@@ -1,0 +1,42 @@
+object fCliente: TfCliente
+  Left = 0
+  Top = 0
+  Caption = 'Cadastro Cliente'
+  ClientHeight = 629
+  ClientWidth = 999
+  Color = clBtnFace
+  DefaultMonitor = dmMainForm
+  ParentFont = True
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  DesignSize = (
+    999
+    629)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 8
+    Top = 80
+    Width = 983
+    Height = 541
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object ZReadOnlyQuery1: TZReadOnlyQuery
+    Params = <>
+    Left = 64
+    Top = 192
+  end
+  object DataSource1: TDataSource
+    Left = 184
+    Top = 224
+  end
+end

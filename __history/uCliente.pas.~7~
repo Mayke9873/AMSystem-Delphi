@@ -1,0 +1,58 @@
+unit uCliente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ToolWin, Vcl.ActnMan,
+  Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.Menus, Vcl.Grids, Vcl.DBGrids, uDM,
+  ZAbstractRODataset, ZDataset, Vcl.ComCtrls, Vcl.Tabs, Vcl.DockTabSet,
+  Vcl.StdCtrls;
+
+type
+  TfCliente = class(TForm)
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    DBGrid1: TDBGrid;
+    dCliente: TDataSource;
+    qCliente: TZReadOnlyQuery;
+    qClienteid: TIntegerField;
+    qClientenome: TWideStringField;
+    qClienterg: TWideStringField;
+    qClienteCPFCNPJ: TWideStringField;
+    qClienteDtNasc: TDateField;
+    qClienteendereco: TWideStringField;
+    qClientenumEndereco: TWideStringField;
+    qClientebairro: TWideStringField;
+    qClienteDtRegistro: TDateField;
+    qClientetipo: TWideStringField;
+    qClienteativo: TWideStringField;
+    TabSheet2: TTabSheet;
+    Edit1: TEdit;
+    Label1: TLabel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fCliente: TfCliente;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfCliente.FormActivate(Sender: TObject);
+begin
+  qCliente.Open;
+end;
+
+procedure TfCliente.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Destroy;
+end;
+
+end.

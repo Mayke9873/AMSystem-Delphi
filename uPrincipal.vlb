@@ -1,0 +1,16 @@
+﻿[ToolBar1]
+Coordinates=10,10,58,33
+
+[tbCliente]
+Coordinates=87,10,58,33
+Visible=True
+LayerNames=NewLayer0;NewLayer1
+
+[]
+Coordinates=87,62,82,33
+
+[Module Settings]
+ModelLayerNames=NewLayer0;NewLayer1
+ActiveLayerNames=NewLayer0;NewLayer1
+EditingLayerName=NewLayer1
+
