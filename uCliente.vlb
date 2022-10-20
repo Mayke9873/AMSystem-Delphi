@@ -1,41 +1,5 @@
-﻿[qClientetipo]
-Coordinates=83,319,73,33
-
-[qClienteDtNasc]
-Coordinates=204,1,90,33
-
-[qCliente]
-Coordinates=10,10,70,249
-
-[qClientenome]
-Coordinates=223,56,82,33
-
-[qClienteativo]
-Coordinates=223,111,79,33
-
-[qClientenumEndereco]
-Coordinates=204,166,123,33
-
-[qClienteDtRegistro]
-Coordinates=204,221,107,33
-
-[qClientebairro]
-Coordinates=223,276,84,33
-
-[qClienterg]
-Coordinates=223,331,65,33
-
-[dCliente]
+﻿[dCliente]
 Coordinates=102,1,54,33
-
-[qClienteid]
-Coordinates=223,386,64,33
-
-[qClienteCPFCNPJ]
-Coordinates=384,1,103,33
-
-[qClienteendereco]
-Coordinates=384,56,100,33
 
 [(TMenuItem)]
 Coordinates=384,441,75,33
@@ -65,9 +29,6 @@ Coordinates=430,10,58,33
 [tbNovo]
 Coordinates=365,10,49,33
 
-[Edit1]
-Coordinates=166,10,40,51
-
 [tbCancelar]
 Coordinates=278,10,67,33
 
@@ -78,12 +39,9 @@ Coordinates=220,10,43,33
 Coordinates=103,10,46,51
 
 []
-Coordinates=99,269,82,33
+Coordinates=10,10,70,249
+Visible=True
 
 [pgTabela]
 Coordinates=330,320,59,33
-
-[ZQuery1]
-Coordinates=164,391,56,51
-Visible=True
 
