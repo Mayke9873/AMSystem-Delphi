@@ -8,17 +8,32 @@ object fCliente: TfCliente
   DefaultMonitor = dmMainForm
   ParentFont = True
   FormStyle = fsMDIChild
+  KeyPreview = True
   OldCreateOrder = False
   Visible = True
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   DesignSize = (
     999
     649)
   PixelsPerInch = 96
   TextHeight = 13
+  object Label9: TLabel
+    Left = 8
+    Top = 35
+    Width = 50
+    Height = 13
+    Caption = 'Pesquisar:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
@@ -33,19 +48,27 @@ object fCliente: TfCliente
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
+    ExplicitLeft = -248
+    ExplicitTop = 31
     object tbNovo: TToolButton
       Left = 0
       Top = 0
+      Hint = 'Novo - F1'
       Margins.Left = 7
       Caption = 'Novo'
       ImageIndex = 0
+      ParentShowHint = False
+      ShowHint = True
       OnClick = tbNovoClick
     end
     object tbEditar: TToolButton
       Left = 29
       Top = 0
+      Hint = 'Editar - F2'
       Caption = 'Editar'
       ImageIndex = 1
+      ParentShowHint = False
+      ShowHint = True
       OnClick = tbEditarClick
     end
     object tbSalvar: TToolButton
@@ -62,42 +85,60 @@ object fCliente: TfCliente
       ImageIndex = 3
       OnClick = tbCancelarClick
     end
-    object tbSair: TToolButton
+    object ToolButton1: TToolButton
       Left = 116
       Top = 0
+      Width = 5
+      Caption = 'ToolButton1'
+      ImageIndex = 5
+      Style = tbsSeparator
+    end
+    object tbSair: TToolButton
+      Left = 121
+      Top = 0
+      Hint = 'Sair - Esc'
       Caption = 'Sair'
       ImageIndex = 4
+      ParentShowHint = False
+      ShowHint = True
       OnClick = tbSairClick
     end
   end
   object PageControl1: TPageControl
-    Left = 8
+    Left = 0
     Top = 56
-    Width = 983
-    Height = 585
+    Width = 999
+    Height = 593
     ActivePage = pgTabela
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       DesignSize = (
-        975
-        557)
+        991
+        565)
       object DBGrid1: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 0
-        Width = 969
-        Height = 554
+        Width = 985
+        Height = 562
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = dCliente
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        ParentFont = False
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
-        OnDblClick = DBGrid1DblClick
+        OnDblClick = tbEditarClick
         Columns = <
           item
             Alignment = taCenter
@@ -116,11 +157,6 @@ object fCliente: TfCliente
           item
             Expanded = False
             FieldName = 'nome'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
             Title.Caption = 'Nome'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
@@ -245,90 +281,290 @@ object fCliente: TfCliente
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 30
+            Width = 36
             Visible = True
           end>
       end
     end
     object pgDados: TTabSheet
       Caption = 'Dados'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = []
       ImageIndex = 1
+      ParentFont = False
       object Label1: TLabel
-        Left = 24
-        Top = 29
-        Width = 31
-        Height = 13
-        Caption = 'Label1'
+        Left = 8
+        Top = 13
+        Width = 56
+        Height = 18
+        Caption = 'C'#243'digo:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
       end
-      object Edit1: TEdit
-        Left = 24
-        Top = 48
-        Width = 121
-        Height = 21
+      object Label2: TLabel
+        Left = 8
+        Top = 70
+        Width = 46
+        Height = 18
+        Caption = 'Nome:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 345
+        Top = 70
+        Width = 27
+        Height = 18
+        Caption = 'RG:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 454
+        Top = 70
+        Width = 37
+        Height = 18
+        Caption = 'CPF:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 610
+        Top = 70
+        Width = 60
+        Height = 18
+        Caption = 'Dt Nasc:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 8
+        Top = 129
+        Width = 72
+        Height = 18
+        Caption = 'Endere'#231'o:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 342
+        Top = 129
+        Width = 20
+        Height = 18
+        Caption = 'N'#186':'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 400
+        Top = 129
+        Width = 47
+        Height = 18
+        Caption = 'Bairro:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBEditID: TDBEdit
+        Left = 10
+        Top = 34
+        Width = 77
+        Height = 26
+        DataField = 'id'
+        DataSource = dCliente
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
         TabOrder = 0
-        Text = 'Edit1'
+      end
+      object DBENome: TDBEdit
+        Left = 10
+        Top = 91
+        Width = 331
+        Height = 26
+        DataField = 'nome'
+        DataSource = dCliente
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object DBERG: TDBEdit
+        Left = 347
+        Top = 91
+        Width = 103
+        Height = 26
+        DataField = 'rg'
+        DataSource = dCliente
+        ReadOnly = True
+        TabOrder = 2
+      end
+      object DBEEndereco: TDBEdit
+        Left = 8
+        Top = 150
+        Width = 331
+        Height = 26
+        DataField = 'endereco'
+        DataSource = dCliente
+        ReadOnly = True
+        TabOrder = 5
+      end
+      object DBENumEnd: TDBEdit
+        Left = 344
+        Top = 150
+        Width = 52
+        Height = 26
+        DataField = 'numEndereco'
+        DataSource = dCliente
+        ReadOnly = True
+        TabOrder = 6
+      end
+      object DBEBairro: TDBEdit
+        Left = 402
+        Top = 150
+        Width = 301
+        Height = 26
+        DataField = 'bairro'
+        DataSource = dCliente
+        ReadOnly = True
+        TabOrder = 7
+      end
+      object DBRadioGroup1: TDBRadioGroup
+        Left = 554
+        Top = 7
+        Width = 150
+        Height = 53
+        Caption = 'Tipo Cliente'
+        Columns = 2
+        DataField = 'tipo'
+        DataSource = dCliente
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Items.Strings = (
+          'Fisica'
+          'Juridica')
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 8
+        Values.Strings = (
+          'F'
+          'J')
+      end
+      object DBCheckBox1: TDBCheckBox
+        Left = 284
+        Top = 37
+        Width = 58
+        Height = 17
+        Caption = 'Ativo'
+        DataField = 'ativo'
+        DataSource = dCliente
+        ReadOnly = True
+        TabOrder = 9
+        ValueChecked = 'S'
+        ValueUnchecked = 'N'
+      end
+      object DBECPF: TDBEdit
+        Left = 456
+        Top = 91
+        Width = 150
+        Height = 26
+        DataField = 'CPFCNPJ'
+        DataSource = dCliente
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object DBENasc: TDBEdit
+        Left = 612
+        Top = 91
+        Width = 91
+        Height = 26
+        DataField = 'DtNasc'
+        DataSource = dCliente
+        ReadOnly = True
+        TabOrder = 4
       end
     end
   end
-  object qCliente: TZReadOnlyQuery
-    Connection = DataModule1.zCon
-    SQL.Strings = (
-      'Select * from Cliente')
-    Params = <>
-    Left = 26
-    Top = 568
-    object qClienteid: TIntegerField
-      FieldName = 'id'
-      ReadOnly = True
-    end
-    object qClientenome: TWideStringField
-      FieldName = 'nome'
-      ReadOnly = True
-      Size = 250
-    end
-    object qClienterg: TWideStringField
-      FieldName = 'rg'
-      ReadOnly = True
-      Size = 10
-    end
-    object qClienteCPFCNPJ: TWideStringField
-      FieldName = 'CPFCNPJ'
-      ReadOnly = True
-      Size = 11
-    end
-    object qClienteDtNasc: TDateField
-      FieldName = 'DtNasc'
-      ReadOnly = True
-    end
-    object qClienteendereco: TWideStringField
-      FieldName = 'endereco'
-      ReadOnly = True
-      Size = 255
-    end
-    object qClientenumEndereco: TWideStringField
-      FieldName = 'numEndereco'
-      ReadOnly = True
-      Size = 5
-    end
-    object qClientebairro: TWideStringField
-      FieldName = 'bairro'
-      ReadOnly = True
-      Size = 250
-    end
-    object qClienteDtRegistro: TDateField
-      FieldName = 'DtRegistro'
-      ReadOnly = True
-    end
-    object qClientetipo: TWideStringField
-      FieldName = 'tipo'
-      ReadOnly = True
-      Size = 1
-    end
-    object qClienteativo: TWideStringField
-      FieldName = 'ativo'
-      ReadOnly = True
-      Size = 1
-    end
+  object edPesquisa: TEdit
+    Left = 64
+    Top = 32
+    Width = 344
+    Height = 21
+    Anchors = [akLeft, akTop, akRight]
+    AutoSize = False
+    TabOrder = 2
+    OnChange = edPesquisaChange
+  end
+  object rdbTodos: TRadioButton
+    Left = 456
+    Top = 34
+    Width = 49
+    Height = 17
+    Anchors = [akTop, akRight]
+    Caption = 'Todos'
+    Checked = True
+    TabOrder = 3
+    TabStop = True
+    OnClick = rdbTodosClick
+  end
+  object rdbAtivo: TRadioButton
+    Left = 536
+    Top = 34
+    Width = 49
+    Height = 17
+    Anchors = [akTop, akRight]
+    Caption = 'Ativo'
+    TabOrder = 4
+    OnClick = rdbAtivoClick
+  end
+  object rdbInativo: TRadioButton
+    Left = 608
+    Top = 34
+    Width = 57
+    Height = 17
+    Anchors = [akTop, akRight]
+    Caption = 'Inativo'
+    TabOrder = 5
+    OnClick = rdbInativoClick
   end
   object dCliente: TDataSource
     DataSet = qCliente
@@ -609,11 +845,211 @@ object fCliente: TfCliente
       FC3F803FFFFF8001FFFFFFFFFFFF800100000000000000000000000000000000
       000000000000}
   end
-  object ZQuery1: TZQuery
+  object uCliente: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM Cliente'
+      'WHERE'
+      '  Cliente.id = :OLD_id AND'
+      '  Cliente.nome = :OLD_nome AND'
+      
+        '  ((Cliente.rg IS NULL AND :OLD_rg IS NULL) OR (Cliente.rg = :OL' +
+        'D_rg)) AND'
+      
+        '  ((Cliente.CPFCNPJ IS NULL AND :OLD_CPFCNPJ IS NULL) OR (Client' +
+        'e.CPFCNPJ = :OLD_CPFCNPJ)) AND'
+      
+        '  ((Cliente.DtNasc IS NULL AND :OLD_DtNasc IS NULL) OR (Cliente.' +
+        'DtNasc = :OLD_DtNasc)) AND'
+      
+        '  ((Cliente.endereco IS NULL AND :OLD_endereco IS NULL) OR (Clie' +
+        'nte.endereco = :OLD_endereco)) AND'
+      
+        '  ((Cliente.numEndereco IS NULL AND :OLD_numEndereco IS NULL) OR' +
+        ' (Cliente.numEndereco = :OLD_numEndereco)) AND'
+      
+        '  ((Cliente.bairro IS NULL AND :OLD_bairro IS NULL) OR (Cliente.' +
+        'bairro = :OLD_bairro)) AND'
+      
+        '  ((Cliente.DtRegistro IS NULL AND :OLD_DtRegistro IS NULL) OR (' +
+        'Cliente.DtRegistro = :OLD_DtRegistro)) AND'
+      
+        '  ((Cliente.tipo IS NULL AND :OLD_tipo IS NULL) OR (Cliente.tipo' +
+        ' = :OLD_tipo)) AND'
+      
+        '  ((Cliente.ativo IS NULL AND :OLD_ativo IS NULL) OR (Cliente.at' +
+        'ivo = :OLD_ativo))')
+    InsertSQL.Strings = (
+      'INSERT INTO Cliente'
+      
+        '  (id, nome, rg, CPFCNPJ, DtNasc, endereco, numEndereco, bairro,' +
+        ' DtRegistro, '
+      '   tipo, ativo)'
+      'VALUES'
+      
+        '  (:id, :nome, :rg, :CPFCNPJ, :DtNasc, :endereco, :numEndereco, ' +
+        ':bairro, '
+      '   :DtRegistro, :tipo, :ativo)')
+    ModifySQL.Strings = (
+      'UPDATE Cliente SET'
+      '  id = :id,'
+      '  nome = :nome,'
+      '  rg = :rg,'
+      '  CPFCNPJ = :CPFCNPJ,'
+      '  DtNasc = :DtNasc,'
+      '  endereco = :endereco,'
+      '  numEndereco = :numEndereco,'
+      '  bairro = :bairro,'
+      '  DtRegistro = :DtRegistro,'
+      '  tipo = :tipo,'
+      '  ativo = :ativo'
+      'WHERE'
+      '  Cliente.id = :OLD_id AND'
+      '  Cliente.nome = :OLD_nome AND'
+      
+        '  ((Cliente.rg IS NULL AND :OLD_rg IS NULL) OR (Cliente.rg = :OL' +
+        'D_rg)) AND'
+      
+        '  ((Cliente.CPFCNPJ IS NULL AND :OLD_CPFCNPJ IS NULL) OR (Client' +
+        'e.CPFCNPJ = :OLD_CPFCNPJ)) AND'
+      
+        '  ((Cliente.DtNasc IS NULL AND :OLD_DtNasc IS NULL) OR (Cliente.' +
+        'DtNasc = :OLD_DtNasc)) AND'
+      
+        '  ((Cliente.endereco IS NULL AND :OLD_endereco IS NULL) OR (Clie' +
+        'nte.endereco = :OLD_endereco)) AND'
+      
+        '  ((Cliente.numEndereco IS NULL AND :OLD_numEndereco IS NULL) OR' +
+        ' (Cliente.numEndereco = :OLD_numEndereco)) AND'
+      
+        '  ((Cliente.bairro IS NULL AND :OLD_bairro IS NULL) OR (Cliente.' +
+        'bairro = :OLD_bairro)) AND'
+      
+        '  ((Cliente.DtRegistro IS NULL AND :OLD_DtRegistro IS NULL) OR (' +
+        'Cliente.DtRegistro = :OLD_DtRegistro)) AND'
+      
+        '  ((Cliente.tipo IS NULL AND :OLD_tipo IS NULL) OR (Cliente.tipo' +
+        ' = :OLD_tipo)) AND'
+      
+        '  ((Cliente.ativo IS NULL AND :OLD_ativo IS NULL) OR (Cliente.at' +
+        'ivo = :OLD_ativo))')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 75
+    Top = 569
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'nome'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'rg'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CPFCNPJ'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DtNasc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'endereco'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'numEndereco'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'bairro'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DtRegistro'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tipo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end>
+  end
+  object qCliente: TZQuery
     Connection = DataModule1.zCon
+    SortedFields = 'Id'
+    UpdateObject = uCliente
+    SQL.Strings = (
+      
+        'SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bai' +
+        'rro, dtregistro, Tipo, Ativo'
+      'FROM CLIENTE')
     Params = <>
-    DataSource = dCliente
-    Left = 76
+    IndexFieldNames = 'Id Asc'
+    Left = 28
     Top = 568
+    object qClienteid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object qClientenome: TWideStringField
+      FieldName = 'nome'
+      Required = True
+      Size = 250
+    end
+    object qClienterg: TWideStringField
+      FieldName = 'rg'
+      Size = 10
+    end
+    object qClienteCPFCNPJ: TWideStringField
+      FieldName = 'CPFCNPJ'
+      EditMask = '###.###.###-##;0;_'
+      Size = 11
+    end
+    object qClienteDtNasc: TDateField
+      FieldName = 'DtNasc'
+      EditMask = '99/!99/9999;0;'
+    end
+    object qClienteendereco: TWideStringField
+      FieldName = 'endereco'
+      Size = 255
+    end
+    object qClientenumEndereco: TWideStringField
+      FieldName = 'numEndereco'
+      Size = 5
+    end
+    object qClientebairro: TWideStringField
+      FieldName = 'bairro'
+      Size = 250
+    end
+    object qClienteDtRegistro: TDateField
+      FieldName = 'DtRegistro'
+      EditMask = '!99/99/00;1;_'
+    end
+    object qClientetipo: TWideStringField
+      FieldName = 'tipo'
+      Size = 1
+    end
+    object qClienteativo: TWideStringField
+      FieldName = 'ativo'
+      Size = 1
+    end
   end
 end
