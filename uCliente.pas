@@ -77,6 +77,7 @@ type
     procedure rdbTodosClick(Sender: TObject);
     procedure rdbAtivoClick(Sender: TObject);
     procedure rdbInativoClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -160,6 +161,7 @@ begin
     27:
       begin
         tbSairClick(tbSair);
+        Key := 0;
       end;
 
     112:
@@ -167,6 +169,15 @@ begin
         tbNovoClick(tbNovo);
       end;
 
+  end;
+end;
+
+procedure TfCliente.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  begin
+    Key := #0;
+    Perform(WM_NEXTDLGCTL, 0, 0);
   end;
 end;
 
@@ -182,7 +193,7 @@ end;
 
 procedure TfCliente.rdbTodosClick(Sender: TObject);
 begin
-  Consulta;                    
+  Consulta;
 end;
 
 procedure TfCliente.tbCancelarClick(Sender: TObject);
@@ -242,7 +253,6 @@ begin
   DBCheckBox1.ReadOnly := false;
   DBRadioGroup1.ReadOnly := false;
 
-  DBEditID.ReadOnly := false;
   DBENome.ReadOnly := false;
   DBERG.ReadOnly := false;
   DBECPF.ReadOnly := false;

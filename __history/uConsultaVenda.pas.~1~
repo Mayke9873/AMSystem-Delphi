@@ -1,0 +1,38 @@
+unit uConsultaVenda;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ToolWin, System.ImageList, Vcl.ImgList;
+
+type
+  TfConsultaVendas = class(TForm)
+    ToolBar1: TToolBar;
+    DBGrid1: TDBGrid;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ToolButton5: TToolButton;
+    ImageList1: TImageList;
+    procedure ToolButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fConsultaVendas: TfConsultaVendas;
+
+implementation
+  uses uVenda;
+{$R *.dfm}
+
+procedure TfConsultaVendas.ToolButton1Click(Sender: TObject);
+begin
+  fVenda.Create(fConsultaVendas);
+end;
+
+end.

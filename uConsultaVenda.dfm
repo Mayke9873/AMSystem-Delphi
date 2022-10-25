@@ -93,13 +93,13 @@ object fConsultaVendas: TfConsultaVendas
         FieldName = 'ID'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
         Title.Caption = 'C'#243'digo'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
-        Title.Font.Height = -15
+        Title.Font.Height = -12
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
         Visible = True
@@ -109,13 +109,13 @@ object fConsultaVendas: TfConsultaVendas
         FieldName = 'CLIENTE'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
         Title.Caption = 'Cliente'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
-        Title.Font.Height = -15
+        Title.Font.Height = -12
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
         Width = 250
@@ -126,14 +126,14 @@ object fConsultaVendas: TfConsultaVendas
         FieldName = 'VALOR'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
         Title.Alignment = taRightJustify
         Title.Caption = 'Valor'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
-        Title.Font.Height = -15
+        Title.Font.Height = -12
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
         Width = 80
@@ -144,14 +144,14 @@ object fConsultaVendas: TfConsultaVendas
         FieldName = 'DESCONTO'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
         Title.Alignment = taRightJustify
         Title.Caption = 'Desconto'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
-        Title.Font.Height = -15
+        Title.Font.Height = -12
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
         Width = 80
@@ -162,14 +162,14 @@ object fConsultaVendas: TfConsultaVendas
         FieldName = 'VALOR_TOTAL'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
         Title.Alignment = taRightJustify
         Title.Caption = 'R$ Total'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
-        Title.Font.Height = -15
+        Title.Font.Height = -12
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
         Width = 80
@@ -181,14 +181,14 @@ object fConsultaVendas: TfConsultaVendas
         FieldName = 'DATA_VENDA'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
         Title.Alignment = taCenter
         Title.Caption = 'Dt. Venda'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
-        Title.Font.Height = -15
+        Title.Font.Height = -12
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
         Width = 95
@@ -199,13 +199,13 @@ object fConsultaVendas: TfConsultaVendas
         FieldName = 'NOME'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
         Title.Caption = 'Vendedor'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
-        Title.Font.Height = -15
+        Title.Font.Height = -12
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
         Width = 250
@@ -498,6 +498,8 @@ object fConsultaVendas: TfConsultaVendas
   end
   object qVendas: TZReadOnlyQuery
     Connection = DataModule1.zCon
+    SortedFields = 'ID'
+    SortType = stDescending
     SQL.Strings = (
       
         'SELECT a.ID, a.CLIENTE, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DA' +
@@ -507,6 +509,7 @@ object fConsultaVendas: TfConsultaVendas
         'ERE ex = 0'
       '    order by id desc;')
     Params = <>
+    IndexFieldNames = 'ID Desc'
     Left = 848
     Top = 96
     object qVendasID: TIntegerField
@@ -521,14 +524,18 @@ object fConsultaVendas: TfConsultaVendas
     object qVendasVALOR: TFloatField
       FieldName = 'VALOR'
       ReadOnly = True
+      currency = True
     end
     object qVendasDESCONTO: TFloatField
       FieldName = 'DESCONTO'
       ReadOnly = True
+      EditFormat = '#.##'
+      currency = True
     end
     object qVendasVALOR_TOTAL: TFloatField
       FieldName = 'VALOR_TOTAL'
       ReadOnly = True
+      currency = True
     end
     object qVendasDATA_VENDA: TDateField
       FieldName = 'DATA_VENDA'

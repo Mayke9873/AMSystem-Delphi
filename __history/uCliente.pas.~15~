@@ -1,0 +1,168 @@
+unit uCliente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ToolWin, Vcl.ActnMan,
+  Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.Menus, Vcl.Grids, Vcl.DBGrids, uDM,
+  ZAbstractRODataset, ZDataset, Vcl.ComCtrls, Vcl.Tabs, Vcl.DockTabSet,
+  Vcl.StdCtrls, System.ImageList, Vcl.ImgList, ZAbstractDataset, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate;
+
+type
+  TfCliente = class(TForm)
+    dCliente: TDataSource;
+    ToolBar1: TToolBar;
+    tbNovo: TToolButton;
+    ImageList1: TImageList;
+    tbEditar: TToolButton;
+    tbSalvar: TToolButton;
+    tbCancelar: TToolButton;
+    tbSair: TToolButton;
+    PageControl1: TPageControl;
+    pgTabela: TTabSheet;
+    DBGrid1: TDBGrid;
+    pgDados: TTabSheet;
+    Label1: TLabel;
+    ToolButton1: TToolButton;
+    DBEditID: TDBEdit;
+    DBEditNome: TDBEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    DBEditRG: TDBEdit;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    DBEditEndereco: TDBEdit;
+    DBEditNumEnd: TDBEdit;
+    DBEditBairro: TDBEdit;
+    DBRadioGroup1: TDBRadioGroup;
+    DBCheckBox1: TDBCheckBox;
+    DBEditCPF: TDBEdit;
+    DBEditNasc: TDBEdit;
+    uCliente: TZUpdateSQL;
+    qCliente: TZQuery;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
+    procedure tbSairClick(Sender: TObject);
+    procedure tbNovoClick(Sender: TObject);
+    procedure tbCancelarClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure tbSalvarClick(Sender: TObject);
+    procedure tbEditarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fCliente: TfCliente;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfCliente.DBGrid1DblClick(Sender: TObject);
+begin
+  PageControl1.ActivePageIndex := 1;
+end;
+
+procedure TfCliente.FormActivate(Sender: TObject);
+begin
+  qCliente.Open;
+end;
+
+procedure TfCliente.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Destroy;
+end;
+
+procedure TfCliente.FormCreate(Sender: TObject);
+begin
+  PageControl1.ActivePageIndex := 0;
+  tbNovo.Enabled := true;
+  tbEditar.Enabled := true;
+  tbSalvar.Enabled := false;
+  tbCancelar.Enabled := false;
+end;
+
+procedure TfCliente.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  case Key of
+  27: begin
+    tbSairClick(tbSair);
+  end;
+
+  112: begin
+    tbNovoClick(tbNovo);
+  end;
+
+  end;
+end;
+
+procedure TfCliente.tbCancelarClick(Sender: TObject);
+begin
+  PageControl1.ActivePageIndex := 0;
+  DBGrid1.Enabled := true;
+  tbNovo.Enabled := true;
+  tbEditar.Enabled := true;
+  tbSalvar.Enabled := false;
+  tbCancelar.Enabled := false;
+end;
+
+procedure TfCliente.tbEditarClick(Sender: TObject);
+begin
+  PageControl1.ActivePageIndex := 1;
+  DBGrid1.Enabled := false;
+  tbNovo.Enabled := false;
+  tbEditar.Enabled := false;
+  tbSalvar.Enabled := true;
+  tbCancelar.Enabled := true;
+end;
+
+procedure TfCliente.tbNovoClick(Sender: TObject);
+begin
+  PageControl1.ActivePageIndex := 1;
+  DBGrid1.Enabled := false;
+  tbNovo.Enabled := false;
+  tbEditar.Enabled := false;
+  tbSalvar.Enabled := true;
+  tbCancelar.Enabled := true;
+
+  DBEditID.Clear;
+  DBEditNome.Clear;
+  DBEditRG.Clear;
+  DBEditCPF.Clear;
+  DBEditNasc.Clear;
+  DBEditEndereco.Clear;
+  DBEditNumEnd.Clear;
+  DBEditBairro.Clear;
+
+  qCliente.Close;
+  uCliente.InsertSQL;
+end;
+
+procedure TfCliente.tbSairClick(Sender: TObject);
+begin
+  Destroy;
+end;
+
+procedure TfCliente.tbSalvarClick(Sender: TObject);
+begin
+  PageControl1.ActivePageIndex := 0;
+  DBGrid1.Enabled := true;
+  tbNovo.Enabled := true;
+  tbEditar.Enabled := true;
+  tbSalvar.Enabled := false;
+  tbCancelar.Enabled := false;
+end;
+
+end.

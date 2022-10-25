@@ -87,6 +87,7 @@ type
     procedure edIdVendedorExit(Sender: TObject);
     procedure edIdClienteExit(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure edQtdProdutoEnter(Sender: TObject);
   private
     { Private declarations }
 
@@ -304,6 +305,14 @@ begin
   qFuncionario.Open;
 end;
 
+procedure TfVenda.edQtdProdutoEnter(Sender: TObject);
+begin
+  if Length(Trim(edQtdProduto.Text)) <> 0 then
+  begin
+    edQtdProduto.Text := '1'
+  end;
+end;
+
 procedure TfVenda.edQtdProdutoExit(Sender: TObject);
 var
   valorTotal: Real;
@@ -422,14 +431,14 @@ begin
     qVenda.Close;
     qVenda.SQL.Clear;
     qVenda.SQL.Add('UPDATE VENDA SET ID_CLIENTE = ' + QuotedStr(edCliente.Text) + ', CLIENTE = ' + QuotedStr(edCliente.Text) +
-      ', ' + 'VALOR = ' + StringReplace(edTotalVenda.Text, ',', '.', []) + ', DESCONTO = ' + QuotedStr(edDescontoVenda.Text) + ', VALOR_TOTAL = ' +
-      QuotedStr(edTotalVenda.Text) + ', PAGO = ' + StringReplace(edTotalVenda.Text, ',', '.', []) + ' ,' + 'VENDEDOR = ' +
-      QuotedStr(edIdVendedor.Text) + ', DATA_VENDA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) + ', EX = 0 WHERE ID = ' +
-      QuotedStr(edCodVenda.Text) + ';');
+      ', ' + 'VALOR = ' + StringReplace(edTotalVenda.Text, ',', '.', []) + ', DESCONTO = ' + QuotedStr(edDescontoVenda.Text) +
+      ', VALOR_TOTAL = ' + QuotedStr(edTotalVenda.Text) + ', PAGO = ' + StringReplace(edTotalVenda.Text, ',', '.', []) + ' ,' +
+      'VENDEDOR = ' + QuotedStr(edIdVendedor.Text) + ', DATA_VENDA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) +
+      ', EX = 0 WHERE ID = ' + QuotedStr(edCodVenda.Text) + ';');
     qVenda.ExecSQL;
 
     qProdVenda.SQL.Clear;
-    qProdVenda.SQL.Add('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' +quotedstr(edCodVenda.Text)+';');
+    qProdVenda.SQL.Add('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + QuotedStr(edCodVenda.Text) + ';');
     qProdVenda.ExecSQL;
   end;
 
@@ -439,8 +448,8 @@ begin
   qProdVenda.ExecSQL;
 
   edCodVenda.Clear;
-//  edIdVendedor.Clear;
-//  edVendedor.Clear;
+  // edIdVendedor.Clear;
+  // edVendedor.Clear;
   edIdCliente.Clear;
   edCliente.Clear;
   edIdProd.Clear;
@@ -451,7 +460,6 @@ begin
   edTotalVenda.Clear;
   edDescontoVenda.Clear;
   edIdVendedor.SetFocus;
-  
 
 end;
 

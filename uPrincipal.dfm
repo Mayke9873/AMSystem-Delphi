@@ -11,6 +11,7 @@ object fPrincipal: TfPrincipal
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIForm
+  KeyPreview = True
   Menu = MainMenu1
   OldCreateOrder = False
   Position = poScreenCenter
@@ -48,6 +49,7 @@ object fPrincipal: TfPrincipal
       Top = 0
       Caption = 'Venda'
       ImageIndex = 1
+      OnClick = ToolButton1Click
     end
     object tbSair: TToolButton
       Left = 94
@@ -907,6 +909,7 @@ object fPrincipal: TfPrincipal
       Caption = 'Cadastros'
       object Cadastros2: TMenuItem
         Caption = 'Clientes'
+        ShortCut = 32880
         OnClick = Cadastros2Click
       end
       object N1: TMenuItem
@@ -914,6 +917,8 @@ object fPrincipal: TfPrincipal
       end
       object Produtos1: TMenuItem
         Caption = 'Produtos'
+        ShortCut = 32881
+        OnClick = Produtos1Click
       end
       object Grupos1: TMenuItem
         Caption = 'Grupos'
@@ -925,8 +930,20 @@ object fPrincipal: TfPrincipal
         Caption = 'Funcion'#225'rios'
       end
     end
+    object Movimento1: TMenuItem
+      Caption = 'Movimento'
+      object Venda1: TMenuItem
+        Caption = 'Venda'
+        OnClick = Venda1Click
+      end
+      object ConsultadeVendas1: TMenuItem
+        Caption = 'Consulta de Vendas'
+        OnClick = ConsultadeVendas1Click
+      end
+    end
     object Sair1: TMenuItem
       Caption = 'Sair'
+      ShortCut = 32883
       OnClick = Sair1Click
     end
   end

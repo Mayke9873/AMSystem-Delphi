@@ -23,11 +23,18 @@ type
     N2: TMenuItem;
     Sair1: TMenuItem;
     tbSair: TToolButton;
+    Movimento1: TMenuItem;
+    Venda1: TMenuItem;
+    ConsultadeVendas1: TMenuItem;
     procedure Cadastros2Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure tbClienteClick(Sender: TObject);
+    procedure Venda1Click(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
+    procedure ConsultadeVendas1Click(Sender: TObject);
+    procedure Produtos1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,13 +47,18 @@ var
 implementation
 
   uses
-     uCliente;
+     uCliente, uVenda, uConsultaVenda, uProduto;
 
 {$R *.dfm}
 
 procedure TfPrincipal.Cadastros2Click(Sender: TObject);
 begin
   fCliente := TfCliente.Create(fPrincipal);
+end;
+
+procedure TfPrincipal.ConsultadeVendas1Click(Sender: TObject);
+begin
+  fConsultaVendas := TfConsultaVendas.Create(fPrincipal);
 end;
 
 procedure TfPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -56,6 +68,11 @@ begin
     ShowMessage('N�o � possivel sair do sistema');
     Abort;
   end;    }
+end;
+
+procedure TfPrincipal.Produtos1Click(Sender: TObject);
+begin
+  fProduto := TfProduto.Create(fPrincipal);
 end;
 
 procedure TfPrincipal.Sair1Click(Sender: TObject);
@@ -70,14 +87,25 @@ end;
 
 procedure TfPrincipal.tbSairClick(Sender: TObject);
 begin
-  if MDIChildCount > 0 then
+{  if MDIChildCount > 0 then
   begin
     ShowMessage('Não é possivel fechar o sistema!');
   end
   else
   begin
     Application.Terminate;
-  end;
+  end; }
+      Application.Terminate;
+end;
+
+procedure TfPrincipal.ToolButton1Click(Sender: TObject);
+begin
+  Venda1Click(Venda1);
+end;
+
+procedure TfPrincipal.Venda1Click(Sender: TObject);
+begin
+  fVenda := TfVenda.Create(fPrincipal);
 end;
 
 end.

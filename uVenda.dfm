@@ -161,6 +161,7 @@ object fVenda: TfVenda
     Width = 86
     Height = 26
     TabOrder = 7
+    OnEnter = edQtdProdutoEnter
     OnExit = edQtdProdutoExit
   end
   object edValorUnitario: TEdit

@@ -1,0 +1,12 @@
+unit uCadastro;
+
+interface
+
+type TCadastro = class
+
+
+end;
+
+implementation
+
+end.

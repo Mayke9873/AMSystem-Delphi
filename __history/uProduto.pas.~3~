@@ -1,0 +1,107 @@
+﻿unit uProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate, System.ImageList,
+  Vcl.ImgList, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ToolWin;
+
+type
+  TfProduto = class(TForm)
+    Label9: TLabel;
+    ToolBar1: TToolBar;
+    tbNovo: TToolButton;
+    tbEditar: TToolButton;
+    tbSalvar: TToolButton;
+    tbCancelar: TToolButton;
+    ToolButton1: TToolButton;
+    tbSair: TToolButton;
+    PageControl1: TPageControl;
+    pgTabela: TTabSheet;
+    DBGrid1: TDBGrid;
+    pgDados: TTabSheet;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    DBEditID: TDBEdit;
+    DBENome: TDBEdit;
+    DBERG: TDBEdit;
+    DBEEndereco: TDBEdit;
+    DBENumEnd: TDBEdit;
+    DBEBairro: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
+    DBECPF: TDBEdit;
+    edPesquisa: TEdit;
+    rdbTodos: TRadioButton;
+    rdbAtivo: TRadioButton;
+    rdbInativo: TRadioButton;
+    dProduto: TDataSource;
+    ImageList1: TImageList;
+    uProduto: TZUpdateSQL;
+    qProduto: TZQuery;
+    qProdutoID: TIntegerField;
+    qProdutoDESCRICAO: TWideStringField;
+    qProdutoUNIDADE: TWideStringField;
+    qProdutoESTOQUE: TFloatField;
+    qProdutoPCOMPRA: TFloatField;
+    qProdutoPLUCRO: TFloatField;
+    qProdutoPVENDA: TFloatField;
+    qProdutoGRUPO: TWideStringField;
+    qProdutoDTREGISTRO: TDateField;
+    qProdutoATIVO: TWideStringField;
+    procedure Consulta;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fProduto: TfProduto;
+
+implementation
+  uses uDM;
+{$R *.dfm}
+
+procedure TfProduto.Consulta;
+begin
+  if rdbTodos.Checked then
+  begin
+    qCliente.Close;
+    qCliente.SQL.Clear;
+    qCliente.SQL.Add('SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bairro, dtregistro, Tipo, Ativo ' +
+      'FROM CLIENTE where ((id = ' + QuotedStr(edPesquisa.Text) + ') or  (nome like ' +
+      QuotedStr('%' + edPesquisa.Text + '%') + '));');
+    qCliente.Open;
+  end;
+
+  if rdbAtivo.Checked then
+  begin
+    qCliente.Close;
+    qCliente.SQL.Clear;
+    qCliente.SQL.Add('SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bairro, dtregistro, Tipo, Ativo ' +
+      'FROM CLIENTE where ativo = ' + QuotedStr('S') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' + '(nome like ' +
+      QuotedStr('%' + edPesquisa.Text + '%') + '));');
+    qCliente.Open;
+  end;
+
+  if rdbInativo.Checked then
+  begin
+    qCliente.Close;
+    qCliente.SQL.Clear;
+    qCliente.SQL.Add('SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bairro, dtregistro, Tipo, Ativo ' +
+      'FROM CLIENTE where ativo = ' + QuotedStr('N') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' + '(nome like ' +
+      QuotedStr('%' + edPesquisa.Text + '%') + '));');
+    qCliente.Open;
+  end;
+end;
+
+//SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA, GRUPO, DTREGISTRO, ATIVO  FROM PRODUTO;
+
+end.
