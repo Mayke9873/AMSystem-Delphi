@@ -13,8 +13,8 @@
     <Transaction>2022/10/07 11:08:49.000.569,D:\Desenvolvimento\Projetos\Delphi\AM System\fPrincipal.dfm=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit1.dfm</Transaction>
     <Transaction>2022/10/07 11:08:49.000.569,D:\Desenvolvimento\Projetos\Delphi\AM System\fPrincipal.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit1.pas</Transaction>
     <Transaction>2022/10/07 11:39:15.000.845,=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit2.pas</Transaction>
-    <Transaction>2022/10/07 11:48:49.000.547,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit2.dfm=D:\Desenvolvimento\Projetos\Delphi\AM System\fCliente.dfm</Transaction>
     <Transaction>2022/10/07 11:48:49.000.547,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit2.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\fCliente.pas</Transaction>
+    <Transaction>2022/10/07 11:48:49.000.547,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit2.dfm=D:\Desenvolvimento\Projetos\Delphi\AM System\fCliente.dfm</Transaction>
     <Transaction>2022/10/07 12:07:14.000.697,D:\Desenvolvimento\Projetos\Delphi\AM System\uCliente.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\fCliente.pas</Transaction>
     <Transaction>2022/10/07 12:07:14.000.697,D:\Desenvolvimento\Projetos\Delphi\AM System\uCliente.dfm=D:\Desenvolvimento\Projetos\Delphi\AM System\fCliente.dfm</Transaction>
     <Transaction>2022/10/07 12:07:33.000.293,D:\Desenvolvimento\Projetos\Delphi\AM System\uPrincipal.dfm=D:\Desenvolvimento\Projetos\Delphi\AM System\fPrincipal.dfm</Transaction>
@@ -23,19 +23,29 @@
     <Transaction>2022/10/15 15:07:01.000.679,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit1.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\uCadastro.pas</Transaction>
     <Transaction>2022/10/15 15:09:11.000.023,D:\Desenvolvimento\Projetos\Delphi\AM System\uCadastro.pas=</Transaction>
     <Transaction>2022/10/15 16:10:45.000.890,=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas</Transaction>
-    <Transaction>2022/10/15 17:12:48.000.791,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\uVenda.pas</Transaction>
     <Transaction>2022/10/15 17:12:48.000.791,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.dfm=D:\Desenvolvimento\Projetos\Delphi\AM System\uVenda.dfm</Transaction>
+    <Transaction>2022/10/15 17:12:48.000.791,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\uVenda.pas</Transaction>
     <Transaction>2022/10/23 23:04:55.000.213,=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas</Transaction>
     <Transaction>2022/10/23 23:14:59.000.116,=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit4.pas</Transaction>
-    <Transaction>2022/10/23 23:19:40.000.308,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\uConsultaVenda.pas</Transaction>
     <Transaction>2022/10/23 23:19:40.000.308,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.dfm=D:\Desenvolvimento\Projetos\Delphi\AM System\uConsultaVenda.dfm</Transaction>
+    <Transaction>2022/10/23 23:19:40.000.308,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\uConsultaVenda.pas</Transaction>
     <Transaction>2022/10/24 07:34:29.000.817,=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas</Transaction>
     <Transaction>2022/10/24 07:46:17.000.878,D:\Desenvolvimento\Projetos\Delphi\AM System\uProduto.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas</Transaction>
     <Transaction>2022/10/24 07:46:17.000.878,D:\Desenvolvimento\Projetos\Delphi\AM System\uProduto.dfm=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.dfm</Transaction>
+    <Transaction>2022/11/26 20:56:21.000.913,=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas</Transaction>
+    <Transaction>2022/11/26 20:56:51.000.257,=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit1.pas</Transaction>
+    <Transaction>2022/11/26 20:57:27.000.442,=D:\Desenvolvimento\Projetos\Delphi\AM System\Unit1.pas</Transaction>
+    <Transaction>2022/11/26 21:44:02.000.281,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit1.dfm=D:\Desenvolvimento\Projetos\Delphi\AM System\ProdutoFranquia.dfm</Transaction>
+    <Transaction>2022/11/26 21:44:02.000.281,D:\Desenvolvimento\Projetos\Delphi\AM System\Unit1.pas=D:\Desenvolvimento\Projetos\Delphi\AM System\ProdutoFranquia.pas</Transaction>
+    <Transaction>2023/01/17 22:40:32.000.036,Z:\Desenvolvimento\Projetos\Delphi\AM System\ProdutoFranquia.pas=</Transaction>
+    <Transaction>2023/01/17 22:41:32.000.911,=Z:\Desenvolvimento\Projetos\Delphi\AM System\uGrupoProduto.pas</Transaction>
+    <Transaction>2023/01/25 20:45:24.000.973,=Z:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas</Transaction>
+    <Transaction>2023/01/25 21:41:40.000.717,Z:\Desenvolvimento\Projetos\Delphi\AM System\uFuncionario.dfm=Z:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.dfm</Transaction>
+    <Transaction>2023/01/25 21:41:40.000.717,Z:\Desenvolvimento\Projetos\Delphi\AM System\uFuncionario.pas=Z:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas</Transaction>
+    <Transaction>2023/03/07 19:36:38.464,Z:\Desenvolvimento\Projetos\Delphi\AM System\uCliente.pas=</Transaction>
+    <Transaction>2023/03/07 19:36:49.604,=Z:\Desenvolvimento\Projetos\Delphi\AM System\uCliente.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
-    <File Path="uCliente.pas"/>
-    <File Path="uCliente.dfm"/>
     <File Path="uDM.pas"/>
     <File Path="uDM.dfm"/>
     <File Path="uPrincipal.pas"/>
@@ -46,5 +56,11 @@
     <File Path="uConsultaVenda.dfm"/>
     <File Path="uProduto.pas"/>
     <File Path="uProduto.dfm"/>
+    <File Path="uGrupoProduto.pas"/>
+    <File Path="uGrupoProduto.dfm"/>
+    <File Path="uFuncionario.pas"/>
+    <File Path="uFuncionario.dfm"/>
+    <File Path="uCliente.pas"/>
+    <File Path="uCliente.dfm"/>
   </ProjectSortOrder>
 </BorlandProject>

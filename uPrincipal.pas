@@ -35,6 +35,8 @@ type
     procedure ToolButton1Click(Sender: TObject);
     procedure ConsultadeVendas1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
+    procedure Grupos1Click(Sender: TObject);
+    procedure Produtos2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +49,7 @@ var
 implementation
 
   uses
-     uCliente, uVenda, uConsultaVenda, uProduto;
+     uCliente, uVenda, uConsultaVenda, uProduto, uGrupoProduto, uFuncionario;
 
 {$R *.dfm}
 
@@ -70,9 +72,19 @@ begin
   end;    }
 end;
 
+procedure TfPrincipal.Grupos1Click(Sender: TObject);
+begin
+  fGrupoProd := TfGrupoProd.Create(fPrincipal);
+end;
+
 procedure TfPrincipal.Produtos1Click(Sender: TObject);
 begin
   fProduto := TfProduto.Create(fPrincipal);
+end;
+
+procedure TfPrincipal.Produtos2Click(Sender: TObject);
+begin
+  fFuncionario := TfFuncionario.Create(fPrincipal);
 end;
 
 procedure TfPrincipal.Sair1Click(Sender: TObject);

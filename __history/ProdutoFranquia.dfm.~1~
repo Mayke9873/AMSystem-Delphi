@@ -1,0 +1,262 @@
+inherited fProdutoFranquia: TfProdutoFranquia
+  Caption = 'fProdutoSodieFranquia'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited PageControl1: TPageControl
+    inherited pgDados: TTabSheet
+      inherited Label1: TLabel
+        Left = 10
+        Top = 12
+        ExplicitLeft = 10
+        ExplicitTop = 12
+      end
+      inherited Label2: TLabel
+        Left = 10
+        Top = 74
+        ExplicitLeft = 10
+        ExplicitTop = 74
+      end
+      inherited Label3: TLabel
+        Left = 666
+        Top = 74
+        ExplicitLeft = 666
+        ExplicitTop = 74
+      end
+      inherited Label5: TLabel
+        Left = 319
+        Top = 12
+        ExplicitLeft = 319
+        ExplicitTop = 12
+      end
+      object Label11: TLabel [5]
+        Left = 529
+        Top = 12
+        Width = 72
+        Height = 18
+        Caption = 'Subgrupo:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label12: TLabel [6]
+        Left = 10
+        Top = 137
+        Width = 129
+        Height = 18
+        Caption = 'C'#243'digo de Barras:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object SpeedButton1: TSpeedButton [7]
+        Left = 437
+        Top = 281
+        Width = 180
+        Height = 40
+        Caption = 'Replicar p/ Lojas ativas'
+      end
+      inherited dbeDescricao: TDBEdit
+        Top = 95
+        Width = 650
+        ExplicitTop = 95
+        ExplicitWidth = 650
+      end
+      inherited dbeUnidade: TDBEdit
+        Left = 666
+        Top = 95
+        ExplicitLeft = 666
+        ExplicitTop = 95
+      end
+      inherited dbeValorCompra: TDBEdit
+        TabOrder = 11
+      end
+      inherited dbeLucro: TDBEdit
+        TabOrder = 12
+      end
+      object DBRadioGroup1: TDBRadioGroup [16]
+        Left = 101
+        Top = 12
+        Width = 197
+        Height = 49
+        Caption = 'Tipo'
+        Columns = 2
+        Items.Strings = (
+          'Por peso'
+          ' Unit'#225'rio')
+        TabOrder = 5
+      end
+      object DBComboBox2: TDBComboBox [17]
+        Left = 529
+        Top = 34
+        Width = 202
+        Height = 26
+        TabOrder = 6
+      end
+      object DBEdit1: TDBEdit [18]
+        Left = 10
+        Top = 158
+        Width = 167
+        Height = 26
+        DataField = 'ESTOQUE'
+        DataSource = dProduto
+        ReadOnly = True
+        TabOrder = 7
+      end
+      object DBRadioGroup2: TDBRadioGroup [19]
+        Left = 189
+        Top = 137
+        Width = 215
+        Height = 47
+        Caption = 'Origem'
+        Columns = 2
+        Items.Strings = (
+          'Comprado'
+          'Produzido')
+        TabOrder = 8
+      end
+      inherited dbeValorVenda: TDBEdit
+        TabOrder = 13
+      end
+      object GroupBox1: TGroupBox [21]
+        Left = 410
+        Top = 137
+        Width = 207
+        Height = 47
+        TabOrder = 9
+        object Label10: TLabel
+          Left = 104
+          Top = 2
+          Width = 91
+          Height = 16
+          Caption = 'Data Libera'#231#227'o:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object DBCheckBox1: TDBCheckBox
+          Left = 7
+          Top = 14
+          Width = 90
+          Height = 17
+          Caption = 'Liberado'
+          DataField = 'ativo'
+          DataSource = dProduto
+          ReadOnly = True
+          TabOrder = 0
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object DBEdit2: TDBEdit
+          Left = 104
+          Top = 18
+          Width = 91
+          Height = 24
+          DataField = 'ESTOQUE'
+          DataSource = dProduto
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      inherited dbchkAtivo: TDBCheckBox
+        Left = 754
+        Top = 38
+        TabOrder = 3
+        ExplicitLeft = 754
+        ExplicitTop = 38
+      end
+      inherited dbeEstoque: TDBEdit
+        TabOrder = 14
+      end
+      object GroupBox2: TGroupBox [24]
+        Left = 3
+        Top = 203
+        Width = 214
+        Height = 118
+        TabOrder = 10
+        object Label13: TLabel
+          Left = 7
+          Top = 12
+          Width = 92
+          Height = 18
+          Caption = 'C'#243'd. F'#225'brica'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label14: TLabel
+          Left = 7
+          Top = 65
+          Width = 143
+          Height = 18
+          Caption = 'C'#243'd. Produto Pronto'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object DBCheckBox2: TDBCheckBox
+          Left = 159
+          Top = 37
+          Width = 52
+          Height = 17
+          Caption = 'Cru'
+          DataField = 'ativo'
+          DataSource = dProduto
+          ReadOnly = True
+          TabOrder = 0
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object DBEdit3: TDBEdit
+          Left = 7
+          Top = 33
+          Width = 145
+          Height = 26
+          DataField = 'ESTOQUE'
+          DataSource = dProduto
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object DBEdit4: TDBEdit
+          Left = 7
+          Top = 83
+          Width = 145
+          Height = 26
+          DataField = 'ESTOQUE'
+          DataSource = dProduto
+          ReadOnly = True
+          TabOrder = 2
+        end
+      end
+      inherited DBComboBox1: TDBComboBox
+        Left = 319
+        Top = 34
+        Width = 202
+        TabOrder = 4
+        ExplicitLeft = 319
+        ExplicitTop = 34
+        ExplicitWidth = 202
+      end
+    end
+  end
+end

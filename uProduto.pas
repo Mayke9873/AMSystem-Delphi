@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate, System.ImageList,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
+  System.ImageList,
   Vcl.ImgList, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ToolWin;
 
 type
@@ -55,7 +56,7 @@ type
     qProdutoGRUPO: TWideStringField;
     qProdutoDTREGISTRO: TDateField;
     qProdutoATIVO: TWideStringField;
-    DBComboBox1: TDBComboBox;
+    DbCbGrupo: TDBComboBox;
     procedure Consulta;
     procedure FormCreate(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
@@ -71,6 +72,7 @@ type
     procedure tbEditarClick(Sender: TObject);
     procedure dbeLucroExit(Sender: TObject);
     procedure dbeValorVendaExit(Sender: TObject);
+    procedure qProdutoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -102,8 +104,8 @@ begin
     qProduto.Close;
     qProduto.SQL.Clear;
     qProduto.SQL.Add('SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA, GRUPO, DTREGISTRO, ATIVO ' +
-      'FROM PRODUTO where ativo = ' + QuotedStr('S') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' + '(descricao like '
-      + QuotedStr('%' + edPesquisa.Text + '%') + '));');
+      'FROM PRODUTO where ativo = ' + QuotedStr('S') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' +
+      '(descricao like ' + QuotedStr('%' + edPesquisa.Text + '%') + '));');
     qProduto.Open;
   end;
 
@@ -112,8 +114,8 @@ begin
     qProduto.Close;
     qProduto.SQL.Clear;
     qProduto.SQL.Add('SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA, GRUPO, DTREGISTRO, ATIVO ' +
-      'FROM PRODUTO where ativo = ' + QuotedStr('N') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' + '(descricao like '
-      + QuotedStr('%' + edPesquisa.Text + '%') + '));');
+      'FROM PRODUTO where ativo = ' + QuotedStr('N') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' +
+      '(descricao like ' + QuotedStr('%' + edPesquisa.Text + '%') + '));');
     qProduto.Open;
   end;
 end;
@@ -122,7 +124,12 @@ procedure TfProduto.dbeLucroExit(Sender: TObject);
 var
   compra, lucro, venda: Real;
 begin
-  if Length(Trim(dbeValorCompra.Text)) <> 0 then
+
+  compra := 0;
+  lucro := 0;
+  venda := 0;
+
+  if Trim(dbeValorCompra.Text) <> '' then
   begin
     compra := StrToFloat(dbeValorCompra.Text);
   end
@@ -141,14 +148,20 @@ begin
   end;
 
   venda := compra + (compra * (lucro / 100));
-  dbeValorVenda.Text := FloatToStr(venda);
+  // dbeValorVenda.Text := FloatToStr(venda);
+  qProdutoPVENDA.asFloat := venda;
 end;
 
 procedure TfProduto.dbeValorVendaExit(Sender: TObject);
 var
   compra, lucro, venda: Real;
 begin
-  if Length(Trim(dbeValorCompra.Text)) <> 0 then
+
+  compra := 0;
+  lucro := 0;
+  venda := 0;
+
+  if Trim(dbeValorCompra.Text) <> '' then
   begin
     compra := StrToFloat(dbeValorCompra.Text);
   end
@@ -163,11 +176,12 @@ begin
   end
   else
   begin
-    venda :=0;
+    venda := 0;
   end;
 
   lucro := (venda - compra) / compra * 100;
-  dbeLucro.Text := FloatToStr(lucro);
+  // dbeLucro.Text := FloatToStr(lucro);
+  qProdutoPLUCRO.asFloat := lucro;
 end;
 
 procedure TfProduto.edPesquisaChange(Sender: TObject);
@@ -188,6 +202,8 @@ begin
   tbEditar.Enabled := True;
   tbSalvar.Enabled := false;
   tbCancelar.Enabled := false;
+
+  DbCbGrupo.ItemIndex := 3;
 end;
 
 procedure TfProduto.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -214,6 +230,11 @@ begin
     Key := #0;
     Perform(WM_NEXTDLGCTL, 0, 0);
   end;
+end;
+
+procedure TfProduto.qProdutoNewRecord(DataSet: TDataSet);
+begin
+  qProdutoATIVO.AsString := 'S';
 end;
 
 procedure TfProduto.rdbAtivoClick(Sender: TObject);

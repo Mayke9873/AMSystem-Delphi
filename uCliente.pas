@@ -62,8 +62,6 @@ type
     rdbTodos: TRadioButton;
     rdbAtivo: TRadioButton;
     rdbInativo: TRadioButton;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure FormActivate(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
     procedure tbNovoClick(Sender: TObject);
     procedure tbCancelarClick(Sender: TObject);
@@ -78,6 +76,10 @@ type
     procedure rdbAtivoClick(Sender: TObject);
     procedure rdbInativoClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure qClienteNewRecord(DataSet: TDataSet);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -95,6 +97,22 @@ uses uDM;
 procedure TfCliente.DBGrid1DblClick(Sender: TObject);
 begin
   PageControl1.ActivePageIndex := 1;
+end;
+
+procedure TfCliente.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if DBGrid1.DataSource.DataSet.State in [dsEdit, dsInsert, dsBrowse] then //Cor da linha selecionada
+     if Rect.Top = TStringGrid(DBGrid1).CellRect(0,TStringGrid(DBGrid1).Row).Top then begin
+        DBGrid1.Canvas.FillRect(Rect);
+        DBGrid1.Canvas.Brush.Color := TColor($F0CAA6);
+        DBGrid1.DefaultDrawDataCell(Rect,Column.Field,State)
+     end;
+  if gdSelected in State then begin //Cor da célula selecionada
+     DBGrid1.Canvas.Brush.Color := TColor($808000);
+     DBGrid1.Canvas.FillRect(Rect);
+     DBGrid1.DefaultDrawDataCell(Rect,Column.Field,State)
+  end
 end;
 
 procedure TfCliente.Consulta;
@@ -135,23 +153,22 @@ begin
   Consulta;
 end;
 
-procedure TfCliente.FormActivate(Sender: TObject);
-begin
-  qCliente.Open;
-end;
-
-procedure TfCliente.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  Destroy;
-end;
-
 procedure TfCliente.FormCreate(Sender: TObject);
 begin
-  PageControl1.ActivePageIndex := 0;
+  qCliente.Open;
   tbNovo.Enabled := true;
   tbEditar.Enabled := true;
   tbSalvar.Enabled := false;
   tbCancelar.Enabled := false;
+end;
+
+procedure TfCliente.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  begin
+    Key := #0;
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
 end;
 
 procedure TfCliente.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -160,7 +177,7 @@ begin
   case Key of
     27:
       begin
-        tbSairClick(tbSair);
+        tbSairClick(Sender);
         Key := 0;
       end;
 
@@ -172,13 +189,10 @@ begin
   end;
 end;
 
-procedure TfCliente.FormKeyPress(Sender: TObject; var Key: Char);
+procedure TfCliente.qClienteNewRecord(DataSet: TDataSet);
 begin
-  if Key = #13 then
-  begin
-    Key := #0;
-    Perform(WM_NEXTDLGCTL, 0, 0);
-  end;
+  qClienteativo.AsString := 'S';
+  qClientetipo.AsString := 'F';
 end;
 
 procedure TfCliente.rdbAtivoClick(Sender: TObject);
@@ -273,11 +287,6 @@ begin
   qCliente.Insert;
 end;
 
-procedure TfCliente.tbSairClick(Sender: TObject);
-begin
-  Destroy;
-end;
-
 procedure TfCliente.tbSalvarClick(Sender: TObject);
 begin
 
@@ -331,5 +340,16 @@ begin
   qCliente.Close;
   qCliente.Open;
 end;
+
+procedure TfCliente.tbSairClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfCliente.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Destroy;
+end;
+
 
 end.

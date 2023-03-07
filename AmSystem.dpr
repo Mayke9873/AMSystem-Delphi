@@ -4,10 +4,12 @@ uses
   Vcl.Forms,
   uDM in 'uDM.pas' {DataModule1: TDataModule},
   uPrincipal in 'uPrincipal.pas' {Form1},
-  uCliente in 'uCliente.pas' {Form2},
   uVenda in 'uVenda.pas' {fVenda},
   uConsultaVenda in 'uConsultaVenda.pas' {fConsultaVendas},
-  uProduto in 'uProduto.pas' {fProduto};
+  uProduto in 'uProduto.pas' {fProduto},
+  uGrupoProduto in 'uGrupoProduto.pas' {fGrupoProd},
+  uFuncionario in 'uFuncionario.pas' {fFuncionario},
+  uCliente in 'uCliente.pas' {fCliente};
 
 {$R *.res}
 

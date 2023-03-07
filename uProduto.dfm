@@ -441,7 +441,7 @@ object fProduto: TfProduto
       end
       object dbeValorVenda: TDBEdit
         Left = 328
-        Top = 150
+        Top = 153
         Width = 90
         Height = 26
         DataField = 'PVENDA'
@@ -473,11 +473,20 @@ object fProduto: TfProduto
         ReadOnly = True
         TabOrder = 3
       end
-      object DBComboBox1: TDBComboBox
+      object DbCbGrupo: TDBComboBox
+        Tag = 1
         Left = 10
         Top = 219
         Width = 216
         Height = 26
+        CharCase = ecUpperCase
+        DataField = 'GRUPO'
+        DataSource = dProduto
+        Items.Strings = (
+          'BRANCO'
+          'BEBIDAS'
+          'QUALQUER'
+          'ROUPAS')
         TabOrder = 8
       end
     end
@@ -980,6 +989,8 @@ object fProduto: TfProduto
     Connection = DataModule1.zCon
     SortedFields = 'Id'
     UpdateObject = uProduto
+    OnNewRecord = qProdutoNewRecord
+    Active = True
     SQL.Strings = (
       
         'SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA,' +
