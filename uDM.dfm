@@ -7,13 +7,14 @@ object DataModule1: TDataModule1
     Catalog = ''
     Properties.Strings = (
       'controls_cp=CP_UTF16')
-    HostName = '127.0.0.1'
+    Connected = True
+    HostName = '192.168.2.104'
     Port = 3306
     Database = 'projeto_db'
-    User = 'root'
-    Password = ''
+    User = 'mayke'
+    Password = 'mayke98'
     Protocol = 'mysql'
-    LibraryLocation = 'Z:\Desenvolvimento\Projetos\Delphi\AM System\libmariadb.dll'
+    LibraryLocation = 'E:\AmSystem\libmariadb.dll'
     Left = 24
     Top = 16
   end

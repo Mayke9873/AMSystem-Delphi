@@ -42,8 +42,8 @@
     <Transaction>2023/01/25 20:45:24.000.973,=Z:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas</Transaction>
     <Transaction>2023/01/25 21:41:40.000.717,Z:\Desenvolvimento\Projetos\Delphi\AM System\uFuncionario.dfm=Z:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.dfm</Transaction>
     <Transaction>2023/01/25 21:41:40.000.717,Z:\Desenvolvimento\Projetos\Delphi\AM System\uFuncionario.pas=Z:\Desenvolvimento\Projetos\Delphi\AM System\Unit3.pas</Transaction>
-    <Transaction>2023/03/07 19:36:38.464,Z:\Desenvolvimento\Projetos\Delphi\AM System\uCliente.pas=</Transaction>
-    <Transaction>2023/03/07 19:36:49.604,=Z:\Desenvolvimento\Projetos\Delphi\AM System\uCliente.pas</Transaction>
+    <Transaction>2023/03/07 19:36:38.000.464,Z:\Desenvolvimento\Projetos\Delphi\AM System\uCliente.pas=</Transaction>
+    <Transaction>2023/03/07 19:36:49.000.604,=Z:\Desenvolvimento\Projetos\Delphi\AM System\uCliente.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="uDM.pas"/>
