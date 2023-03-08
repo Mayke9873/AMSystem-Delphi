@@ -616,14 +616,14 @@ object fVenda: TfVenda
         Name = 'nome'
         ParamType = ptUnknown
       end>
-    object IntegerField1: TIntegerField
+    object qClienteid: TIntegerField
       FieldName = 'id'
       ReadOnly = True
     end
-    object WideStringField1: TWideStringField
+    object qClientenome: TWideStringField
       FieldName = 'nome'
       ReadOnly = True
-      Size = 255
+      Size = 250
     end
   end
   object qPesqProd: TZReadOnlyQuery

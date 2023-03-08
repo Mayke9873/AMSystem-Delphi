@@ -45,8 +45,6 @@ type
     qFuncionarioid: TIntegerField;
     qFuncionarionome: TWideStringField;
     qCliente: TZReadOnlyQuery;
-    IntegerField1: TIntegerField;
-    WideStringField1: TWideStringField;
     qPesqProd: TZReadOnlyQuery;
     qPesqProdid: TIntegerField;
     qPesqProddescricao: TWideStringField;
@@ -68,6 +66,8 @@ type
     Label9: TLabel;
     edTotalVenda: TEdit;
     Label10: TLabel;
+    qClienteid: TIntegerField;
+    qClientenome: TWideStringField;
     procedure btnSairClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edVendedorChange(Sender: TObject);
@@ -158,7 +158,7 @@ end;
 
 procedure TfVenda.dbgClienteDblClick(Sender: TObject);
 begin
-  edIdCliente.Text := dbgCliente.Fields[0].Value;
+s  edIdCliente.Text := dbgCliente.Fields[0].Value;
   edCliente.Text := dbgCliente.Fields[1].Value;
 end;
 
@@ -291,6 +291,7 @@ begin
       dbgVendedor.Visible := True;
 
       qFuncionario.ParamByName('nome').AsString := '%' + edVendedor.Text + '%';
+      qFuncionario.Open;
     end
     else
     begin
@@ -301,8 +302,6 @@ begin
   begin
     dbgVendedor.Visible := false;
   end;
-
-  qFuncionario.Open;
 end;
 
 procedure TfVenda.edQtdProdutoEnter(Sender: TObject);
@@ -362,10 +361,12 @@ begin
   if Length(edIdCliente.Text) <> 0 then
   begin
     qCliente.Close;
-    qCliente.ParamByName('id').Value := edIdCliente.Text;
+    qCliente.ParamByName('id').Value := '0';
     qCliente.Open;
 
-    edCliente.Text := dbgCliente.Fields[1].Text;
+    qCliente.Locate('id', edIdCliente.Text, []);
+
+    edCliente.Text := qClientenome.AsString;
   end;
 end;
 
@@ -391,8 +392,10 @@ begin
   if Length(edIdVendedor.Text) <> 0 then
   begin
     qFuncionario.Close;
-    qFuncionario.ParamByName('id').AsString := edIdVendedor.Text;
+    qFuncionario.ParamByName('id').AsString := '0';
     qFuncionario.Open;
+
+    qFuncionario.Locate('id', edIdVendedor.Text, []);
 
     edVendedor.Text := qFuncionarionome.AsString;
   end;
