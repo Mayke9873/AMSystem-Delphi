@@ -362,8 +362,7 @@ begin
   if Length(edIdCliente.Text) <> 0 then
   begin
     qCliente.Close;
-    qCliente.SQL.Clear;
-    qCliente.SQL.Add('SELECT id, nome FROM cliente WHERE id = ' + QuotedStr(edIdCliente.Text) + ';');
+    qCliente.ParamByName('id').Value := edIdCliente.Text;
     qCliente.Open;
 
     edCliente.Text := dbgCliente.Fields[1].Text;
@@ -392,11 +391,10 @@ begin
   if Length(edIdVendedor.Text) <> 0 then
   begin
     qFuncionario.Close;
-    qFuncionario.SQL.Clear;
-    qFuncionario.SQL.Add('SELECT id, nome FROM funcionario WHERE id = ' + QuotedStr(edIdVendedor.Text) + ';');
+    qFuncionario.ParamByName('id').AsString := edIdVendedor.Text;
     qFuncionario.Open;
 
-    edVendedor.Text := dbgVendedor.Fields[1].Text;
+    edVendedor.Text := qFuncionarionome.AsString;
   end;
 end;
 
@@ -470,7 +468,8 @@ end;
 
 procedure TfVenda.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Destroy;
+  Action := caFree;
+  fVenda := nil;
 end;
 
 end.

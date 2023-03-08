@@ -452,7 +452,7 @@ object fVenda: TfVenda
         Title.Font.Height = -15
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
-        Width = 430
+        Width = 420
         Visible = True
       end>
   end
@@ -492,7 +492,7 @@ object fVenda: TfVenda
         Title.Font.Height = -15
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
-        Width = 430
+        Width = 420
         Visible = True
       end>
   end
@@ -552,7 +552,7 @@ object fVenda: TfVenda
     Connection = DataModule1.zCon
     SQL.Strings = (
       'Select id, nome From funcionario'
-      '  where (id = :id or id = 0) or (nome like :nome);')
+      '  where ((:id = 0) or (id = :id)) or (nome like :nome);')
     Params = <
       item
         DataType = ftUnknown
@@ -591,7 +591,7 @@ object fVenda: TfVenda
     Connection = DataModule1.zCon
     SQL.Strings = (
       'Select id, nome From cliente'
-      '  where (id = :id or id = 0) or (nome like :nome);')
+      '  where ((:id = 0) or (id = :id)) or (nome like :nome);')
     Params = <
       item
         DataType = ftUnknown
