@@ -6,7 +6,11 @@ object fCliente: TfCliente
   ClientWidth = 999
   Color = clBtnFace
   DefaultMonitor = dmMainForm
-  ParentFont = True
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
   FormStyle = fsMDIChild
   KeyPreview = True
   OldCreateOrder = False
@@ -107,7 +111,7 @@ object fCliente: TfCliente
     Top = 56
     Width = 999
     Height = 593
-    ActivePage = pgTabela
+    ActivePage = pgDados
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     object pgTabela: TTabSheet
@@ -295,10 +299,6 @@ object fCliente: TfCliente
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label1: TLabel
         Left = 8
         Top = 13
@@ -421,11 +421,13 @@ object fCliente: TfCliente
       end
       object DBENome: TDBEdit
         Left = 10
-        Top = 91
+        Top = 94
         Width = 331
         Height = 26
+        CharCase = ecUpperCase
         DataField = 'nome'
         DataSource = dCliente
+        MaxLength = 250
         ReadOnly = True
         TabOrder = 1
       end
@@ -1028,13 +1030,13 @@ object fCliente: TfCliente
       EditMask = '###.###.###-##;0;_'
       Size = 11
     end
-    object qClienteDtNasc: TDateField
-      FieldName = 'DtNasc'
-      EditMask = '99/!99/9999;1;'
-    end
     object qClienteendereco: TWideStringField
       FieldName = 'endereco'
       Size = 255
+    end
+    object qClienteDtNasc: TDateField
+      FieldName = 'DtNasc'
+      EditMask = '99/!99/9999;1;'
     end
     object qClientenumEndereco: TWideStringField
       FieldName = 'numEndereco'

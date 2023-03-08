@@ -155,6 +155,7 @@ end;
 
 procedure TfCliente.FormCreate(Sender: TObject);
 begin
+  PageControl1.ActivePageIndex := 0;
   qCliente.Open;
   tbNovo.Enabled := true;
   tbEditar.Enabled := true;
@@ -177,7 +178,7 @@ begin
   case Key of
     27:
       begin
-        tbSairClick(Sender);
+        tbSairClick(tbSair);
         Key := 0;
       end;
 
@@ -326,7 +327,7 @@ begin
       qClienteativo.Value := DBCheckBox1.ValueUnchecked;
     end;
 
-    if DBENasc.Text <> '' then
+    if DBENasc.Text <> '  /  /    ' then
       qClienteDtNasc.AsDateTime := StrToDate(DBENasc.Text);
 
     qCliente.Post;
@@ -334,7 +335,7 @@ begin
   else
   begin
     qCliente.Cancel;
-    ShowMessage('Campo Nome obrigatório!');
+    ShowMessage('Campo nome obrigatório!');
   end;
 
   qCliente.Close;
@@ -348,8 +349,8 @@ end;
 
 procedure TfCliente.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Destroy;
+  Action := caFree;
+  fCliente := nil;
 end;
-
 
 end.
