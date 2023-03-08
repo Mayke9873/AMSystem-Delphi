@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ZSqlUpdate, System.ImageList, Vcl.ImgList,
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ComCtrls, Vcl.ToolWin;
+  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList;
 
 type
   TfFuncionario = class(TForm)
@@ -37,7 +37,6 @@ type
     DBEEndereco: TDBEdit;
     DBENumEnd: TDBEdit;
     DBEBairro: TDBEdit;
-    DBRadioGroup1: TDBRadioGroup;
     DBCheckBox1: TDBCheckBox;
     DBECPF: TDBEdit;
     DBENasc: TDBEdit;
@@ -49,19 +48,22 @@ type
     ImageList1: TImageList;
     uFuncionario: TZUpdateSQL;
     qFuncionario: TZQuery;
-    qFuncionarioid: TIntegerField;
-    qFuncionarionome: TWideStringField;
-    qFuncionariorg: TWideStringField;
-    qFuncionarioCPFCNPJ: TWideStringField;
-    qFuncionarioDtNasc: TDateField;
-    qFuncionarioendereco: TWideStringField;
-    qFuncionarionumEndereco: TWideStringField;
-    qFuncionariobairro: TWideStringField;
-    qFuncionarioDtRegistro: TDateField;
-    qFuncionariotipo: TWideStringField;
-    qFuncionarioativo: TWideStringField;
+    qFuncionarioId: TIntegerField;
+    qFuncionarioNome: TWideStringField;
+    qFuncionarioRG: TWideStringField;
+    qFuncionarioCpf: TWideStringField;
+    qFuncionariodtnasc: TDateField;
+    qFuncionarioEndereco: TWideStringField;
+    qFuncionarionumendereco: TWideStringField;
+    qFuncionarioBairro: TWideStringField;
+    qFuncionariodtregistro: TDateField;
+    qFuncionarioAtivo: TWideStringField;
+    ActionList1: TActionList;
+    acSair: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure tbSairClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure acSairExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -75,14 +77,28 @@ implementation
 
 {$R *.dfm}
 
-procedure TfFuncionario.FormClose(Sender: TObject; var Action: TCloseAction);
+
+
+
+procedure TfFuncionario.FormActivate(Sender: TObject);
 begin
-  Free;
+  PageControl1.ActivePageIndex := 0;
 end;
 
-procedure TfFuncionario.tbSairClick(Sender: TObject);
+procedure TfFuncionario.FormCreate(Sender: TObject);
 begin
-  Destroy;
+  qFuncionario.Open;
+end;
+
+procedure TfFuncionario.acSairExecute(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfFuncionario.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+  fFuncionario := nil;
 end;
 
 end.

@@ -1,7 +1,7 @@
 object fFuncionario: TfFuncionario
   Left = 0
   Top = 0
-  Caption = 'Funcion'#225'rio.'
+  Caption = 'Funcion'#225'rios'
   ClientHeight = 649
   ClientWidth = 999
   Color = clBtnFace
@@ -14,7 +14,9 @@ object fFuncionario: TfFuncionario
   OldCreateOrder = False
   Visible = True
   WindowState = wsMaximized
+  OnActivate = FormActivate
   OnClose = FormClose
+  OnCreate = FormCreate
   DesignSize = (
     999
     649)
@@ -89,12 +91,9 @@ object fFuncionario: TfFuncionario
     object tbSair: TToolButton
       Left = 121
       Top = 0
-      Hint = 'Sair - Esc'
-      Caption = 'Sair'
-      ImageIndex = 4
+      Action = acSair
       ParentShowHint = False
       ShowHint = True
-      OnClick = tbSairClick
     end
   end
   object PageControl1: TPageControl
@@ -135,7 +134,7 @@ object fFuncionario: TfFuncionario
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'id'
+            FieldName = 'Id'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'digo'
             Title.Font.Charset = ANSI_CHARSET
@@ -148,8 +147,7 @@ object fFuncionario: TfFuncionario
           end
           item
             Expanded = False
-            FieldName = 'nome'
-            Title.Caption = 'Nome'
+            FieldName = 'Nome'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
@@ -161,9 +159,8 @@ object fFuncionario: TfFuncionario
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'rg'
+            FieldName = 'RG'
             Title.Alignment = taCenter
-            Title.Caption = 'RG'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
@@ -189,7 +186,7 @@ object fFuncionario: TfFuncionario
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'DtNasc'
+            FieldName = 'dtnasc'
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Nasc'
             Title.Font.Charset = ANSI_CHARSET
@@ -202,8 +199,7 @@ object fFuncionario: TfFuncionario
           end
           item
             Expanded = False
-            FieldName = 'endereco'
-            Title.Caption = 'Endereco'
+            FieldName = 'Endereco'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
@@ -214,7 +210,7 @@ object fFuncionario: TfFuncionario
           end
           item
             Expanded = False
-            FieldName = 'numEndereco'
+            FieldName = 'numendereco'
             Title.Caption = 'N'#186
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -226,8 +222,7 @@ object fFuncionario: TfFuncionario
           end
           item
             Expanded = False
-            FieldName = 'bairro'
-            Title.Caption = 'Bairro'
+            FieldName = 'Bairro'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
@@ -239,7 +234,7 @@ object fFuncionario: TfFuncionario
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'DtRegistro'
+            FieldName = 'dtregistro'
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Registro'
             Title.Font.Charset = ANSI_CHARSET
@@ -266,7 +261,7 @@ object fFuncionario: TfFuncionario
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'ativo'
+            FieldName = 'Ativo'
             Title.Alignment = taCenter
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -409,7 +404,7 @@ object fFuncionario: TfFuncionario
       end
       object DBENome: TDBEdit
         Left = 10
-        Top = 91
+        Top = 94
         Width = 331
         Height = 26
         DataField = 'nome'
@@ -457,30 +452,6 @@ object fFuncionario: TfFuncionario
         ReadOnly = True
         TabOrder = 7
       end
-      object DBRadioGroup1: TDBRadioGroup
-        Left = 554
-        Top = 7
-        Width = 150
-        Height = 53
-        Caption = 'Tipo Cliente'
-        Columns = 2
-        DataField = 'tipo'
-        DataSource = dFuncionario
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = []
-        Items.Strings = (
-          'Fisica'
-          'Juridica')
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 8
-        Values.Strings = (
-          'F'
-          'J')
-      end
       object DBCheckBox1: TDBCheckBox
         Left = 284
         Top = 37
@@ -490,23 +461,23 @@ object fFuncionario: TfFuncionario
         DataField = 'ativo'
         DataSource = dFuncionario
         ReadOnly = True
-        TabOrder = 9
+        TabOrder = 8
         ValueChecked = 'S'
         ValueUnchecked = 'N'
       end
       object DBECPF: TDBEdit
         Left = 456
-        Top = 91
+        Top = 94
         Width = 150
         Height = 26
-        DataField = 'CPFCNPJ'
+        DataField = 'Cpf'
         DataSource = dFuncionario
         ReadOnly = True
         TabOrder = 3
       end
       object DBENasc: TDBEdit
         Left = 612
-        Top = 91
+        Top = 94
         Width = 91
         Height = 26
         DataField = 'DtNasc'
@@ -993,51 +964,59 @@ object fFuncionario: TfFuncionario
     IndexFieldNames = 'Id Asc'
     Left = 28
     Top = 569
-    object qFuncionarioid: TIntegerField
-      FieldName = 'id'
+    object qFuncionarioId: TIntegerField
+      FieldName = 'Id'
       Required = True
     end
-    object qFuncionarionome: TWideStringField
-      FieldName = 'nome'
+    object qFuncionarioNome: TWideStringField
+      FieldName = 'Nome'
       Required = True
-      Size = 250
-    end
-    object qFuncionariorg: TWideStringField
-      FieldName = 'rg'
-      Size = 10
-    end
-    object qFuncionarioCPFCNPJ: TWideStringField
-      FieldName = 'CPFCNPJ'
-      EditMask = '###.###.###-##;0;_'
-      Size = 11
-    end
-    object qFuncionarioDtNasc: TDateField
-      FieldName = 'DtNasc'
-      EditMask = '99/!99/9999;1;'
-    end
-    object qFuncionarioendereco: TWideStringField
-      FieldName = 'endereco'
       Size = 255
     end
-    object qFuncionarionumEndereco: TWideStringField
-      FieldName = 'numEndereco'
-      Size = 5
+    object qFuncionarioRG: TWideStringField
+      FieldName = 'RG'
+      Required = True
+      Size = 10
     end
-    object qFuncionariobairro: TWideStringField
-      FieldName = 'bairro'
+    object qFuncionarioCpf: TWideStringField
+      FieldName = 'Cpf'
+      Required = True
+      Size = 11
+    end
+    object qFuncionariodtnasc: TDateField
+      FieldName = 'dtnasc'
+      Required = True
+    end
+    object qFuncionarioEndereco: TWideStringField
+      FieldName = 'Endereco'
       Size = 250
     end
-    object qFuncionarioDtRegistro: TDateField
-      FieldName = 'DtRegistro'
-      EditMask = '!99/99/00;1;_'
+    object qFuncionarionumendereco: TWideStringField
+      FieldName = 'numendereco'
+      Size = 5
     end
-    object qFuncionariotipo: TWideStringField
-      FieldName = 'tipo'
+    object qFuncionarioBairro: TWideStringField
+      FieldName = 'Bairro'
+      Size = 250
+    end
+    object qFuncionariodtregistro: TDateField
+      FieldName = 'dtregistro'
+      Required = True
+    end
+    object qFuncionarioAtivo: TWideStringField
+      FieldName = 'Ativo'
+      Required = True
       Size = 1
     end
-    object qFuncionarioativo: TWideStringField
-      FieldName = 'ativo'
-      Size = 1
+  end
+  object ActionList1: TActionList
+    Left = 444
+    Top = 312
+    object acSair: TAction
+      Caption = 'Sair'
+      ImageIndex = 4
+      ShortCut = 27
+      OnExecute = acSairExecute
     end
   end
 end
