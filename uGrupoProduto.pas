@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ZSqlUpdate, System.ImageList, Vcl.ImgList,
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls,
-  Vcl.ToolWin;
+  Vcl.ToolWin, System.Actions, Vcl.ActnList;
 
 type
   TfGrupoProd = class(TForm)
@@ -39,8 +39,11 @@ type
     qGrupoid: TIntegerField;
     qGrupodescricao: TWideStringField;
     qGrupoativo: TWideStringField;
-    procedure tbSairClick(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
+    ActionList1: TActionList;
+    acSair: TAction;
+    procedure acSairExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -54,14 +57,20 @@ implementation
 
 {$R *.dfm}
 
-procedure TfGrupoProd.FormActivate(Sender: TObject);
+procedure TfGrupoProd.acSairExecute(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfGrupoProd.FormCreate(Sender: TObject);
 begin
   qGrupo.Open;
 end;
 
-procedure TfGrupoProd.tbSairClick(Sender: TObject);
+procedure TfGrupoProd.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Destroying;
+  Action := caFree;
+  fGrupoProd := nil;
 end;
 
 end.

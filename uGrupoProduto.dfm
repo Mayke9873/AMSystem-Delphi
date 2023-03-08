@@ -14,7 +14,8 @@ object fGrupoProd: TfGrupoProd
   OldCreateOrder = False
   Visible = True
   WindowState = wsMaximized
-  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCreate = FormCreate
   DesignSize = (
     999
     649)
@@ -81,12 +82,9 @@ object fGrupoProd: TfGrupoProd
     object tbSair: TToolButton
       Left = 116
       Top = 0
-      Hint = 'Sair - Esc'
-      Caption = 'Sair'
-      ImageIndex = 4
+      Action = acSair
       ParentShowHint = False
       ShowHint = True
-      OnClick = tbSairClick
     end
     object ToolButton1: TToolButton
       Left = 145
@@ -168,6 +166,10 @@ object fGrupoProd: TfGrupoProd
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label1: TLabel
         Left = 8
         Top = 13
@@ -748,6 +750,17 @@ object fGrupoProd: TfGrupoProd
       FieldName = 'ativo'
       Required = True
       Size = 1
+    end
+  end
+  object ActionList1: TActionList
+    Images = ImageList1
+    Left = 116
+    Top = 216
+    object acSair: TAction
+      Caption = 'acSair'
+      ImageIndex = 4
+      ShortCut = 27
+      OnExecute = acSairExecute
     end
   end
 end
