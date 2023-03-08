@@ -109,7 +109,7 @@ object fProduto: TfProduto
     Top = 56
     Width = 999
     Height = 593
-    ActivePage = pgDados
+    ActivePage = pgTabela
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     object pgTabela: TTabSheet
@@ -990,7 +990,6 @@ object fProduto: TfProduto
     SortedFields = 'Id'
     UpdateObject = uProduto
     OnNewRecord = qProdutoNewRecord
-    Active = True
     SQL.Strings = (
       
         'SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA,' +

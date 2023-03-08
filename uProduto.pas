@@ -189,11 +189,6 @@ begin
   Consulta;
 end;
 
-procedure TfProduto.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  Destroy;
-end;
-
 procedure TfProduto.FormCreate(Sender: TObject);
 begin
   qProduto.Open;
@@ -326,6 +321,12 @@ end;
 procedure TfProduto.tbSairClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfProduto.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+  fProduto := nil;
 end;
 
 end.
