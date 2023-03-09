@@ -40,14 +40,8 @@ Coordinates=563,300,67,58
 [uProdVenda]
 Coordinates=551,537,86,36
 
-[IntegerField1]
-Coordinates=53,537,90,36
-
 [qCliente]
 Coordinates=194,10,62,102
-
-[WideStringField1]
-Coordinates=730,56,113,36
 
 [dProdVenda]
 Coordinates=77,154,86,36
@@ -162,5 +156,5 @@ Coordinates=106,10,78,146
 Coordinates=209,232,88,58
 
 []
-Coordinates=352,655,91,36
+Coordinates=53,537,90,36
 

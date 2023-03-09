@@ -158,7 +158,7 @@ end;
 
 procedure TfVenda.dbgClienteDblClick(Sender: TObject);
 begin
-s  edIdCliente.Text := dbgCliente.Fields[0].Value;
+  edIdCliente.Text := dbgCliente.Fields[0].Value;
   edCliente.Text := dbgCliente.Fields[1].Value;
 end;
 
@@ -265,10 +265,10 @@ begin
     qProdVenda.Open;
   end;
   totalVenda := totalVenda + StrToFloat(edValorTotal.Text);
-  edTotalVenda.Text := FloatToStr(totalVenda);
+  edTotalVenda.Text := FormatFloat('###,###,##0.00', totalVenda);
 
   descontoVenda := descontoVenda + StrToFloat(edDesconto.Text);
-  edDescontoVenda.Text := FloatToStr(descontoVenda);
+  edDescontoVenda.Text :=  FormatFloat('###,###,##0.00', descontoVenda);
 
   edIdProd.Clear;
   edPesqProd.Clear;
@@ -403,25 +403,25 @@ end;
 
 procedure TfVenda.btnSalvarClick(Sender: TObject);
 begin
-  qFuncionario.Close;
-  qFuncionario.SQL.Clear;
-  qFuncionario.SQL.Add('SELECT id, nome FROM funcionario WHERE id = ' + QuotedStr(edIdVendedor.Text) + ' and nome = ' +
+  DM.qPesq.Close;
+  DM.qPesq.SQL.Clear;
+  DM.qPesq.SQL.Add('SELECT id, nome FROM funcionario WHERE id = ' + QuotedStr(edIdVendedor.Text) + ' and nome = ' +
     QuotedStr(edVendedor.Text) + ';');
-  qFuncionario.Open;
+  DM.qPesq.Open;
 
-  if qFuncionario.RecordCount = 0 then
+  if DM.qPesq.RecordCount = 0 then
   begin
     ShowMessage('Vendedor inválido. Por favor, verifique!');
     Abort;
   end;
 
-  qCliente.Close;
-  qCliente.SQL.Clear;
-  qCliente.SQL.Add('SELECT id, nome FROM cliente WHERE id = ' + QuotedStr(edIdCliente.Text) + ' and nome = ' +
+  DM.qPesq.Close;
+  DM.qPesq.SQL.Clear;
+  DM.qPesq.SQL.Add('SELECT id, nome FROM cliente WHERE id = ' + QuotedStr(edIdCliente.Text) + ' and nome = ' +
     QuotedStr(edCliente.Text) + ';');
-  qCliente.Open;
+  DM.qPesq.Open;
 
-  if qCliente.RecordCount = 0 then
+  if DM.qPesq.RecordCount = 0 then
   begin
     Application.MessageBox('AMSystem', 'Cleinte inválido. Por favor, verifique!');
     Abort;
@@ -429,23 +429,27 @@ begin
 
   if (Length(Trim(edCodVenda.Text)) <> 0) then
   begin
-    qVenda.Close;
-    qVenda.SQL.Clear;
-    qVenda.SQL.Add('UPDATE VENDA SET ID_CLIENTE = ' + QuotedStr(edCliente.Text) + ', CLIENTE = ' + QuotedStr(edCliente.Text) +
-      ', ' + 'VALOR = ' + StringReplace(edTotalVenda.Text, ',', '.', []) + ', DESCONTO = ' + QuotedStr(edDescontoVenda.Text) +
-      ', VALOR_TOTAL = ' + QuotedStr(edTotalVenda.Text) + ', PAGO = ' + StringReplace(edTotalVenda.Text, ',', '.', []) + ' ,' +
-      'VENDEDOR = ' + QuotedStr(edIdVendedor.Text) + ', DATA_VENDA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) +
+s    DM.qPesq.Close;
+    DM.qPesq.SQL.Clear;
+    DM.qPesq.SQL.Add('UPDATE VENDA SET ID_CLIENTE = ' + QuotedStr(edCliente.Text) + ', CLIENTE = ' + QuotedStr(edCliente.Text) +
+      ', ' + 'VALOR = ' + StringReplace(edTotalVenda.Text, ',', '.', []) + ', DESCONTO = ' +
+      StringReplace(edDescontoVenda.Text, ',', '.', []) +
+      ', VALOR_TOTAL = ' + StringReplace(edTotalVenda.Text, ',', '.', []) + ', PAGO = ' + StringReplace(edTotalVenda.Text, ',', '.', []) +
+      ', VENDEDOR = ' + QuotedStr(edIdVendedor.Text) + ', DATA_VENDA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) +
       ', EX = 0 WHERE ID = ' + QuotedStr(edCodVenda.Text) + ';');
-    qVenda.ExecSQL;
+    DM.qPesq.ExecSQL;
 
-    qProdVenda.SQL.Clear;
-    qProdVenda.SQL.Add('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + QuotedStr(edCodVenda.Text) + ';');
-    qProdVenda.ExecSQL;
+    DM.qPesq.SQL.Clear;
+    DM.qPesq.SQL.Add('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + QuotedStr(edCodVenda.Text) + ';');
+    DM.qPesq.ExecSQL;
   end;
 
   qProdVenda.Close;
   qProdVenda.SQL.Clear;
-  qProdVenda.SQL.Add('Select idprod, descricao, quantidade, valor, desconto, total FROM venda_item where idVenda = 0;');
+  qProdVenda.SQL.Add('Select id, idVenda, idprod, descricao, valor, desconto, quantidade, total, ex ' +
+                      'From Venda_item where idvenda = :idVenda and ex = 9;');
+
+  qProdVenda.ParamByName('idVenda').Value := '0';
   qProdVenda.ExecSQL;
 
   edCodVenda.Clear;

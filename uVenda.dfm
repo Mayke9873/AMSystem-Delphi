@@ -417,7 +417,7 @@ object fVenda: TfVenda
   end
   object dbgVendedor: TDBGrid
     Left = 918
-    Top = 61
+    Top = 54
     Width = 533
     Height = 120
     DataSource = dFuncionario
@@ -481,6 +481,7 @@ object fVenda: TfVenda
         Title.Font.Height = -15
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
+        Width = 80
         Visible = True
       end
       item
@@ -549,7 +550,7 @@ object fVenda: TfVenda
     Top = 328
   end
   object qFuncionario: TZReadOnlyQuery
-    Connection = DataModule1.zCon
+    Connection = DM.zCon
     SQL.Strings = (
       'Select id, nome From funcionario'
       '  where ((:id = 0) or (id = :id)) or (nome like :nome);')
@@ -588,7 +589,7 @@ object fVenda: TfVenda
     end
   end
   object qCliente: TZReadOnlyQuery
-    Connection = DataModule1.zCon
+    Connection = DM.zCon
     SQL.Strings = (
       'Select id, nome From cliente'
       '  where ((:id = 0) or (id = :id)) or (nome like :nome);')
@@ -627,7 +628,7 @@ object fVenda: TfVenda
     end
   end
   object qPesqProd: TZReadOnlyQuery
-    Connection = DataModule1.zCon
+    Connection = DM.zCon
     SQL.Strings = (
       'Select id, descricao, estoque, pVenda From Produto'
       '  where (id = :id or id = 0) or (descricao like :descricao);')
@@ -675,7 +676,7 @@ object fVenda: TfVenda
     end
   end
   object qProdVenda: TZQuery
-    Connection = DataModule1.zCon
+    Connection = DM.zCon
     UpdateObject = uProdVenda
     SQL.Strings = (
       
@@ -720,10 +721,12 @@ object fVenda: TfVenda
     object qProdVendatotal: TFloatField
       FieldName = 'total'
       Required = True
+      DisplayFormat = '###,###,##0.00'
     end
     object qProdVendavalor: TFloatField
       FieldName = 'valor'
       Required = True
+      DisplayFormat = '###,###,##0.00'
     end
   end
   object uProdVenda: TZUpdateSQL
@@ -860,7 +863,7 @@ object fVenda: TfVenda
       end>
   end
   object qVenda: TZQuery
-    Connection = DataModule1.zCon
+    Connection = DM.zCon
     UpdateObject = uVenda
     SQL.Strings = (
       'Select id From Venda where id = (select max(id) from Venda);')
