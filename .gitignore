@@ -1,5 +1,18 @@
-*__history
+# Delphi compiler-generated binaries (safe to delete)
 *__recovery
 *.dcu
-*Win32
-AmSystem.dproj.local
+ErpThr.dproj.local
+
+# Delphi local files (user-specific info)
+*.local
+*.identcache
+*.projdata
+*.tvsconfig
+*.dsk
+
+# Delphi history and backups
+__history/
+.~
+*.ppu
+*.o
+*.compiled
