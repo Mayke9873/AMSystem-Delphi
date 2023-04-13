@@ -1,7 +1,6 @@
 # Delphi compiler-generated binaries (safe to delete)
 *__recovery
 *.dcu
-ErpThr.dproj.local
 
 # Delphi local files (user-specific info)
 *.local
