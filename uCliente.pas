@@ -9,11 +9,10 @@ uses
   Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.Menus, Vcl.Grids, Vcl.DBGrids,
   ZAbstractRODataset, ZDataset, Vcl.ComCtrls, Vcl.Tabs, Vcl.DockTabSet,
   Vcl.StdCtrls, System.ImageList, Vcl.ImgList, ZAbstractDataset, Vcl.Mask,
-  Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate;
+  Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate, Vcl.Buttons, uClientes;
 
 type
   TfCliente = class(TForm)
-    dCliente: TDataSource;
     ToolBar1: TToolBar;
     tbNovo: TToolButton;
     ImageList1: TImageList;
@@ -27,41 +26,44 @@ type
     pgDados: TTabSheet;
     Label1: TLabel;
     ToolButton1: TToolButton;
-    DBEditID: TDBEdit;
-    DBENome: TDBEdit;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
-    DBERG: TDBEdit;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
-    DBEEndereco: TDBEdit;
-    DBENumEnd: TDBEdit;
-    DBEBairro: TDBEdit;
     DBRadioGroup1: TDBRadioGroup;
     DBCheckBox1: TDBCheckBox;
-    DBECPF: TDBEdit;
-    DBENasc: TDBEdit;
-    uCliente: TZUpdateSQL;
-    qCliente: TZQuery;
-    qClienteid: TIntegerField;
-    qClientenome: TWideStringField;
-    qClienterg: TWideStringField;
-    qClienteCPFCNPJ: TWideStringField;
-    qClienteDtNasc: TDateField;
-    qClienteendereco: TWideStringField;
-    qClientenumEndereco: TWideStringField;
-    qClientebairro: TWideStringField;
-    qClienteDtRegistro: TDateField;
-    qClientetipo: TWideStringField;
-    qClienteativo: TWideStringField;
     Label9: TLabel;
     edPesquisa: TEdit;
     rdbTodos: TRadioButton;
     rdbAtivo: TRadioButton;
     rdbInativo: TRadioButton;
+    Panel1: TPanel;
+    Shape1: TShape;
+    DBENome: TDBEdit;
+    Panel2: TPanel;
+    Shape2: TShape;
+    Panel3: TPanel;
+    Shape3: TShape;
+    Panel4: TPanel;
+    Shape4: TShape;
+    Panel5: TPanel;
+    Shape5: TShape;
+    Panel6: TPanel;
+    Shape6: TShape;
+    DBERG: TDBEdit;
+    DBECPF: TDBEdit;
+    DBENasc: TDBEdit;
+    DBEEndereco: TDBEdit;
+    Panel7: TPanel;
+    Shape7: TShape;
+    Panel8: TPanel;
+    Shape8: TShape;
+    DBENumEnd: TDBEdit;
+    DBEBairro: TDBEdit;
+    DBEditID: TDBEdit;
     procedure tbSairClick(Sender: TObject);
     procedure tbNovoClick(Sender: TObject);
     procedure tbCancelarClick(Sender: TObject);
@@ -76,12 +78,13 @@ type
     procedure rdbAtivoClick(Sender: TObject);
     procedure rdbInativoClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure qClienteNewRecord(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
+    Cliente : TClientes;
+
   public
     { Public declarations }
   end;
@@ -116,35 +119,25 @@ begin
 end;
 
 procedure TfCliente.Consulta;
+var
+  vAtivo : String;
 begin
+
   if rdbTodos.Checked then
-  begin
-    qCliente.Close;
-    qCliente.SQL.Clear;
-    qCliente.SQL.Add('SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bairro, dtregistro, Tipo, Ativo ' +
-      'FROM CLIENTE where ((id = ' + QuotedStr(edPesquisa.Text) + ') or  (nome like ' +
-      QuotedStr('%' + edPesquisa.Text + '%') + '));');
-    qCliente.Open;
-  end;
+    vAtivo := 'T' // Todos clientes
 
-  if rdbAtivo.Checked then
-  begin
-    qCliente.Close;
-    qCliente.SQL.Clear;
-    qCliente.SQL.Add('SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bairro, dtregistro, Tipo, Ativo ' +
-      'FROM CLIENTE where ativo = ' + QuotedStr('S') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' + '(nome like ' +
-      QuotedStr('%' + edPesquisa.Text + '%') + '));');
-    qCliente.Open;
-  end;
+  else if rdbAtivo.Checked then
+    vAtivo := 'S' // Somente ativos
 
-  if rdbInativo.Checked then
-  begin
-    qCliente.Close;
-    qCliente.SQL.Clear;
-    qCliente.SQL.Add('SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bairro, dtregistro, Tipo, Ativo ' +
-      'FROM CLIENTE where ativo = ' + QuotedStr('N') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' + '(nome like ' +
-      QuotedStr('%' + edPesquisa.Text + '%') + '));');
-    qCliente.Open;
+  else
+    vAtivo := 'N'; // Somente inativos;
+
+  Cliente.Nome := edPesquisa.Text;
+
+  try
+    Cliente.Pesquisar(vAtivo);
+  except
+    Application.MessageBox('Erro ao pesquisar cliente!', 'Atenção', MB_OK+MB_ICONEXCLAMATION);
   end;
 end;
 
@@ -155,12 +148,7 @@ end;
 
 procedure TfCliente.FormCreate(Sender: TObject);
 begin
-  PageControl1.ActivePageIndex := 0;
-  qCliente.Open;
-  tbNovo.Enabled := true;
-  tbEditar.Enabled := true;
-  tbSalvar.Enabled := false;
-  tbCancelar.Enabled := false;
+  Cliente := TClientes.Create;
 end;
 
 procedure TfCliente.FormKeyPress(Sender: TObject; var Key: Char);
@@ -188,12 +176,6 @@ begin
       end;
 
   end;
-end;
-
-procedure TfCliente.qClienteNewRecord(DataSet: TDataSet);
-begin
-  qClienteativo.AsString := 'S';
-  qClientetipo.AsString := 'F';
 end;
 
 procedure TfCliente.rdbAtivoClick(Sender: TObject);
@@ -231,7 +213,7 @@ begin
   DBENumEnd.ReadOnly := true;
   DBEBairro.ReadOnly := true;
 
-  qCliente.Cancel;
+  DM.qCliente.Cancel;
 end;
 
 procedure TfCliente.tbEditarClick(Sender: TObject);
@@ -254,7 +236,7 @@ begin
   DBENumEnd.ReadOnly := false;
   DBEBairro.ReadOnly := false;
 
-  qCliente.Edit;
+  DM.qCliente.Edit;
 end;
 
 procedure TfCliente.tbNovoClick(Sender: TObject);
@@ -285,7 +267,7 @@ begin
   DBENumEnd.Clear;
   DBEBairro.Clear;
 
-  qCliente.Insert;
+  DM.qCliente.Insert;
 end;
 
 procedure TfCliente.tbSalvarClick(Sender: TObject);
@@ -311,35 +293,35 @@ begin
 
   if DBENome.GetTextLen <> 0 then
   begin
-    qClientenome.asString := DBENome.Text;
-    qClienterg.asString := DBERG.Text;
-    qClienteCPFCNPJ.asString := DBECPF.Text;
-    qClienteendereco.asString := DBEEndereco.Text;
-    qClientenumEndereco.asString := DBENumEnd.Text;
-    qClientebairro.asString := DBEBairro.Text;
+    DM.qClientenome.asString := DBENome.Text;
+    DM.qClienterg.asString := DBERG.Text;
+    DM.qClienteCPFCNPJ.asString := DBECPF.Text;
+    DM.qClienteendereco.asString := DBEEndereco.Text;
+    DM.qClientenumEndereco.asString := DBENumEnd.Text;
+    DM.qClientebairro.asString := DBEBairro.Text;
 
     if DBCheckBox1.Checked then
     begin
-      qClienteativo.Value := DBCheckBox1.ValueChecked;
+      DM.qClienteativo.Value := DBCheckBox1.ValueChecked;
     end
     else
     begin
-      qClienteativo.Value := DBCheckBox1.ValueUnchecked;
+      DM.qClienteativo.Value := DBCheckBox1.ValueUnchecked;
     end;
 
     if DBENasc.Text <> '  /  /    ' then
-      qClienteDtNasc.AsDateTime := StrToDate(DBENasc.Text);
+      DM.qClienteDtNasc.AsDateTime := StrToDate(DBENasc.Text);
 
-    qCliente.Post;
+    DM.qCliente.Post;
   end
   else
   begin
-    qCliente.Cancel;
+    DM.qCliente.Cancel;
     ShowMessage('Campo nome obrigatório!');
   end;
 
-  qCliente.Close;
-  qCliente.Open;
+  DM.qCliente.Close;
+  DM.qCliente.Open;
 end;
 
 procedure TfCliente.tbSairClick(Sender: TObject);
@@ -349,6 +331,7 @@ end;
 
 procedure TfCliente.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  Cliente.Free;
   Action := caFree;
   fCliente := nil;
 end;

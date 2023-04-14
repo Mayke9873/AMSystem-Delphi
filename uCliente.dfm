@@ -126,7 +126,7 @@ object fCliente: TfCliente
         Width = 985
         Height = 562
         Anchors = [akLeft, akTop, akRight, akBottom]
-        DataSource = dCliente
+        DataSource = DM.dCliente
         DrawingStyle = gdsGradient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -147,7 +147,7 @@ object fCliente: TfCliente
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'id'
+            FieldName = 'Id'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'digo'
             Title.Font.Charset = ANSI_CHARSET
@@ -160,8 +160,7 @@ object fCliente: TfCliente
           end
           item
             Expanded = False
-            FieldName = 'nome'
-            Title.Caption = 'Nome'
+            FieldName = 'Nome'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
@@ -173,9 +172,8 @@ object fCliente: TfCliente
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'rg'
+            FieldName = 'RG'
             Title.Alignment = taCenter
-            Title.Caption = 'RG'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
@@ -187,7 +185,7 @@ object fCliente: TfCliente
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'CPFCNPJ'
+            FieldName = 'CpfCnpj'
             Title.Alignment = taCenter
             Title.Caption = 'CPF / CNPJ'
             Title.Font.Charset = ANSI_CHARSET
@@ -201,7 +199,7 @@ object fCliente: TfCliente
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'DtNasc'
+            FieldName = 'dtnasc'
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Nasc'
             Title.Font.Charset = ANSI_CHARSET
@@ -214,8 +212,7 @@ object fCliente: TfCliente
           end
           item
             Expanded = False
-            FieldName = 'endereco'
-            Title.Caption = 'Endereco'
+            FieldName = 'Endereco'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
@@ -226,7 +223,7 @@ object fCliente: TfCliente
           end
           item
             Expanded = False
-            FieldName = 'numEndereco'
+            FieldName = 'numendereco'
             Title.Caption = 'N'#186
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -238,8 +235,7 @@ object fCliente: TfCliente
           end
           item
             Expanded = False
-            FieldName = 'bairro'
-            Title.Caption = 'Bairro'
+            FieldName = 'Bairro'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
@@ -251,7 +247,7 @@ object fCliente: TfCliente
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'DtRegistro'
+            FieldName = 'dtregistro'
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Registro'
             Title.Font.Charset = ANSI_CHARSET
@@ -265,7 +261,7 @@ object fCliente: TfCliente
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'tipo'
+            FieldName = 'Tipo'
             Title.Alignment = taCenter
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -278,7 +274,7 @@ object fCliente: TfCliente
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'ativo'
+            FieldName = 'Ativo'
             Title.Alignment = taCenter
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -391,7 +387,7 @@ object fCliente: TfCliente
         ParentFont = False
       end
       object Label8: TLabel
-        Left = 400
+        Left = 405
         Top = 129
         Width = 47
         Height = 18
@@ -403,83 +399,21 @@ object fCliente: TfCliente
         Font.Style = []
         ParentFont = False
       end
-      object DBEditID: TDBEdit
-        Left = 10
-        Top = 34
-        Width = 77
-        Height = 26
-        DataField = 'id'
-        DataSource = dCliente
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 0
-      end
-      object DBENome: TDBEdit
-        Left = 10
-        Top = 94
-        Width = 331
-        Height = 26
-        CharCase = ecUpperCase
-        DataField = 'nome'
-        DataSource = dCliente
-        MaxLength = 250
-        ReadOnly = True
-        TabOrder = 1
-      end
-      object DBERG: TDBEdit
-        Left = 347
-        Top = 91
-        Width = 103
-        Height = 26
-        DataField = 'rg'
-        DataSource = dCliente
-        ReadOnly = True
-        TabOrder = 2
-      end
-      object DBEEndereco: TDBEdit
-        Left = 8
-        Top = 150
-        Width = 331
-        Height = 26
-        DataField = 'endereco'
-        DataSource = dCliente
-        ReadOnly = True
-        TabOrder = 5
-      end
-      object DBENumEnd: TDBEdit
-        Left = 344
-        Top = 150
-        Width = 52
-        Height = 26
-        DataField = 'numEndereco'
-        DataSource = dCliente
-        ReadOnly = True
-        TabOrder = 6
-      end
-      object DBEBairro: TDBEdit
-        Left = 402
-        Top = 150
-        Width = 301
-        Height = 26
-        DataField = 'bairro'
-        DataSource = dCliente
-        ReadOnly = True
-        TabOrder = 7
-      end
       object DBRadioGroup1: TDBRadioGroup
         Left = 554
         Top = 7
         Width = 150
         Height = 53
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
         Caption = 'Tipo Cliente'
+        Color = clBtnFace
         Columns = 2
+        Ctl3D = True
         DataField = 'tipo'
-        DataSource = dCliente
+        DataSource = DM.dCliente
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -488,9 +422,13 @@ object fCliente: TfCliente
         Items.Strings = (
           'Fisica'
           'Juridica')
+        ParentColor = False
+        ParentCtl3D = False
         ParentFont = False
         ReadOnly = True
-        TabOrder = 8
+        TabOrder = 0
+        Touch.ParentTabletOptions = False
+        Touch.TabletOptions = [toPressAndHold]
         Values.Strings = (
           'F'
           'J')
@@ -502,31 +440,380 @@ object fCliente: TfCliente
         Height = 17
         Caption = 'Ativo'
         DataField = 'ativo'
-        DataSource = dCliente
+        DataSource = DM.dCliente
         ReadOnly = True
-        TabOrder = 9
+        TabOrder = 1
         ValueChecked = 'S'
         ValueUnchecked = 'N'
       end
-      object DBECPF: TDBEdit
-        Left = 456
+      object Panel1: TPanel
+        Left = 8
         Top = 91
-        Width = 150
-        Height = 26
-        DataField = 'CPFCNPJ'
-        DataSource = dCliente
-        ReadOnly = True
-        TabOrder = 3
+        Width = 332
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 2
+        object Shape1: TShape
+          AlignWithMargins = True
+          Left = 0
+          Top = 0
+          Width = 332
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 152
+          ExplicitTop = 24
+          ExplicitWidth = 65
+          ExplicitHeight = 65
+        end
+        object DBENome: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 326
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BevelInner = bvNone
+          BevelOuter = bvRaised
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'nome'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+          ExplicitLeft = 5
+        end
       end
-      object DBENasc: TDBEdit
-        Left = 612
+      object Panel2: TPanel
+        Left = 345
         Top = 91
-        Width = 91
-        Height = 26
-        DataField = 'DtNasc'
-        DataSource = dCliente
-        ReadOnly = True
+        Width = 104
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 3
+        object Shape2: TShape
+          Left = 0
+          Top = 0
+          Width = 104
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 152
+          ExplicitTop = 24
+          ExplicitWidth = 65
+          ExplicitHeight = 65
+        end
+        object DBERG: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 98
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BevelInner = bvNone
+          BevelOuter = bvRaised
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'rg'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel3: TPanel
+        Left = 454
+        Top = 91
+        Width = 151
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
         TabOrder = 4
+        object Shape3: TShape
+          Left = 0
+          Top = 0
+          Width = 151
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 1
+          ExplicitWidth = 331
+          ExplicitHeight = 26
+        end
+        object DBECPF: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 145
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'CPFCNPJ'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel4: TPanel
+        Left = 610
+        Top = 91
+        Width = 97
+        Height = 26
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 5
+        object Shape4: TShape
+          Left = 0
+          Top = 0
+          Width = 97
+          Height = 26
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 1
+          ExplicitWidth = 331
+        end
+        object DBENasc: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 91
+          Height = 19
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'DtNasc'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel5: TPanel
+        Left = 8
+        Top = 149
+        Width = 331
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 6
+        object Shape5: TShape
+          Left = 0
+          Top = 0
+          Width = 331
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 152
+          ExplicitTop = 24
+          ExplicitWidth = 65
+          ExplicitHeight = 65
+        end
+        object DBEEndereco: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 325
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'endereco'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel6: TPanel
+        Left = 342
+        Top = 149
+        Width = 58
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 7
+        object Shape6: TShape
+          Left = 0
+          Top = 0
+          Width = 58
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 152
+          ExplicitTop = 24
+          ExplicitWidth = 65
+          ExplicitHeight = 65
+        end
+        object DBENumEnd: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 52
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'numEndereco'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel7: TPanel
+        Left = 405
+        Top = 150
+        Width = 302
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 8
+        object Shape7: TShape
+          Left = 0
+          Top = 0
+          Width = 302
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = -7
+        end
+        object DBEBairro: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 296
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'bairro'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel8: TPanel
+        Left = 8
+        Top = 34
+        Width = 78
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 9
+        object Shape8: TShape
+          Left = 0
+          Top = 0
+          Width = 78
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Pen.Style = psInsideFrame
+          Shape = stRoundRect
+          ExplicitHeight = 26
+        end
+        object DBEditID: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 72
+          Height = 21
+          Align = alClient
+          BorderStyle = bsNone
+          DataField = 'id'
+          DataSource = DM.dCliente
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+        end
       end
     end
   end
@@ -571,11 +858,6 @@ object fCliente: TfCliente
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbInativoClick
-  end
-  object dCliente: TDataSource
-    DataSet = qCliente
-    Left = 122
-    Top = 568
   end
   object ImageList1: TImageList
     Left = 928
@@ -850,213 +1132,5 @@ object fCliente: TfCliente
       C003C003C0030000C003C007C0030001E007800FC0038001F00F801FC0078001
       FC3F803FFFFF8001FFFFFFFFFFFF800100000000000000000000000000000000
       000000000000}
-  end
-  object uCliente: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM Cliente'
-      'WHERE'
-      '  Cliente.id = :OLD_id AND'
-      '  Cliente.nome = :OLD_nome AND'
-      
-        '  ((Cliente.rg IS NULL AND :OLD_rg IS NULL) OR (Cliente.rg = :OL' +
-        'D_rg)) AND'
-      
-        '  ((Cliente.CPFCNPJ IS NULL AND :OLD_CPFCNPJ IS NULL) OR (Client' +
-        'e.CPFCNPJ = :OLD_CPFCNPJ)) AND'
-      
-        '  ((Cliente.DtNasc IS NULL AND :OLD_DtNasc IS NULL) OR (Cliente.' +
-        'DtNasc = :OLD_DtNasc)) AND'
-      
-        '  ((Cliente.endereco IS NULL AND :OLD_endereco IS NULL) OR (Clie' +
-        'nte.endereco = :OLD_endereco)) AND'
-      
-        '  ((Cliente.numEndereco IS NULL AND :OLD_numEndereco IS NULL) OR' +
-        ' (Cliente.numEndereco = :OLD_numEndereco)) AND'
-      
-        '  ((Cliente.bairro IS NULL AND :OLD_bairro IS NULL) OR (Cliente.' +
-        'bairro = :OLD_bairro)) AND'
-      
-        '  ((Cliente.DtRegistro IS NULL AND :OLD_DtRegistro IS NULL) OR (' +
-        'Cliente.DtRegistro = :OLD_DtRegistro)) AND'
-      
-        '  ((Cliente.tipo IS NULL AND :OLD_tipo IS NULL) OR (Cliente.tipo' +
-        ' = :OLD_tipo)) AND'
-      
-        '  ((Cliente.ativo IS NULL AND :OLD_ativo IS NULL) OR (Cliente.at' +
-        'ivo = :OLD_ativo))')
-    InsertSQL.Strings = (
-      'INSERT INTO Cliente'
-      
-        '  (id, nome, rg, CPFCNPJ, DtNasc, endereco, numEndereco, bairro,' +
-        ' DtRegistro, '
-      '   tipo, ativo)'
-      'VALUES'
-      
-        '  (:id, :nome, :rg, :CPFCNPJ, :DtNasc, :endereco, :numEndereco, ' +
-        ':bairro, '
-      '   :DtRegistro, :tipo, :ativo)')
-    ModifySQL.Strings = (
-      'UPDATE Cliente SET'
-      '  id = :id,'
-      '  nome = :nome,'
-      '  rg = :rg,'
-      '  CPFCNPJ = :CPFCNPJ,'
-      '  DtNasc = :DtNasc,'
-      '  endereco = :endereco,'
-      '  numEndereco = :numEndereco,'
-      '  bairro = :bairro,'
-      '  DtRegistro = :DtRegistro,'
-      '  tipo = :tipo,'
-      '  ativo = :ativo'
-      'WHERE'
-      '  Cliente.id = :OLD_id AND'
-      '  Cliente.nome = :OLD_nome AND'
-      
-        '  ((Cliente.rg IS NULL AND :OLD_rg IS NULL) OR (Cliente.rg = :OL' +
-        'D_rg)) AND'
-      
-        '  ((Cliente.CPFCNPJ IS NULL AND :OLD_CPFCNPJ IS NULL) OR (Client' +
-        'e.CPFCNPJ = :OLD_CPFCNPJ)) AND'
-      
-        '  ((Cliente.DtNasc IS NULL AND :OLD_DtNasc IS NULL) OR (Cliente.' +
-        'DtNasc = :OLD_DtNasc)) AND'
-      
-        '  ((Cliente.endereco IS NULL AND :OLD_endereco IS NULL) OR (Clie' +
-        'nte.endereco = :OLD_endereco)) AND'
-      
-        '  ((Cliente.numEndereco IS NULL AND :OLD_numEndereco IS NULL) OR' +
-        ' (Cliente.numEndereco = :OLD_numEndereco)) AND'
-      
-        '  ((Cliente.bairro IS NULL AND :OLD_bairro IS NULL) OR (Cliente.' +
-        'bairro = :OLD_bairro)) AND'
-      
-        '  ((Cliente.DtRegistro IS NULL AND :OLD_DtRegistro IS NULL) OR (' +
-        'Cliente.DtRegistro = :OLD_DtRegistro)) AND'
-      
-        '  ((Cliente.tipo IS NULL AND :OLD_tipo IS NULL) OR (Cliente.tipo' +
-        ' = :OLD_tipo)) AND'
-      
-        '  ((Cliente.ativo IS NULL AND :OLD_ativo IS NULL) OR (Cliente.at' +
-        'ivo = :OLD_ativo))')
-    UseSequenceFieldForRefreshSQL = False
-    Left = 75
-    Top = 569
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'nome'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'rg'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CPFCNPJ'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DtNasc'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'endereco'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'numEndereco'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'bairro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DtRegistro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'tipo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ativo'
-        ParamType = ptUnknown
-      end>
-  end
-  object qCliente: TZQuery
-    Connection = DataModule1.zCon
-    SortedFields = 'Id'
-    UpdateObject = uCliente
-    OnNewRecord = qClienteNewRecord
-    SQL.Strings = (
-      
-        'SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bai' +
-        'rro, dtregistro, Tipo, Ativo'
-      'FROM CLIENTE')
-    Params = <>
-    IndexFieldNames = 'Id Asc'
-    Left = 28
-    Top = 568
-    object qClienteid: TIntegerField
-      FieldName = 'id'
-      Required = True
-    end
-    object qClientenome: TWideStringField
-      FieldName = 'nome'
-      Required = True
-      Size = 250
-    end
-    object qClienterg: TWideStringField
-      FieldName = 'rg'
-      Size = 10
-    end
-    object qClienteCPFCNPJ: TWideStringField
-      FieldName = 'CPFCNPJ'
-      EditMask = '###.###.###-##;0;_'
-      Size = 11
-    end
-    object qClienteendereco: TWideStringField
-      FieldName = 'endereco'
-      Size = 255
-    end
-    object qClienteDtNasc: TDateField
-      FieldName = 'DtNasc'
-      EditMask = '99/!99/9999;1;'
-    end
-    object qClientenumEndereco: TWideStringField
-      FieldName = 'numEndereco'
-      Size = 5
-    end
-    object qClientebairro: TWideStringField
-      FieldName = 'bairro'
-      Size = 250
-    end
-    object qClienteDtRegistro: TDateField
-      FieldName = 'DtRegistro'
-      EditMask = '!99/99/00;1;_'
-    end
-    object qClientetipo: TWideStringField
-      FieldName = 'tipo'
-      Size = 1
-    end
-    object qClienteativo: TWideStringField
-      FieldName = 'ativo'
-      Size = 1
-    end
   end
 end
