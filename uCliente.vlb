@@ -1,7 +1,4 @@
-﻿[dCliente]
-Coordinates=102,1,54,33
-
-[(TMenuItem)]
+﻿[(TMenuItem)]
 Coordinates=384,441,75,33
 
 [tbSalvar]
@@ -39,7 +36,7 @@ Coordinates=220,10,43,33
 Coordinates=103,10,46,51
 
 []
-Coordinates=10,10,70,249
+Coordinates=102,1,54,33
 Visible=True
 
 [pgTabela]
