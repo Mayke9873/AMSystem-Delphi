@@ -8,7 +8,7 @@ type
       FCod         : Integer;
       FNome        : String;
       FRGIE        : String;
-      FCPFCNPJ     : Integer;
+      FCPFCNPJ     : String;
       FEndereco    : String;
       FNumEndereco : String;
       FBairro: String;
@@ -17,7 +17,7 @@ type
     procedure SetNome(const Value: String);
     procedure SetAtivo(const Value: String);
     procedure SetBairro(const Value: String);
-    procedure SetCPFCNPJ(const Value: Integer);
+    procedure SetCPFCNPJ(const Value: String);
     procedure SetEndereco(const Value: String);
     procedure SetNumEndereco(const Value: String);
     procedure SetRGIE(const Value: String);
@@ -25,7 +25,7 @@ type
       property Cod : Integer read FCod write SetCod;
       property Nome : String read FNome write SetNome;
       property RGIE : String read FRGIE write SetRGIE;
-      property CPFCNPJ : Integer read FCPFCNPJ write SetCPFCNPJ;
+      property CPFCNPJ : String read FCPFCNPJ write SetCPFCNPJ;
       property Endereco : String read FEndereco write SetEndereco;
       property NumEndereco : String read FNumEndereco write SetNumEndereco;
       property Bairro : String read FBairro write SetBairro;
@@ -55,7 +55,7 @@ begin
   FCod := Value;
 end;
 
-procedure TPessoas.SetCPFCNPJ(const Value: Integer);
+procedure TPessoas.SetCPFCNPJ(const Value: String);
 begin
   FCPFCNPJ := Value;
 end;

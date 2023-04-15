@@ -84,6 +84,8 @@ type
   private
     { Private declarations }
     Cliente : TClientes;
+    TipoCadastro : Integer;
+    procedure NovoEditar(Tipo : Integer);
 
   public
     { Public declarations }
@@ -159,6 +161,22 @@ begin
     Key := #0;
     Perform(WM_NEXTDLGCTL, 0, 0);
   end;
+end;
+
+procedure TfCliente.NovoEditar(Tipo: Integer);
+begin
+  case Tipo of  // 0 = Novo;  1 = Editar;
+    0 :
+    begin
+      Cliente.Cadastrar(Cliente);
+    end;
+
+    1 :
+    begin
+      Cliente.Editar(Cliente);
+    end;
+  end;
+
 end;
 
 procedure TfCliente.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -238,6 +256,7 @@ begin
   DBEBairro.ReadOnly := false;
 
   DM.qCliente.Edit;
+  TipoCadastro := 1;
 end;
 
 procedure TfCliente.tbNovoClick(Sender: TObject);
@@ -269,6 +288,7 @@ begin
   DBEBairro.Clear;
 
   DM.qCliente.Insert;
+  TipoCadastro := 0;
 end;
 
 procedure TfCliente.tbSalvarClick(Sender: TObject);
@@ -295,11 +315,19 @@ begin
 
   Cliente.Nome := DBENome.Text;
   Cliente.RGIE := DBERG.Text;
-  Cliente.CPFCNPJ := StrToInt(DBECPF.Text);
+  Cliente.CPFCNPJ := DBECPF.Text;
   Cliente.Endereco := DBEEndereco.Text;
   Cliente.NumEndereco := DBENumEnd.Text;
   Cliente.Bairro := DBEBairro.Text;
-  Cliente.DtNasc := StrToDate(DBENasc.Text);
+
+  if DBENasc.Text <> '  /  /    ' then
+  begin
+    try
+        Cliente.DtNasc := StrToDate(DBENasc.Text);
+    except
+      Application.MessageBox('Data inválida. Por favor, verifique!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    end;
+  end;
 
   if DBCheckBox1.Checked then
   begin
@@ -310,7 +338,8 @@ begin
     Cliente.Ativo := DBCheckBox1.ValueUnchecked;
   end;
 
-  Cliente.Cadastrar(Cliente);
+//  Cliente.Cadastrar(Cliente);
+  NovoEditar(TipoCadastro);
   Consulta;
 end;
 
