@@ -173,7 +173,7 @@ object DM: TDM
       '  tipo = :tipo,'
       '  ativo = :ativo'
       'WHERE'
-      '  Cliente.id = :OLD_id AND')
+      '  Cliente.id = :OLD_id')
     UseSequenceFieldForRefreshSQL = False
     Left = 56
     Top = 120
