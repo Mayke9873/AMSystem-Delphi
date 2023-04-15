@@ -149,6 +149,7 @@ end;
 procedure TfCliente.FormCreate(Sender: TObject);
 begin
   Cliente := TClientes.Create;
+  PageControl1.TabIndex := 0;
 end;
 
 procedure TfCliente.FormKeyPress(Sender: TObject; var Key: Char);
@@ -291,37 +292,26 @@ begin
   tbSalvar.Enabled := false;
   tbCancelar.Enabled := false;
 
-  if DBENome.GetTextLen <> 0 then
+
+  Cliente.Nome := DBENome.Text;
+  Cliente.RGIE := DBERG.Text;
+  Cliente.CPFCNPJ := StrToInt(DBECPF.Text);
+  Cliente.Endereco := DBEEndereco.Text;
+  Cliente.NumEndereco := DBENumEnd.Text;
+  Cliente.Bairro := DBEBairro.Text;
+  Cliente.DtNasc := StrToDate(DBENasc.Text);
+
+  if DBCheckBox1.Checked then
   begin
-    DM.qClientenome.asString := DBENome.Text;
-    DM.qClienterg.asString := DBERG.Text;
-    DM.qClienteCPFCNPJ.asString := DBECPF.Text;
-    DM.qClienteendereco.asString := DBEEndereco.Text;
-    DM.qClientenumEndereco.asString := DBENumEnd.Text;
-    DM.qClientebairro.asString := DBEBairro.Text;
-
-    if DBCheckBox1.Checked then
-    begin
-      DM.qClienteativo.Value := DBCheckBox1.ValueChecked;
-    end
-    else
-    begin
-      DM.qClienteativo.Value := DBCheckBox1.ValueUnchecked;
-    end;
-
-    if DBENasc.Text <> '  /  /    ' then
-      DM.qClienteDtNasc.AsDateTime := StrToDate(DBENasc.Text);
-
-    DM.qCliente.Post;
+    Cliente.Ativo := DBCheckBox1.ValueChecked;
   end
   else
   begin
-    DM.qCliente.Cancel;
-    ShowMessage('Campo nome obrigatório!');
+    Cliente.Ativo := DBCheckBox1.ValueUnchecked;
   end;
 
-  DM.qCliente.Close;
-  DM.qCliente.Open;
+  Cliente.Cadastrar(Cliente);
+  Consulta;
 end;
 
 procedure TfCliente.tbSairClick(Sender: TObject);

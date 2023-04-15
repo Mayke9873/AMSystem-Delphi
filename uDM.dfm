@@ -84,6 +84,7 @@ object DM: TDM
     end
     object qClientedtnasc: TDateField
       FieldName = 'dtnasc'
+      EditMask = '!99/99/0000;1;_'
     end
     object qClienteEndereco: TWideStringField
       FieldName = 'Endereco'

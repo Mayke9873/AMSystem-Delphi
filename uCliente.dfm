@@ -492,7 +492,6 @@ object fCliente: TfCliente
           DataSource = DM.dCliente
           ReadOnly = True
           TabOrder = 0
-          ExplicitLeft = 5
         end
       end
       object Panel2: TPanel
