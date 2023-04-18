@@ -163,6 +163,8 @@
         </DCCReference>
         <DCCReference Include="uPessoas.pas"/>
         <DCCReference Include="uClientes.pas"/>
+        <DCCReference Include="uFornecedores.pas"/>
+        <DCCReference Include="uValida.pas"/>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>
