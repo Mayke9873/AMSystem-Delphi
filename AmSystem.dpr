@@ -11,7 +11,9 @@ uses
   uFuncionario in 'uFuncionario.pas' {fFuncionario},
   uCliente in 'uCliente.pas' {fCliente},
   uPessoas in 'uPessoas.pas',
-  uClientes in 'uClientes.pas';
+  uClientes in 'uClientes.pas',
+  uFornecedores in 'uFornecedores.pas',
+  uValida in 'uValida.pas';
 
 {$R *.res}
 
