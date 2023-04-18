@@ -14,7 +14,6 @@ type
     procedure SetTpPessoa(const Value: String);
 
   public
-    constructor Create;
     procedure Pesquisar(pAtivo : String);
     procedure Cadastrar(Value : TClientes);
     procedure Editar(Value : TClientes);
@@ -41,10 +40,6 @@ begin
   FTpPessoa := Value;
 end;
 
-constructor TClientes.Create;
-begin
-  Pesquisar('T');
-end;
 
 procedure TClientes.Editar(Value: TClientes);
 begin

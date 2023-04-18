@@ -151,6 +151,7 @@ end;
 procedure TfCliente.FormCreate(Sender: TObject);
 begin
   Cliente := TClientes.Create;
+  Cliente.Pesquisar('T');
   PageControl1.TabIndex := 0;
 end;
 
@@ -293,6 +294,8 @@ end;
 
 procedure TfCliente.tbSalvarClick(Sender: TObject);
 begin
+
+  SelectNext(ActiveControl, True, True);
 
   DBEditID.ReadOnly := true;
   DBENome.ReadOnly := true;
