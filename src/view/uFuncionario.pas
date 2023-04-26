@@ -75,6 +75,9 @@ var
 
 implementation
 
+uses
+  uDM;
+
 {$R *.dfm}
 
 

@@ -2,8 +2,8 @@ object fPrincipal: TfPrincipal
   Left = 0
   Top = 0
   Caption = 'AmSystem'
-  ClientHeight = 700
-  ClientWidth = 1100
+  ClientHeight = 600
+  ClientWidth = 1000
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,7 +22,7 @@ object fPrincipal: TfPrincipal
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 1100
+    Width = 1000
     Height = 49
     Hint = 'Cliente'
     Margins.Left = 5

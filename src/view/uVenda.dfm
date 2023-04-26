@@ -497,37 +497,94 @@ object fVenda: TfVenda
         Visible = True
       end>
   end
-  object edDescontoVenda: TEdit
+  object Panel1: TPanel
     Left = 698
     Top = 30
     Width = 104
     Height = 35
-    Alignment = taRightJustify
-    Color = clMedGray
-    Enabled = False
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -24
-    Font.Name = 'Arial'
-    Font.Style = []
-    ParentFont = False
+    BevelOuter = bvNone
     TabOrder = 19
+    object Shape1: TShape
+      Left = 0
+      Top = 0
+      Width = 104
+      Height = 35
+      Align = alClient
+      Brush.Color = clMedGray
+      Pen.Color = clSilver
+      Pen.Mode = pmMask
+      Shape = stRoundRect
+      ExplicitLeft = 48
+      ExplicitTop = 16
+      ExplicitWidth = 65
+      ExplicitHeight = 65
+    end
+    object edDescontoVenda: TEdit
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 98
+      Height = 29
+      Align = alClient
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      Color = clMedGray
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -24
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+    end
   end
-  object edTotalVenda: TEdit
+  object Panel2: TPanel
     Left = 808
     Top = 30
     Width = 104
     Height = 35
-    Alignment = taRightJustify
-    Color = clMedGray
-    Enabled = False
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -24
-    Font.Name = 'Arial'
-    Font.Style = []
-    ParentFont = False
+    BevelOuter = bvNone
     TabOrder = 20
+    object Shape2: TShape
+      Left = 0
+      Top = 0
+      Width = 104
+      Height = 35
+      Align = alClient
+      Brush.Color = clMedGray
+      Pen.Color = clSilver
+      Pen.Mode = pmMask
+      Shape = stRoundRect
+      ExplicitLeft = 48
+      ExplicitTop = 16
+      ExplicitWidth = 65
+      ExplicitHeight = 65
+    end
+    object edTotalVenda: TEdit
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 98
+      Height = 29
+      Align = alClient
+      Alignment = taRightJustify
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BiDiMode = bdLeftToRight
+      BorderStyle = bsNone
+      Color = clMedGray
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -24
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 0
+    end
   end
   object dFuncionario: TDataSource
     DataSet = qFuncionario
@@ -553,7 +610,9 @@ object fVenda: TfVenda
     Connection = DM.zCon
     SQL.Strings = (
       'Select id, nome From funcionario'
-      '  where ((:id = 0) or (id = :id)) or (nome like :nome);')
+      
+        '  where ((:id = 0) or (id = :id)) and (nome like :nome) and Ativ' +
+        'o = '#39'S'#39';')
     Params = <
       item
         DataType = ftUnknown
@@ -592,7 +651,9 @@ object fVenda: TfVenda
     Connection = DM.zCon
     SQL.Strings = (
       'Select id, nome From cliente'
-      '  where ((:id = 0) or (id = :id)) or (nome like :nome);')
+      
+        '  where ((:id = 0) or (id = :id)) and (nome like :nome) and Ativ' +
+        'o = '#39'S'#39';')
     Params = <
       item
         DataType = ftUnknown
@@ -869,7 +930,7 @@ object fVenda: TfVenda
       'Select id From Venda where id = (select max(id) from Venda);')
     Params = <>
     Left = 24
-    Top = 512
+    Top = 511
     object qVendaid: TIntegerField
       FieldName = 'id'
       Required = True

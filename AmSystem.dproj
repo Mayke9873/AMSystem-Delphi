@@ -5,8 +5,8 @@
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
-        <TargetedPlatforms>1</TargetedPlatforms>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
         <MainSource>AmSystem.dpr</MainSource>
     </PropertyGroup>
@@ -128,43 +128,38 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="uDM.pas">
+        <DCCReference Include="src\view\uDM.pas">
             <Form>DM</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="uPrincipal.pas">
+        <DCCReference Include="src\view\uPrincipal.pas">
             <Form>fPrincipal</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uVenda.pas">
+        <DCCReference Include="src\view\uVenda.pas">
             <Form>fVenda</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uConsultaVenda.pas">
+        <DCCReference Include="src\view\uConsultaVenda.pas">
             <Form>fConsultaVendas</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uProduto.pas">
+        <DCCReference Include="src\view\uProduto.pas">
             <Form>fProduto</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uGrupoProduto.pas">
+        <DCCReference Include="src\view\uGrupoProduto.pas">
             <Form>fGrupoProd</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uFuncionario.pas">
+        <DCCReference Include="src\view\uFuncionario.pas">
             <Form>fFuncionario</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uCliente.pas">
+        <DCCReference Include="src\view\uCliente.pas">
             <Form>fCliente</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uPessoas.pas"/>
-        <DCCReference Include="uClientes.pas"/>
-        <DCCReference Include="uFornecedores.pas"/>
-        <DCCReference Include="uValida.pas"/>
+        <DCCReference Include="src\uPessoas.pas"/>
+        <DCCReference Include="src\uFornecedores.pas"/>
+        <DCCReference Include="src\Conexao.MySQL.pas"/>
+        <DCCReference Include="src\Conexao.SQLServer.pas"/>
+        <DCCReference Include="src\Interfaces.pas"/>
+        <DCCReference Include="src\uClientes.pas"/>
+        <DCCReference Include="src\uValida.pas"/>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>
@@ -1291,7 +1286,7 @@
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
+                <Platform value="Win64">True</Platform>
             </Platforms>
             <ModelSupport>False</ModelSupport>
         </BorlandProject>

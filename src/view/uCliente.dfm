@@ -1,24 +1,28 @@
-object fConsultaVendas: TfConsultaVendas
+object fCliente: TfCliente
   Left = 0
   Top = 0
-  Caption = 'Consulta de Pedidos'
-  ClientHeight = 629
-  ClientWidth = 983
+  Caption = 'Cadastro Cliente'
+  ClientHeight = 649
+  ClientWidth = 999
   Color = clBtnFace
+  DefaultMonitor = dmMainForm
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIChild
+  KeyPreview = True
   OldCreateOrder = False
   Visible = True
   WindowState = wsMaximized
-  OnActivate = FormActivate
   OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
   DesignSize = (
-    983
-    629)
+    999
+    649)
   PixelsPerInch = 96
   TextHeight = 13
   object Label9: TLabel
@@ -37,190 +41,824 @@ object fConsultaVendas: TfConsultaVendas
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 983
+    Width = 999
     Height = 29
     ButtonHeight = 29
     ButtonWidth = 29
     Caption = 'ToolBar1'
+    Color = clBtnShadow
     Images = ImageList1
+    ParentColor = False
+    ParentShowHint = False
+    ShowHint = False
     TabOrder = 0
     object tbNovo: TToolButton
       Left = 0
       Top = 0
-      Caption = 'tbNovo'
+      Hint = 'Novo - F1'
+      Margins.Left = 7
+      Caption = 'Novo'
       ImageIndex = 0
+      ParentShowHint = False
+      ShowHint = True
       OnClick = tbNovoClick
     end
-    object ToolButton2: TToolButton
+    object tbEditar: TToolButton
       Left = 29
       Top = 0
-      Width = 8
-      Caption = 'ToolButton2'
-      ImageIndex = 4
-      Style = tbsSeparator
+      Hint = 'Editar - F2'
+      Caption = 'Editar'
+      ImageIndex = 1
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = tbEditarClick
+    end
+    object tbSalvar: TToolButton
+      Left = 58
+      Top = 0
+      Caption = 'Salvar'
+      ImageIndex = 2
+      OnClick = tbSalvarClick
+    end
+    object tbCancelar: TToolButton
+      Left = 87
+      Top = 0
+      Caption = 'Cancelar'
+      ImageIndex = 3
+      OnClick = tbCancelarClick
     end
     object tbSair: TToolButton
-      Left = 37
+      Left = 116
       Top = 0
+      Hint = 'Sair - Esc'
       Caption = 'Sair'
       ImageIndex = 4
+      ParentShowHint = False
+      ShowHint = True
       OnClick = tbSairClick
     end
+    object ToolButton1: TToolButton
+      Left = 145
+      Top = 0
+      Width = 5
+      Caption = 'ToolButton1'
+      ImageIndex = 5
+      Style = tbsSeparator
+    end
   end
-  object dbgVendas: TDBGrid
+  object PageControl1: TPageControl
     Left = 0
-    Top = 58
-    Width = 983
-    Height = 566
+    Top = 56
+    Width = 999
+    Height = 593
+    ActivePage = pgTabela
     Anchors = [akLeft, akTop, akRight, akBottom]
-    DataSource = dVendas
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Arial'
-    Font.Style = []
-    ParentFont = False
-    ReadOnly = True
     TabOrder = 1
-    TitleFont.Charset = ANSI_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -16
-    TitleFont.Name = 'Arial'
-    TitleFont.Style = [fsBold]
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'ID'
-        Font.Charset = ANSI_CHARSET
+    object pgTabela: TTabSheet
+      Caption = 'Tabela'
+      DesignSize = (
+        991
+        565)
+      object DBGrid1: TDBGrid
+        AlignWithMargins = True
+        Left = 3
+        Top = 0
+        Width = 985
+        Height = 562
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        DataSource = DM.dCliente
+        DrawingStyle = gdsGradient
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
+        Font.Height = -11
+        Font.Name = 'Tahoma'
         Font.Style = []
-        Title.Caption = 'C'#243'digo'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Visible = True
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        ParentFont = False
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGrid1DrawColumnCell
+        OnDblClick = tbEditarClick
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'Id'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'digo'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 50
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 200
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'RG'
+            Title.Alignment = taCenter
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 93
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'CpfCnpj'
+            Title.Alignment = taCenter
+            Title.Caption = 'CPF / CNPJ'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 93
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'dtnasc'
+            Title.Alignment = taCenter
+            Title.Caption = 'Dt. Nasc'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 86
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Endereco'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 135
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'numendereco'
+            Title.Caption = 'N'#186
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 40
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Bairro'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'dtregistro'
+            Title.Alignment = taCenter
+            Title.Caption = 'Dt. Registro'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 86
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'Tipo'
+            Title.Alignment = taCenter
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 30
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'Ativo'
+            Title.Alignment = taCenter
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 36
+            Visible = True
+          end>
       end
-      item
-        Expanded = False
-        FieldName = 'CLIENTE'
+    end
+    object pgDados: TTabSheet
+      Caption = 'Dados'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = []
+      ImageIndex = 1
+      ParentFont = False
+      object Label1: TLabel
+        Left = 8
+        Top = 13
+        Width = 56
+        Height = 18
+        Caption = 'C'#243'digo:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = []
-        Title.Caption = 'Cliente'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 250
-        Visible = True
+        ParentFont = False
       end
-      item
-        Expanded = False
-        FieldName = 'VALOR'
+      object Label2: TLabel
+        Left = 8
+        Top = 70
+        Width = 46
+        Height = 18
+        Caption = 'Nome:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = []
-        Title.Alignment = taRightJustify
-        Title.Caption = 'Valor'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 80
-        Visible = True
+        ParentFont = False
       end
-      item
-        Expanded = False
-        FieldName = 'DESCONTO'
+      object Label3: TLabel
+        Left = 345
+        Top = 70
+        Width = 27
+        Height = 18
+        Caption = 'RG:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = []
-        Title.Alignment = taRightJustify
-        Title.Caption = 'Desconto'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 80
-        Visible = True
+        ParentFont = False
       end
-      item
-        Expanded = False
-        FieldName = 'VALOR_TOTAL'
+      object Label4: TLabel
+        Left = 454
+        Top = 70
+        Width = 37
+        Height = 18
+        Caption = 'CPF:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = []
-        Title.Alignment = taRightJustify
-        Title.Caption = 'R$ Total'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 80
-        Visible = True
+        ParentFont = False
       end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'DATA_VENDA'
+      object Label5: TLabel
+        Left = 610
+        Top = 70
+        Width = 60
+        Height = 18
+        Caption = 'Dt Nasc:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = []
-        Title.Alignment = taCenter
-        Title.Caption = 'Dt. Venda'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 95
-        Visible = True
+        ParentFont = False
       end
-      item
-        Expanded = False
-        FieldName = 'NOME'
+      object Label6: TLabel
+        Left = 8
+        Top = 129
+        Width = 72
+        Height = 18
+        Caption = 'Endere'#231'o:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -12
+        Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = []
-        Title.Caption = 'Vendedor'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 250
-        Visible = True
-      end>
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 342
+        Top = 129
+        Width = 20
+        Height = 18
+        Caption = 'N'#186':'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 405
+        Top = 129
+        Width = 47
+        Height = 18
+        Caption = 'Bairro:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBRadioGroup1: TDBRadioGroup
+        Left = 554
+        Top = 7
+        Width = 150
+        Height = 53
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        Caption = 'Tipo Cliente'
+        Color = clBtnFace
+        Columns = 2
+        Ctl3D = True
+        DataField = 'tipo'
+        DataSource = DM.dCliente
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Items.Strings = (
+          'Fisica'
+          'Juridica')
+        ParentColor = False
+        ParentCtl3D = False
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+        Touch.ParentTabletOptions = False
+        Touch.TabletOptions = [toPressAndHold]
+        Values.Strings = (
+          'F'
+          'J')
+      end
+      object DBCheckBox1: TDBCheckBox
+        Left = 284
+        Top = 37
+        Width = 58
+        Height = 17
+        Caption = 'Ativo'
+        DataField = 'ativo'
+        DataSource = DM.dCliente
+        ReadOnly = True
+        TabOrder = 1
+        ValueChecked = 'S'
+        ValueUnchecked = 'N'
+      end
+      object Panel1: TPanel
+        Left = 8
+        Top = 91
+        Width = 332
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 2
+        object Shape1: TShape
+          AlignWithMargins = True
+          Left = 0
+          Top = 0
+          Width = 332
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 152
+          ExplicitTop = 24
+          ExplicitWidth = 65
+          ExplicitHeight = 65
+        end
+        object DBENome: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 326
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BevelInner = bvNone
+          BevelOuter = bvRaised
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'nome'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel2: TPanel
+        Left = 345
+        Top = 91
+        Width = 104
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 3
+        object Shape2: TShape
+          Left = 0
+          Top = 0
+          Width = 104
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 152
+          ExplicitTop = 24
+          ExplicitWidth = 65
+          ExplicitHeight = 65
+        end
+        object DBERG: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 98
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BevelInner = bvNone
+          BevelOuter = bvRaised
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'rg'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel3: TPanel
+        Left = 454
+        Top = 91
+        Width = 151
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 4
+        object Shape3: TShape
+          Left = 0
+          Top = 0
+          Width = 151
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 1
+          ExplicitWidth = 331
+          ExplicitHeight = 26
+        end
+        object DBECPF: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 145
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'CPFCNPJ'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+          OnKeyPress = DBECPFKeyPress
+        end
+      end
+      object Panel4: TPanel
+        Left = 610
+        Top = 91
+        Width = 97
+        Height = 26
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 5
+        object Shape4: TShape
+          Left = 0
+          Top = 0
+          Width = 97
+          Height = 26
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 1
+          ExplicitWidth = 331
+        end
+        object DBENasc: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 91
+          Height = 19
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'DtNasc'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel5: TPanel
+        Left = 8
+        Top = 149
+        Width = 331
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 6
+        object Shape5: TShape
+          Left = 0
+          Top = 0
+          Width = 331
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 152
+          ExplicitTop = 24
+          ExplicitWidth = 65
+          ExplicitHeight = 65
+        end
+        object DBEEndereco: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 325
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'endereco'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel6: TPanel
+        Left = 342
+        Top = 149
+        Width = 58
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 7
+        object Shape6: TShape
+          Left = 0
+          Top = 0
+          Width = 58
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = 152
+          ExplicitTop = 24
+          ExplicitWidth = 65
+          ExplicitHeight = 65
+        end
+        object DBENumEnd: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 52
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'numEndereco'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel7: TPanel
+        Left = 405
+        Top = 150
+        Width = 302
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 8
+        object Shape7: TShape
+          Left = 0
+          Top = 0
+          Width = 302
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Shape = stRoundRect
+          ExplicitLeft = -7
+        end
+        object DBEBairro: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 4
+          Width = 296
+          Height = 20
+          Margins.Top = 4
+          Align = alClient
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'bairro'
+          DataSource = DM.dCliente
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+      object Panel8: TPanel
+        Left = 8
+        Top = 34
+        Width = 78
+        Height = 27
+        Margins.Left = 0
+        Margins.Top = 0
+        Margins.Right = 0
+        Margins.Bottom = 0
+        BevelOuter = bvNone
+        Color = clWindow
+        TabOrder = 9
+        object Shape8: TShape
+          Left = 0
+          Top = 0
+          Width = 78
+          Height = 27
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Align = alClient
+          Brush.Style = bsDiagCross
+          Pen.Color = clMedGray
+          Pen.Style = psInsideFrame
+          Shape = stRoundRect
+          ExplicitHeight = 26
+        end
+        object DBEditID: TDBEdit
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 72
+          Height = 21
+          Align = alClient
+          BorderStyle = bsNone
+          DataField = 'id'
+          DataSource = DM.dCliente
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+    end
   end
   object edPesquisa: TEdit
     Left = 64
-    Top = 31
+    Top = 32
     Width = 344
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
+    CharCase = ecUpperCase
     TabOrder = 2
     OnChange = edPesquisaChange
+  end
+  object rdbTodos: TRadioButton
+    Left = 456
+    Top = 34
+    Width = 49
+    Height = 17
+    Anchors = [akTop, akRight]
+    Caption = 'Todos'
+    Checked = True
+    TabOrder = 3
+    TabStop = True
+    OnClick = rdbTodosClick
+  end
+  object rdbAtivo: TRadioButton
+    Left = 536
+    Top = 34
+    Width = 49
+    Height = 17
+    Anchors = [akTop, akRight]
+    Caption = 'Ativo'
+    TabOrder = 4
+    OnClick = rdbAtivoClick
+  end
+  object rdbInativo: TRadioButton
+    Left = 608
+    Top = 34
+    Width = 57
+    Height = 17
+    Anchors = [akTop, akRight]
+    Caption = 'Inativo'
+    TabOrder = 5
+    OnClick = rdbInativoClick
   end
   object ImageList1: TImageList
     Left = 928
@@ -495,61 +1133,5 @@ object fConsultaVendas: TfConsultaVendas
       C003C003C0030000C003C007C0030001E007800FC0038001F00F801FC0078001
       FC3F803FFFFF8001FFFFFFFFFFFF800100000000000000000000000000000000
       000000000000}
-  end
-  object qVendas: TZReadOnlyQuery
-    Connection = DataModule1.zCon
-    SortedFields = 'ID'
-    SortType = stDescending
-    SQL.Strings = (
-      
-        'SELECT a.ID, a.CLIENTE, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DA' +
-        'TA_VENDA, b.NOME'
-      
-        '  FROM VENDA a LEFT JOIN  FUNCIONARIO b on  a.VENDEDOR = b.ID WH' +
-        'ERE ex = 0'
-      '    order by id desc;')
-    Params = <>
-    IndexFieldNames = 'ID Desc'
-    Left = 848
-    Top = 96
-    object qVendasID: TIntegerField
-      FieldName = 'ID'
-      ReadOnly = True
-    end
-    object qVendasCLIENTE: TWideStringField
-      FieldName = 'CLIENTE'
-      ReadOnly = True
-      Size = 250
-    end
-    object qVendasVALOR: TFloatField
-      FieldName = 'VALOR'
-      ReadOnly = True
-      currency = True
-    end
-    object qVendasDESCONTO: TFloatField
-      FieldName = 'DESCONTO'
-      ReadOnly = True
-      EditFormat = '#.##'
-      currency = True
-    end
-    object qVendasVALOR_TOTAL: TFloatField
-      FieldName = 'VALOR_TOTAL'
-      ReadOnly = True
-      currency = True
-    end
-    object qVendasDATA_VENDA: TDateField
-      FieldName = 'DATA_VENDA'
-      ReadOnly = True
-    end
-    object qVendasNOME: TWideStringField
-      FieldName = 'NOME'
-      ReadOnly = True
-      Size = 255
-    end
-  end
-  object dVendas: TDataSource
-    DataSet = qVendas
-    Left = 912
-    Top = 96
   end
 end

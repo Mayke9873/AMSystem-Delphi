@@ -9,7 +9,7 @@ uses
   Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.Menus, Vcl.Grids, Vcl.DBGrids,
   ZAbstractRODataset, ZDataset, Vcl.ComCtrls, Vcl.Tabs, Vcl.DockTabSet,
   Vcl.StdCtrls, System.ImageList, Vcl.ImgList, ZAbstractDataset, Vcl.Mask,
-  Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate, Vcl.Buttons, uClientes;
+  Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate, Vcl.Buttons, uClientes, uValida;
 
 type
   TfCliente = class(TForm)
@@ -81,11 +81,13 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBECPFKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     Cliente : TClientes;
     TipoCadastro : Integer;
-    procedure NovoEditar(Tipo : Integer);
+    Valida : TValidacoes;
+    procedure NovoOuEditar(Tipo : Integer);
 
   public
     { Public declarations }
@@ -96,8 +98,18 @@ var
 
 implementation
 
-uses uDM;
+uses uDM, Conexao.MySQL;
 {$R *.dfm}
+
+procedure TfCliente.DBECPFKeyPress(Sender: TObject; var Key: Char);
+begin
+  Valida := TValidacoes.Create;
+  try
+    Valida.SomenteNumeroInteiro(Key);
+  finally
+    Valida.Free;
+  end;
+end;
 
 procedure TfCliente.DBGrid1DblClick(Sender: TObject);
 begin
@@ -108,16 +120,23 @@ procedure TfCliente.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
   DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   if DBGrid1.DataSource.DataSet.State in [dsEdit, dsInsert, dsBrowse] then //Cor da linha selecionada
-     if Rect.Top = TStringGrid(DBGrid1).CellRect(0,TStringGrid(DBGrid1).Row).Top then begin
+  begin
+     if Rect.Top = TStringGrid(DBGrid1).CellRect(0,TStringGrid(DBGrid1).Row).Top then
+     begin
         DBGrid1.Canvas.FillRect(Rect);
-        DBGrid1.Canvas.Brush.Color := TColor($F0CAA6);
+        DBGrid1.Canvas.Brush.Color := TColor($FFFF00);
+        DBGrid1.Canvas.Font.Color := clBlack;
         DBGrid1.DefaultDrawDataCell(Rect,Column.Field,State)
      end;
-  if gdSelected in State then begin //Cor da célula selecionada
-     DBGrid1.Canvas.Brush.Color := TColor($808000);
+  end;
+
+  if gdSelected in State then  //Cor da célula selecionada
+  begin
+     DBGrid1.Canvas.Brush.Color := TColor($FCCC33);
+     DBGrid1.Canvas.Font.Color := clBlack;
      DBGrid1.Canvas.FillRect(Rect);
      DBGrid1.DefaultDrawDataCell(Rect,Column.Field,State)
-  end
+  end;
 end;
 
 procedure TfCliente.Consulta;
@@ -134,7 +153,7 @@ begin
   else
     vAtivo := 'N'; // Somente inativos;
 
-  Cliente.Nome := edPesquisa.Text;
+  Cliente.Nome := '%' + edPesquisa.Text + '%';
 
   try
     Cliente.Pesquisar(vAtivo);
@@ -150,8 +169,8 @@ end;
 
 procedure TfCliente.FormCreate(Sender: TObject);
 begin
-  Cliente := TClientes.Create;
-  Cliente.Pesquisar('T');
+  Cliente := TClientes.Create(TConexaoMySQL.Create);
+  Consulta;
   PageControl1.TabIndex := 0;
 end;
 
@@ -164,7 +183,7 @@ begin
   end;
 end;
 
-procedure TfCliente.NovoEditar(Tipo: Integer);
+procedure TfCliente.NovoOuEditar(Tipo: Integer);
 begin
   case Tipo of  // 0 = Novo;  1 = Editar;
     0 :
@@ -341,8 +360,7 @@ begin
     Cliente.Ativo := DBCheckBox1.ValueUnchecked;
   end;
 
-//  Cliente.Cadastrar(Cliente);
-  NovoEditar(TipoCadastro);
+  NovoOuEditar(TipoCadastro);
   Consulta;
 end;
 

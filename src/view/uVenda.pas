@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, ZAbstractRODataset, ZDataset, ZSqlUpdate, ZAbstractDataset;
+  Vcl.DBGrids, ZAbstractRODataset, ZDataset, ZSqlUpdate, ZAbstractDataset,
+  System.StrUtils, Vcl.ExtCtrls;
 
 type
   TfVenda = class(TForm)
@@ -62,16 +63,19 @@ type
     qProdVendatotal: TFloatField;
     qVendaid: TIntegerField;
     qProdVendavalor: TFloatField;
-    edDescontoVenda: TEdit;
     Label9: TLabel;
-    edTotalVenda: TEdit;
     Label10: TLabel;
     qClienteid: TIntegerField;
     qClientenome: TWideStringField;
+    Panel1: TPanel;
+    edDescontoVenda: TEdit;
+    Shape1: TShape;
+    Panel2: TPanel;
+    Shape2: TShape;
+    edTotalVenda: TEdit;
     procedure btnSairClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edVendedorChange(Sender: TObject);
-    procedure edClienteChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure dbgVendedorDblClick(Sender: TObject);
     procedure dbgClienteDblClick(Sender: TObject);
@@ -88,10 +92,11 @@ type
     procedure edIdClienteExit(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure edQtdProdutoEnter(Sender: TObject);
+    procedure edClienteChange(Sender: TObject);
   private
     { Private declarations }
-
     totalVenda, descontoVenda: Real;
+    procedure Consulta(Tipo, TipoCampo : String);
 
   public
     { Public declarations }
@@ -183,32 +188,6 @@ begin
   edVendedor.Text := dbgVendedor.Fields[1].Value;
 end;
 
-procedure TfVenda.edClienteChange(Sender: TObject);
-begin
-
-  qCliente.Close;
-
-  if Trim(edCliente.Text) <> '' then
-  begin
-    if Trim(edIdCliente.Text) = '' then
-    begin
-      dbgCliente.Visible := True;
-
-      qCliente.ParamByName('nome').AsString := '%' + edCliente.Text + '%';
-    end
-    else
-    begin
-      dbgCliente.Visible := false;
-    end;
-  end
-  else
-  begin
-    dbgCliente.Visible := false;
-  end;
-
-  qCliente.Open;
-end;
-
 procedure TfVenda.edPesqProdChange(Sender: TObject);
 begin
 
@@ -281,27 +260,7 @@ end;
 
 procedure TfVenda.edVendedorChange(Sender: TObject);
 begin
-
-  qFuncionario.Close;
-
-  if Trim(edVendedor.Text) <> '' then
-  begin
-    if Trim(edIdVendedor.Text) = '' then
-    begin
-      dbgVendedor.Visible := True;
-
-      qFuncionario.ParamByName('nome').AsString := '%' + edVendedor.Text + '%';
-      qFuncionario.Open;
-    end
-    else
-    begin
-      dbgVendedor.Visible := false;
-    end;
-  end
-  else
-  begin
-    dbgVendedor.Visible := false;
-  end;
+  Consulta('Func', 'Pesq');
 end;
 
 procedure TfVenda.edQtdProdutoEnter(Sender: TObject);
@@ -319,6 +278,11 @@ begin
   valorTotal := StrToFloat(edQtdProduto.Text) * StrToFloat(edValorUnitario.Text);
 
   edValorTotal.Text := FloatToStr(valorTotal);
+end;
+
+procedure TfVenda.edClienteChange(Sender: TObject);
+begin
+  Consulta('Cli', 'Pesq');
 end;
 
 procedure TfVenda.edDescontoExit(Sender: TObject);
@@ -358,16 +322,7 @@ end;
 
 procedure TfVenda.edIdClienteExit(Sender: TObject);
 begin
-  if Length(edIdCliente.Text) <> 0 then
-  begin
-    qCliente.Close;
-    qCliente.ParamByName('id').Value := '0';
-    qCliente.Open;
-
-    qCliente.Locate('id', edIdCliente.Text, []);
-
-    edCliente.Text := qClientenome.AsString;
-  end;
+  Consulta('Cli', 'ID');
 end;
 
 procedure TfVenda.edIdProdExit(Sender: TObject);
@@ -389,16 +344,7 @@ end;
 
 procedure TfVenda.edIdVendedorExit(Sender: TObject);
 begin
-  if Length(edIdVendedor.Text) <> 0 then
-  begin
-    qFuncionario.Close;
-    qFuncionario.ParamByName('id').AsString := '0';
-    qFuncionario.Open;
-
-    qFuncionario.Locate('id', edIdVendedor.Text, []);
-
-    edVendedor.Text := qFuncionarionome.AsString;
-  end;
+  Consulta('Func', 'ID');
 end;
 
 procedure TfVenda.btnSalvarClick(Sender: TObject);
@@ -429,7 +375,7 @@ begin
 
   if (Length(Trim(edCodVenda.Text)) <> 0) then
   begin
-s    DM.qPesq.Close;
+    DM.qPesq.Close;
     DM.qPesq.SQL.Clear;
     DM.qPesq.SQL.Add('UPDATE VENDA SET ID_CLIENTE = ' + QuotedStr(edCliente.Text) + ', CLIENTE = ' + QuotedStr(edCliente.Text) +
       ', ' + 'VALOR = ' + StringReplace(edTotalVenda.Text, ',', '.', []) + ', DESCONTO = ' +
@@ -465,6 +411,75 @@ s    DM.qPesq.Close;
   edTotalVenda.Clear;
   edDescontoVenda.Clear;
   edIdVendedor.SetFocus;
+
+end;
+
+procedure TfVenda.Consulta(Tipo, TipoCampo : String);
+begin
+
+  case AnsiIndexStr(Tipo, ['Func', 'Cli']) of
+
+    0: begin
+      qFuncionario.Close; 
+           
+      if (TipoCampo = 'Pesq') and (Trim(edIdVendedor.Text) = '') then
+      begin
+        dbgVendedor.Visible := True;
+
+        qFuncionario.ParamByName('id').AsInteger := 0;
+        qFuncionario.ParamByName('nome').AsString := '%' + edVendedor.Text + '%';
+        qFuncionario.Open;
+      end
+
+      else
+      begin
+        dbgVendedor.Visible := false;
+
+        qFuncionario.ParamByName('id').AsInteger := StrToIntDef(edIdVendedor.Text, 0);
+        qFuncionario.ParamByName('nome').AsString := '%' + edVendedor.Text + '%';
+        qFuncionario.Open;
+
+        if not (qFuncionario.ParamByName('id').Value = 0) then
+          edVendedor.Text := qFuncionarionome.AsString;
+      end;
+      
+      if edVendedor.Text = '' then
+      begin
+        dbgVendedor.Visible := false;
+      end;
+    end;
+
+    1: begin
+      qCliente.Close;      
+
+      if (TipoCampo = 'Pesq') and (Trim(edIdCliente.Text) = '') then
+      begin
+        dbgCliente.Visible := True;
+
+        qCliente.ParamByName('id').AsInteger := 0;
+        qCliente.ParamByName('nome').AsString := '%' + edCliente.Text + '%';
+        qCliente.Open;
+      end
+
+      else 
+      begin
+        dbgCliente.Visible := false;
+
+        qCliente.ParamByName('id').AsInteger := StrToIntDef(edIdCliente.Text, 0);
+        qCliente.ParamByName('nome').AsString := '%' + edCliente.Text + '%';
+        qCliente.Open;
+
+        if not (qCliente.ParamByName('id').Value = 0) then
+          edCliente.Text := qClientenome.AsString;
+      end;
+      
+      if edCliente.Text = '' then
+      begin
+        dbgCliente.Visible := false;
+      end;
+    end;
+
+  end;
 
 end;
 

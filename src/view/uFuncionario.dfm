@@ -414,7 +414,7 @@ object fFuncionario: TfFuncionario
       end
       object DBERG: TDBEdit
         Left = 347
-        Top = 91
+        Top = 94
         Width = 103
         Height = 26
         DataField = 'rg'
@@ -952,7 +952,7 @@ object fFuncionario: TfFuncionario
       end>
   end
   object qFuncionario: TZQuery
-    Connection = DataModule1.zCon
+    Connection = DM.zCon
     SortedFields = 'Id'
     UpdateObject = uFuncionario
     SQL.Strings = (

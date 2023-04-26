@@ -22,7 +22,7 @@ object DM: TDM
     Connection = zCon
     Params = <>
     Left = 24
-    Top = 72
+    Top = 73
   end
   object dPesq: TDataSource
     DataSet = qPesq
@@ -36,12 +36,16 @@ object DM: TDM
     SQL.Strings = (
       
         'SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bai' +
-        'rro, dtregistro, Tipo, Ativo '
-      '                   FROM CLIENTE    where ((nome like :nome))  '
-      
-        '                                     and ((:ativo = '#39'T'#39') or (ati' +
-        'vo = :ativo))')
+        'rro, dtregistro, Tipo, Ativo'
+      'FROM CLIENTE'
+      '  where ((:id = 0) or (id = :id)) and (nome like :nome)'
+      '    and ((:ativo = '#39'T'#39') or (ativo = :ativo));')
     Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'nome'
@@ -55,6 +59,11 @@ object DM: TDM
     Left = 24
     Top = 120
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'nome'

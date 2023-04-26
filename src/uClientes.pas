@@ -3,7 +3,8 @@ unit uClientes;
 interface
 
 uses
-  uPessoas, ZAbstractRODataset, ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows;
+  uPessoas, ZAbstractRODataset, ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows,
+  Interfaces;
 
 type
   TClientes = class(TPessoas)
@@ -14,12 +15,13 @@ type
     procedure SetTpPessoa(const Value: String);
 
   public
+    Conexao : IConexao;
     procedure Pesquisar(pAtivo : String);
     procedure Cadastrar(Value : TClientes);
     procedure Editar(Value : TClientes);
-
     property DtNasc : TDate read FDtNasc write SetDtNasc;
     property TpPessoa : String read FTpPessoa write SetTpPessoa;
+    constructor Create(aConexao : IConexao);
   end;
 
 
@@ -40,6 +42,11 @@ begin
   FTpPessoa := Value;
 end;
 
+
+constructor TClientes.Create(aConexao: IConexao);
+begin
+  Conexao := aConexao;
+end;
 
 procedure TClientes.Editar(Value: TClientes);
 begin
@@ -100,7 +107,10 @@ end;
 procedure TClientes.Pesquisar(pAtivo : String);
 begin
   DM.qCliente.Close;
-  DM.qCliente.ParamByName('nome').AsString := '%' + Nome + '%';
+  DM.qCliente.ParamByName('id').AsInteger := StrToIntDef(StringReplace(Nome, '%', '', [rfReplaceAll]), 0);
+  if DM.qCliente.ParamByName('id').Value = 0 then
+    DM.qCliente.ParamByName('nome').AsString := Nome;
+
   DM.qCliente.ParamByName('ativo').AsString   := pAtivo;
   DM.qCliente.Open;
 end;

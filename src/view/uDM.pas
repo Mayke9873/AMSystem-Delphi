@@ -48,9 +48,9 @@ uses
 
 procedure TDM.qClientedtnascSetText(Sender: TField; const Text: string);
 var
-  Valida : TValida;
+  Valida : TValidacoes;
 begin
-  Valida := TValida.Create;
+  Valida := TValidacoes.Create;
   try
     if not Valida.ValidaData(Sender, Text) then
       Abort;
