@@ -1,5 +1,16 @@
 # Delphi compiler-generated binaries (safe to delete)
-*__recovery
+*.exe
+*.dll
+*.bpl
+*.bpi
+*.dcp
+*.so
+*.apk
+*.drc
+*.map
+*.dres
+*.rsm
+*.tds
 *.dcu
 
 # Delphi local files (user-specific info)
