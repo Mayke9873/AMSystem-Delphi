@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Win.TaskbarCore, Vcl.Taskbar,
-  Vcl.ComCtrls, Vcl.ToolWin,System.ImageList, Vcl.ImgList, Vcl.Menus, Threading, IPPeerClient, IPPeerServer, System.Tether.Manager;
+  Vcl.ComCtrls, Vcl.ToolWin,System.ImageList, Vcl.ImgList, Vcl.Menus, Threading, IPPeerClient, IPPeerServer,
+  System.Tether.Manager;
 
 type
   TfPrincipal = class(TForm)
@@ -49,7 +50,7 @@ var
 implementation
 
   uses
-     uCliente, uVenda, uConsultaVenda, uProduto, uGrupoProduto, uFuncionario;
+    uFrmCliente, uVenda, uConsultaVenda, uProduto, uGrupoProduto, uFuncionario;
 
 {$R *.dfm}
 

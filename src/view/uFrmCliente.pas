@@ -1,4 +1,4 @@
-unit uCliente;
+unit uFrmCliente;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.Menus, Vcl.Grids, Vcl.DBGrids,
   ZAbstractRODataset, ZDataset, Vcl.ComCtrls, Vcl.Tabs, Vcl.DockTabSet,
   Vcl.StdCtrls, System.ImageList, Vcl.ImgList, ZAbstractDataset, Vcl.Mask,
-  Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate, Vcl.Buttons, uClientes, uValida;
+  Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate, Vcl.Buttons, uCliente, uValida;
 
 type
   TfCliente = class(TForm)
@@ -169,7 +169,7 @@ end;
 
 procedure TfCliente.FormCreate(Sender: TObject);
 begin
-  Cliente := TClientes.Create(TConexaoMySQL.Create);
+  Cliente := TClientes.Create;
   Consulta;
   PageControl1.TabIndex := 0;
 end;

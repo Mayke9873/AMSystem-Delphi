@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
         <MainSource>AmSystem.dpr</MainSource>
@@ -150,7 +150,7 @@
         <DCCReference Include="src\view\uFuncionario.pas">
             <Form>fFuncionario</Form>
         </DCCReference>
-        <DCCReference Include="src\view\uCliente.pas">
+        <DCCReference Include="src\view\uFrmCliente.pas">
             <Form>fCliente</Form>
         </DCCReference>
         <DCCReference Include="src\uPessoas.pas"/>
@@ -158,7 +158,7 @@
         <DCCReference Include="src\Conexao.MySQL.pas"/>
         <DCCReference Include="src\Conexao.SQLServer.pas"/>
         <DCCReference Include="src\Interfaces.pas"/>
-        <DCCReference Include="src\uClientes.pas"/>
+        <DCCReference Include="src\uCliente.pas"/>
         <DCCReference Include="src\uValida.pas"/>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>

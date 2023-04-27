@@ -1,4 +1,4 @@
-unit uClientes;
+unit uCliente;
 
 interface
 
@@ -21,14 +21,13 @@ type
     procedure Editar(Value : TClientes);
     property DtNasc : TDate read FDtNasc write SetDtNasc;
     property TpPessoa : String read FTpPessoa write SetTpPessoa;
-    constructor Create(aConexao : IConexao);
   end;
 
 
 implementation
 
   uses
-    uCliente, uDM;
+    uFrmCliente, uDM;
 
 { TClientes }
 
@@ -40,12 +39,6 @@ end;
 procedure TClientes.SetTpPessoa(const Value: String);
 begin
   FTpPessoa := Value;
-end;
-
-
-constructor TClientes.Create(aConexao: IConexao);
-begin
-  Conexao := aConexao;
 end;
 
 procedure TClientes.Editar(Value: TClientes);
@@ -107,8 +100,13 @@ end;
 procedure TClientes.Pesquisar(pAtivo : String);
 begin
   DM.qCliente.Close;
-  DM.qCliente.ParamByName('id').AsInteger := StrToIntDef(StringReplace(Nome, '%', '', [rfReplaceAll]), 0);
-  if DM.qCliente.ParamByName('id').Value = 0 then
+
+  if IntToStr(Cod) <> '' then
+    DM.qCliente.ParamByName('id').AsInteger := Cod
+  else
+    DM.qCliente.ParamByName('id').AsInteger := StrToIntDef(StringReplace(Nome, '%', '', [rfReplaceAll]), 0);
+
+//  if DM.qCliente.ParamByName('id').Value = 0 then
     DM.qCliente.ParamByName('nome').AsString := Nome;
 
   DM.qCliente.ParamByName('ativo').AsString   := pAtivo;

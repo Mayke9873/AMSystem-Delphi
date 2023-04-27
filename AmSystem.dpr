@@ -9,13 +9,13 @@ uses
   uProduto in 'src\view\uProduto.pas' {fProduto},
   uGrupoProduto in 'src\view\uGrupoProduto.pas' {fGrupoProd},
   uFuncionario in 'src\view\uFuncionario.pas' {fFuncionario},
-  uCliente in 'src\view\uCliente.pas' {fCliente},
+  uFrmCliente in 'src\view\uFrmCliente.pas' {fCliente},
   uPessoas in 'src\uPessoas.pas',
   uFornecedores in 'src\uFornecedores.pas',
   Conexao.MySQL in 'src\Conexao.MySQL.pas',
   Conexao.SQLServer in 'src\Conexao.SQLServer.pas',
   Interfaces in 'src\Interfaces.pas',
-  uClientes in 'src\uClientes.pas',
+  uCliente in 'src\uCliente.pas',
   uValida in 'src\uValida.pas';
 
 {$R *.res}
