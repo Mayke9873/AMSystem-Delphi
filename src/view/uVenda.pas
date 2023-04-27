@@ -107,7 +107,9 @@ var
 
 implementation
 
-uses uDM;
+uses
+  uDM, uCliente;
+
 {$R *.dfm}
 
 procedure TfVenda.FormCreate(Sender: TObject);
@@ -321,9 +323,20 @@ begin
 end;
 
 procedure TfVenda.edIdClienteExit(Sender: TObject);
+var
+  Cliente : TClientes;
 begin
-  Consulta('Cli', 'ID');
+  Cliente :=  TClientes.Create;
+  try
+    Cliente.Cod := StrToIntDef(edIdCliente.Text, 0);
+    Cliente.Nome := '%%';
+    Cliente.Pesquisar('S');
+    edCliente.Text := DM.qClienteNome.AsString;
+  finally
+    Cliente.Free;
+  end;
 end;
+
 
 procedure TfVenda.edIdProdExit(Sender: TObject);
 begin
