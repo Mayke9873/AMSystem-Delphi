@@ -1,12 +1,12 @@
-unit uFornecedores;
+unit uFornecedor;
 
 interface
 
 uses
-  uPessoas;
+  uPessoa;
 
 type
-  TFornecedor = class(TPessoas)
+  TFornecedor = class(TPessoa)
     private
 
     public

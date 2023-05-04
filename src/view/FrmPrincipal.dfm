@@ -2,8 +2,8 @@ object fPrincipal: TfPrincipal
   Left = 0
   Top = 0
   Caption = 'AmSystem'
-  ClientHeight = 600
-  ClientWidth = 1000
+  ClientHeight = 599
+  ClientWidth = 996
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,16 +13,14 @@ object fPrincipal: TfPrincipal
   FormStyle = fsMDIForm
   KeyPreview = True
   Menu = MainMenu1
-  OldCreateOrder = False
   Position = poScreenCenter
   WindowState = wsMaximized
   OnClose = FormClose
-  PixelsPerInch = 96
   TextHeight = 13
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 1000
+    Width = 996
     Height = 49
     Hint = 'Cliente'
     Margins.Left = 5
@@ -1728,7 +1726,7 @@ object fPrincipal: TfPrincipal
       000000000000}
   end
   object MainMenu1: TMainMenu
-    Left = 1008
+    Left = 944
     Top = 8
     object Cadastros1: TMenuItem
       Caption = 'Cadastros'

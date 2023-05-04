@@ -1,9 +1,9 @@
-object fProduto: TfProduto
+object fConsultaVendas: TfConsultaVendas
   Left = 0
   Top = 0
-  Caption = 'Cadastro de Produtos'
-  ClientHeight = 649
-  ClientWidth = 999
+  Caption = 'Consulta de Pedidos'
+  ClientHeight = 629
+  ClientWidth = 983
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,17 +12,15 @@ object fProduto: TfProduto
   Font.Style = []
   FormStyle = fsMDIChild
   KeyPreview = True
-  OldCreateOrder = False
   Visible = True
   WindowState = wsMaximized
+  OnActivate = FormActivate
   OnClose = FormClose
-  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    999
-    649)
-  PixelsPerInch = 96
+    983
+    629)
   TextHeight = 13
   object Label9: TLabel
     Left = 8
@@ -40,503 +38,193 @@ object fProduto: TfProduto
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 999
+    Width = 983
     Height = 29
     ButtonHeight = 29
     ButtonWidth = 29
     Caption = 'ToolBar1'
-    Color = clBtnShadow
     Images = ImageList1
-    ParentColor = False
-    ParentShowHint = False
-    ShowHint = False
     TabOrder = 0
+    ExplicitWidth = 979
     object tbNovo: TToolButton
       Left = 0
       Top = 0
-      Hint = 'Novo - F1'
-      Margins.Left = 7
-      Caption = 'Novo'
+      Caption = 'tbNovo'
       ImageIndex = 0
-      ParentShowHint = False
-      ShowHint = True
       OnClick = tbNovoClick
     end
-    object tbEditar: TToolButton
+    object ToolButton2: TToolButton
       Left = 29
       Top = 0
-      Hint = 'Editar - F2'
-      Caption = 'Editar'
-      ImageIndex = 1
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = tbEditarClick
-    end
-    object tbSalvar: TToolButton
-      Left = 58
-      Top = 0
-      Caption = 'Salvar'
-      ImageIndex = 2
-    end
-    object tbCancelar: TToolButton
-      Left = 87
-      Top = 0
-      Caption = 'Cancelar'
-      ImageIndex = 3
-      OnClick = tbCancelarClick
-    end
-    object tbSair: TToolButton
-      Left = 116
-      Top = 0
-      Hint = 'Sair - Esc'
-      Caption = 'Sair'
+      Width = 8
+      Caption = 'ToolButton2'
       ImageIndex = 4
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = tbSairClick
-    end
-    object ToolButton1: TToolButton
-      Left = 145
-      Top = 0
-      Width = 5
-      Caption = 'ToolButton1'
-      ImageIndex = 5
       Style = tbsSeparator
     end
+    object tbSair: TToolButton
+      Left = 37
+      Top = 0
+      Caption = 'Sair'
+      ImageIndex = 4
+      OnClick = tbSairClick
+    end
   end
-  object PageControl1: TPageControl
+  object dbgVendas: TDBGrid
     Left = 0
-    Top = 56
-    Width = 999
-    Height = 593
-    ActivePage = pgTabela
+    Top = 58
+    Width = 975
+    Height = 566
     Anchors = [akLeft, akTop, akRight, akBottom]
+    DataSource = dVendas
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
     TabOrder = 1
-    object pgTabela: TTabSheet
-      Caption = 'Tabela'
-      DesignSize = (
-        991
-        565)
-      object dbgProduto: TDBGrid
-        AlignWithMargins = True
-        Left = 3
-        Top = 0
-        Width = 985
-        Height = 562
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        DataSource = dProduto
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'ID'
-            Title.Caption = 'C'#243'digo'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 50
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DESCRICAO'
-            Title.Caption = 'Descri'#231#227'o'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 250
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'UNIDADE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Un.'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'ESTOQUE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Estoque'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'PCOMPRA'
-            Title.Alignment = taRightJustify
-            Title.Caption = 'R$ Compra'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 74
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'PLUCRO'
-            Title.Caption = 'Lucro (%)'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'PVENDA'
-            Title.Alignment = taRightJustify
-            Title.Caption = 'R$ Venda'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 74
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'GRUPO'
-            Title.Caption = 'Grupo'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 200
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'DTREGISTRO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Dt. Registro'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 86
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'ATIVO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Ativo'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 36
-            Visible = True
-          end>
-      end
-    end
-    object pgDados: TTabSheet
-      Caption = 'Dados'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Arial'
-      Font.Style = []
-      ImageIndex = 1
-      ParentFont = False
-      object Label1: TLabel
-        Left = 8
-        Top = 13
-        Width = 56
-        Height = 18
-        Caption = 'C'#243'digo:'
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -16
+    TitleFont.Name = 'Arial'
+    TitleFont.Style = [fsBold]
+    OnDrawColumnCell = dbgVendasDrawColumnCell
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
-        ParentFont = False
+        Title.Caption = 'C'#243'digo'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsBold]
+        Visible = True
       end
-      object Label2: TLabel
-        Left = 8
-        Top = 70
-        Width = 76
-        Height = 18
-        Caption = 'Descri'#231#227'o:'
+      item
+        Expanded = False
+        FieldName = 'CLIENTE'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
-        ParentFont = False
+        Title.Caption = 'Cliente'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsBold]
+        Width = 250
+        Visible = True
       end
-      object Label3: TLabel
-        Left = 351
-        Top = 70
-        Width = 27
-        Height = 18
-        Caption = 'Un.:'
+      item
+        Expanded = False
+        FieldName = 'VALOR'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
-        ParentFont = False
+        Title.Alignment = taRightJustify
+        Title.Caption = 'Valor'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsBold]
+        Width = 80
+        Visible = True
       end
-      object Label4: TLabel
-        Left = 10
-        Top = 129
-        Width = 62
-        Height = 18
-        Caption = 'Estoque:'
+      item
+        Expanded = False
+        FieldName = 'DESCONTO'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
-        ParentFont = False
+        Title.Alignment = taRightJustify
+        Title.Caption = 'Desconto'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsBold]
+        Width = 80
+        Visible = True
       end
-      object Label5: TLabel
-        Left = 10
-        Top = 199
-        Width = 47
-        Height = 18
-        Caption = 'Grupo:'
+      item
+        Expanded = False
+        FieldName = 'VALOR_TOTAL'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
-        ParentFont = False
+        Title.Alignment = taRightJustify
+        Title.Caption = 'R$ Total'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsBold]
+        Width = 80
+        Visible = True
       end
-      object Label6: TLabel
-        Left = 136
-        Top = 129
-        Width = 85
-        Height = 18
-        Caption = 'R$ Compra:'
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'DATA_VENDA'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
-        ParentFont = False
+        Title.Alignment = taCenter
+        Title.Caption = 'Dt. Venda'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsBold]
+        Width = 95
+        Visible = True
       end
-      object Label7: TLabel
-        Left = 232
-        Top = 129
-        Width = 71
-        Height = 18
-        Caption = 'Lucro (%):'
+      item
+        Expanded = False
+        FieldName = 'NOME'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -12
         Font.Name = 'Arial'
         Font.Style = []
-        ParentFont = False
-      end
-      object Label8: TLabel
-        Left = 328
-        Top = 129
-        Width = 73
-        Height = 18
-        Caption = 'R$ Venda:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-      end
-      object DBEditID: TDBEdit
-        Left = 10
-        Top = 34
-        Width = 77
-        Height = 26
-        DataField = 'id'
-        DataSource = dProduto
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 0
-      end
-      object dbeDescricao: TDBEdit
-        Left = 10
-        Top = 91
-        Width = 339
-        Height = 26
-        DataField = 'DESCRICAO'
-        DataSource = dProduto
-        ReadOnly = True
-        TabOrder = 1
-      end
-      object dbeUnidade: TDBEdit
-        Left = 353
-        Top = 91
-        Width = 65
-        Height = 26
-        DataField = 'UNIDADE'
-        DataSource = dProduto
-        ReadOnly = True
-        TabOrder = 2
-      end
-      object dbeValorCompra: TDBEdit
-        Left = 136
-        Top = 150
-        Width = 90
-        Height = 26
-        DataField = 'PCOMPRA'
-        DataSource = dProduto
-        ReadOnly = True
-        TabOrder = 4
-      end
-      object dbeLucro: TDBEdit
-        Left = 232
-        Top = 150
-        Width = 90
-        Height = 26
-        DataField = 'PLUCRO'
-        DataSource = dProduto
-        ReadOnly = True
-        TabOrder = 5
-        OnExit = dbeLucroExit
-      end
-      object dbeValorVenda: TDBEdit
-        Left = 328
-        Top = 153
-        Width = 90
-        Height = 26
-        DataField = 'PVENDA'
-        DataSource = dProduto
-        ReadOnly = True
-        TabOrder = 6
-        OnExit = dbeValorVendaExit
-      end
-      object dbchkAtivo: TDBCheckBox
-        Left = 360
-        Top = 34
-        Width = 58
-        Height = 17
-        Caption = 'Ativo'
-        DataField = 'ativo'
-        DataSource = dProduto
-        ReadOnly = True
-        TabOrder = 7
-        ValueChecked = 'S'
-        ValueUnchecked = 'N'
-      end
-      object dbeEstoque: TDBEdit
-        Left = 10
-        Top = 150
-        Width = 90
-        Height = 26
-        DataField = 'ESTOQUE'
-        DataSource = dProduto
-        ReadOnly = True
-        TabOrder = 3
-      end
-      object DbCbGrupo: TDBComboBox
-        Tag = 1
-        Left = 10
-        Top = 219
-        Width = 216
-        Height = 26
-        CharCase = ecUpperCase
-        DataField = 'GRUPO'
-        DataSource = dProduto
-        Items.Strings = (
-          'BRANCO'
-          'BEBIDAS'
-          'QUALQUER'
-          'ROUPAS')
-        TabOrder = 8
-      end
-    end
+        Title.Caption = 'Vendedor'
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Arial'
+        Title.Font.Style = [fsBold]
+        Width = 250
+        Visible = True
+      end>
   end
   object edPesquisa: TEdit
     Left = 64
-    Top = 32
-    Width = 344
+    Top = 31
+    Width = 336
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-  end
-  object rdbTodos: TRadioButton
-    Left = 456
-    Top = 34
-    Width = 49
-    Height = 17
-    Anchors = [akTop, akRight]
-    Caption = 'Todos'
-    Checked = True
-    TabOrder = 3
-    TabStop = True
-    OnClick = rdbTodosClick
-  end
-  object rdbAtivo: TRadioButton
-    Left = 536
-    Top = 34
-    Width = 49
-    Height = 17
-    Anchors = [akTop, akRight]
-    Caption = 'Ativo'
-    TabOrder = 4
-    OnClick = rdbAtivoClick
-  end
-  object rdbInativo: TRadioButton
-    Left = 608
-    Top = 34
-    Width = 57
-    Height = 17
-    Anchors = [akTop, akRight]
-    Caption = 'Inativo'
-    TabOrder = 5
-    OnClick = rdbInativoClick
-  end
-  object dProduto: TDataSource
-    DataSet = qProduto
-    Left = 122
-    Top = 568
+    ExplicitWidth = 332
   end
   object ImageList1: TImageList
     Left = 928
@@ -812,231 +500,60 @@ object fProduto: TfProduto
       FC3F803FFFFF8001FFFFFFFFFFFF800100000000000000000000000000000000
       000000000000}
   end
-  object uProduto: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM PRODUTO'
-      'WHERE'
-      '  PRODUTO.id = :OLD_id AND'
-      '  PRODUTO.descricao = :OLD_descricao AND'
-      
-        '  ((PRODUTO.unidade IS NULL AND :OLD_unidade IS NULL) OR (PRODUT' +
-        'O.unidade = :OLD_unidade)) AND'
-      
-        '  ((PRODUTO.estoque IS NULL AND :OLD_estoque IS NULL) OR (PRODUT' +
-        'O.estoque = :OLD_estoque)) AND'
-      
-        '  ((PRODUTO.pCompra IS NULL AND :OLD_pCompra IS NULL) OR (PRODUT' +
-        'O.pCompra = :OLD_pCompra)) AND'
-      
-        '  ((PRODUTO.pLucro IS NULL AND :OLD_pLucro IS NULL) OR (PRODUTO.' +
-        'pLucro = :OLD_pLucro)) AND'
-      '  PRODUTO.pVenda = :OLD_pVenda AND'
-      
-        '  ((PRODUTO.grupo IS NULL AND :OLD_grupo IS NULL) OR (PRODUTO.gr' +
-        'upo = :OLD_grupo)) AND'
-      '  PRODUTO.dtRegistro = :OLD_dtRegistro AND'
-      '  PRODUTO.ativo = :OLD_ativo')
-    InsertSQL.Strings = (
-      'INSERT INTO PRODUTO'
-      
-        '  (id, descricao, unidade, estoque, pCompra, pLucro, pVenda, gru' +
-        'po, dtRegistro, '
-      '   ativo)'
-      'VALUES'
-      
-        '  (:id, :descricao, :unidade, :estoque, :pCompra, :pLucro, :pVen' +
-        'da, :grupo, '
-      '   :dtRegistro, :ativo)')
-    ModifySQL.Strings = (
-      'UPDATE PRODUTO SET'
-      '  id = :id,'
-      '  descricao = :descricao,'
-      '  unidade = :unidade,'
-      '  estoque = :estoque,'
-      '  pCompra = :pCompra,'
-      '  pLucro = :pLucro,'
-      '  pVenda = :pVenda,'
-      '  grupo = :grupo,'
-      '  dtRegistro = :dtRegistro,'
-      '  ativo = :ativo'
-      'WHERE'
-      '  PRODUTO.id = :OLD_id AND'
-      '  PRODUTO.descricao = :OLD_descricao AND'
-      
-        '  ((PRODUTO.unidade IS NULL AND :OLD_unidade IS NULL) OR (PRODUT' +
-        'O.unidade = :OLD_unidade)) AND'
-      
-        '  ((PRODUTO.estoque IS NULL AND :OLD_estoque IS NULL) OR (PRODUT' +
-        'O.estoque = :OLD_estoque)) AND'
-      
-        '  ((PRODUTO.pCompra IS NULL AND :OLD_pCompra IS NULL) OR (PRODUT' +
-        'O.pCompra = :OLD_pCompra)) AND'
-      
-        '  ((PRODUTO.pLucro IS NULL AND :OLD_pLucro IS NULL) OR (PRODUTO.' +
-        'pLucro = :OLD_pLucro)) AND'
-      '  PRODUTO.pVenda = :OLD_pVenda AND'
-      
-        '  ((PRODUTO.grupo IS NULL AND :OLD_grupo IS NULL) OR (PRODUTO.gr' +
-        'upo = :OLD_grupo)) AND'
-      '  PRODUTO.dtRegistro = :OLD_dtRegistro AND'
-      '  PRODUTO.ativo = :OLD_ativo')
-    UseSequenceFieldForRefreshSQL = False
-    Left = 75
-    Top = 569
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'descricao'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'unidade'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'estoque'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pCompra'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pLucro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pVenda'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'grupo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DtRegistro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ativo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_descricao'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_unidade'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_estoque'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_pCompra'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_pLucro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_pVenda'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_grupo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_dtRegistro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_ativo'
-        ParamType = ptUnknown
-      end>
-  end
-  object qProduto: TZQuery
-    Connection = DataModule1.zCon
-    SortedFields = 'Id'
-    UpdateObject = uProduto
-    OnNewRecord = qProdutoNewRecord
+  object qVendas: TZReadOnlyQuery
+    Connection = DM.zCon
+    SortedFields = 'ID'
+    SortType = stDescending
     SQL.Strings = (
       
-        'SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA,' +
-        ' GRUPO, DTREGISTRO, ATIVO'
-      '  FROM PRODUTO;')
+        'SELECT a.ID, a.CLIENTE, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DA' +
+        'TA_VENDA, b.NOME'
+      
+        '  FROM VENDA a LEFT JOIN  FUNCIONARIO b on  a.VENDEDOR = b.ID WH' +
+        'ERE ex = 0'
+      '    order by id desc;')
     Params = <>
-    IndexFieldNames = 'Id Asc'
-    Left = 28
-    Top = 568
-    object qProdutoID: TIntegerField
+    IndexFieldNames = 'ID Desc'
+    Left = 848
+    Top = 96
+    object qVendasID: TIntegerField
       FieldName = 'ID'
-      Required = True
+      ReadOnly = True
     end
-    object qProdutoDESCRICAO: TWideStringField
-      FieldName = 'DESCRICAO'
-      Required = True
+    object qVendasCLIENTE: TWideStringField
+      FieldName = 'CLIENTE'
+      ReadOnly = True
+      Size = 250
+    end
+    object qVendasVALOR: TFloatField
+      FieldName = 'VALOR'
+      ReadOnly = True
+      currency = True
+    end
+    object qVendasDESCONTO: TFloatField
+      FieldName = 'DESCONTO'
+      ReadOnly = True
+      EditFormat = '#.##'
+      currency = True
+    end
+    object qVendasVALOR_TOTAL: TFloatField
+      FieldName = 'VALOR_TOTAL'
+      ReadOnly = True
+      currency = True
+    end
+    object qVendasDATA_VENDA: TDateField
+      FieldName = 'DATA_VENDA'
+      ReadOnly = True
+    end
+    object qVendasNOME: TWideStringField
+      FieldName = 'NOME'
+      ReadOnly = True
       Size = 255
     end
-    object qProdutoUNIDADE: TWideStringField
-      FieldName = 'UNIDADE'
-      Size = 5
-    end
-    object qProdutoESTOQUE: TFloatField
-      FieldName = 'ESTOQUE'
-    end
-    object qProdutoPCOMPRA: TFloatField
-      FieldName = 'PCOMPRA'
-    end
-    object qProdutoPLUCRO: TFloatField
-      FieldName = 'PLUCRO'
-    end
-    object qProdutoPVENDA: TFloatField
-      FieldName = 'PVENDA'
-      Required = True
-    end
-    object qProdutoGRUPO: TWideStringField
-      FieldName = 'GRUPO'
-      Size = 70
-    end
-    object qProdutoDTREGISTRO: TDateField
-      FieldName = 'DTREGISTRO'
-      Required = True
-    end
-    object qProdutoATIVO: TWideStringField
-      FieldName = 'ATIVO'
-      Required = True
-      Size = 1
-    end
+  end
+  object dVendas: TDataSource
+    DataSet = qVendas
+    Left = 912
+    Top = 96
   end
 end

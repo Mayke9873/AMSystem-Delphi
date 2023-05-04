@@ -1,9 +1,9 @@
-unit uPessoas;
+unit uPessoa;
 
 interface
 
 type
-  TPessoas = class
+  TPessoa = class
     private
       FCod         : Integer;
       FNome        : String;
@@ -34,49 +34,49 @@ type
   end;
 
 var
-  Pessoas : TPessoas;
+  Pessoas : TPessoa;
 
 implementation
 
 
 { TPessoas }
 
-procedure TPessoas.SetAtivo(const Value: String);
+procedure TPessoa.SetAtivo(const Value: String);
 begin
   FAtivo := Value;
 end;
 
-procedure TPessoas.SetBairro(const Value: String);
+procedure TPessoa.SetBairro(const Value: String);
 begin
   FBairro := Value;
 end;
 
-procedure TPessoas.SetCod(const Value: Integer);
+procedure TPessoa.SetCod(const Value: Integer);
 begin
   FCod := Value;
 end;
 
-procedure TPessoas.SetCPFCNPJ(const Value: String);
+procedure TPessoa.SetCPFCNPJ(const Value: String);
 begin
   FCPFCNPJ := Value;
 end;
 
-procedure TPessoas.SetEndereco(const Value: String);
+procedure TPessoa.SetEndereco(const Value: String);
 begin
   FEndereco := Value;
 end;
 
-procedure TPessoas.SetNome(const Value: String);
+procedure TPessoa.SetNome(const Value: String);
 begin
   FNome := Value;
 end;
 
-procedure TPessoas.SetNumEndereco(const Value: String);
+procedure TPessoa.SetNumEndereco(const Value: String);
 begin
   FNumEndereco := Value;
 end;
 
-procedure TPessoas.SetRGIE(const Value: String);
+procedure TPessoa.SetRGIE(const Value: String);
 begin
   FRGIE := Value;
 end;

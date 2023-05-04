@@ -3,11 +3,11 @@ unit uCliente;
 interface
 
 uses
-  uPessoas, ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows,
+  uPessoa, ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows,
   Interfaces;
 
 type
-  TClientes = class(TPessoas)
+  TCliente = class(TPessoa)
   private
     FDtNasc  : TDate;
     FTpPessoa: String;
@@ -19,8 +19,8 @@ type
     property TpPessoa : String read FTpPessoa write SetTpPessoa;
     function Pesquisar(pNome : String) : Boolean; overload;
     function Pesquisar(pID : Integer) : Boolean; overload;
-    procedure Cadastrar(Value : TClientes);
-    procedure Editar(Value : TClientes);
+    procedure Cadastrar(Value : TCliente);
+    procedure Editar(Value : TCliente);
     function Tipo: String; override;
   end;
 
@@ -28,26 +28,26 @@ type
 implementation
 
   uses
-    uFrmCliente, uDM;
+    FrmCliente, uDM;
 
 { TClientes }
 
-procedure TClientes.SetDtNasc(const Value: TDate);
+procedure TCliente.SetDtNasc(const Value: TDate);
 begin
   FDtNasc := Value;
 end;
 
-procedure TClientes.SetTpPessoa(const Value: String);
+procedure TCliente.SetTpPessoa(const Value: String);
 begin
   FTpPessoa := Value;
 end;
 
-function TClientes.Tipo: String;
+function TCliente.Tipo: String;
 begin
   Result := 'C';
 end;
 
-procedure TClientes.Editar(Value: TClientes);
+procedure TCliente.Editar(Value: TCliente);
 begin
   if not (dm.qCliente.State in [dsEdit]) then
     DM.qCliente.Edit;
@@ -74,7 +74,7 @@ begin
   end;
 end;
 
-procedure TClientes.Cadastrar(Value : TClientes);
+procedure TCliente.Cadastrar(Value : TCliente);
 begin
   if not (dm.qCliente.State in [dsInsert]) then
     DM.qCliente.Insert;
@@ -105,7 +105,7 @@ begin
 end;
 
 
-function TClientes.Pesquisar(pID : Integer) : Boolean;
+function TCliente.Pesquisar(pID : Integer) : Boolean;
 begin
   Result := False;
 
@@ -126,7 +126,7 @@ begin
   Nome := '';
 end;
 
-function TClientes.Pesquisar(pNome : String) : Boolean;
+function TCliente.Pesquisar(pNome : String) : Boolean;
 begin
   Result := False;
 

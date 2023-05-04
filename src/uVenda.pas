@@ -1,4 +1,4 @@
-unit Classe.Venda;
+unit uVenda;
 
 interface
 
@@ -21,7 +21,7 @@ type
 implementation
 
   uses
-    uDM, uConsultaVenda, uVenda;
+    uDM, FrmVenda;
 
 { TVenda }
 

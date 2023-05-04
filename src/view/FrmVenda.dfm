@@ -2,8 +2,8 @@ object fVenda: TfVenda
   Left = 0
   Top = 0
   Caption = 'Vendas'
-  ClientHeight = 629
-  ClientWidth = 983
+  ClientHeight = 628
+  ClientWidth = 979
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -20,8 +20,8 @@ object fVenda: TfVenda
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    983
-    629)
+    979
+    628)
   TextHeight = 18
   object Label1: TLabel
     Left = 8
@@ -174,8 +174,8 @@ object fVenda: TfVenda
   object DBGrid1: TDBGrid
     Left = 8
     Top = 244
-    Width = 935
-    Height = 324
+    Width = 919
+    Height = 323
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = dProdVenda
@@ -424,7 +424,7 @@ object fVenda: TfVenda
     object Label9: TLabel
       Left = 0
       Top = 0
-      Width = 107
+      Width = 89
       Height = 19
       Align = alTop
       Alignment = taCenter
@@ -435,7 +435,6 @@ object fVenda: TfVenda
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 89
     end
     object Panel1: TPanel
       Left = 0
@@ -445,9 +444,6 @@ object fVenda: TfVenda
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 3
-      ExplicitTop = 24
-      ExplicitWidth = 104
       object Shape1: TShape
         Left = 0
         Top = 0
@@ -498,7 +494,7 @@ object fVenda: TfVenda
     object Label10: TLabel
       Left = 0
       Top = 0
-      Width = 107
+      Width = 68
       Height = 19
       Align = alTop
       Alignment = taCenter
@@ -509,9 +505,6 @@ object fVenda: TfVenda
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 39
-      ExplicitTop = 8
-      ExplicitWidth = 68
     end
     object Panel2: TPanel
       Left = 0
@@ -521,8 +514,6 @@ object fVenda: TfVenda
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 3
-      ExplicitWidth = 104
       object Shape2: TShape
         Left = 0
         Top = 0
@@ -560,14 +551,13 @@ object fVenda: TfVenda
         ParentBiDiMode = False
         ParentFont = False
         TabOrder = 0
-        ExplicitWidth = 98
       end
     end
   end
   object pnlBotoes: TPanel
     Left = 0
-    Top = 574
-    Width = 983
+    Top = 573
+    Width = 979
     Height = 55
     Align = alBottom
     BevelOuter = bvNone
@@ -575,7 +565,7 @@ object fVenda: TfVenda
     ShowCaption = False
     TabOrder = 17
     DesignSize = (
-      983
+      979
       55)
     object btnSair: TButton
       Left = 401

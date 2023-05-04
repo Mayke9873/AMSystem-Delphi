@@ -2,8 +2,8 @@ object fCliente: TfCliente
   Left = 0
   Top = 0
   Caption = 'Cadastro Cliente'
-  ClientHeight = 649
-  ClientWidth = 999
+  ClientHeight = 648
+  ClientWidth = 995
   Color = clBtnFace
   DefaultMonitor = dmMainForm
   Font.Charset = DEFAULT_CHARSET
@@ -13,7 +13,6 @@ object fCliente: TfCliente
   Font.Style = []
   FormStyle = fsMDIChild
   KeyPreview = True
-  OldCreateOrder = False
   Visible = True
   WindowState = wsMaximized
   OnClose = FormClose
@@ -21,9 +20,8 @@ object fCliente: TfCliente
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    999
-    649)
-  PixelsPerInch = 96
+    995
+    648)
   TextHeight = 13
   object Label9: TLabel
     Left = 8
@@ -41,7 +39,7 @@ object fCliente: TfCliente
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 999
+    Width = 995
     Height = 29
     ButtonHeight = 29
     ButtonWidth = 29
@@ -109,22 +107,23 @@ object fCliente: TfCliente
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 999
-    Height = 593
+    Width = 983
+    Height = 592
     ActivePage = pgTabela
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
+    ExplicitWidth = 987
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       DesignSize = (
-        991
-        565)
+        975
+        564)
       object DBGrid1: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 0
-        Width = 985
-        Height = 562
+        Width = 969
+        Height = 561
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = DM.dCliente
         DrawingStyle = gdsGradient
@@ -820,16 +819,17 @@ object fCliente: TfCliente
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 344
+    Width = 328
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     CharCase = ecUpperCase
     TabOrder = 2
     OnChange = edPesquisaChange
+    ExplicitWidth = 332
   end
   object rdbTodos: TRadioButton
-    Left = 456
+    Left = 440
     Top = 34
     Width = 49
     Height = 17
@@ -839,9 +839,10 @@ object fCliente: TfCliente
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
+    ExplicitLeft = 444
   end
   object rdbAtivo: TRadioButton
-    Left = 536
+    Left = 520
     Top = 34
     Width = 49
     Height = 17
@@ -849,9 +850,10 @@ object fCliente: TfCliente
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbAtivoClick
+    ExplicitLeft = 524
   end
   object rdbInativo: TRadioButton
-    Left = 608
+    Left = 592
     Top = 34
     Width = 57
     Height = 17
@@ -859,6 +861,7 @@ object fCliente: TfCliente
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbInativoClick
+    ExplicitLeft = 596
   end
   object ImageList1: TImageList
     Left = 928

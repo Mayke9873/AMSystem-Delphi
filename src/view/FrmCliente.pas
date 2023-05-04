@@ -1,4 +1,4 @@
-unit uFrmCliente;
+unit FrmCliente;
 
 interface
 
@@ -84,7 +84,7 @@ type
     procedure DBECPFKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
-    Cliente : TClientes;
+    Cliente : TCliente;
     TipoCadastro : Integer;
     Valida : TValidacoes;
     procedure NovoOuEditar(Tipo : Integer);
@@ -169,7 +169,7 @@ end;
 
 procedure TfCliente.FormCreate(Sender: TObject);
 begin
-  Cliente := TClientes.Create;
+  Cliente := TCliente.Create;
   Consulta;
   PageControl1.TabIndex := 0;
 end;

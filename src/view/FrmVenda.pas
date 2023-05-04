@@ -1,4 +1,4 @@
-unit uVenda;
+unit FrmVenda;
 
 interface
 
@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
   Vcl.DBGrids, ZAbstractRODataset, ZDataset, ZSqlUpdate, ZAbstractDataset,
-  System.StrUtils, Vcl.ExtCtrls, uCliente, Vcl.Buttons, Classe.Venda;
+  System.StrUtils, Vcl.ExtCtrls, uCliente, Vcl.Buttons, uVenda;
 
 type
   TfVenda = class(TForm)
@@ -97,7 +97,7 @@ type
   private
     { Private declarations }
     totalVenda, descontoVenda: Real;
-    Cliente : TClientes;
+    Cliente : TCliente;
     Venda : TVenda;
     procedure Consulta(Tipo, TipoCampo : String);
     procedure LimpaCampos(pTipo : String);
@@ -118,7 +118,7 @@ uses
 
 procedure TfVenda.FormCreate(Sender: TObject);
 begin
-  Cliente := TClientes.Create();
+  Cliente := TCliente.Create();
   Venda := TVenda.Create();
 
   totalVenda := 0;

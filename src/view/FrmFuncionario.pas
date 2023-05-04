@@ -1,4 +1,4 @@
-unit uFuncionario;
+unit FrmFuncionario;
 
 interface
 

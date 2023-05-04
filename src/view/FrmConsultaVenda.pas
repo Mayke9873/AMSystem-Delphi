@@ -1,4 +1,4 @@
-unit uConsultaVenda;
+unit FrmConsultaVenda;
 
 interface
 
@@ -46,7 +46,7 @@ var
 
 implementation
 
-uses uDM, uVenda;
+uses uDM, FrmVenda;
 {$R *.dfm}
 
 procedure TfConsultaVendas.dbgVendasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;

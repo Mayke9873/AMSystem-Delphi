@@ -132,35 +132,35 @@
             <Form>DM</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\uPrincipal.pas">
+        <DCCReference Include="src\view\FrmPrincipal.pas">
             <Form>fPrincipal</Form>
         </DCCReference>
-        <DCCReference Include="src\view\uVenda.pas">
+        <DCCReference Include="src\view\FrmVenda.pas">
             <Form>fVenda</Form>
         </DCCReference>
-        <DCCReference Include="src\view\uConsultaVenda.pas">
+        <DCCReference Include="src\view\FrmConsultaVenda.pas">
             <Form>fConsultaVendas</Form>
         </DCCReference>
-        <DCCReference Include="src\view\uProduto.pas">
+        <DCCReference Include="src\view\FrmProduto.pas">
             <Form>fProduto</Form>
         </DCCReference>
-        <DCCReference Include="src\view\uGrupoProduto.pas">
+        <DCCReference Include="src\view\FrmGrupoProduto.pas">
             <Form>fGrupoProd</Form>
         </DCCReference>
-        <DCCReference Include="src\view\uFuncionario.pas">
+        <DCCReference Include="src\view\FrmFuncionario.pas">
             <Form>fFuncionario</Form>
         </DCCReference>
-        <DCCReference Include="src\view\uFrmCliente.pas">
+        <DCCReference Include="src\view\FrmCliente.pas">
             <Form>fCliente</Form>
         </DCCReference>
-        <DCCReference Include="src\uPessoas.pas"/>
-        <DCCReference Include="src\uFornecedores.pas"/>
+        <DCCReference Include="src\uPessoa.pas"/>
+        <DCCReference Include="src\uFornecedor.pas"/>
         <DCCReference Include="src\Conexao.MySQL.pas"/>
         <DCCReference Include="src\Conexao.SQLServer.pas"/>
         <DCCReference Include="src\Interfaces.pas"/>
         <DCCReference Include="src\uCliente.pas"/>
         <DCCReference Include="src\uValida.pas"/>
-        <DCCReference Include="src\Classe.Venda.pas"/>
+        <DCCReference Include="src\uVenda.pas"/>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>

@@ -1,7 +1,7 @@
-object fFuncionario: TfFuncionario
+object fGrupoProd: TfGrupoProd
   Left = 0
   Top = 0
-  Caption = 'Funcion'#225'rios'
+  Caption = 'Grupo de Produto'
   ClientHeight = 649
   ClientWidth = 999
   Color = clBtnFace
@@ -11,16 +11,13 @@ object fFuncionario: TfFuncionario
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIChild
-  OldCreateOrder = False
   Visible = True
   WindowState = wsMaximized
-  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
     999
     649)
-  PixelsPerInch = 96
   TextHeight = 13
   object Label9: TLabel
     Left = 8
@@ -49,6 +46,7 @@ object fFuncionario: TfFuncionario
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
+    ExplicitWidth = 995
     object tbNovo: TToolButton
       Left = 0
       Top = 0
@@ -80,43 +78,44 @@ object fFuncionario: TfFuncionario
       Caption = 'Cancelar'
       ImageIndex = 3
     end
-    object ToolButton1: TToolButton
+    object tbSair: TToolButton
       Left = 116
+      Top = 0
+      Action = acSair
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton1: TToolButton
+      Left = 145
       Top = 0
       Width = 5
       Caption = 'ToolButton1'
       ImageIndex = 5
       Style = tbsSeparator
     end
-    object tbSair: TToolButton
-      Left = 121
-      Top = 0
-      Action = acSair
-      ParentShowHint = False
-      ShowHint = True
-    end
   end
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 999
+    Width = 991
     Height = 593
-    ActivePage = pgDados
+    ActivePage = pgTabela
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
+    ExplicitHeight = 592
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       DesignSize = (
-        991
+        983
         565)
-      object DBGrid1: TDBGrid
+      object dbgGrupo: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 0
-        Width = 985
+        Width = 977
         Height = 562
         Anchors = [akLeft, akTop, akRight, akBottom]
-        DataSource = dFuncionario
+        DataSource = dGrupo
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -124,6 +123,7 @@ object fFuncionario: TfFuncionario
         Font.Style = []
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         ParentFont = False
+        ReadOnly = True
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -132,10 +132,8 @@ object fFuncionario: TfFuncionario
         TitleFont.Style = []
         Columns = <
           item
-            Alignment = taCenter
             Expanded = False
-            FieldName = 'Id'
-            Title.Alignment = taCenter
+            FieldName = 'id'
             Title.Caption = 'C'#243'digo'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -147,128 +145,14 @@ object fFuncionario: TfFuncionario
           end
           item
             Expanded = False
-            FieldName = 'Nome'
+            FieldName = 'descricao'
+            Title.Caption = 'Descri'#231#227'o'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
             Title.Font.Name = 'Arial'
             Title.Font.Style = [fsBold]
-            Width = 200
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'RG'
-            Title.Alignment = taCenter
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 93
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'CPFCNPJ'
-            Title.Alignment = taCenter
-            Title.Caption = 'CPF / CNPJ'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 93
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'dtnasc'
-            Title.Alignment = taCenter
-            Title.Caption = 'Dt. Nasc'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 86
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'Endereco'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 135
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'numendereco'
-            Title.Caption = 'N'#186
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 40
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'Bairro'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 100
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'dtregistro'
-            Title.Alignment = taCenter
-            Title.Caption = 'Dt. Registro'
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 86
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'tipo'
-            Title.Alignment = taCenter
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 30
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'Ativo'
-            Title.Alignment = taCenter
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 36
+            Width = 250
             Visible = True
           end>
       end
@@ -298,87 +182,9 @@ object fFuncionario: TfFuncionario
       object Label2: TLabel
         Left = 8
         Top = 70
-        Width = 46
+        Width = 76
         Height = 18
-        Caption = 'Nome:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label3: TLabel
-        Left = 345
-        Top = 70
-        Width = 27
-        Height = 18
-        Caption = 'RG:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label4: TLabel
-        Left = 454
-        Top = 70
-        Width = 37
-        Height = 18
-        Caption = 'CPF:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label5: TLabel
-        Left = 610
-        Top = 70
-        Width = 60
-        Height = 18
-        Caption = 'Dt Nasc:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label6: TLabel
-        Left = 8
-        Top = 129
-        Width = 72
-        Height = 18
-        Caption = 'Endere'#231'o:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label7: TLabel
-        Left = 342
-        Top = 129
-        Width = 20
-        Height = 18
-        Caption = 'N'#186':'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label8: TLabel
-        Left = 400
-        Top = 129
-        Width = 47
-        Height = 18
-        Caption = 'Bairro:'
+        Caption = 'Descri'#231#227'o:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -392,7 +198,7 @@ object fFuncionario: TfFuncionario
         Width = 77
         Height = 26
         DataField = 'id'
-        DataSource = dFuncionario
+        DataSource = dGrupo
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -402,102 +208,42 @@ object fFuncionario: TfFuncionario
         ReadOnly = True
         TabOrder = 0
       end
-      object DBENome: TDBEdit
+      object dbeDescricao: TDBEdit
         Left = 10
-        Top = 94
-        Width = 331
+        Top = 91
+        Width = 339
         Height = 26
-        DataField = 'nome'
-        DataSource = dFuncionario
+        DataField = 'DESCRICAO'
+        DataSource = dGrupo
         ReadOnly = True
         TabOrder = 1
       end
-      object DBERG: TDBEdit
-        Left = 347
-        Top = 94
-        Width = 103
-        Height = 26
-        DataField = 'rg'
-        DataSource = dFuncionario
-        ReadOnly = True
-        TabOrder = 2
-      end
-      object DBEEndereco: TDBEdit
-        Left = 8
-        Top = 150
-        Width = 331
-        Height = 26
-        DataField = 'endereco'
-        DataSource = dFuncionario
-        ReadOnly = True
-        TabOrder = 5
-      end
-      object DBENumEnd: TDBEdit
-        Left = 344
-        Top = 150
-        Width = 52
-        Height = 26
-        DataField = 'numEndereco'
-        DataSource = dFuncionario
-        ReadOnly = True
-        TabOrder = 6
-      end
-      object DBEBairro: TDBEdit
-        Left = 402
-        Top = 150
-        Width = 301
-        Height = 26
-        DataField = 'bairro'
-        DataSource = dFuncionario
-        ReadOnly = True
-        TabOrder = 7
-      end
-      object DBCheckBox1: TDBCheckBox
-        Left = 284
-        Top = 37
+      object dbchkAtivo: TDBCheckBox
+        Left = 291
+        Top = 38
         Width = 58
         Height = 17
         Caption = 'Ativo'
         DataField = 'ativo'
-        DataSource = dFuncionario
+        DataSource = dGrupo
         ReadOnly = True
-        TabOrder = 8
+        TabOrder = 2
         ValueChecked = 'S'
         ValueUnchecked = 'N'
-      end
-      object DBECPF: TDBEdit
-        Left = 456
-        Top = 94
-        Width = 150
-        Height = 26
-        DataField = 'Cpf'
-        DataSource = dFuncionario
-        ReadOnly = True
-        TabOrder = 3
-      end
-      object DBENasc: TDBEdit
-        Left = 612
-        Top = 94
-        Width = 91
-        Height = 26
-        DataField = 'DtNasc'
-        DataSource = dFuncionario
-        ReadOnly = True
-        TabOrder = 4
       end
     end
   end
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 344
+    Width = 336
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
   end
   object rdbTodos: TRadioButton
-    Left = 456
+    Left = 448
     Top = 34
     Width = 49
     Height = 17
@@ -508,7 +254,7 @@ object fFuncionario: TfFuncionario
     TabStop = True
   end
   object rdbAtivo: TRadioButton
-    Left = 536
+    Left = 528
     Top = 34
     Width = 49
     Height = 17
@@ -517,7 +263,7 @@ object fFuncionario: TfFuncionario
     TabOrder = 4
   end
   object rdbInativo: TRadioButton
-    Left = 608
+    Left = 600
     Top = 34
     Width = 57
     Height = 17
@@ -525,10 +271,10 @@ object fFuncionario: TfFuncionario
     Caption = 'Inativo'
     TabOrder = 5
   end
-  object dFuncionario: TDataSource
-    DataSet = qFuncionario
+  object dGrupo: TDataSource
+    DataSet = qGrupo
     Left = 122
-    Top = 569
+    Top = 568
   end
   object ImageList1: TImageList
     Left = 928
@@ -804,93 +550,74 @@ object fFuncionario: TfFuncionario
       FC3F803FFFFF8001FFFFFFFFFFFF800100000000000000000000000000000000
       000000000000}
   end
-  object uFuncionario: TZUpdateSQL
+  object uGrupo: TZUpdateSQL
     DeleteSQL.Strings = (
-      'DELETE FROM Cliente'
+      'DELETE FROM PRODUTO'
       'WHERE'
-      '  Cliente.id = :OLD_id AND'
-      '  Cliente.nome = :OLD_nome AND'
+      '  PRODUTO.id = :OLD_id AND'
+      '  PRODUTO.descricao = :OLD_descricao AND'
       
-        '  ((Cliente.rg IS NULL AND :OLD_rg IS NULL) OR (Cliente.rg = :OL' +
-        'D_rg)) AND'
+        '  ((PRODUTO.unidade IS NULL AND :OLD_unidade IS NULL) OR (PRODUT' +
+        'O.unidade = :OLD_unidade)) AND'
       
-        '  ((Cliente.CPFCNPJ IS NULL AND :OLD_CPFCNPJ IS NULL) OR (Client' +
-        'e.CPFCNPJ = :OLD_CPFCNPJ)) AND'
+        '  ((PRODUTO.estoque IS NULL AND :OLD_estoque IS NULL) OR (PRODUT' +
+        'O.estoque = :OLD_estoque)) AND'
       
-        '  ((Cliente.DtNasc IS NULL AND :OLD_DtNasc IS NULL) OR (Cliente.' +
-        'DtNasc = :OLD_DtNasc)) AND'
+        '  ((PRODUTO.pCompra IS NULL AND :OLD_pCompra IS NULL) OR (PRODUT' +
+        'O.pCompra = :OLD_pCompra)) AND'
       
-        '  ((Cliente.endereco IS NULL AND :OLD_endereco IS NULL) OR (Clie' +
-        'nte.endereco = :OLD_endereco)) AND'
+        '  ((PRODUTO.pLucro IS NULL AND :OLD_pLucro IS NULL) OR (PRODUTO.' +
+        'pLucro = :OLD_pLucro)) AND'
+      '  PRODUTO.pVenda = :OLD_pVenda AND'
       
-        '  ((Cliente.numEndereco IS NULL AND :OLD_numEndereco IS NULL) OR' +
-        ' (Cliente.numEndereco = :OLD_numEndereco)) AND'
-      
-        '  ((Cliente.bairro IS NULL AND :OLD_bairro IS NULL) OR (Cliente.' +
-        'bairro = :OLD_bairro)) AND'
-      
-        '  ((Cliente.DtRegistro IS NULL AND :OLD_DtRegistro IS NULL) OR (' +
-        'Cliente.DtRegistro = :OLD_DtRegistro)) AND'
-      
-        '  ((Cliente.tipo IS NULL AND :OLD_tipo IS NULL) OR (Cliente.tipo' +
-        ' = :OLD_tipo)) AND'
-      
-        '  ((Cliente.ativo IS NULL AND :OLD_ativo IS NULL) OR (Cliente.at' +
-        'ivo = :OLD_ativo))')
+        '  ((PRODUTO.grupo IS NULL AND :OLD_grupo IS NULL) OR (PRODUTO.gr' +
+        'upo = :OLD_grupo)) AND'
+      '  PRODUTO.dtRegistro = :OLD_dtRegistro AND'
+      '  PRODUTO.ativo = :OLD_ativo')
     InsertSQL.Strings = (
-      'INSERT INTO Cliente'
+      'INSERT INTO PRODUTO'
       
-        '  (id, nome, rg, CPFCNPJ, DtNasc, endereco, numEndereco, bairro,' +
-        ' DtRegistro, '
-      '   tipo, ativo)'
+        '  (id, descricao, unidade, estoque, pCompra, pLucro, pVenda, gru' +
+        'po, dtRegistro, '
+      '   ativo)'
       'VALUES'
       
-        '  (:id, :nome, :rg, :CPFCNPJ, :DtNasc, :endereco, :numEndereco, ' +
-        ':bairro, '
-      '   :DtRegistro, :tipo, :ativo)')
+        '  (:id, :descricao, :unidade, :estoque, :pCompra, :pLucro, :pVen' +
+        'da, :grupo, '
+      '   :dtRegistro, :ativo)')
     ModifySQL.Strings = (
-      'UPDATE Cliente SET'
+      'UPDATE PRODUTO SET'
       '  id = :id,'
-      '  nome = :nome,'
-      '  rg = :rg,'
-      '  CPFCNPJ = :CPFCNPJ,'
-      '  DtNasc = :DtNasc,'
-      '  endereco = :endereco,'
-      '  numEndereco = :numEndereco,'
-      '  bairro = :bairro,'
-      '  DtRegistro = :DtRegistro,'
-      '  tipo = :tipo,'
+      '  descricao = :descricao,'
+      '  unidade = :unidade,'
+      '  estoque = :estoque,'
+      '  pCompra = :pCompra,'
+      '  pLucro = :pLucro,'
+      '  pVenda = :pVenda,'
+      '  grupo = :grupo,'
+      '  dtRegistro = :dtRegistro,'
       '  ativo = :ativo'
       'WHERE'
-      '  Cliente.id = :OLD_id AND'
-      '  Cliente.nome = :OLD_nome AND'
+      '  PRODUTO.id = :OLD_id AND'
+      '  PRODUTO.descricao = :OLD_descricao AND'
       
-        '  ((Cliente.rg IS NULL AND :OLD_rg IS NULL) OR (Cliente.rg = :OL' +
-        'D_rg)) AND'
+        '  ((PRODUTO.unidade IS NULL AND :OLD_unidade IS NULL) OR (PRODUT' +
+        'O.unidade = :OLD_unidade)) AND'
       
-        '  ((Cliente.CPFCNPJ IS NULL AND :OLD_CPFCNPJ IS NULL) OR (Client' +
-        'e.CPFCNPJ = :OLD_CPFCNPJ)) AND'
+        '  ((PRODUTO.estoque IS NULL AND :OLD_estoque IS NULL) OR (PRODUT' +
+        'O.estoque = :OLD_estoque)) AND'
       
-        '  ((Cliente.DtNasc IS NULL AND :OLD_DtNasc IS NULL) OR (Cliente.' +
-        'DtNasc = :OLD_DtNasc)) AND'
+        '  ((PRODUTO.pCompra IS NULL AND :OLD_pCompra IS NULL) OR (PRODUT' +
+        'O.pCompra = :OLD_pCompra)) AND'
       
-        '  ((Cliente.endereco IS NULL AND :OLD_endereco IS NULL) OR (Clie' +
-        'nte.endereco = :OLD_endereco)) AND'
+        '  ((PRODUTO.pLucro IS NULL AND :OLD_pLucro IS NULL) OR (PRODUTO.' +
+        'pLucro = :OLD_pLucro)) AND'
+      '  PRODUTO.pVenda = :OLD_pVenda AND'
       
-        '  ((Cliente.numEndereco IS NULL AND :OLD_numEndereco IS NULL) OR' +
-        ' (Cliente.numEndereco = :OLD_numEndereco)) AND'
-      
-        '  ((Cliente.bairro IS NULL AND :OLD_bairro IS NULL) OR (Cliente.' +
-        'bairro = :OLD_bairro)) AND'
-      
-        '  ((Cliente.DtRegistro IS NULL AND :OLD_DtRegistro IS NULL) OR (' +
-        'Cliente.DtRegistro = :OLD_DtRegistro)) AND'
-      
-        '  ((Cliente.tipo IS NULL AND :OLD_tipo IS NULL) OR (Cliente.tipo' +
-        ' = :OLD_tipo)) AND'
-      
-        '  ((Cliente.ativo IS NULL AND :OLD_ativo IS NULL) OR (Cliente.at' +
-        'ivo = :OLD_ativo))')
+        '  ((PRODUTO.grupo IS NULL AND :OLD_grupo IS NULL) OR (PRODUTO.gr' +
+        'upo = :OLD_grupo)) AND'
+      '  PRODUTO.dtRegistro = :OLD_dtRegistro AND'
+      '  PRODUTO.ativo = :OLD_ativo')
     UseSequenceFieldForRefreshSQL = False
     Left = 75
     Top = 569
@@ -902,37 +629,37 @@ object fFuncionario: TfFuncionario
       end
       item
         DataType = ftUnknown
-        Name = 'nome'
+        Name = 'descricao'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'rg'
+        Name = 'unidade'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'CPFCNPJ'
+        Name = 'estoque'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'DtNasc'
+        Name = 'pCompra'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'endereco'
+        Name = 'pLucro'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'numEndereco'
+        Name = 'pVenda'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'bairro'
+        Name = 'grupo'
         ParamType = ptUnknown
       end
       item
@@ -942,78 +669,91 @@ object fFuncionario: TfFuncionario
       end
       item
         DataType = ftUnknown
-        Name = 'tipo'
+        Name = 'ativo'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'ativo'
+        Name = 'OLD_id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_descricao'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_unidade'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_estoque'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_pCompra'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_pLucro'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_pVenda'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_grupo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_dtRegistro'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ativo'
         ParamType = ptUnknown
       end>
   end
-  object qFuncionario: TZQuery
+  object qGrupo: TZQuery
     Connection = DM.zCon
     SortedFields = 'Id'
-    UpdateObject = uFuncionario
+    UpdateObject = uGrupo
     SQL.Strings = (
-      
-        'SELECT Id, Nome, RG, Cpf, dtnasc, Endereco, numendereco, Bairro,' +
-        ' dtregistro, Ativo'
-      'FROM FUNCIONARIO')
+      'SELECT id, descricao, ativo FROM Grupo_produto')
     Params = <>
     IndexFieldNames = 'Id Asc'
     Left = 28
-    Top = 569
-    object qFuncionarioId: TIntegerField
-      FieldName = 'Id'
+    Top = 568
+    object qGrupoid: TIntegerField
+      FieldName = 'id'
       Required = True
     end
-    object qFuncionarioNome: TWideStringField
-      FieldName = 'Nome'
+    object qGrupodescricao: TWideStringField
+      FieldName = 'descricao'
       Required = True
       Size = 255
     end
-    object qFuncionarioRG: TWideStringField
-      FieldName = 'RG'
-      Required = True
-      Size = 10
-    end
-    object qFuncionarioCpf: TWideStringField
-      FieldName = 'Cpf'
-      Required = True
-      Size = 11
-    end
-    object qFuncionariodtnasc: TDateField
-      FieldName = 'dtnasc'
-      Required = True
-    end
-    object qFuncionarioEndereco: TWideStringField
-      FieldName = 'Endereco'
-      Size = 250
-    end
-    object qFuncionarionumendereco: TWideStringField
-      FieldName = 'numendereco'
-      Size = 5
-    end
-    object qFuncionarioBairro: TWideStringField
-      FieldName = 'Bairro'
-      Size = 250
-    end
-    object qFuncionariodtregistro: TDateField
-      FieldName = 'dtregistro'
-      Required = True
-    end
-    object qFuncionarioAtivo: TWideStringField
-      FieldName = 'Ativo'
+    object qGrupoativo: TWideStringField
+      FieldName = 'ativo'
       Required = True
       Size = 1
     end
   end
   object ActionList1: TActionList
-    Left = 444
-    Top = 312
+    Images = ImageList1
+    Left = 116
+    Top = 216
     object acSair: TAction
-      Caption = 'Sair'
+      Caption = 'acSair'
       ImageIndex = 4
       ShortCut = 27
       OnExecute = acSairExecute

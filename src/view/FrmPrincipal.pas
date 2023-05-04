@@ -1,4 +1,4 @@
-﻿unit uPrincipal;
+﻿unit FrmPrincipal;
 
 interface
 
@@ -50,7 +50,8 @@ var
 implementation
 
   uses
-    uFrmCliente, uVenda, uConsultaVenda, uProduto, uGrupoProduto, uFuncionario;
+    FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto, FrmFuncionario,
+  FrmVenda;
 
 {$R *.dfm}
 

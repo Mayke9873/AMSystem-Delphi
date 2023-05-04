@@ -1,4 +1,4 @@
-unit uGrupoProduto;
+unit FrmGrupoProduto;
 
 interface
 
@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ZSqlUpdate, System.ImageList, Vcl.ImgList,
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls,
-  Vcl.ToolWin, System.Actions, Vcl.ActnList;
+  Vcl.ToolWin, System.Actions, Vcl.ActnList, Vcl.ExtCtrls;
 
 type
   TfGrupoProd = class(TForm)
@@ -54,6 +54,9 @@ var
   fGrupoProd: TfGrupoProd;
 
 implementation
+
+uses
+  uDM;
 
 {$R *.dfm}
 

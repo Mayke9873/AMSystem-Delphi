@@ -45,7 +45,27 @@ begin
 end;
 
 function TValidacoes.ValidaValor(Sender: TField; Text: String): Boolean;
-begin  Result := false;  if (Text = '') then  begin    Sender.Clear;    Result := true;  end  else  begin    try      Sender.asString := Text;      Result := true;    except      Application.MessageBox('Valor inválido. Por favor, verifique!','Atenção', MB_OK + MB_ICONWARNING);      if Screen.Cursor = crHourGlass then      begin        Screen.Cursor := crDefault;      end;    end;  end;end;
+begin
+  Result := false;
+  if (Text = '') then
+  begin
+    Sender.Clear;
+    Result := true;
+  end
+  else
+  begin
+    try
+      Sender.asString := Text;
+      Result := true;
+    except
+      Application.MessageBox('Valor inválido. Por favor, verifique!','Atenção', MB_OK + MB_ICONWARNING);
+      if Screen.Cursor = crHourGlass then
+      begin
+        Screen.Cursor := crDefault;
+      end;
+    end;
+  end;
+end;
 
 procedure TValidacoes.SomenteNumero(var key: char);
 begin
