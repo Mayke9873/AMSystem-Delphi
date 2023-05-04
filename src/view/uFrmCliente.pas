@@ -145,18 +145,18 @@ var
 begin
 
   if rdbTodos.Checked then
-    vAtivo := 'T' // Todos clientes
+    Cliente.Ativo := 'T' // Todos clientes
 
   else if rdbAtivo.Checked then
-    vAtivo := 'S' // Somente ativos
+    Cliente.Ativo := 'S' // Somente ativos
 
   else
-    vAtivo := 'N'; // Somente inativos;
+    Cliente.Ativo := 'N'; // Somente inativos;
 
   Cliente.Nome := '%' + edPesquisa.Text + '%';
 
   try
-    Cliente.Pesquisar(vAtivo);
+    Cliente.Pesquisar(Cliente.Nome);
   except
     Application.MessageBox('Erro ao pesquisar cliente!', 'Atenção', MB_OK+MB_ICONEXCLAMATION);
   end;

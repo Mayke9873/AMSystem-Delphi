@@ -3,7 +3,7 @@ unit uCliente;
 interface
 
 uses
-  uPessoas, ZAbstractRODataset, ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows,
+  uPessoas, ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows,
   Interfaces;
 
 type
@@ -13,14 +13,15 @@ type
     FTpPessoa: String;
     procedure SetDtNasc(const Value: TDate);
     procedure SetTpPessoa(const Value: String);
-
   public
     Conexao : IConexao;
-    procedure Pesquisar(pAtivo : String);
-    procedure Cadastrar(Value : TClientes);
-    procedure Editar(Value : TClientes);
     property DtNasc : TDate read FDtNasc write SetDtNasc;
     property TpPessoa : String read FTpPessoa write SetTpPessoa;
+    function Pesquisar(pNome : String) : Boolean; overload;
+    function Pesquisar(pID : Integer) : Boolean; overload;
+    procedure Cadastrar(Value : TClientes);
+    procedure Editar(Value : TClientes);
+    function Tipo: String; override;
   end;
 
 
@@ -39,6 +40,11 @@ end;
 procedure TClientes.SetTpPessoa(const Value: String);
 begin
   FTpPessoa := Value;
+end;
+
+function TClientes.Tipo: String;
+begin
+  Result := 'C';
 end;
 
 procedure TClientes.Editar(Value: TClientes);
@@ -85,32 +91,59 @@ begin
     DM.qClientedtregistro.AsDateTime := Now;
 
     if DateToStr(DtNasc) <> '  /  /    ' then
-      DM.qClienteDtNasc.AsDateTime := DtNasc;
+      DM.qClienteDtNasc.AsDateTime := DtNasc
+    else
+      DM.qClienteDtNasc.Value := varNull;
 
     DM.qCliente.Post;
   end
   else
   begin
     DM.qCliente.Cancel;
-    Application.MessageBox('O campo nome obrigatório. Por favor, verifique!', 'Atenção', mb_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('Campo nome obrigatório. Por favor, verifique!', 'Atenção', MB_ICONEXCLAMATION);
   end;
 end;
 
 
-procedure TClientes.Pesquisar(pAtivo : String);
+function TClientes.Pesquisar(pID : Integer) : Boolean;
 begin
+  Result := False;
+
   DM.qCliente.Close;
-
-  if IntToStr(Cod) <> '' then
-    DM.qCliente.ParamByName('id').AsInteger := Cod
-  else
-    DM.qCliente.ParamByName('id').AsInteger := StrToIntDef(StringReplace(Nome, '%', '', [rfReplaceAll]), 0);
-
-//  if DM.qCliente.ParamByName('id').Value = 0 then
-    DM.qCliente.ParamByName('nome').AsString := Nome;
-
-  DM.qCliente.ParamByName('ativo').AsString   := pAtivo;
+  DM.qCliente.Params[0].AsInteger := pID;
+  DM.qCliente.Params[1].AsString := Nome;
+  DM.qCliente.Params[2].AsString := Ativo;
   DM.qCliente.Open;
+
+  if DM.qCliente.RecordCount = 1 then
+  begin
+    Result := True;
+    Cod := DM.qClienteId.AsInteger;
+    Nome := DM.qClienteNome.AsString;
+    Exit;
+  end;
+
+  Nome := '';
+end;
+
+function TClientes.Pesquisar(pNome : String) : Boolean;
+begin
+  Result := False;
+
+  DM.qCliente.Close;
+  DM.qCliente.ParamByName('id').AsInteger := 0;
+  DM.qCliente.ParamByName('nome').AsString := pNome;
+  DM.qCliente.ParamByName('ativo').AsString   := Ativo;
+  DM.qCliente.Open;
+
+  if DM.qCliente.RecordCount = 1 then
+  begin
+    Result := True;
+    Nome := DM.qClienteNome.AsString;
+    Exit;
+  end;
+
+  Nome := '';
 end;
 
 end.

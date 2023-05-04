@@ -13,14 +13,14 @@ type
       FNumEndereco : String;
       FBairro: String;
       FAtivo : string;
-    procedure setCod(const Value: Integer);
-    procedure SetNome(const Value: String);
-    procedure SetAtivo(const Value: String);
-    procedure SetBairro(const Value: String);
-    procedure SetCPFCNPJ(const Value: String);
-    procedure SetEndereco(const Value: String);
-    procedure SetNumEndereco(const Value: String);
-    procedure SetRGIE(const Value: String);
+      procedure setCod(const Value: Integer);
+      procedure SetNome(const Value: String);
+      procedure SetAtivo(const Value: String);
+      procedure SetBairro(const Value: String);
+      procedure SetCPFCNPJ(const Value: String);
+      procedure SetEndereco(const Value: String);
+      procedure SetNumEndereco(const Value: String);
+      procedure SetRGIE(const Value: String);
     public
       property Cod : Integer read FCod write SetCod;
       property Nome : String read FNome write SetNome;
@@ -30,6 +30,7 @@ type
       property NumEndereco : String read FNumEndereco write SetNumEndereco;
       property Bairro : String read FBairro write SetBairro;
       property Ativo : String read FAtivo write SetAtivo;
+      function Tipo : String; virtual; abstract;
   end;
 
 var
