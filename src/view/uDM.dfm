@@ -1,5 +1,4 @@
 object DM: TDM
-  OldCreateOrder = False
   Height = 468
   Width = 835
   object zCon: TZConnection
@@ -7,27 +6,26 @@ object DM: TDM
     Catalog = ''
     Properties.Strings = (
       'controls_cp=CP_UTF16')
-    Connected = True
     HostName = '192.168.2.104'
     Port = 3306
     Database = 'projeto_db'
     User = 'mayke'
     Password = 'mayke98'
     Protocol = 'mysql'
-    LibraryLocation = 'E:\AmSystem\libmariadb.dll'
+    LibraryLocation = 'libmariadb.dll'
     Left = 24
     Top = 16
   end
   object qPesq: TZQuery
     Connection = zCon
     Params = <>
-    Left = 24
-    Top = 73
+    Left = 736
+    Top = 81
   end
   object dPesq: TDataSource
     DataSet = qPesq
-    Left = 64
-    Top = 72
+    Left = 776
+    Top = 80
   end
   object qCliente: TZQuery
     Connection = zCon
@@ -298,5 +296,75 @@ object DM: TDM
         Name = 'OLD_ativo'
         ParamType = ptUnknown
       end>
+  end
+  object qExecSQL: TZQuery
+    Connection = zCon
+    Params = <>
+    Left = 776
+    Top = 16
+  end
+  object uVenda: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM Venda'
+      'WHERE'
+      '  Venda.id = :OLD_id')
+    InsertSQL.Strings = (
+      
+        'insert into venda (ID, EX) select (select coalesce(max(id)+1, 1)' +
+        ' from venda), 1;')
+    ModifySQL.Strings = (
+      'UPDATE VENDA SET '
+      'ID_CLIENTE = :ID_CLIENTE, CLIENTE = :CLIENTE, '
+      'VALOR = :VALOR, DESCONTO = :DESC,'
+      ' VALOR_TOTAL = :TOTAL, "PAGO = :PAGO , '
+      'VENDEDOR = :VENDEDOR, DATA_VENDA = :DATA, EX = 0 '
+      'WHERE ID = :id;')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 56
+    Top = 68
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_CLIENTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CLIENTE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'VALOR'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DESC'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TOTAL'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_id'
+        ParamType = ptUnknown
+      end>
+  end
+  object qVenda: TZQuery
+    Connection = zCon
+    UpdateObject = uVenda
+    SQL.Strings = (
+      'Select id From Venda where id = (select max(id) from Venda);')
+    Params = <>
+    Left = 24
+    Top = 68
+    object qVendaid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
   end
 end
