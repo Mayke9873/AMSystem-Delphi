@@ -26,6 +26,10 @@ type
     qClientedtregistro: TDateField;
     qClienteTipo: TWideStringField;
     qClienteAtivo: TWideStringField;
+    qExecSQL: TZQuery;
+    uVenda: TZUpdateSQL;
+    qVenda: TZQuery;
+    qVendaid: TIntegerField;
     procedure qClienteNewRecord(DataSet: TDataSet);
     procedure qClientedtnascSetText(Sender: TField; const Text: string);
   private
@@ -36,7 +40,7 @@ type
 
 var
   DM: TDM;
-
+  procedure ExecSQL(SQL : String);
 implementation
 
 uses
@@ -45,6 +49,15 @@ uses
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure ExecSQL(SQL: String);
+begin
+  DM.qExecSQL.Close;
+  DM.qExecSQL.SQL.Clear;
+  DM.qExecSQL.SQL.Add(SQL);
+  DM.qExecSQL.ExecSQL;
+  DM.qExecSQL.ApplyUpdates;
+end;
 
 procedure TDM.qClientedtnascSetText(Sender: TField; const Text: string);
 var

@@ -16,7 +16,8 @@ uses
   Conexao.SQLServer in 'src\Conexao.SQLServer.pas',
   Interfaces in 'src\Interfaces.pas',
   uCliente in 'src\uCliente.pas',
-  uValida in 'src\uValida.pas';
+  uValida in 'src\uValida.pas',
+  Classe.Venda in 'src\Classe.Venda.pas';
 
 {$R *.res}
 

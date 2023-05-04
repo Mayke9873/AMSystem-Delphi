@@ -12,7 +12,6 @@ object fVenda: TfVenda
   Font.Style = []
   FormStyle = fsMDIChild
   KeyPreview = True
-  OldCreateOrder = False
   Position = poDesigned
   Visible = True
   WindowState = wsMaximized
@@ -23,7 +22,6 @@ object fVenda: TfVenda
   DesignSize = (
     983
     629)
-  PixelsPerInch = 96
   TextHeight = 18
   object Label1: TLabel
     Left = 8
@@ -76,24 +74,10 @@ object fVenda: TfVenda
   end
   object Label8: TLabel
     Left = 826
-    Top = 188
+    Top = 192
     Width = 56
     Height = 18
     Caption = 'R$ Total'
-  end
-  object Label9: TLabel
-    Left = 698
-    Top = 8
-    Width = 79
-    Height = 18
-    Caption = 'Descontos:'
-  end
-  object Label10: TLabel
-    Left = 808
-    Top = 8
-    Width = 60
-    Height = 18
-    Caption = 'R$ Total:'
   end
   object edCodVenda: TEdit
     Left = 8
@@ -190,7 +174,7 @@ object fVenda: TfVenda
   object DBGrid1: TDBGrid
     Left = 8
     Top = 244
-    Width = 967
+    Width = 935
     Height = 324
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -280,74 +264,6 @@ object fVenda: TfVenda
         Visible = True
       end>
   end
-  object btnSalvar: TButton
-    Left = 8
-    Top = 582
-    Width = 125
-    Height = 32
-    Anchors = [akLeft, akBottom]
-    BiDiMode = bdLeftToRight
-    Caption = 'F3 - Salvar'
-    DragCursor = crHandPoint
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Arial'
-    Font.Style = []
-    ParentBiDiMode = False
-    ParentFont = False
-    TabOrder = 12
-    OnClick = btnSalvarClick
-  end
-  object btnCancelar: TButton
-    Left = 139
-    Top = 582
-    Width = 125
-    Height = 32
-    Anchors = [akLeft, akBottom]
-    Caption = 'F4 - Cancelar'
-    DragCursor = crHandPoint
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Arial'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 13
-  end
-  object btnExcluirProduto: TButton
-    Left = 270
-    Top = 582
-    Width = 125
-    Height = 32
-    Anchors = [akLeft, akBottom]
-    Caption = 'F5 - Excluir Produto'
-    DragCursor = crHandPoint
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Arial'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 14
-  end
-  object btnSair: TButton
-    Left = 401
-    Top = 582
-    Width = 125
-    Height = 32
-    Anchors = [akLeft, akBottom]
-    Caption = 'Esc - Sair'
-    DragCursor = crHandPoint
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Arial'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 15
-    OnClick = btnSairClick
-  end
   object dbgPesqProduto: TDBGrid
     Left = 810
     Top = 276
@@ -355,7 +271,7 @@ object fVenda: TfVenda
     Height = 153
     DataSource = dPesqProd
     Options = [dgTitles, dgIndicator, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 16
+    TabOrder = 12
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
@@ -363,7 +279,6 @@ object fVenda: TfVenda
     TitleFont.Style = []
     Visible = False
     OnDblClick = dbgPesqProdutoDblClick
-    OnKeyDown = dbgPesqProdutoKeyDown
     Columns = <
       item
         Expanded = False
@@ -422,7 +337,7 @@ object fVenda: TfVenda
     Height = 120
     DataSource = dFuncionario
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 17
+    TabOrder = 13
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
@@ -463,7 +378,7 @@ object fVenda: TfVenda
     Height = 120
     DataSource = dCliente
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 18
+    TabOrder = 14
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
@@ -497,93 +412,240 @@ object fVenda: TfVenda
         Visible = True
       end>
   end
-  object Panel1: TPanel
-    Left = 698
-    Top = 30
-    Width = 104
-    Height = 35
+  object pnlDesconto: TPanel
+    Left = 695
+    Top = 10
+    Width = 107
+    Height = 55
     BevelOuter = bvNone
-    TabOrder = 19
-    object Shape1: TShape
+    Caption = 'pnlDesconto'
+    ShowCaption = False
+    TabOrder = 15
+    object Label9: TLabel
       Left = 0
       Top = 0
-      Width = 104
-      Height = 35
-      Align = alClient
-      Brush.Color = clMedGray
-      Pen.Color = clSilver
-      Pen.Mode = pmMask
-      Shape = stRoundRect
-      ExplicitLeft = 48
-      ExplicitTop = 16
-      ExplicitWidth = 65
-      ExplicitHeight = 65
-    end
-    object edDescontoVenda: TEdit
-      AlignWithMargins = True
-      Left = 3
-      Top = 3
-      Width = 98
-      Height = 29
-      Align = alClient
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      BorderStyle = bsNone
-      Color = clMedGray
-      Enabled = False
+      Width = 107
+      Height = 19
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'Descontos:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -24
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitWidth = 89
+    end
+    object Panel1: TPanel
+      Left = 0
+      Top = 20
+      Width = 107
+      Height = 35
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 0
+      ExplicitLeft = 3
+      ExplicitTop = 24
+      ExplicitWidth = 104
+      object Shape1: TShape
+        Left = 0
+        Top = 0
+        Width = 107
+        Height = 35
+        Align = alClient
+        Brush.Color = clMedGray
+        Pen.Color = clSilver
+        Pen.Mode = pmMask
+        Shape = stRoundRect
+        ExplicitLeft = 48
+        ExplicitTop = 16
+        ExplicitWidth = 65
+        ExplicitHeight = 65
+      end
+      object edDescontoVenda: TEdit
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 101
+        Height = 29
+        Align = alClient
+        Alignment = taRightJustify
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        Color = clMedGray
+        Enabled = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+  end
+  object pnlTotal: TPanel
+    Left = 805
+    Top = 10
+    Width = 107
+    Height = 55
+    BevelOuter = bvNone
+    Caption = 'pnlTotal'
+    ShowCaption = False
+    TabOrder = 16
+    object Label10: TLabel
+      Left = 0
+      Top = 0
+      Width = 107
+      Height = 19
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'R$ Total:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitLeft = 39
+      ExplicitTop = 8
+      ExplicitWidth = 68
+    end
+    object Panel2: TPanel
+      Left = 0
+      Top = 20
+      Width = 107
+      Height = 35
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 0
+      ExplicitLeft = 3
+      ExplicitWidth = 104
+      object Shape2: TShape
+        Left = 0
+        Top = 0
+        Width = 107
+        Height = 35
+        Align = alClient
+        Brush.Color = clMedGray
+        Pen.Color = clSilver
+        Pen.Mode = pmMask
+        Shape = stRoundRect
+        ExplicitLeft = 48
+        ExplicitTop = 16
+        ExplicitWidth = 65
+        ExplicitHeight = 65
+      end
+      object edTotalVenda: TEdit
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 101
+        Height = 29
+        Align = alClient
+        Alignment = taRightJustify
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BiDiMode = bdLeftToRight
+        BorderStyle = bsNone
+        Color = clMedGray
+        Enabled = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 0
+        ExplicitWidth = 98
+      end
+    end
+  end
+  object pnlBotoes: TPanel
+    Left = 0
+    Top = 574
+    Width = 983
+    Height = 55
+    Align = alBottom
+    BevelOuter = bvNone
+    Caption = 'pnlBotoes'
+    ShowCaption = False
+    TabOrder = 17
+    DesignSize = (
+      983
+      55)
+    object btnSair: TButton
+      Left = 401
+      Top = 7
+      Width = 125
+      Height = 32
+      Anchors = [akLeft, akBottom]
+      Caption = 'Esc - Sair'
+      DragCursor = crHandPoint
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      OnClick = btnSairClick
     end
-  end
-  object Panel2: TPanel
-    Left = 808
-    Top = 30
-    Width = 104
-    Height = 35
-    BevelOuter = bvNone
-    TabOrder = 20
-    object Shape2: TShape
-      Left = 0
-      Top = 0
-      Width = 104
-      Height = 35
-      Align = alClient
-      Brush.Color = clMedGray
-      Pen.Color = clSilver
-      Pen.Mode = pmMask
-      Shape = stRoundRect
-      ExplicitLeft = 48
-      ExplicitTop = 16
-      ExplicitWidth = 65
-      ExplicitHeight = 65
-    end
-    object edTotalVenda: TEdit
-      AlignWithMargins = True
-      Left = 3
-      Top = 3
-      Width = 98
-      Height = 29
-      Align = alClient
-      Alignment = taRightJustify
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      BiDiMode = bdLeftToRight
-      BorderStyle = bsNone
-      Color = clMedGray
-      Enabled = False
+    object btnExcluirProduto: TButton
+      Left = 270
+      Top = 7
+      Width = 125
+      Height = 32
+      Anchors = [akLeft, akBottom]
+      Caption = 'F5 - Excluir Produto'
+      DragCursor = crHandPoint
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -24
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      OnClick = btnExcluirProdutoClick
+    end
+    object btnCancelar: TButton
+      Left = 139
+      Top = 7
+      Width = 125
+      Height = 32
+      Anchors = [akLeft, akBottom]
+      Caption = 'F4 - Cancelar'
+      DragCursor = crHandPoint
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = btnCancelarClick
+    end
+    object btnSalvar: TButton
+      Left = 8
+      Top = 7
+      Width = 125
+      Height = 32
+      Anchors = [akLeft, akBottom]
+      BiDiMode = bdLeftToRight
+      Caption = 'F3 - Salvar'
+      DragCursor = crHandPoint
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
       Font.Name = 'Arial'
       Font.Style = []
       ParentBiDiMode = False
       ParentFont = False
-      TabOrder = 0
+      TabOrder = 3
+      OnClick = btnSalvarClick
     end
   end
   object dFuncionario: TDataSource
@@ -598,8 +660,8 @@ object fVenda: TfVenda
   end
   object dProdVenda: TDataSource
     DataSet = qProdVenda
-    Left = 920
-    Top = 512
+    Left = 856
+    Top = 544
   end
   object dPesqProd: TDataSource
     DataSet = qPesqProd
@@ -692,7 +754,7 @@ object fVenda: TfVenda
     Connection = DM.zCon
     SQL.Strings = (
       'Select id, descricao, estoque, pVenda From Produto'
-      '  where (id = :id or id = 0) or (descricao like :descricao);')
+      '  where ((id = :id or id = 0) or (descricao like :descricao));')
     Params = <
       item
         DataType = ftUnknown
@@ -834,8 +896,8 @@ object fVenda: TfVenda
       '  Venda_item.total = :OLD_total AND'
       '  Venda_item.ex = :OLD_ex')
     UseSequenceFieldForRefreshSQL = False
-    Left = 861
-    Top = 512
+    Left = 827
+    Top = 528
     ParamData = <
       item
         DataType = ftUnknown
@@ -920,45 +982,6 @@ object fVenda: TfVenda
       item
         DataType = ftUnknown
         Name = 'OLD_ex'
-        ParamType = ptUnknown
-      end>
-  end
-  object qVenda: TZQuery
-    Connection = DM.zCon
-    UpdateObject = uVenda
-    SQL.Strings = (
-      'Select id From Venda where id = (select max(id) from Venda);')
-    Params = <>
-    Left = 24
-    Top = 511
-    object qVendaid: TIntegerField
-      FieldName = 'id'
-      Required = True
-    end
-  end
-  object uVenda: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM Venda'
-      'WHERE'
-      '  Venda.id = :OLD_id')
-    InsertSQL.Strings = (
-      
-        'insert into venda (ID, EX) select (select max(id)+1 from venda),' +
-        ' 1;')
-    ModifySQL.Strings = (
-      'UPDATE VENDA SET '
-      'ID_CLIENTE = :ID_CLIENTE, CLIENTE = :CLIENTE, '
-      'VALOR = :VALOR, DESCONTO = :DESC,'
-      ' VALOR_TOTAL = :TOTAL, "PAGO = :PAGO , '
-      'VENDEDOR = :VENDEDOR, DATA_VENDA = :DATA, EX = 0 '
-      'WHERE ID = :id;')
-    UseSequenceFieldForRefreshSQL = False
-    Left = 72
-    Top = 512
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'OLD_id'
         ParamType = ptUnknown
       end>
   end

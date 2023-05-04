@@ -58,9 +58,6 @@ Coordinates=730,111,88,36
 [edIdVendedor]
 Coordinates=10,232,95,58
 
-[btnExcluirProduto]
-Coordinates=307,232,116,58
-
 [qProdVendadescricao]
 Coordinates=730,166,141,36
 
@@ -91,17 +88,8 @@ Coordinates=468,300,85,58
 [edCodVenda]
 Coordinates=497,10,89,58
 
-[btnSalvar]
-Coordinates=433,232,69,58
-
 [qFuncionario]
 Coordinates=266,10,89,102
-
-[qVenda]
-Coordinates=365,10,59,80
-
-[uVenda]
-Coordinates=570,592,59,36
 
 [edIdCliente]
 Coordinates=378,300,80,58
@@ -118,15 +106,8 @@ Coordinates=730,496,133,36
 [qProdVendavalor]
 Coordinates=730,551,114,36
 
-[btnSair]
-Coordinates=73,300,55,58
-Visible=True
-
 [qFuncionarioid]
 Coordinates=730,606,99,36
-
-[qVendaid]
-Coordinates=570,647,69,36
 
 [qProdVendatotal]
 Coordinates=711,655,110,36
@@ -146,9 +127,6 @@ Coordinates=512,232,53,58
 [Label6]
 Coordinates=434,10,53,58
 
-[btnCancelar]
-Coordinates=115,232,84,58
-
 [qPesqProd]
 Coordinates=106,10,78,146
 
@@ -156,5 +134,6 @@ Coordinates=106,10,78,146
 Coordinates=209,232,88,58
 
 []
-Coordinates=53,537,90,36
+Coordinates=433,232,69,58
+Visible=True
 
