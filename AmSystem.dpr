@@ -17,7 +17,8 @@ uses
   Interfaces in 'src\Interfaces.pas',
   uCliente in 'src\uCliente.pas',
   uValida in 'src\uValida.pas',
-  uVenda in 'src\uVenda.pas';
+  uVenda in 'src\uVenda.pas',
+  uProduto in 'src\uProduto.pas';
 
 {$R *.res}
 

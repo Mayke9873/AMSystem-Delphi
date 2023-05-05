@@ -6,13 +6,16 @@ object DM: TDM
     Catalog = ''
     Properties.Strings = (
       'controls_cp=CP_UTF16')
+    Connected = True
     HostName = '192.168.2.104'
     Port = 3306
     Database = 'projeto_db'
     User = 'mayke'
     Password = 'mayke98'
     Protocol = 'mysql'
-    LibraryLocation = 'libmariadb.dll'
+    LibraryLocation = 
+      'D:\Desenvolvimento\Projetos\Delphi\AMSystem-Delphi\libmariadb.dl' +
+      'l'
     Left = 24
     Top = 16
   end
@@ -120,7 +123,7 @@ object DM: TDM
   end
   object dCliente: TDataSource
     DataSet = qCliente
-    Left = 90
+    Left = 88
     Top = 120
   end
   object uCliente: TZUpdateSQL
@@ -366,5 +369,194 @@ object DM: TDM
       FieldName = 'id'
       Required = True
     end
+  end
+  object qProduto: TZQuery
+    Connection = zCon
+    SortedFields = 'Id'
+    UpdateObject = uProduto
+    SQL.Strings = (
+      'select id, descricao, estoque, unidade, pCompra, pLucro, pVenda,'
+      '  IdGrupo, grupo, dtRegistro, ativo'
+      'FROM produto'
+      'where (((:id = 0) or (id = :id)) and (descricao like :desc)'
+      '  and (:ativo = '#39'T'#39' or ativo = :ativo));')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'desc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end>
+    IndexFieldNames = 'Id Asc'
+    Left = 24
+    Top = 174
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'desc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end>
+    object qProdutoid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object qProdutodescricao: TWideStringField
+      FieldName = 'descricao'
+      Required = True
+      Size = 255
+    end
+    object qProdutoestoque: TFloatField
+      FieldName = 'estoque'
+    end
+    object qProdutounidade: TWideStringField
+      FieldName = 'unidade'
+      Size = 5
+    end
+    object qProdutopCompra: TFloatField
+      FieldName = 'pCompra'
+    end
+    object qProdutopLucro: TFloatField
+      FieldName = 'pLucro'
+    end
+    object qProdutopVenda: TFloatField
+      FieldName = 'pVenda'
+      Required = True
+    end
+    object qProdutoIdGrupo: TIntegerField
+      FieldName = 'IdGrupo'
+    end
+    object qProdutogrupo: TWideStringField
+      FieldName = 'grupo'
+      Size = 70
+    end
+    object qProdutodtRegistro: TDateField
+      FieldName = 'dtRegistro'
+      Required = True
+    end
+    object qProdutoativo: TWideStringField
+      FieldName = 'ativo'
+      Required = True
+      Size = 1
+    end
+  end
+  object dProduto: TDataSource
+    DataSet = qProduto
+    Left = 88
+    Top = 174
+  end
+  object uProduto: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM PRODUTO'
+      'WHERE'
+      '  PRODUTO.id = :OLD_id')
+    InsertSQL.Strings = (
+      'INSERT INTO PRODUTO'
+      
+        '  (id, descricao, unidade, estoque, pCompra, pLucro, pVenda, IdG' +
+        'rupo,'
+      '   grupo, dtRegistro, ativo)'
+      'SELECT'
+      
+        '  (select coalesce(max(id)+1, 1) from PRODUTO), :descricao, :uni' +
+        'dade, :estoque, :pCompra, :pLucro, :pVenda, :IdGrupo,'
+      '   :grupo, :dtRegistro, :ativo')
+    ModifySQL.Strings = (
+      'UPDATE PRODUTO SET'
+      '  id = :id,'
+      '  descricao = :descricao,'
+      '  estoque = :estoque,'
+      '  unidade = :unidade,'
+      '  pCompra = :pCompra,'
+      '  pLucro = :pLucro,'
+      '  pVenda = :pVenda,'
+      '  IdGrupo = :IdGrupo,'
+      '  grupo = :grupo,'
+      '  dtRegistro = :dtRegistro,'
+      '  ativo = :ativo'
+      'WHERE'
+      '  PRODUTO.id = :OLD_id')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 56
+    Top = 174
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'descricao'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'estoque'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'unidade'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pCompra'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pLucro'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pVenda'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdGrupo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'grupo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DtRegistro'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_id'
+        ParamType = ptUnknown
+      end>
   end
 end

@@ -30,6 +30,20 @@ type
     uVenda: TZUpdateSQL;
     qVenda: TZQuery;
     qVendaid: TIntegerField;
+    qProduto: TZQuery;
+    dProduto: TDataSource;
+    uProduto: TZUpdateSQL;
+    qProdutoid: TIntegerField;
+    qProdutodescricao: TWideStringField;
+    qProdutoestoque: TFloatField;
+    qProdutounidade: TWideStringField;
+    qProdutopCompra: TFloatField;
+    qProdutopLucro: TFloatField;
+    qProdutopVenda: TFloatField;
+    qProdutoIdGrupo: TIntegerField;
+    qProdutogrupo: TWideStringField;
+    qProdutodtRegistro: TDateField;
+    qProdutoativo: TWideStringField;
     procedure qClienteNewRecord(DataSet: TDataSet);
     procedure qClientedtnascSetText(Sender: TField; const Text: string);
   private

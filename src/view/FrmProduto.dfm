@@ -2,8 +2,8 @@ object fProduto: TfProduto
   Left = 0
   Top = 0
   Caption = 'Cadastro de Produtos'
-  ClientHeight = 648
-  ClientWidth = 995
+  ClientHeight = 647
+  ClientWidth = 991
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object fProduto: TfProduto
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    995
-    648)
+    991
+    647)
   TextHeight = 13
   object Label9: TLabel
     Left = 8
@@ -38,7 +38,7 @@ object fProduto: TfProduto
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 995
+    Width = 991
     Height = 29
     ButtonHeight = 29
     ButtonWidth = 29
@@ -49,7 +49,7 @@ object fProduto: TfProduto
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
-    ExplicitWidth = 991
+    ExplicitWidth = 987
     object tbNovo: TToolButton
       Left = 0
       Top = 0
@@ -76,6 +76,7 @@ object fProduto: TfProduto
       Top = 0
       Caption = 'Salvar'
       ImageIndex = 2
+      OnClick = tbSalvarClick
     end
     object tbCancelar: TToolButton
       Left = 87
@@ -106,26 +107,27 @@ object fProduto: TfProduto
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 987
-    Height = 592
-    ActivePage = pgTabela
+    Width = 983
+    Height = 591
+    ActivePage = pgDados
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
-    ExplicitWidth = 983
-    ExplicitHeight = 591
+    ExplicitWidth = 979
+    ExplicitHeight = 590
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       DesignSize = (
-        979
-        564)
+        975
+        563)
       object dbgProduto: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 0
-        Width = 973
-        Height = 561
+        Width = 969
+        Height = 560
         Anchors = [akLeft, akTop, akRight, akBottom]
-        DataSource = dProduto
+        DataSource = DM.dProduto
+        DrawingStyle = gdsGradient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -143,7 +145,7 @@ object fProduto: TfProduto
         Columns = <
           item
             Expanded = False
-            FieldName = 'ID'
+            FieldName = 'id'
             Title.Caption = 'C'#243'digo'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -155,7 +157,7 @@ object fProduto: TfProduto
           end
           item
             Expanded = False
-            FieldName = 'DESCRICAO'
+            FieldName = 'descricao'
             Title.Caption = 'Descri'#231#227'o'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -168,7 +170,7 @@ object fProduto: TfProduto
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'UNIDADE'
+            FieldName = 'unidade'
             Title.Alignment = taCenter
             Title.Caption = 'Un.'
             Title.Font.Charset = ANSI_CHARSET
@@ -181,7 +183,7 @@ object fProduto: TfProduto
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'ESTOQUE'
+            FieldName = 'estoque'
             Title.Alignment = taCenter
             Title.Caption = 'Estoque'
             Title.Font.Charset = ANSI_CHARSET
@@ -193,7 +195,7 @@ object fProduto: TfProduto
           end
           item
             Expanded = False
-            FieldName = 'PCOMPRA'
+            FieldName = 'pCompra'
             Title.Alignment = taRightJustify
             Title.Caption = 'R$ Compra'
             Title.Font.Charset = ANSI_CHARSET
@@ -206,7 +208,7 @@ object fProduto: TfProduto
           end
           item
             Expanded = False
-            FieldName = 'PLUCRO'
+            FieldName = 'pLucro'
             Title.Caption = 'Lucro (%)'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -217,7 +219,7 @@ object fProduto: TfProduto
           end
           item
             Expanded = False
-            FieldName = 'PVENDA'
+            FieldName = 'pVenda'
             Title.Alignment = taRightJustify
             Title.Caption = 'R$ Venda'
             Title.Font.Charset = ANSI_CHARSET
@@ -230,7 +232,7 @@ object fProduto: TfProduto
           end
           item
             Expanded = False
-            FieldName = 'GRUPO'
+            FieldName = 'grupo'
             Title.Caption = 'Grupo'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -243,7 +245,7 @@ object fProduto: TfProduto
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'DTREGISTRO'
+            FieldName = 'dtRegistro'
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Registro'
             Title.Font.Charset = ANSI_CHARSET
@@ -257,7 +259,7 @@ object fProduto: TfProduto
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'ATIVO'
+            FieldName = 'ativo'
             Title.Alignment = taCenter
             Title.Caption = 'Ativo'
             Title.Font.Charset = ANSI_CHARSET
@@ -280,7 +282,7 @@ object fProduto: TfProduto
       ImageIndex = 1
       ParentFont = False
       object Label1: TLabel
-        Left = 8
+        Left = 10
         Top = 13
         Width = 56
         Height = 18
@@ -293,7 +295,7 @@ object fProduto: TfProduto
         ParentFont = False
       end
       object Label2: TLabel
-        Left = 8
+        Left = 10
         Top = 70
         Width = 76
         Height = 18
@@ -389,7 +391,7 @@ object fProduto: TfProduto
         Width = 77
         Height = 26
         DataField = 'id'
-        DataSource = dProduto
+        DataSource = DM.dProduto
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -405,7 +407,7 @@ object fProduto: TfProduto
         Width = 339
         Height = 26
         DataField = 'DESCRICAO'
-        DataSource = dProduto
+        DataSource = DM.dProduto
         ReadOnly = True
         TabOrder = 1
       end
@@ -415,7 +417,7 @@ object fProduto: TfProduto
         Width = 65
         Height = 26
         DataField = 'UNIDADE'
-        DataSource = dProduto
+        DataSource = DM.dProduto
         ReadOnly = True
         TabOrder = 2
       end
@@ -425,7 +427,7 @@ object fProduto: TfProduto
         Width = 90
         Height = 26
         DataField = 'PCOMPRA'
-        DataSource = dProduto
+        DataSource = DM.dProduto
         ReadOnly = True
         TabOrder = 4
       end
@@ -435,18 +437,18 @@ object fProduto: TfProduto
         Width = 90
         Height = 26
         DataField = 'PLUCRO'
-        DataSource = dProduto
+        DataSource = DM.dProduto
         ReadOnly = True
         TabOrder = 5
         OnExit = dbeLucroExit
       end
       object dbeValorVenda: TDBEdit
         Left = 328
-        Top = 153
+        Top = 150
         Width = 90
         Height = 26
         DataField = 'PVENDA'
-        DataSource = dProduto
+        DataSource = DM.dProduto
         ReadOnly = True
         TabOrder = 6
         OnExit = dbeValorVendaExit
@@ -458,7 +460,7 @@ object fProduto: TfProduto
         Height = 17
         Caption = 'Ativo'
         DataField = 'ativo'
-        DataSource = dProduto
+        DataSource = DM.dProduto
         ReadOnly = True
         TabOrder = 7
         ValueChecked = 'S'
@@ -470,7 +472,7 @@ object fProduto: TfProduto
         Width = 90
         Height = 26
         DataField = 'ESTOQUE'
-        DataSource = dProduto
+        DataSource = DM.dProduto
         ReadOnly = True
         TabOrder = 3
       end
@@ -482,7 +484,7 @@ object fProduto: TfProduto
         Height = 26
         CharCase = ecUpperCase
         DataField = 'GRUPO'
-        DataSource = dProduto
+        DataSource = DM.dProduto
         Items.Strings = (
           'BRANCO'
           'BEBIDAS'
@@ -495,16 +497,16 @@ object fProduto: TfProduto
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 332
+    Width = 320
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 328
+    ExplicitWidth = 316
   end
   object rdbTodos: TRadioButton
-    Left = 444
+    Left = 432
     Top = 34
     Width = 49
     Height = 17
@@ -514,10 +516,10 @@ object fProduto: TfProduto
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 440
+    ExplicitLeft = 428
   end
   object rdbAtivo: TRadioButton
-    Left = 524
+    Left = 512
     Top = 34
     Width = 49
     Height = 17
@@ -525,10 +527,10 @@ object fProduto: TfProduto
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbAtivoClick
-    ExplicitLeft = 520
+    ExplicitLeft = 508
   end
   object rdbInativo: TRadioButton
-    Left = 596
+    Left = 584
     Top = 34
     Width = 57
     Height = 17
@@ -536,12 +538,7 @@ object fProduto: TfProduto
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbInativoClick
-    ExplicitLeft = 592
-  end
-  object dProduto: TDataSource
-    DataSet = qProduto
-    Left = 69
-    Top = 580
+    ExplicitLeft = 580
   end
   object ImageList1: TImageList
     Left = 928
@@ -816,232 +813,5 @@ object fProduto: TfProduto
       C003C003C0030000C003C007C0030001E007800FC0038001F00F801FC0078001
       FC3F803FFFFF8001FFFFFFFFFFFF800100000000000000000000000000000000
       000000000000}
-  end
-  object uProduto: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM PRODUTO'
-      'WHERE'
-      '  PRODUTO.id = :OLD_id AND'
-      '  PRODUTO.descricao = :OLD_descricao AND'
-      
-        '  ((PRODUTO.unidade IS NULL AND :OLD_unidade IS NULL) OR (PRODUT' +
-        'O.unidade = :OLD_unidade)) AND'
-      
-        '  ((PRODUTO.estoque IS NULL AND :OLD_estoque IS NULL) OR (PRODUT' +
-        'O.estoque = :OLD_estoque)) AND'
-      
-        '  ((PRODUTO.pCompra IS NULL AND :OLD_pCompra IS NULL) OR (PRODUT' +
-        'O.pCompra = :OLD_pCompra)) AND'
-      
-        '  ((PRODUTO.pLucro IS NULL AND :OLD_pLucro IS NULL) OR (PRODUTO.' +
-        'pLucro = :OLD_pLucro)) AND'
-      '  PRODUTO.pVenda = :OLD_pVenda AND'
-      
-        '  ((PRODUTO.grupo IS NULL AND :OLD_grupo IS NULL) OR (PRODUTO.gr' +
-        'upo = :OLD_grupo)) AND'
-      '  PRODUTO.dtRegistro = :OLD_dtRegistro AND'
-      '  PRODUTO.ativo = :OLD_ativo')
-    InsertSQL.Strings = (
-      'INSERT INTO PRODUTO'
-      
-        '  (id, descricao, unidade, estoque, pCompra, pLucro, pVenda, gru' +
-        'po, dtRegistro, '
-      '   ativo)'
-      'VALUES'
-      
-        '  (:id, :descricao, :unidade, :estoque, :pCompra, :pLucro, :pVen' +
-        'da, :grupo, '
-      '   :dtRegistro, :ativo)')
-    ModifySQL.Strings = (
-      'UPDATE PRODUTO SET'
-      '  id = :id,'
-      '  descricao = :descricao,'
-      '  unidade = :unidade,'
-      '  estoque = :estoque,'
-      '  pCompra = :pCompra,'
-      '  pLucro = :pLucro,'
-      '  pVenda = :pVenda,'
-      '  grupo = :grupo,'
-      '  dtRegistro = :dtRegistro,'
-      '  ativo = :ativo'
-      'WHERE'
-      '  PRODUTO.id = :OLD_id AND'
-      '  PRODUTO.descricao = :OLD_descricao AND'
-      
-        '  ((PRODUTO.unidade IS NULL AND :OLD_unidade IS NULL) OR (PRODUT' +
-        'O.unidade = :OLD_unidade)) AND'
-      
-        '  ((PRODUTO.estoque IS NULL AND :OLD_estoque IS NULL) OR (PRODUT' +
-        'O.estoque = :OLD_estoque)) AND'
-      
-        '  ((PRODUTO.pCompra IS NULL AND :OLD_pCompra IS NULL) OR (PRODUT' +
-        'O.pCompra = :OLD_pCompra)) AND'
-      
-        '  ((PRODUTO.pLucro IS NULL AND :OLD_pLucro IS NULL) OR (PRODUTO.' +
-        'pLucro = :OLD_pLucro)) AND'
-      '  PRODUTO.pVenda = :OLD_pVenda AND'
-      
-        '  ((PRODUTO.grupo IS NULL AND :OLD_grupo IS NULL) OR (PRODUTO.gr' +
-        'upo = :OLD_grupo)) AND'
-      '  PRODUTO.dtRegistro = :OLD_dtRegistro AND'
-      '  PRODUTO.ativo = :OLD_ativo')
-    UseSequenceFieldForRefreshSQL = False
-    Left = 51
-    Top = 569
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'descricao'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'unidade'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'estoque'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pCompra'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pLucro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pVenda'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'grupo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DtRegistro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ativo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_descricao'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_unidade'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_estoque'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_pCompra'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_pLucro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_pVenda'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_grupo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_dtRegistro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_ativo'
-        ParamType = ptUnknown
-      end>
-  end
-  object qProduto: TZQuery
-    Connection = DM.zCon
-    SortedFields = 'Id'
-    UpdateObject = uProduto
-    OnNewRecord = qProdutoNewRecord
-    SQL.Strings = (
-      
-        'SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA,' +
-        ' GRUPO, DTREGISTRO, ATIVO'
-      '  FROM PRODUTO;')
-    Params = <>
-    IndexFieldNames = 'Id Asc'
-    Left = 28
-    Top = 560
-    object qProdutoID: TIntegerField
-      FieldName = 'ID'
-      Required = True
-    end
-    object qProdutoDESCRICAO: TWideStringField
-      FieldName = 'DESCRICAO'
-      Required = True
-      Size = 255
-    end
-    object qProdutoUNIDADE: TWideStringField
-      FieldName = 'UNIDADE'
-      Size = 5
-    end
-    object qProdutoESTOQUE: TFloatField
-      FieldName = 'ESTOQUE'
-    end
-    object qProdutoPCOMPRA: TFloatField
-      FieldName = 'PCOMPRA'
-    end
-    object qProdutoPLUCRO: TFloatField
-      FieldName = 'PLUCRO'
-    end
-    object qProdutoPVENDA: TFloatField
-      FieldName = 'PVENDA'
-      Required = True
-    end
-    object qProdutoGRUPO: TWideStringField
-      FieldName = 'GRUPO'
-      Size = 70
-    end
-    object qProdutoDTREGISTRO: TDateField
-      FieldName = 'DTREGISTRO'
-      Required = True
-    end
-    object qProdutoATIVO: TWideStringField
-      FieldName = 'ATIVO'
-      Required = True
-      Size = 1
-    end
   end
 end

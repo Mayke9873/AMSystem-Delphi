@@ -5,8 +5,13 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
-  System.ImageList,
-  Vcl.ImgList, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.ToolWin;
+  System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ComCtrls, Vcl.ToolWin, uProduto;
+
+Const
+  telaPadrao = 0;
+  telaInsert = 1;
+  telaEdit = 2;
 
 type
   TfProduto = class(TForm)
@@ -42,20 +47,7 @@ type
     rdbTodos: TRadioButton;
     rdbAtivo: TRadioButton;
     rdbInativo: TRadioButton;
-    dProduto: TDataSource;
     ImageList1: TImageList;
-    uProduto: TZUpdateSQL;
-    qProduto: TZQuery;
-    qProdutoID: TIntegerField;
-    qProdutoDESCRICAO: TWideStringField;
-    qProdutoUNIDADE: TWideStringField;
-    qProdutoESTOQUE: TFloatField;
-    qProdutoPCOMPRA: TFloatField;
-    qProdutoPLUCRO: TFloatField;
-    qProdutoPVENDA: TFloatField;
-    qProdutoGRUPO: TWideStringField;
-    qProdutoDTREGISTRO: TDateField;
-    qProdutoATIVO: TWideStringField;
     DbCbGrupo: TDBComboBox;
     procedure Consulta;
     procedure FormCreate(Sender: TObject);
@@ -73,8 +65,12 @@ type
     procedure dbeLucroExit(Sender: TObject);
     procedure dbeValorVendaExit(Sender: TObject);
     procedure qProdutoNewRecord(DataSet: TDataSet);
+    procedure tbSalvarClick(Sender: TObject);
   private
     { Private declarations }
+    Produto : TProduto;
+    Cancelar : String;
+    procedure AlterarCampos(pTipo : Integer);
   public
     { Public declarations }
   end;
@@ -84,39 +80,30 @@ var
 
 implementation
 
-uses uDM;
+uses
+  uDM;
 {$R *.dfm}
 
 procedure TfProduto.Consulta;
 begin
   if rdbTodos.Checked then
   begin
-    qProduto.Close;
-    qProduto.SQL.Clear;
-    qProduto.SQL.Add('SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA, GRUPO, DTREGISTRO, ATIVO ' +
-      'FROM PRODUTO where ((id = ' + QuotedStr(edPesquisa.Text) + ') or  (descricao like ' +
-      QuotedStr('%' + edPesquisa.Text + '%') + '));');
-    qProduto.Open;
+
+    Produto.Ativo := 'T';
+    Produto.Pesquisar(edPesquisa.Text);
   end;
 
   if rdbAtivo.Checked then
   begin
-    qProduto.Close;
-    qProduto.SQL.Clear;
-    qProduto.SQL.Add('SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA, GRUPO, DTREGISTRO, ATIVO ' +
-      'FROM PRODUTO where ativo = ' + QuotedStr('S') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' +
-      '(descricao like ' + QuotedStr('%' + edPesquisa.Text + '%') + '));');
-    qProduto.Open;
+
+    Produto.Ativo := 'S';
+    Produto.Pesquisar(edPesquisa.Text);
   end;
 
   if rdbInativo.Checked then
   begin
-    qProduto.Close;
-    qProduto.SQL.Clear;
-    qProduto.SQL.Add('SELECT ID, DESCRICAO, UNIDADE, ESTOQUE, PCOMPRA, PLUCRO, PVENDA, GRUPO, DTREGISTRO, ATIVO ' +
-      'FROM PRODUTO where ativo = ' + QuotedStr('N') + ' and ((id = ' + QuotedStr(edPesquisa.Text) + ') or  ' +
-      '(descricao like ' + QuotedStr('%' + edPesquisa.Text + '%') + '));');
-    qProduto.Open;
+    Produto.Ativo := 'N';
+    Produto.Pesquisar(edPesquisa.Text);
   end;
 end;
 
@@ -149,7 +136,7 @@ begin
 
   venda := compra + (compra * (lucro / 100));
   // dbeValorVenda.Text := FloatToStr(venda);
-  qProdutoPVENDA.asFloat := venda;
+  DM.qProdutoPVENDA.asFloat := venda;
 end;
 
 procedure TfProduto.dbeValorVendaExit(Sender: TObject);
@@ -181,7 +168,7 @@ begin
 
   lucro := (venda - compra) / compra * 100;
   // dbeLucro.Text := FloatToStr(lucro);
-  qProdutoPLUCRO.asFloat := lucro;
+  DM.qProdutoPLUCRO.asFloat := lucro;
 end;
 
 procedure TfProduto.edPesquisaChange(Sender: TObject);
@@ -191,14 +178,11 @@ end;
 
 procedure TfProduto.FormCreate(Sender: TObject);
 begin
-  qProduto.Open;
-  PageControl1.ActivePageIndex := 0;
-  tbNovo.Enabled := True;
-  tbEditar.Enabled := True;
-  tbSalvar.Enabled := false;
-  tbCancelar.Enabled := false;
+  Produto := TProduto.Create();
+  //  Cancelar := 'N';
+  AlterarCampos(telaPadrao);
 
-  DbCbGrupo.ItemIndex := 3;
+  Consulta;
 end;
 
 procedure TfProduto.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -227,9 +211,84 @@ begin
   end;
 end;
 
+procedure TfProduto.AlterarCampos(pTipo : Integer);
+begin
+  case pTipo of
+
+    telaPadrao : begin
+      PageControl1.ActivePageIndex := 0;
+      dbgProduto.Enabled := True;
+      tbNovo.Enabled := True;
+      tbEditar.Enabled := True;
+      tbSalvar.Enabled := false;
+      tbCancelar.Enabled := false;
+      dbchkAtivo.ReadOnly := True;
+
+      DBEditID.ReadOnly := True;
+      dbeDescricao.ReadOnly := True;
+      dbeUnidade.ReadOnly := True;
+      dbeEstoque.ReadOnly := True;
+      dbeValorCompra.ReadOnly := True;
+      dbeLucro.ReadOnly := True;
+      dbeValorVenda.ReadOnly := True;
+
+      if Cancelar = 'S' then
+        DM.qProduto.Cancel;
+    end;
+
+    telaInsert : begin
+      PageControl1.ActivePageIndex := 1;
+      dbgProduto.Enabled := false;
+      tbNovo.Enabled := false;
+      tbEditar.Enabled := false;
+      tbSalvar.Enabled := True;
+      tbCancelar.Enabled := True;
+      dbchkAtivo.ReadOnly := false;
+
+      DBEditID.ReadOnly := True;
+      dbeDescricao.ReadOnly := false;
+      dbeUnidade.ReadOnly := false;
+      dbeEstoque.ReadOnly := false;
+      dbeValorCompra.ReadOnly := false;
+      dbeLucro.ReadOnly := false;
+      dbeValorVenda.ReadOnly := false;
+
+      DBEditID.Clear;
+      dbeDescricao.Clear;
+      dbeUnidade.Clear;
+      dbeEstoque.Clear;
+      dbeValorCompra.Clear;
+      dbeLucro.Clear;
+      dbeValorVenda.Clear;
+
+      DM.qProduto.Insert;
+    end;
+
+    telaEdit : begin
+      PageControl1.ActivePageIndex := 1;
+      dbgProduto.Enabled := false;
+      tbNovo.Enabled := false;
+      tbEditar.Enabled := false;
+      tbSalvar.Enabled := True;
+      tbCancelar.Enabled := True;
+      dbchkAtivo.ReadOnly := false;
+
+      DBEditID.ReadOnly := True;
+      dbeDescricao.ReadOnly := false;
+      dbeUnidade.ReadOnly := false;
+      dbeEstoque.ReadOnly := false;
+      dbeValorCompra.ReadOnly := false;
+      dbeLucro.ReadOnly := false;
+      dbeValorVenda.ReadOnly := false;
+
+      DM.qProduto.Edit;
+    end;
+  end;
+end;
+
 procedure TfProduto.qProdutoNewRecord(DataSet: TDataSet);
 begin
-  qProdutoATIVO.AsString := 'S';
+  DM.qProdutoATIVO.AsString := 'S';
 end;
 
 procedure TfProduto.rdbAtivoClick(Sender: TObject);
@@ -249,73 +308,18 @@ end;
 
 procedure TfProduto.tbCancelarClick(Sender: TObject);
 begin
-  PageControl1.ActivePageIndex := 0;
-  dbgProduto.Enabled := True;
-  tbNovo.Enabled := True;
-  tbEditar.Enabled := True;
-  tbSalvar.Enabled := false;
-  tbCancelar.Enabled := false;
-  dbchkAtivo.ReadOnly := True;
-
-  DBEditID.ReadOnly := True;
-  dbeDescricao.ReadOnly := True;
-  dbeUnidade.ReadOnly := True;
-  dbeEstoque.ReadOnly := True;
-  dbeValorCompra.ReadOnly := True;
-  dbeLucro.ReadOnly := True;
-  dbeValorVenda.ReadOnly := True;
-
-  qProduto.Cancel;
+  Cancelar := 'S';
+  AlterarCampos(telaPadrao);
 end;
 
 procedure TfProduto.tbEditarClick(Sender: TObject);
 begin
-  PageControl1.ActivePageIndex := 1;
-  dbgProduto.Enabled := false;
-  tbNovo.Enabled := false;
-  tbEditar.Enabled := false;
-  tbSalvar.Enabled := True;
-  tbCancelar.Enabled := True;
-  dbchkAtivo.ReadOnly := false;
-
-  DBEditID.ReadOnly := false;
-  dbeDescricao.ReadOnly := false;
-  dbeUnidade.ReadOnly := false;
-  dbeEstoque.ReadOnly := false;
-  dbeValorCompra.ReadOnly := false;
-  dbeLucro.ReadOnly := false;
-  dbeValorVenda.ReadOnly := false;
-
-  qProduto.Edit;
+  AlterarCampos(telaEdit);
 end;
 
 procedure TfProduto.tbNovoClick(Sender: TObject);
 begin
-  PageControl1.ActivePageIndex := 1;
-  dbgProduto.Enabled := false;
-  tbNovo.Enabled := false;
-  tbEditar.Enabled := false;
-  tbSalvar.Enabled := True;
-  tbCancelar.Enabled := True;
-  dbchkAtivo.ReadOnly := false;
-
-  DBEditID.ReadOnly := True;
-  dbeDescricao.ReadOnly := false;
-  dbeUnidade.ReadOnly := false;
-  dbeEstoque.ReadOnly := false;
-  dbeValorCompra.ReadOnly := false;
-  dbeLucro.ReadOnly := false;
-  dbeValorVenda.ReadOnly := false;
-
-  DBEditID.Clear;
-  dbeDescricao.Clear;
-  dbeUnidade.Clear;
-  dbeEstoque.Clear;
-  dbeValorCompra.Clear;
-  dbeLucro.Clear;
-  dbeValorVenda.Clear;
-
-  qProduto.Insert;
+  AlterarCampos(telaInsert);
 end;
 
 procedure TfProduto.tbSairClick(Sender: TObject);
@@ -323,8 +327,29 @@ begin
   Close;
 end;
 
+procedure TfProduto.tbSalvarClick(Sender: TObject);
+begin
+  Cancelar := 'N';
+  AlterarCampos(telaPadrao);
+
+  Produto.Descricao := dbeDescricao.Text;
+  Produto.Unidade := dbeUnidade.Text;
+  Produto.PrecoCompra := StrToCurrDef(dbeValorCompra.Text, 0);
+  Produto.PrecoVenda := StrToCurrDef(dbeValorVenda.Text, 0);
+  Produto.PorcentLucro := StrToFloatDef(dbeLucro.Text, 0);
+  Produto.DescricaoGrupo := DbCbGrupo.Text;
+
+  if dbchkAtivo.Checked then
+    Produto.Ativo := dbchkAtivo.ValueChecked
+  else
+    Produto.Ativo := dbchkAtivo.ValueUnchecked;
+
+  Produto.Cadastrar;
+end;
+
 procedure TfProduto.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  Produto.Free;
   Action := caFree;
   fProduto := nil;
 end;
