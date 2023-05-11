@@ -125,7 +125,7 @@ begin
     Exit;
   end;
 
-  ID := varNull;
+  ID := 0;
   Descricao := '';
 end;
 
@@ -144,6 +144,7 @@ begin
     Result := True;
     ID := DM.qProdutoId.AsInteger;
     Descricao := DM.qProdutoDescricao.AsString;
+    PrecoVenda := DM.qProdutopVenda.AsCurrency;
     Exit;
   end;
 
