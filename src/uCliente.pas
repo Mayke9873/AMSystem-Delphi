@@ -17,10 +17,10 @@ type
     Conexao : IConexao;
     property DtNasc : TDate read FDtNasc write SetDtNasc;
     property TpPessoa : String read FTpPessoa write SetTpPessoa;
-    function Pesquisar(pNome : String) : Boolean; overload;
-    function Pesquisar(pID : Integer) : Boolean; overload;
     procedure Cadastrar(Value : TCliente);
     procedure Editar(Value : TCliente);
+    function Pesquisar(pNome : String) : Boolean; overload;
+    function Pesquisar(pID : Integer) : Boolean; overload;
     function Tipo: String; override;
   end;
 
@@ -111,7 +111,7 @@ begin
 
   DM.qCliente.Close;
   DM.qCliente.Params[0].AsInteger := pID;
-  DM.qCliente.Params[1].AsString := Nome;
+  DM.qCliente.Params[1].AsString := '%%';
   DM.qCliente.Params[2].AsString := Ativo;
   DM.qCliente.Open;
 
@@ -132,7 +132,7 @@ begin
 
   DM.qCliente.Close;
   DM.qCliente.ParamByName('id').AsInteger := 0;
-  DM.qCliente.ParamByName('nome').AsString := pNome;
+  DM.qCliente.ParamByName('nome').AsString := '%' + pNome + '%';
   DM.qCliente.ParamByName('ativo').AsString   := Ativo;
   DM.qCliente.Open;
 
