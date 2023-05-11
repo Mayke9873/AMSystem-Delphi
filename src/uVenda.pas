@@ -9,12 +9,27 @@ type
   TVenda = class
     private
     FID: Integer;
+    FDesconto: Currency;
+    FTotal: Currency;
+    FDescontoProduto: Currency;
+    FPrecoProduto: Currency;
     procedure SetID(const Value: Integer);
+    procedure SetDesconto(const Value: Currency);
+    procedure SetTotal(const Value: Currency);
+    procedure SetDescontoProduto(const Value: Currency);
+    procedure SetPrecoProduto(const Value: Currency);
     public
+      property Total : Currency read FTotal write SetTotal;
+      property Desconto : Currency read FDesconto write SetDesconto;
+      property PrecoProduto : Currency read FPrecoProduto write SetPrecoProduto;
+      property DescontoProduto : Currency read FDescontoProduto write SetDescontoProduto;
       property ID : Integer read FID write SetID;
+      procedure Soma;
+      procedure Subtrair;
       procedure Finaliza;
       procedure LimpaProduto;
       procedure ExcluirProduto;
+      procedure InsereVenda(pCodigoVenda : String);
       function Cancelar: Boolean;
   End;
 
@@ -30,8 +45,7 @@ begin
   ExecSQL('Update Venda_item set ex = 1 where id = '+ fVenda.DBGrid1.Fields[0].AsString +' and ' +
       ' IdVenda = '+ IntToStr(ID) +';');
 
-  fVenda.edTotalVenda.Text := CurrToStr(StrToCurr(fVenda.edTotalVenda.Text) - fVenda.DBGrid1.Fields[6].AsCurrency);
-  fVenda.edDescontoVenda.Text := CurrToStr(StrToCurr(fVenda.edDescontoVenda.Text) - fVenda.DBGrid1.Fields[5].AsCurrency);
+  Subtrair();
 
   fVenda.qProdVenda.Close;
   fVenda.qProdVenda.Params[0].AsInteger := ID;
@@ -62,6 +76,23 @@ begin
 
 end;
 
+procedure TVenda.InsereVenda(pCodigoVenda : String);
+begin
+  if Length(pCodigoVenda) = 0 then
+  begin
+    Total := 0;
+    Desconto := 0;
+    DM.qVenda.Open;
+    DM.qVenda.Insert;
+    DM.qVenda.ApplyUpdates;
+
+    DM.qVenda.Close;
+    DM.qVenda.Open;
+    fVenda.edCodVenda.Text := DM.qVenda.Fields[0].Value;
+    ID := DM.qVenda.Fields[0].Value;
+  end;
+end;
+
 procedure TVenda.LimpaProduto;
 begin
   fVenda.qProdVenda.Close;
@@ -79,12 +110,45 @@ begin
     ExecSQL('Delete from venda_item where idVenda = '+  IntToStr(ID));
     Result := True;
   end;
-    
+
+end;
+
+procedure TVenda.Soma;
+begin
+  PrecoProduto := PrecoProduto - DescontoProduto;
+  Total := Total + PrecoProduto;
+  Desconto := Desconto + (DescontoProduto);
+end;
+
+procedure TVenda.Subtrair;
+begin
+  Total := Total - PrecoProduto;
+  Desconto := Desconto - DescontoProduto;
+end;
+
+procedure TVenda.SetDesconto(const Value: Currency);
+begin
+  FDesconto := Value;
+end;
+
+procedure TVenda.SetDescontoProduto(const Value: Currency);
+begin
+  FDescontoProduto := Value;
 end;
 
 procedure TVenda.SetID(const Value: Integer);
 begin
   FID := Value;
+end;
+
+procedure TVenda.SetPrecoProduto(const Value: Currency);
+begin
+  FPrecoProduto := Value;
+end;
+
+procedure TVenda.SetTotal(const Value: Currency);
+begin
+  FTotal := Value;
 end;
 
 end.

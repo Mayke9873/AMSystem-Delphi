@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
   Vcl.DBGrids, ZAbstractRODataset, ZDataset, ZSqlUpdate, ZAbstractDataset,
-  System.StrUtils, Vcl.ExtCtrls, uCliente, Vcl.Buttons, uVenda;
+  System.StrUtils, Vcl.ExtCtrls, uCliente, Vcl.Buttons, uVenda, uProduto;
 
 type
   TfVenda = class(TForm)
@@ -32,21 +32,13 @@ type
     edValorTotal: TEdit;
     DBGrid1: TDBGrid;
     dFuncionario: TDataSource;
-    dCliente: TDataSource;
     dbgPesqProduto: TDBGrid;
     dbgVendedor: TDBGrid;
     dbgCliente: TDBGrid;
     dProdVenda: TDataSource;
-    dPesqProd: TDataSource;
     qFuncionario: TZReadOnlyQuery;
     qFuncionarioid: TIntegerField;
     qFuncionarionome: TWideStringField;
-    qCliente: TZReadOnlyQuery;
-    qPesqProd: TZReadOnlyQuery;
-    qPesqProdid: TIntegerField;
-    qPesqProddescricao: TWideStringField;
-    qPesqProdestoque: TFloatField;
-    qPesqProdpVenda: TFloatField;
     qProdVenda: TZQuery;
     uProdVenda: TZUpdateSQL;
     qProdVendaid: TIntegerField;
@@ -56,8 +48,6 @@ type
     qProdVendadesconto: TFloatField;
     qProdVendatotal: TFloatField;
     qProdVendavalor: TFloatField;
-    qClienteid: TIntegerField;
-    qClientenome: TWideStringField;
     pnlDesconto: TPanel;
     Panel1: TPanel;
     Shape1: TShape;
@@ -78,10 +68,8 @@ type
     procedure edVendedorChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure dbgVendedorDblClick(Sender: TObject);
-    procedure dbgClienteDblClick(Sender: TObject);
     procedure edPesqProdChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure dbgPesqProdutoDblClick(Sender: TObject);
     procedure edQtdProdutoExit(Sender: TObject);
     procedure edDescontoExit(Sender: TObject);
     procedure edValorTotalEnter(Sender: TObject);
@@ -94,13 +82,17 @@ type
     procedure edClienteChange(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirProdutoClick(Sender: TObject);
+    procedure dbgVendedorKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
-    totalVenda, descontoVenda: Real;
+    Produto : TProduto;
     Cliente : TCliente;
     Venda : TVenda;
     procedure Consulta(Tipo, TipoCampo : String);
     procedure LimpaCampos(pTipo : String);
+    procedure FocarGrid(edit : TEdit);
+    procedure PreencheCampos(grid : TDBGrid);
 
   public
     { Public declarations }
@@ -119,10 +111,11 @@ uses
 procedure TfVenda.FormCreate(Sender: TObject);
 begin
   Cliente := TCliente.Create();
+  Produto := TProduto.Create();
   Venda := TVenda.Create();
 
-  totalVenda := 0;
-  descontoVenda := 0;
+  edTotalVenda.Text := '0,00';
+  edDescontoVenda.Text := '0,00';
 
   dbgVendedor.Left := 8;
   dbgVendedor.Top := 112;
@@ -170,8 +163,8 @@ begin
       edTotalVenda.Clear;
       edDescontoVenda.Clear;
       edIdVendedor.SetFocus;
-      totalVenda := 0;
-      descontoVenda := 0;
+      edTotalVenda.Text := '0,00';
+      edDescontoVenda.Text := '0,00';
     End;
   end;
 end;
@@ -179,67 +172,55 @@ end;
 procedure TfVenda.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   case Key of
-    27: // Esc
-      begin
-        btnSairClick(Sender);
-        Key := 0;
-      end;
+    27 : begin // Esc
+      btnSairClick(Sender);
+      Key := 0;
+    end;
 
-    114: // F3
-      begin
-        btnSalvarClick(Sender);
-      end;
+    114 : begin// F3
 
-    115: // F4
-      begin
-        btnCancelar.Click;
-      end;
+      btnSalvarClick(Sender);
+    end;
 
-    116: // F5
-      begin
+    115 : begin // F4
+      btnCancelar.Click;
+    end;
+
+    116 : begin // F5
         btnExcluirProduto.Click;
-      end;
+    end;
+    
+    VK_DOWN : begin
+      FocarGrid(TEdit(Sender));
+    end;
   end;
-end;
-
-procedure TfVenda.dbgClienteDblClick(Sender: TObject);
-begin
-  edIdCliente.Text := dbgCliente.Fields[0].Value;
-  edCliente.Text := dbgCliente.Fields[1].Value;
-  dbgCliente.Visible := False;
-end;
-
-procedure TfVenda.dbgPesqProdutoDblClick(Sender: TObject);
-begin
-  edIdProd.Text := dbgPesqProduto.Fields[0].Value;
-  edValorUnitario.Text := dbgPesqProduto.Fields[3].Text;
-  edPesqProd.Text := dbgPesqProduto.Fields[1].Text;
-  dbgPesqProduto.Visible := False;
-
-  edQtdProduto.Text := '1';
-  edDesconto.Text := '0,00';
-  edQtdProduto.SetFocus;
 end;
 
 procedure TfVenda.dbgVendedorDblClick(Sender: TObject);
 begin
-  edIdVendedor.Text := dbgVendedor.Fields[0].Value;
-  edVendedor.Text := dbgVendedor.Fields[1].Value;
-  dbgVendedor.Visible := False;
+  PreencheCampos(TDBGrid(Sender));
+end;
+
+procedure TfVenda.dbgVendedorKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if not (Key = 13) then
+    Exit;
+    
+  PreencheCampos(TDBGrid(Sender));
+  Perform(WM_NEXTDLGCTL, 0, 0);
 end;
 
 procedure TfVenda.edPesqProdChange(Sender: TObject);
 begin
-
-  qPesqProd.Close;
-
-  if Trim(edPesqProd.Text) <> '' then
+  if (Trim(edPesqProd.Text) <> '') and (Trim(edIdProd.Text) = '') then
   begin
-    if Trim(edIdProd.Text) = '' then
+    Produto.Ativo := 'S';
+    Produto.Pesquisar(edPesqProd.Text);
+
+    if DM.qProduto.RecordCount > 0  then
     begin
       dbgPesqProduto.Visible := True;
-
-      qPesqProd.ParamByName('descricao').AsString := '%' + edPesqProd.Text + '%';
     end
     else
     begin
@@ -250,23 +231,20 @@ begin
   begin
     dbgPesqProduto.Visible := false;
   end;
-
-  qPesqProd.Open;
 end;
 
 procedure TfVenda.edValorTotalEnter(Sender: TObject);
 begin
-  if Length(edCodVenda.Text) = 0 then
-  begin
-    DM.qVenda.Open;
-    DM.qVenda.Insert;
-    DM.qVenda.ApplyUpdates;
 
-    DM.qVenda.Close;
-    DM.qVenda.Open;
-    edCodVenda.Text := DM.qVenda.Fields[0].Value;
-    Venda.ID := DM.qVenda.Fields[0].Value;
-  end;
+  If not Produto.Pesquisar(StrToIntDef(edIdProd.Text, 0)) then
+    Exit;
+
+  Venda.InsereVenda(edCodVenda.Text);
+
+  Venda.PrecoProduto    := StrToCurr(edValorUnitario.Text) * strtoFLoat(edQtdProduto.Text);
+  Venda.DescontoProduto := StrToCurr(edDesconto.Text);
+
+  Venda.Soma();
 
   try
     qProdVenda.Open;
@@ -276,7 +254,7 @@ begin
     qProdVendavalor.AsFloat := StrToFloat(edValorUnitario.Text);
     qProdVendadesconto.AsFloat := StrToFloat(edDesconto.Text);
     qProdVendaquantidade.AsFloat := StrToFloat(edQtdProduto.Text);
-    qProdVendatotal.AsFloat := StrToFloat(edValorTotal.Text);
+    qProdVendatotal.AsFloat := (Venda.PrecoProduto);
 
     qProdVenda.ApplyUpdates;
     qProdVenda.Close;
@@ -284,11 +262,9 @@ begin
     qProdVenda.ParamByName('idVenda').AsString := '' + edCodVenda.Text + '';
     qProdVenda.Open;
   end;
-  totalVenda := totalVenda + StrToFloat(edValorTotal.Text);
-  edTotalVenda.Text := FormatFloat('###,###,##0.00', totalVenda);
 
-  descontoVenda := descontoVenda + StrToFloat(edDesconto.Text);
-  edDescontoVenda.Text :=  FormatFloat('###,###,##0.00', descontoVenda);
+  edTotalVenda.Text := FormatFloat('###,##0.00', Venda.Total);
+  edDescontoVenda.Text := FormatFloat('###,##0.00', Venda.Desconto);
 
   LimpaCampos('Prod');
 end;
@@ -318,47 +294,40 @@ end;
 
 procedure TfVenda.edClienteChange(Sender: TObject);
 begin
-  if Trim(edIdCliente.Text) = '' then
-    Consulta('Cli', 'Pesq');
+  if (Trim(edCliente.Text) <> '') and (Trim(edIdCliente.Text) = '') then
+  begin
+    Cliente.Ativo := 'S';
+    Cliente.Pesquisar(edCliente.Text);
+
+    if DM.qCliente.RecordCount > 0 then
+      dbgCliente.Visible := True
+    else
+      dbgCliente.Visible := False;
+  end
+  else
+    dbgCliente.Visible := False;
 end;
 
 procedure TfVenda.edDescontoExit(Sender: TObject);
-var
-  valorTotal: Real;
-  valorProduto: Real;
-  desconto: Real;
 begin
-  valorProduto := 0;
+  Produto.Ativo := 'S';
+  Produto.Descricao := edPesqProd.Text;
+  if not Produto.Pesquisar(StrToIntDef(edIdProd.Text, 0)) then
+  begin
+    edIdProd.SetFocus;
+    Exit;
+  end;
 
   if Length(edValorUnitario.Text) = 0 then
   begin
     edPesqProd.SetFocus;
-  end
-  else
-  begin
-    valorProduto := StrToFloat(edValorUnitario.Text);
+    Exit;
   end;
 
-  if Length(edDesconto.Text) <> 0 then
-  begin
-    desconto := StrToFloat(edDesconto.Text);
-    valorTotal := (valorProduto * StrToFloat(edQtdProduto.Text)) - desconto;
-
-    edValorTotal.Text := FloatToStr(valorTotal);
-  end
-  else
-  begin
-    valorTotal := valorProduto * StrToFloat(edQtdProduto.Text);
-
-    edValorTotal.Text := FloatToStr(valorTotal);
-    edDesconto.Text := '0,00';
-  end;
 end;
 
 procedure TfVenda.edIdClienteExit(Sender: TObject);
 begin
-
-  Cliente.Nome := '%%';
   Cliente.Ativo := 'S';
   Cliente.Pesquisar(StrToIntDef(edIdCliente.Text, 0));
   edCliente.Text := Cliente.Nome;
@@ -367,14 +336,14 @@ end;
 
 procedure TfVenda.edIdProdExit(Sender: TObject);
 begin
-  if Length(edIdProd.Text) <> 0 then
-  begin
-    qPesqProd.Close;
-    qPesqProd.Params[0].AsString := edIdProd.Text;
-    qPesqProd.Open;
+  Produto.Descricao := '';
+  Produto.Ativo := 'S';
 
-    edValorUnitario.Text := dbgPesqProduto.Fields[3].Text;
-    edPesqProd.Text := dbgPesqProduto.Fields[1].Text;
+  if Produto.Pesquisar(StrToIntDef(edIdProd.Text, 0)) then
+  begin
+    edIdProd.Text := IntToStr(Produto.ID);
+    edPesqProd.Text := Produto.Descricao;
+    edValorUnitario.Text := CurrToStr(Produto.PrecoVenda);
     edQtdProduto.Text := '1';
     edDesconto.Text := '0,00';
     edQtdProduto.SetFocus;
@@ -416,60 +385,32 @@ end;
 
 procedure TfVenda.Consulta(Tipo, TipoCampo : String);
 begin
+  qFuncionario.Close;
 
-  case AnsiIndexStr(Tipo, ['Func', 'Cli']) of
+  if (TipoCampo = 'Pesq') and (Trim(edIdVendedor.Text) = '') then
+  begin
+    dbgVendedor.Visible := True;
 
-    0: begin
-      qFuncionario.Close;
-           
-      if (TipoCampo = 'Pesq') and (Trim(edIdVendedor.Text) = '') then
-      begin
-        dbgVendedor.Visible := True;
+    qFuncionario.ParamByName('id').AsInteger := 0;
+    qFuncionario.ParamByName('nome').AsString := '%' + edVendedor.Text + '%';
+    qFuncionario.Open;
+  end
 
-        qFuncionario.ParamByName('id').AsInteger := 0;
-        qFuncionario.ParamByName('nome').AsString := '%' + edVendedor.Text + '%';
-        qFuncionario.Open;
-      end
+  else if not (Trim(edIdVendedor.Text) = '') then
+  begin
+    dbgVendedor.Visible := false;
 
-      else if not (Trim(edIdVendedor.Text) = '') then
-      begin
-        dbgVendedor.Visible := false;
+    qFuncionario.ParamByName('id').AsInteger := StrToIntDef(edIdVendedor.Text, 0);
+    qFuncionario.ParamByName('nome').AsString := '%%';
+    qFuncionario.Open;
 
-        qFuncionario.ParamByName('id').AsInteger := StrToIntDef(edIdVendedor.Text, 0);
-        qFuncionario.ParamByName('nome').AsString := '%%';
-        qFuncionario.Open;
+    if not (qFuncionario.ParamByName('id').Value = 0) then
+      edVendedor.Text := qFuncionarionome.AsString;
+  end;
 
-        if not (qFuncionario.ParamByName('id').Value = 0) then
-          edVendedor.Text := qFuncionarionome.AsString;
-      end;
-      
-      if edVendedor.Text = '' then
-      begin
-        dbgVendedor.Visible := false;
-      end;
-    end;
-
-    1: begin
-      qCliente.Close;
-
-      if not (Trim(edCliente.Text) = '') then
-      begin
-        dbgCliente.Visible := True;
-
-        qCliente.ParamByName('id').AsInteger := StrToIntDef(edIdCliente.Text, 0);
-        qCliente.ParamByName('nome').AsString := '%' + edCliente.Text + '%';
-         qCliente.Open;
-
-        if not (qCliente.ParamByName('id').Value = 0) then
-          edCliente.Text := qClientenome.AsString;
-      end;
-
-      if edCliente.Text = '' then
-      begin
-        dbgCliente.Visible := false;
-      end;
-    end;
-
+  if edVendedor.Text = '' then
+  begin
+    dbgVendedor.Visible := false;
   end;
 
 end;
@@ -484,7 +425,13 @@ end;
 procedure TfVenda.btnExcluirProdutoClick(Sender: TObject);
 begin
   If qProdVenda.RecordCount > 0 then
+  begin
+    Venda.PrecoProduto    := StrToCurr(DBGrid1.Fields[6].AsString);
+    Venda.DescontoProduto := StrToCurr(DBGrid1.Fields[5].AsString);
     Venda.ExcluirProduto();
+    edTotalVenda.Text := FormatFloat('###,##0.00', Venda.Total);
+    edDescontoVenda.Text := FormatFloat('###,##0.00', Venda.Desconto);
+  end;
 end;
 
 procedure TfVenda.btnSairClick(Sender: TObject);
@@ -497,6 +444,56 @@ begin
   else
   if (not (Trim(edCodVenda.Text) = '' ) and Venda.Cancelar()) then
     Close;
+end;
+
+procedure TfVenda.FocarGrid(edit : TEdit);
+begin
+  case edit.Tag of
+    0 : begin
+      if dbgVendedor.Visible then
+        dbgVendedor.SetFocus;
+    end;
+
+    1 : begin
+      if dbgCliente.Visible then
+      dbgCliente.SetFocus;
+    end;
+
+    2 : begin
+      if dbgPesqProduto.Visible then
+        dbgPesqProduto.SetFocus;
+    end;
+
+  end;
+end;
+
+procedure TfVenda.PreencheCampos(grid: TDBGrid);
+begin
+  case grid.Tag of
+    0 : begin 
+      edIdVendedor.Text := dbgVendedor.Fields[0].Value;
+      edVendedor.Text := dbgVendedor.Fields[1].Value;
+      dbgVendedor.Visible := False;
+    end;
+    
+    1 : begin
+      edIdCliente.Text := dbgCliente.Fields[0].Value;
+      edCliente.Text := dbgCliente.Fields[1].Value;
+      dbgCliente.Visible := False;
+    end;
+    
+    2 : begin
+      edIdProd.Text := dbgPesqProduto.Fields[0].Value;
+      edValorUnitario.Text := dbgPesqProduto.Fields[3].Text;
+      edPesqProd.Text := dbgPesqProduto.Fields[1].Text;
+      dbgPesqProduto.Visible := False;
+
+      edQtdProduto.Text := '1';
+      edDesconto.Text := '0,00';
+      edQtdProduto.SetFocus; 
+    end;
+  end;
+  
 end;
 
 procedure TfVenda.FormClose(Sender: TObject; var Action: TCloseAction);

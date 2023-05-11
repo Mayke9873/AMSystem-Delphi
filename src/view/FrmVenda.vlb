@@ -1,9 +1,6 @@
 ﻿[edVendedor]
 Coordinates=575,232,84,58
 
-[dPesqProd]
-Coordinates=185,1,78,36
-
 [qProdVendaidprod]
 Coordinates=570,386,122,36
 
@@ -28,9 +25,6 @@ Coordinates=111,368,76,36
 [qProdVendaid]
 Coordinates=570,496,96,36
 
-[dCliente]
-Coordinates=13,154,62,36
-
 [edQtdProduto]
 Coordinates=596,10,94,58
 
@@ -40,9 +34,6 @@ Coordinates=563,300,67,58
 [uProdVenda]
 Coordinates=551,537,86,36
 
-[qCliente]
-Coordinates=194,10,62,102
-
 [dProdVenda]
 Coordinates=77,154,86,36
 
@@ -51,9 +42,6 @@ Coordinates=428,507,89,36
 
 [Label7]
 Coordinates=762,232,53,58
-
-[qPesqProdid]
-Coordinates=730,111,88,36
 
 [edIdVendedor]
 Coordinates=10,232,95,58
@@ -66,9 +54,6 @@ Coordinates=10,368,91,36
 
 [qProdVendadesconto]
 Coordinates=730,276,138,36
-
-[qPesqProdpVenda]
-Coordinates=730,331,122,36
 
 [qProdVenda]
 Coordinates=10,10,86,212
@@ -97,12 +82,6 @@ Coordinates=378,300,80,58
 [edCliente]
 Coordinates=640,300,69,58
 
-[qPesqProdestoque]
-Coordinates=730,441,124,36
-
-[qPesqProddescricao]
-Coordinates=730,496,133,36
-
 [qProdVendavalor]
 Coordinates=730,551,114,36
 
@@ -127,13 +106,10 @@ Coordinates=512,232,53,58
 [Label6]
 Coordinates=434,10,53,58
 
-[qPesqProd]
-Coordinates=106,10,78,146
-
 [edValorTotal]
 Coordinates=209,232,88,58
 
 []
-Coordinates=433,232,69,58
+Coordinates=13,154,62,36
 Visible=True
 

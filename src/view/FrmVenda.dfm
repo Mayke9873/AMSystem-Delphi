@@ -2,8 +2,8 @@ object fVenda: TfVenda
   Left = 0
   Top = 0
   Caption = 'Vendas'
-  ClientHeight = 628
-  ClientWidth = 979
+  ClientHeight = 625
+  ClientWidth = 967
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -20,8 +20,8 @@ object fVenda: TfVenda
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    979
-    628)
+    967
+    625)
   TextHeight = 18
   object Label1: TLabel
     Left = 8
@@ -80,6 +80,7 @@ object fVenda: TfVenda
     Caption = 'R$ Total'
   end
   object edCodVenda: TEdit
+    Tag = 99
     Left = 8
     Top = 28
     Width = 86
@@ -89,6 +90,7 @@ object fVenda: TfVenda
     TabOrder = 0
   end
   object edIdVendedor: TEdit
+    Tag = 99
     Left = 8
     Top = 86
     Width = 86
@@ -97,19 +99,21 @@ object fVenda: TfVenda
     OnExit = edIdVendedorExit
   end
   object edIdCliente: TEdit
+    Tag = 99
     Left = 8
     Top = 148
     Width = 86
     Height = 26
-    TabOrder = 3
+    TabOrder = 4
     OnExit = edIdClienteExit
   end
   object edIdProd: TEdit
+    Tag = 99
     Left = 8
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 5
+    TabOrder = 7
     OnExit = edIdProdExit
   end
   object edVendedor: TEdit
@@ -122,65 +126,71 @@ object fVenda: TfVenda
     OnChange = edVendedorChange
   end
   object edCliente: TEdit
+    Tag = 1
     Left = 95
     Top = 148
     Width = 446
     Height = 26
     CharCase = ecUpperCase
-    TabOrder = 4
+    TabOrder = 5
     OnChange = edClienteChange
   end
   object edPesqProd: TEdit
+    Tag = 2
     Left = 95
     Top = 212
     Width = 446
     Height = 26
     CharCase = ecUpperCase
-    TabOrder = 6
+    TabOrder = 8
     OnChange = edPesqProdChange
   end
   object edQtdProduto: TEdit
+    Tag = 99
     Left = 547
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 7
+    TabOrder = 9
     OnEnter = edQtdProdutoEnter
     OnExit = edQtdProdutoExit
   end
   object edValorUnitario: TEdit
+    Tag = 99
     Left = 640
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 8
+    TabOrder = 10
   end
   object edDesconto: TEdit
+    Tag = 99
     Left = 734
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 9
+    TabOrder = 11
     OnExit = edDescontoExit
   end
   object edValorTotal: TEdit
+    Tag = 99
     Left = 826
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 10
+    TabOrder = 12
     OnEnter = edValorTotalEnter
   end
   object DBGrid1: TDBGrid
     Left = 8
-    Top = 244
-    Width = 919
-    Height = 323
+    Top = 240
+    Width = 896
+    Height = 320
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = dProdVenda
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 11
+    TabOrder = 13
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
@@ -265,20 +275,22 @@ object fVenda: TfVenda
       end>
   end
   object dbgPesqProduto: TDBGrid
-    Left = 810
-    Top = 276
+    Tag = 2
+    Left = 826
+    Top = 300
     Width = 814
     Height = 153
-    DataSource = dPesqProd
+    DataSource = DM.dProduto
     Options = [dgTitles, dgIndicator, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 12
+    TabOrder = 14
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
     TitleFont.Name = 'Arial'
     TitleFont.Style = []
     Visible = False
-    OnDblClick = dbgPesqProdutoDblClick
+    OnDblClick = dbgVendedorDblClick
+    OnKeyDown = dbgVendedorKeyDown
     Columns = <
       item
         Expanded = False
@@ -331,13 +343,13 @@ object fVenda: TfVenda
       end>
   end
   object dbgVendedor: TDBGrid
-    Left = 918
+    Left = 878
     Top = 54
     Width = 533
     Height = 120
     DataSource = dFuncionario
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 13
+    TabOrder = 3
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
@@ -345,6 +357,7 @@ object fVenda: TfVenda
     TitleFont.Style = []
     Visible = False
     OnDblClick = dbgVendedorDblClick
+    OnKeyDown = dbgVendedorKeyDown
     Columns = <
       item
         Expanded = False
@@ -372,24 +385,26 @@ object fVenda: TfVenda
       end>
   end
   object dbgCliente: TDBGrid
-    Left = 918
-    Top = 118
+    Tag = 1
+    Left = 878
+    Top = 262
     Width = 533
     Height = 120
-    DataSource = dCliente
+    DataSource = DM.dCliente
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 14
+    TabOrder = 6
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
     TitleFont.Name = 'Arial'
     TitleFont.Style = []
     Visible = False
-    OnDblClick = dbgClienteDblClick
+    OnDblClick = dbgVendedorDblClick
+    OnKeyDown = dbgVendedorKeyDown
     Columns = <
       item
         Expanded = False
-        FieldName = 'id'
+        FieldName = 'Id'
         Title.Caption = 'C'#243'digo'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
@@ -401,8 +416,7 @@ object fVenda: TfVenda
       end
       item
         Expanded = False
-        FieldName = 'nome'
-        Title.Caption = 'Nome'
+        FieldName = 'Nome'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -15
@@ -424,7 +438,7 @@ object fVenda: TfVenda
     object Label9: TLabel
       Left = 0
       Top = 0
-      Width = 89
+      Width = 107
       Height = 19
       Align = alTop
       Alignment = taCenter
@@ -435,6 +449,7 @@ object fVenda: TfVenda
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitWidth = 89
     end
     object Panel1: TPanel
       Left = 0
@@ -494,7 +509,7 @@ object fVenda: TfVenda
     object Label10: TLabel
       Left = 0
       Top = 0
-      Width = 68
+      Width = 107
       Height = 19
       Align = alTop
       Alignment = taCenter
@@ -505,6 +520,7 @@ object fVenda: TfVenda
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitWidth = 68
     end
     object Panel2: TPanel
       Left = 0
@@ -556,8 +572,8 @@ object fVenda: TfVenda
   end
   object pnlBotoes: TPanel
     Left = 0
-    Top = 573
-    Width = 979
+    Top = 570
+    Width = 967
     Height = 55
     Align = alBottom
     BevelOuter = bvNone
@@ -565,7 +581,7 @@ object fVenda: TfVenda
     ShowCaption = False
     TabOrder = 17
     DesignSize = (
-      979
+      967
       55)
     object btnSair: TButton
       Left = 401
@@ -643,20 +659,10 @@ object fVenda: TfVenda
     Left = 876
     Top = 68
   end
-  object dCliente: TDataSource
-    DataSet = qCliente
-    Left = 876
-    Top = 128
-  end
   object dProdVenda: TDataSource
     DataSet = qProdVenda
     Left = 856
     Top = 544
-  end
-  object dPesqProd: TDataSource
-    DataSet = qPesqProd
-    Left = 928
-    Top = 328
   end
   object qFuncionario: TZReadOnlyQuery
     Connection = DM.zCon
@@ -697,95 +703,6 @@ object fVenda: TfVenda
       FieldName = 'nome'
       ReadOnly = True
       Size = 255
-    end
-  end
-  object qCliente: TZReadOnlyQuery
-    Connection = DM.zCon
-    SQL.Strings = (
-      'Select id, nome From cliente'
-      
-        '  where ((:id = 0) or (id = :id)) and (nome like :nome) and Ativ' +
-        'o = '#39'S'#39';')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'nome'
-        ParamType = ptUnknown
-      end>
-    Left = 820
-    Top = 128
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'nome'
-        ParamType = ptUnknown
-      end>
-    object qClienteid: TIntegerField
-      FieldName = 'id'
-      ReadOnly = True
-    end
-    object qClientenome: TWideStringField
-      FieldName = 'nome'
-      ReadOnly = True
-      Size = 250
-    end
-  end
-  object qPesqProd: TZReadOnlyQuery
-    Connection = DM.zCon
-    SQL.Strings = (
-      'Select id, descricao, estoque, pVenda From Produto'
-      '  where ((id = :id or id = 0) or (descricao like :descricao));')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'descricao'
-        ParamType = ptUnknown
-      end>
-    Left = 880
-    Top = 328
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'descricao'
-        ParamType = ptUnknown
-      end>
-    object qPesqProdid: TIntegerField
-      Alignment = taLeftJustify
-      FieldName = 'id'
-      ReadOnly = True
-    end
-    object qPesqProddescricao: TWideStringField
-      FieldName = 'descricao'
-      ReadOnly = True
-      Size = 255
-    end
-    object qPesqProdestoque: TFloatField
-      FieldName = 'estoque'
-      ReadOnly = True
-    end
-    object qPesqProdpVenda: TFloatField
-      FieldName = 'pVenda'
-      ReadOnly = True
     end
   end
   object qProdVenda: TZQuery
