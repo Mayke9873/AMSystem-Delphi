@@ -50,6 +50,7 @@ object fCliente: TfCliente
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
+    ExplicitWidth = 991
     object tbNovo: TToolButton
       Left = 0
       Top = 0
@@ -107,22 +108,21 @@ object fCliente: TfCliente
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 983
+    Width = 995
     Height = 592
     ActivePage = pgTabela
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
-    ExplicitWidth = 987
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       DesignSize = (
-        975
+        987
         564)
       object DBGrid1: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 0
-        Width = 969
+        Width = 981
         Height = 561
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = DM.dCliente
@@ -819,17 +819,17 @@ object fCliente: TfCliente
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 328
+    Width = 308
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     CharCase = ecUpperCase
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 332
+    ExplicitWidth = 304
   end
   object rdbTodos: TRadioButton
-    Left = 440
+    Left = 420
     Top = 34
     Width = 49
     Height = 17
@@ -839,10 +839,10 @@ object fCliente: TfCliente
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 444
+    ExplicitLeft = 416
   end
   object rdbAtivo: TRadioButton
-    Left = 520
+    Left = 500
     Top = 34
     Width = 49
     Height = 17
@@ -850,10 +850,10 @@ object fCliente: TfCliente
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbAtivoClick
-    ExplicitLeft = 524
+    ExplicitLeft = 496
   end
   object rdbInativo: TRadioButton
-    Left = 592
+    Left = 572
     Top = 34
     Width = 57
     Height = 17
@@ -861,7 +861,7 @@ object fCliente: TfCliente
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbInativoClick
-    ExplicitLeft = 596
+    ExplicitLeft = 568
   end
   object ImageList1: TImageList
     Left = 928

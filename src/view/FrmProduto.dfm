@@ -107,23 +107,23 @@ object fProduto: TfProduto
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 983
+    Width = 979
     Height = 591
     ActivePage = pgDados
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
-    ExplicitWidth = 979
+    ExplicitWidth = 975
     ExplicitHeight = 590
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       DesignSize = (
-        975
+        971
         563)
       object dbgProduto: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 0
-        Width = 969
+        Width = 965
         Height = 560
         Anchors = [akLeft, akTop, akRight, akBottom]
         DataSource = DM.dProduto
@@ -497,16 +497,16 @@ object fProduto: TfProduto
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 320
+    Width = 316
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 316
+    ExplicitWidth = 312
   end
   object rdbTodos: TRadioButton
-    Left = 432
+    Left = 428
     Top = 34
     Width = 49
     Height = 17
@@ -516,10 +516,10 @@ object fProduto: TfProduto
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 428
+    ExplicitLeft = 424
   end
   object rdbAtivo: TRadioButton
-    Left = 512
+    Left = 508
     Top = 34
     Width = 49
     Height = 17
@@ -527,10 +527,10 @@ object fProduto: TfProduto
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbAtivoClick
-    ExplicitLeft = 508
+    ExplicitLeft = 504
   end
   object rdbInativo: TRadioButton
-    Left = 584
+    Left = 580
     Top = 34
     Width = 57
     Height = 17
@@ -538,7 +538,7 @@ object fProduto: TfProduto
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbInativoClick
-    ExplicitLeft = 580
+    ExplicitLeft = 576
   end
   object ImageList1: TImageList
     Left = 928

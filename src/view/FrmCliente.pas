@@ -140,8 +140,6 @@ begin
 end;
 
 procedure TfCliente.Consulta;
-var
-  vAtivo : String;
 begin
 
   if rdbTodos.Checked then

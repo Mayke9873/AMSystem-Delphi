@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Win.TaskbarCore, Vcl.Taskbar,
   Vcl.ComCtrls, Vcl.ToolWin,System.ImageList, Vcl.ImgList, Vcl.Menus, Threading, IPPeerClient, IPPeerServer,
-  System.Tether.Manager;
+  System.Tether.Manager, Vcl.OleCtrls, SHDocVw;
 
 type
   TfPrincipal = class(TForm)
@@ -69,7 +69,7 @@ procedure TfPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   {if MDIChildCount > 0 then
   begin
-    ShowMessage('N�o � possivel sair do sistema');
+    ShowMessage('Não é possivel sair do sistema');
     Abort;
   end;    }
 end;
