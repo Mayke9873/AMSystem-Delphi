@@ -18,7 +18,9 @@ uses
   uCliente in 'src\uCliente.pas',
   uValida in 'src\uValida.pas',
   uVenda in 'src\uVenda.pas',
-  uProduto in 'src\uProduto.pas';
+  uProduto in 'src\uProduto.pas',
+  uFuncionario in 'src\uFuncionario.pas',
+  OKCANCL1 in 'c:\program files (x86)\embarcadero\studio\22.0\ObjRepos\EN\DelphiWin32\OKCANCL1.PAS' {OKBottomDlg};
 
 {$R *.res}
 
