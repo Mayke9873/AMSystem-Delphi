@@ -1730,11 +1730,21 @@ object fPrincipal: TfPrincipal
     Left = 944
     Top = 8
     object Cadastros1: TMenuItem
-      Caption = 'Cadastros'
-      object Cadastros2: TMenuItem
-        Caption = 'Clientes'
-        ShortCut = 32880
-        OnClick = Cadastros2Click
+      Caption = 'Cadastro'
+      object Pessoas1: TMenuItem
+        Caption = 'Pessoas'
+        object Cadastros2: TMenuItem
+          Caption = 'Clientes'
+          ShortCut = 32880
+          OnClick = Cadastros2Click
+        end
+        object Produtos2: TMenuItem
+          Caption = 'Funcion'#225'rios'
+          OnClick = Produtos2Click
+        end
+        object Fornecedores1: TMenuItem
+          Caption = 'Fornecedores'
+        end
       end
       object N1: TMenuItem
         Caption = '-'
@@ -1745,15 +1755,11 @@ object fPrincipal: TfPrincipal
         OnClick = Produtos1Click
       end
       object Grupos1: TMenuItem
-        Caption = 'Grupos'
+        Caption = 'Grupos de Produto'
         OnClick = Grupos1Click
       end
       object N2: TMenuItem
         Caption = '-'
-      end
-      object Produtos2: TMenuItem
-        Caption = 'Funcion'#225'rios'
-        OnClick = Produtos2Click
       end
     end
     object Movimento1: TMenuItem
@@ -1765,6 +1771,12 @@ object fPrincipal: TfPrincipal
       object ConsultadeVendas1: TMenuItem
         Caption = 'Consulta de Vendas'
         OnClick = ConsultadeVendas1Click
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object AjustedeEstoque1: TMenuItem
+        Caption = 'Ajuste de Estoque'
       end
     end
     object Sair1: TMenuItem
