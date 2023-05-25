@@ -32,14 +32,10 @@ type
     edDesconto: TEdit;
     edValorTotal: TEdit;
     DBGrid1: TDBGrid;
-    dFuncionario: TDataSource;
     dbgPesqProduto: TDBGrid;
     dbgVendedor: TDBGrid;
     dbgCliente: TDBGrid;
     dProdVenda: TDataSource;
-    qFuncionario: TZReadOnlyQuery;
-    qFuncionarioid: TIntegerField;
-    qFuncionarionome: TWideStringField;
     qProdVenda: TZQuery;
     uProdVenda: TZUpdateSQL;
     qProdVendaid: TIntegerField;
@@ -75,15 +71,15 @@ type
     procedure edDescontoExit(Sender: TObject);
     procedure edValorTotalEnter(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
-    procedure edIdProdExit(Sender: TObject);
     procedure edIdVendedorExit(Sender: TObject);
-    procedure edIdClienteExit(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure edQtdProdutoEnter(Sender: TObject);
     procedure edClienteChange(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnExcluirProdutoClick(Sender: TObject);
     procedure dbgVendedorKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edVendedorKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
     { Private declarations }
@@ -92,6 +88,7 @@ type
     Funcionario : TFuncionario;
     Venda : TVenda;
     procedure Consulta(Sender : TEdit);
+    procedure ConsultaPorID(Sender : TEdit);
     procedure LimpaCampos(pTipo : String);
     procedure FocarGrid(edit : TEdit);
     procedure PreencheCampos(grid : TDBGrid);
@@ -192,10 +189,6 @@ begin
     116 : begin // F5
         btnExcluirProduto.Click;
     end;
-    
-    VK_DOWN : begin
-      FocarGrid(TEdit(Sender));
-    end;
   end;
 end;
 
@@ -276,7 +269,7 @@ procedure TfVenda.edVendedorChange(Sender: TObject);
 begin
     if (Trim(edVendedor.Text) <> '') and (Trim(edIdVendedor.Text) = '') then
   begin
-    Consulta(edVendedor);
+    Consulta(TEdit(Sender));
     
     if DM.qFuncionario.RecordCount > 0 then
       dbgVendedor.Visible := True
@@ -286,6 +279,13 @@ begin
   else
     dbgVendedor.Visible := False;
 
+end;
+
+procedure TfVenda.edVendedorKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    if (Key = VK_DOWN) then
+      FocarGrid(TEdit(Sender));
 end;
 
 procedure TfVenda.edQtdProdutoEnter(Sender: TObject);
@@ -309,7 +309,7 @@ procedure TfVenda.edClienteChange(Sender: TObject);
 begin
   if (Trim(edCliente.Text) <> '') and (Trim(edIdCliente.Text) = '') then
   begin
-    Consulta(edCliente);  
+    Consulta(TEdit(Sender));
     
     if DM.qCliente.RecordCount > 0 then
       dbgCliente.Visible := True
@@ -338,47 +338,18 @@ begin
 
 end;
 
-procedure TfVenda.edIdClienteExit(Sender: TObject);
-begin
-  Cliente.Ativo := 'S';
-  Cliente.Pesquisar(StrToIntDef(edIdCliente.Text, 0));
-  edCliente.Text := Cliente.Nome;
-end;
-
-
-procedure TfVenda.edIdProdExit(Sender: TObject);
-begin
-  Produto.Descricao := '';
-  Produto.Ativo := 'S';
-
-  if Produto.Pesquisar(StrToIntDef(edIdProd.Text, 0)) then
-  begin
-    edIdProd.Text := IntToStr(Produto.ID);
-    edPesqProd.Text := Produto.Descricao;
-    edValorUnitario.Text := CurrToStr(Produto.PrecoVenda);
-    edQtdProduto.Text := '1';
-    edDesconto.Text := '0,00';
-    edQtdProduto.SetFocus;
-  end;
-
-end;
-
 procedure TfVenda.edIdVendedorExit(Sender: TObject);
 begin
-//
+  ConsultaPorID(TEdit(Sender));
 end;
 
 procedure TfVenda.btnSalvarClick(Sender: TObject);
 begin
-  DM.qPesq.Close;
-  DM.qPesq.SQL.Clear;
-  DM.qPesq.SQL.Add('SELECT id, nome FROM funcionario WHERE id = ' + QuotedStr(edIdVendedor.Text) + ' and nome = ' +
-    QuotedStr(edVendedor.Text) + ';');
-  DM.qPesq.Open;
 
-  if DM.qPesq.RecordCount = 0 then
+  Funcionario.Nome := edVendedor.Text;
+  if not Funcionario.Pesquisar(Funcionario.Cod) then
   begin
-    Application.MessageBox('Vendedor inválido. Por favor, verifique!', 'Atenção', MB_ICONEXCLAMATION);
+    Application.MessageBox('Vendedor inválido. Por favor, verifique!', 'Atenção', 48);
     Abort;
   end;
 
@@ -390,9 +361,8 @@ begin
   end;
 
   Venda.ID := StrToIntDef(edCodVenda.Text, 0);
-  Venda.Finaliza;
-
-  LimpaCampos('Venda');
+  if Venda.Finaliza() then
+    LimpaCampos('Venda');
 end;
 
 procedure TfVenda.Consulta(Sender : TEdit);
@@ -406,6 +376,38 @@ begin
     1 : begin
       Cliente.Ativo := 'S';
       Cliente.Pesquisar(Sender.Text);
+    end;
+  end;
+end;
+
+procedure TfVenda.ConsultaPorID(Sender: TEdit);
+begin
+  case Sender.Tag of
+    0 : begin  
+      Funcionario.Ativo := 'S';
+      Funcionario.Pesquisar(StrToIntDef(edIdVendedor.Text, 0));
+      edVendedor.Text := Funcionario.Nome;
+    end;
+
+    2 : begin
+      Produto.Descricao := '';
+      Produto.Ativo := 'S';
+
+      if Produto.Pesquisar(StrToIntDef(edIdProd.Text, 0)) then
+      begin
+        edIdProd.Text := IntToStr(Produto.ID);
+        edPesqProd.Text := Produto.Descricao;
+        edValorUnitario.Text := CurrToStr(Produto.PrecoVenda);
+        edQtdProduto.Text := '1';
+        edDesconto.Text := '0,00';
+        edQtdProduto.SetFocus;
+      end;
+    end;
+
+    1 : begin
+      Cliente.Ativo := 'S';
+      Cliente.Pesquisar(StrToIntDef(edIdCliente.Text, 0));
+      edCliente.Text := Cliente.Nome;  
     end;
   end;
 end;

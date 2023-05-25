@@ -90,7 +90,6 @@ object fVenda: TfVenda
     TabOrder = 0
   end
   object edIdVendedor: TEdit
-    Tag = 99
     Left = 8
     Top = 86
     Width = 86
@@ -99,22 +98,22 @@ object fVenda: TfVenda
     OnExit = edIdVendedorExit
   end
   object edIdCliente: TEdit
-    Tag = 99
+    Tag = 1
     Left = 8
     Top = 148
     Width = 86
     Height = 26
     TabOrder = 4
-    OnExit = edIdClienteExit
+    OnExit = edIdVendedorExit
   end
   object edIdProd: TEdit
-    Tag = 99
+    Tag = 2
     Left = 8
     Top = 212
     Width = 86
     Height = 26
     TabOrder = 7
-    OnExit = edIdProdExit
+    OnExit = edIdVendedorExit
   end
   object edVendedor: TEdit
     Left = 95
@@ -124,6 +123,7 @@ object fVenda: TfVenda
     CharCase = ecUpperCase
     TabOrder = 2
     OnChange = edVendedorChange
+    OnKeyDown = edVendedorKeyDown
   end
   object edCliente: TEdit
     Tag = 1
@@ -134,6 +134,7 @@ object fVenda: TfVenda
     CharCase = ecUpperCase
     TabOrder = 5
     OnChange = edClienteChange
+    OnKeyDown = edVendedorKeyDown
   end
   object edPesqProd: TEdit
     Tag = 2
@@ -144,6 +145,7 @@ object fVenda: TfVenda
     CharCase = ecUpperCase
     TabOrder = 8
     OnChange = edPesqProdChange
+    OnKeyDown = edVendedorKeyDown
   end
   object edQtdProduto: TEdit
     Tag = 99
@@ -184,7 +186,7 @@ object fVenda: TfVenda
   object DBGrid1: TDBGrid
     Left = 8
     Top = 240
-    Width = 884
+    Width = 880
     Height = 320
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -361,7 +363,7 @@ object fVenda: TfVenda
     Columns = <
       item
         Expanded = False
-        FieldName = 'id'
+        FieldName = 'Id'
         Title.Caption = 'C'#243'digo'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
@@ -373,8 +375,7 @@ object fVenda: TfVenda
       end
       item
         Expanded = False
-        FieldName = 'nome'
-        Title.Caption = 'Nome'
+        FieldName = 'Nome'
         Title.Font.Charset = ANSI_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -15
@@ -656,56 +657,10 @@ object fVenda: TfVenda
       OnClick = btnSalvarClick
     end
   end
-  object dFuncionario: TDataSource
-    DataSet = qFuncionario
-    Left = 876
-    Top = 68
-  end
   object dProdVenda: TDataSource
     DataSet = qProdVenda
     Left = 856
     Top = 544
-  end
-  object qFuncionario: TZReadOnlyQuery
-    Connection = DM.zCon
-    SQL.Strings = (
-      'Select id, nome From funcionario'
-      
-        '  where ((:id = 0) or (id = :id)) and (nome like :nome) and Ativ' +
-        'o = '#39'S'#39';')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'nome'
-        ParamType = ptUnknown
-      end>
-    Left = 820
-    Top = 69
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'nome'
-        ParamType = ptUnknown
-      end>
-    object qFuncionarioid: TIntegerField
-      FieldName = 'id'
-      ReadOnly = True
-    end
-    object qFuncionarionome: TWideStringField
-      FieldName = 'nome'
-      ReadOnly = True
-      Size = 255
-    end
   end
   object qProdVenda: TZQuery
     Connection = DM.zCon
