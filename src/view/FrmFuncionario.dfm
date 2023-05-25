@@ -2,7 +2,7 @@ object fFuncionario: TfFuncionario
   Left = 0
   Top = 0
   Margins.Right = 0
-  Caption = 's'
+  Caption = 'Funcion'#225'rios'
   ClientHeight = 649
   ClientWidth = 999
   Color = clBtnFace
@@ -12,11 +12,13 @@ object fFuncionario: TfFuncionario
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIChild
+  KeyPreview = True
   Visible = True
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
   DesignSize = (
     999
     649)
@@ -556,16 +558,16 @@ object fFuncionario: TfFuncionario
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 304
+    Width = 296
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 300
+    ExplicitWidth = 292
   end
   object rdbTodos: TRadioButton
-    Left = 416
+    Left = 408
     Top = 34
     Width = 49
     Height = 17
@@ -575,11 +577,11 @@ object fFuncionario: TfFuncionario
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 412
+    ExplicitLeft = 404
   end
   object rdbAtivo: TRadioButton
     Tag = 1
-    Left = 496
+    Left = 488
     Top = 34
     Width = 49
     Height = 17
@@ -587,11 +589,11 @@ object fFuncionario: TfFuncionario
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbTodosClick
-    ExplicitLeft = 492
+    ExplicitLeft = 484
   end
   object rdbInativo: TRadioButton
     Tag = 2
-    Left = 568
+    Left = 560
     Top = 34
     Width = 57
     Height = 17
@@ -599,7 +601,7 @@ object fFuncionario: TfFuncionario
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbTodosClick
-    ExplicitLeft = 564
+    ExplicitLeft = 556
   end
   object ImageList1: TImageList
     Left = 928

@@ -64,6 +64,7 @@ type
     procedure dbgFuncionarioDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure rdbTodosClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     Cancelar : String;
     Ativo : String;
@@ -87,6 +88,15 @@ uses
 procedure TfFuncionario.FormCreate(Sender: TObject);
 begin
   rdbTodosClick(Self);
+end;
+
+procedure TfFuncionario.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  begin
+    Key := #0;
+    Perform(WM_NEXTDLGCTL, 0, 0);
+  end;
 end;
 
 function TfFuncionario.isAtivo(Sender : TRadioButton) : String;
