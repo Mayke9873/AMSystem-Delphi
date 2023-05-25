@@ -184,7 +184,7 @@ object fVenda: TfVenda
   object DBGrid1: TDBGrid
     Left = 8
     Top = 240
-    Width = 896
+    Width = 884
     Height = 320
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -347,7 +347,7 @@ object fVenda: TfVenda
     Top = 54
     Width = 533
     Height = 120
-    DataSource = dFuncionario
+    DataSource = DM.dFuncionario
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 3
     TitleFont.Charset = ANSI_CHARSET
@@ -580,6 +580,8 @@ object fVenda: TfVenda
     Caption = 'pnlBotoes'
     ShowCaption = False
     TabOrder = 17
+    ExplicitTop = 569
+    ExplicitWidth = 963
     DesignSize = (
       967
       55)

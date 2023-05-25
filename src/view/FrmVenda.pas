@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
   Vcl.DBGrids, ZAbstractRODataset, ZDataset, ZSqlUpdate, ZAbstractDataset,
-  System.StrUtils, Vcl.ExtCtrls, uCliente, Vcl.Buttons, uVenda, uProduto;
+  System.StrUtils, Vcl.ExtCtrls, uCliente, Vcl.Buttons, uVenda, uProduto,
+  uFuncionario;
 
 type
   TfVenda = class(TForm)
@@ -88,8 +89,9 @@ type
     { Private declarations }
     Produto : TProduto;
     Cliente : TCliente;
+    Funcionario : TFuncionario;
     Venda : TVenda;
-    procedure Consulta(Tipo, TipoCampo : String);
+    procedure Consulta(Sender : TEdit);
     procedure LimpaCampos(pTipo : String);
     procedure FocarGrid(edit : TEdit);
     procedure PreencheCampos(grid : TDBGrid);
@@ -112,6 +114,7 @@ procedure TfVenda.FormCreate(Sender: TObject);
 begin
   Cliente := TCliente.Create();
   Produto := TProduto.Create();
+  Funcionario := TFuncionario.Create();
   Venda := TVenda.Create();
 
   edTotalVenda.Text := '0,00';
@@ -271,8 +274,18 @@ end;
 
 procedure TfVenda.edVendedorChange(Sender: TObject);
 begin
-  if Trim(edIdVendedor.Text) = '' then
-    Consulta('Func', 'Pesq');
+    if (Trim(edVendedor.Text) <> '') and (Trim(edIdVendedor.Text) = '') then
+  begin
+    Consulta(edVendedor);
+    
+    if DM.qFuncionario.RecordCount > 0 then
+      dbgVendedor.Visible := True
+    else
+      dbgVendedor.Visible := False;
+  end
+  else
+    dbgVendedor.Visible := False;
+
 end;
 
 procedure TfVenda.edQtdProdutoEnter(Sender: TObject);
@@ -296,9 +309,8 @@ procedure TfVenda.edClienteChange(Sender: TObject);
 begin
   if (Trim(edCliente.Text) <> '') and (Trim(edIdCliente.Text) = '') then
   begin
-    Cliente.Ativo := 'S';
-    Cliente.Pesquisar(edCliente.Text);
-
+    Consulta(edCliente);  
+    
     if DM.qCliente.RecordCount > 0 then
       dbgCliente.Visible := True
     else
@@ -353,7 +365,7 @@ end;
 
 procedure TfVenda.edIdVendedorExit(Sender: TObject);
 begin
-  Consulta('Func', 'ID');
+//
 end;
 
 procedure TfVenda.btnSalvarClick(Sender: TObject);
@@ -383,36 +395,19 @@ begin
   LimpaCampos('Venda');
 end;
 
-procedure TfVenda.Consulta(Tipo, TipoCampo : String);
+procedure TfVenda.Consulta(Sender : TEdit);
 begin
-  qFuncionario.Close;
+  case Sender.Tag of
+    0 : begin
+      Funcionario.Ativo := 'S';
+      Funcionario.Pesquisar(Sender.Text);
+    end;
 
-  if (TipoCampo = 'Pesq') and (Trim(edIdVendedor.Text) = '') then
-  begin
-    dbgVendedor.Visible := True;
-
-    qFuncionario.ParamByName('id').AsInteger := 0;
-    qFuncionario.ParamByName('nome').AsString := '%' + edVendedor.Text + '%';
-    qFuncionario.Open;
-  end
-
-  else if not (Trim(edIdVendedor.Text) = '') then
-  begin
-    dbgVendedor.Visible := false;
-
-    qFuncionario.ParamByName('id').AsInteger := StrToIntDef(edIdVendedor.Text, 0);
-    qFuncionario.ParamByName('nome').AsString := '%%';
-    qFuncionario.Open;
-
-    if not (qFuncionario.ParamByName('id').Value = 0) then
-      edVendedor.Text := qFuncionarionome.AsString;
+    1 : begin
+      Cliente.Ativo := 'S';
+      Cliente.Pesquisar(Sender.Text);
+    end;
   end;
-
-  if edVendedor.Text = '' then
-  begin
-    dbgVendedor.Visible := false;
-  end;
-
 end;
 
 procedure TfVenda.btnCancelarClick(Sender: TObject);
