@@ -26,11 +26,11 @@ type
       property ID : Integer read FID write SetID;
       procedure Soma;
       procedure Subtrair;
-      procedure Finaliza;
       procedure LimpaProduto;
       procedure ExcluirProduto;
       procedure InsereVenda(pCodigoVenda : String);
       function Cancelar: Boolean;
+      function Finaliza: Boolean;
   End;
 
 implementation
@@ -53,8 +53,9 @@ begin
 
 end;
 
-procedure TVenda.Finaliza;
+function TVenda.Finaliza : Boolean;
 begin
+  Result := False;
   if ID <> 0 then
   begin
     if Application.MessageBox('Confirma venda?', 'Atenção', MB_YESNO + MB_ICONQUESTION) = IDYES then
@@ -70,6 +71,7 @@ begin
       ExecSQL('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + IntToStr(ID) + ';');
 
       LimpaProduto();
+      Result := True;
     end;
 
   end;

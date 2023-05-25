@@ -13,8 +13,8 @@ uses uPessoa, uDM;
       property DtNasc : TDate read FDtNasc write SetDtNasc;
       procedure Cadastrar(Value : TFuncionario);
       procedure Pesquisar; overload;
-      procedure Pesquisar(pID : Integer); overload;
       procedure Pesquisar(pNome : String); overload;
+      function Pesquisar(pID : Integer) : Boolean; overload;
       function Tipo: String; override;
     end;
 
@@ -61,8 +61,9 @@ begin
   DM.qFuncionario.Open;
 end;
 
-procedure TFuncionario.Pesquisar(pID: Integer);
+function TFuncionario.Pesquisar(pID: Integer) : Boolean;
 begin
+  Result := False;
   DM.qFuncionario.Close;
   DM.qFuncionario.Params[0].AsInteger := pID;
   DM.qFuncionario.Params[1].AsString := '%%';
@@ -71,6 +72,7 @@ begin
 
   if DM.qFuncionario.RecordCount = 1 then
   begin
+    Result := True;
     Cod := DM.qFuncionarioID.AsInteger;
     Nome := DM.qFuncionarioNome.AsString;
     Exit;
