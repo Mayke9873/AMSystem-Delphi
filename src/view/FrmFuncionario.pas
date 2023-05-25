@@ -7,7 +7,12 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ZSqlUpdate, System.ImageList, Vcl.ImgList,
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList;
+  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, uFuncionario;
+
+Const
+  telaPadrao = 0;
+  telaInsert = 1;
+  telaEdit = 2;
 
 type
   TfFuncionario = class(TForm)
@@ -21,7 +26,7 @@ type
     ToolButton1: TToolButton;
     PageControl1: TPageControl;
     pgTabela: TTabSheet;
-    DBGrid1: TDBGrid;
+    dbgFuncionario: TDBGrid;
     pgDados: TTabSheet;
     Label1: TLabel;
     Label2: TLabel;
@@ -37,34 +42,33 @@ type
     DBEEndereco: TDBEdit;
     DBENumEnd: TDBEdit;
     DBEBairro: TDBEdit;
-    DBCheckBox1: TDBCheckBox;
+    dbchkAtivo: TDBCheckBox;
     DBECPF: TDBEdit;
     DBENasc: TDBEdit;
     edPesquisa: TEdit;
     rdbTodos: TRadioButton;
     rdbAtivo: TRadioButton;
     rdbInativo: TRadioButton;
-    dFuncionario: TDataSource;
     ImageList1: TImageList;
-    uFuncionario: TZUpdateSQL;
-    qFuncionario: TZQuery;
-    qFuncionarioId: TIntegerField;
-    qFuncionarioNome: TWideStringField;
-    qFuncionarioRG: TWideStringField;
-    qFuncionarioCpf: TWideStringField;
-    qFuncionariodtnasc: TDateField;
-    qFuncionarioEndereco: TWideStringField;
-    qFuncionarionumendereco: TWideStringField;
-    qFuncionarioBairro: TWideStringField;
-    qFuncionariodtregistro: TDateField;
-    qFuncionarioAtivo: TWideStringField;
     ActionList1: TActionList;
     acSair: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure acSairExecute(Sender: TObject);
+    procedure edPesquisaChange(Sender: TObject);
+    procedure tbSalvarClick(Sender: TObject);
+    procedure tbNovoClick(Sender: TObject);
+    procedure tbEditarClick(Sender: TObject);
+    procedure tbCancelarClick(Sender: TObject);
+    procedure dbgFuncionarioDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure rdbTodosClick(Sender: TObject);
   private
+    Cancelar : String;
+    Ativo : String;
+    procedure AlterarCampos(pTipo: Integer);
+    function isAtivo(Sender : TRadioButton) : String;
     { Private declarations }
   public
     { Public declarations }
@@ -80,17 +84,198 @@ uses
 
 {$R *.dfm}
 
+procedure TfFuncionario.FormCreate(Sender: TObject);
+begin
+  rdbTodosClick(Self);
+end;
 
+function TfFuncionario.isAtivo(Sender : TRadioButton) : String;
+begin
+  case Sender.tag of
+    0 : begin
+      Ativo := 'T';
+    end;
 
+    1 : begin
+      Ativo := 'S';
+    end;
+
+    2 : begin
+      Ativo := 'N';
+    end;
+  end;
+end;
+
+procedure TfFuncionario.rdbTodosClick(Sender: TObject);
+begin
+  isAtivo(TRadioButton(Sender));
+  edPesquisaChange(edPesquisa);
+end;
+
+procedure TfFuncionario.tbCancelarClick(Sender: TObject);
+begin
+  Cancelar := 'S';
+  AlterarCampos(telaPadrao);
+end;
+
+procedure TfFuncionario.tbEditarClick(Sender: TObject);
+begin
+  AlterarCampos(telaEdit);
+end;
+
+procedure TfFuncionario.tbNovoClick(Sender: TObject);
+begin
+  AlterarCampos(telaInsert);
+end;
+
+procedure TfFuncionario.tbSalvarClick(Sender: TObject);
+var
+  Funcionario : TFuncionario;
+begin
+  Cancelar := 'N';
+  AlterarCampos(telaPadrao);
+
+  Funcionario := TFuncionario.Create;
+  try
+    Funcionario.Cod := StrToIntDef(DBEditID.Text, 0);
+    Funcionario.Nome := DBENome.Text;
+    Funcionario.RGIE := DBERG.Text;
+    Funcionario.CPFCNPJ := DBECPF.Text;
+    Funcionario.Endereco := DBEEndereco.Text;
+    Funcionario.NumEndereco := DBENumEnd.Text;
+    Funcionario.Bairro := DBEBairro.Text;
+
+    if DBENasc.Text <> '  /  /    ' then
+    begin
+      try
+        Funcionario.DtNasc := StrToDate(DBENasc.Text);
+      except
+        Application.MessageBox('Data inválida. Por favor, verifique!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      end;
+    end;
+
+    if dbchkAtivo.Checked then
+      Funcionario.Ativo := dbchkAtivo.ValueChecked
+    else
+      Funcionario.Ativo := dbchkAtivo.ValueUnchecked;
+
+    Funcionario.Cadastrar(Funcionario);
+    rdbTodosClick(Self);
+  finally
+    Funcionario.Free;
+  end;
+end;
 
 procedure TfFuncionario.FormActivate(Sender: TObject);
 begin
   PageControl1.ActivePageIndex := 0;
 end;
 
-procedure TfFuncionario.FormCreate(Sender: TObject);
+procedure TfFuncionario.edPesquisaChange(Sender: TObject);
+var
+  Funcionario : TFuncionario;
 begin
-  qFuncionario.Open;
+  Funcionario := TFuncionario.Create;
+  try
+    Funcionario.Ativo := Ativo;
+    Funcionario.Pesquisar(edPesquisa.Text);
+  finally
+    Funcionario.Free;
+  end;
+end;
+
+procedure TfFuncionario.AlterarCampos(pTipo : Integer);
+begin
+  case pTipo of
+
+    telaPadrao : begin
+      PageControl1.ActivePageIndex := 0;
+      dbgFuncionario.Enabled := True;
+      tbNovo.Enabled := True;
+      tbEditar.Enabled := True;
+      tbSalvar.Enabled := false;
+      tbCancelar.Enabled := false;
+      dbchkAtivo.ReadOnly := True;
+
+      DBEditID.ReadOnly := True;
+      dbeNome.ReadOnly := True;
+      dbeRG.ReadOnly := True;
+      dbeCPF.ReadOnly := True;
+      dbeNasc.ReadOnly := True;
+      dbeEndereco.ReadOnly := True;
+      dbeNumEnd.ReadOnly := True;
+      dbeBairro.ReadOnly := True;
+
+      if Cancelar = 'S' then
+        DM.qFuncionario.Cancel;
+    end;
+
+    telaInsert : begin
+      PageControl1.ActivePageIndex := 1;
+      dbgFuncionario.Enabled := false;
+      tbNovo.Enabled := false;
+      tbEditar.Enabled := false;
+      tbSalvar.Enabled := True;
+      tbCancelar.Enabled := True;
+      dbchkAtivo.ReadOnly := false;
+
+      DBEditID.ReadOnly := True;
+      dbeNome.ReadOnly := false;
+      dbeRG.ReadOnly := false;
+      dbeCPF.ReadOnly := false;
+      dbeNasc.ReadOnly := false;
+      dbeEndereco.ReadOnly := false;
+      dbeNumEnd.ReadOnly := false;
+      dbeBairro.ReadOnly := False;
+
+      DM.qFuncionario.Insert;
+    end;
+
+    telaEdit : begin
+      PageControl1.ActivePageIndex := 1;
+      dbgFuncionario.Enabled := false;
+      tbNovo.Enabled := false;
+      tbEditar.Enabled := false;
+      tbSalvar.Enabled := True;
+      tbCancelar.Enabled := True;
+      dbchkAtivo.ReadOnly := false;
+
+      DBEditID.ReadOnly := True;
+      dbeNome.ReadOnly := false;
+      dbeRG.ReadOnly := false;
+      dbeCPF.ReadOnly := false;
+      dbeNasc.ReadOnly := false;
+      dbeEndereco.ReadOnly := false;
+      dbeNumEnd.ReadOnly := false;
+      dbeBairro.ReadOnly := False;
+
+      DM.qFuncionario.Edit;
+    end;
+  end;
+end;
+
+procedure TfFuncionario.dbgFuncionarioDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if dbgFuncionario.DataSource.DataSet.State in [dsEdit, dsInsert, dsBrowse] then //Cor da linha selecionada
+  begin
+     if Rect.Top = TStringGrid(dbgFuncionario).CellRect(0,TStringGrid(dbgFuncionario).Row).Top then
+     begin
+        dbgFuncionario.Canvas.FillRect(Rect);
+        dbgFuncionario.Canvas.Brush.Color := TColor($FFFF00);
+        dbgFuncionario.Canvas.Font.Color := clBlack;
+        dbgFuncionario.Canvas.Font.Style := [fsBold];
+        dbgFuncionario.DefaultDrawDataCell(Rect,Column.Field,State)
+     end;
+  end;
+
+  if gdSelected in State then  //Cor da célula selecionada
+  begin
+     dbgFuncionario.Canvas.Brush.Color := TColor($FCCC33);
+     dbgFuncionario.Canvas.Font.Color := clBlack;
+     dbgFuncionario.Canvas.FillRect(Rect);
+     dbgFuncionario.DefaultDrawDataCell(Rect,Column.Field,State)
+  end;
 end;
 
 procedure TfFuncionario.acSairExecute(Sender: TObject);
