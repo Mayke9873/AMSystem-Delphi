@@ -44,8 +44,23 @@ type
     qProdutogrupo: TWideStringField;
     qProdutodtRegistro: TDateField;
     qProdutoativo: TWideStringField;
+    dFuncionario: TDataSource;
+    uFuncionario: TZUpdateSQL;
+    qFuncionario: TZQuery;
+    qFuncionarioId: TIntegerField;
+    qFuncionarioNome: TWideStringField;
+    qFuncionarioRG: TWideStringField;
+    qFuncionarioCpf: TWideStringField;
+    qFuncionariodtnasc: TDateField;
+    qFuncionarioEndereco: TWideStringField;
+    qFuncionarionumendereco: TWideStringField;
+    qFuncionarioBairro: TWideStringField;
+    qFuncionariodtregistro: TDateField;
+    qFuncionarioAtivo: TWideStringField;
     procedure qClienteNewRecord(DataSet: TDataSet);
     procedure qClientedtnascSetText(Sender: TField; const Text: string);
+    procedure qFuncionarioNewRecord(DataSet: TDataSet);
+    procedure qFuncionariodtnascSetText(Sender: TField; const Text: string);
   private
     { Private declarations }
   public
@@ -90,6 +105,24 @@ procedure TDM.qClienteNewRecord(DataSet: TDataSet);
 begin
   qClienteativo.AsString := 'S';
   qClientetipo.AsString := 'F';
+end;
+
+procedure TDM.qFuncionariodtnascSetText(Sender: TField; const Text: string);
+var
+  Valida : TValidacoes;
+begin
+    Valida := TValidacoes.Create;
+  try
+    if not Valida.ValidaData(Sender, Text) then
+      Abort;
+  finally
+    Valida.Free;
+  end;
+end;
+
+procedure TDM.qFuncionarioNewRecord(DataSet: TDataSet);
+begin
+  qFuncionarioAtivo.AsString := 'S';
 end;
 
 end.
