@@ -37,9 +37,6 @@ Coordinates=551,537,86,36
 [dProdVenda]
 Coordinates=77,154,86,36
 
-[dFuncionario]
-Coordinates=428,507,89,36
-
 [Label7]
 Coordinates=762,232,53,58
 
@@ -64,17 +61,11 @@ Coordinates=763,10,53,58
 [edDesconto]
 Coordinates=669,232,83,58
 
-[qFuncionarionome]
-Coordinates=730,386,121,36
-
 [edPesqProd]
 Coordinates=468,300,85,58
 
 [edCodVenda]
 Coordinates=497,10,89,58
-
-[qFuncionario]
-Coordinates=266,10,89,102
 
 [edIdCliente]
 Coordinates=378,300,80,58
@@ -84,9 +75,6 @@ Coordinates=640,300,69,58
 
 [qProdVendavalor]
 Coordinates=730,551,114,36
-
-[qFuncionarioid]
-Coordinates=730,606,99,36
 
 [qProdVendatotal]
 Coordinates=711,655,110,36
@@ -110,6 +98,6 @@ Coordinates=434,10,53,58
 Coordinates=209,232,88,58
 
 []
-Coordinates=13,154,62,36
+Coordinates=266,10,89,102
 Visible=True
 
