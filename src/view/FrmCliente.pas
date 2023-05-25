@@ -126,6 +126,7 @@ begin
         DBGrid1.Canvas.FillRect(Rect);
         DBGrid1.Canvas.Brush.Color := TColor($FFFF00);
         DBGrid1.Canvas.Font.Color := clBlack;
+        DBGrid1.Canvas.Font.Style := [fsBold];
         DBGrid1.DefaultDrawDataCell(Rect,Column.Field,State)
      end;
   end;
@@ -295,15 +296,6 @@ begin
   DBEEndereco.ReadOnly := false;
   DBENumEnd.ReadOnly := false;
   DBEBairro.ReadOnly := false;
-
-  DBEditID.Clear;
-  DBENome.Clear;
-  DBERG.Clear;
-  DBECPF.Clear;
-  DBENasc.Clear;
-  DBEEndereco.Clear;
-  DBENumEnd.Clear;
-  DBEBairro.Clear;
 
   DM.qCliente.Insert;
   TipoCadastro := 0;
