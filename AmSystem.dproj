@@ -162,6 +162,11 @@
         <DCCReference Include="src\uValida.pas"/>
         <DCCReference Include="src\uVenda.pas"/>
         <DCCReference Include="src\uProduto.pas"/>
+        <DCCReference Include="src\uFuncionario.pas"/>
+        <DCCReference Include="c:\program files (x86)\embarcadero\studio\22.0\ObjRepos\EN\DelphiWin32\OKCANCL1.PAS">
+            <Form>OKBottomDlg</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>
