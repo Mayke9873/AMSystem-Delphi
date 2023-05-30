@@ -59,6 +59,7 @@ begin
         dbgVendas.Canvas.FillRect(Rect);
         dbgVendas.Canvas.Brush.Color := TColor($FFFF00);
         dbgVendas.Canvas.Font.Color := clBlack;
+        dbgVendas.Canvas.Font.Style := [fsBold];
         dbgVendas.DefaultDrawDataCell(Rect,Column.Field,State)
      end;
   end;

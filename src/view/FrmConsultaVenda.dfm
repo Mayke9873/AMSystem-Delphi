@@ -72,7 +72,7 @@ object fConsultaVendas: TfConsultaVendas
   object dbgVendas: TDBGrid
     Left = 0
     Top = 58
-    Width = 975
+    Width = 983
     Height = 566
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = dVendas
@@ -218,13 +218,13 @@ object fConsultaVendas: TfConsultaVendas
   object edPesquisa: TEdit
     Left = 64
     Top = 31
-    Width = 336
+    Width = 332
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 332
+    ExplicitWidth = 328
   end
   object ImageList1: TImageList
     Left = 928
