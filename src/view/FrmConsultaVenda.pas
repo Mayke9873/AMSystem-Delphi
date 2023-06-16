@@ -5,12 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ToolWin, System.ImageList, Vcl.ImgList,
-  Vcl.StdCtrls, ZAbstractRODataset, ZDataset;
+  Vcl.StdCtrls, ZAbstractRODataset, ZDataset, Vcl.ExtCtrls;
 
 type
   TfConsultaVendas = class(TForm)
     ToolBar1: TToolBar;
-    dbgVendas: TDBGrid;
     tbNovo: TToolButton;
     tbSair: TToolButton;
     ImageList1: TImageList;
@@ -26,6 +25,8 @@ type
     qVendasVALOR_TOTAL: TFloatField;
     qVendasDATA_VENDA: TDateField;
     qVendasNOME: TWideStringField;
+    Panel1: TPanel;
+    dbgVendas: TDBGrid;
     procedure tbNovoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure tbSairClick(Sender: TObject);

@@ -69,162 +69,176 @@ object fConsultaVendas: TfConsultaVendas
       OnClick = tbSairClick
     end
   end
-  object dbgVendas: TDBGrid
-    Left = 0
-    Top = 58
-    Width = 983
-    Height = 566
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    DataSource = dVendas
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Arial'
-    Font.Style = []
-    ParentFont = False
-    ReadOnly = True
-    TabOrder = 1
-    TitleFont.Charset = ANSI_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -16
-    TitleFont.Name = 'Arial'
-    TitleFont.Style = [fsBold]
-    OnDrawColumnCell = dbgVendasDrawColumnCell
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'ID'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        Title.Caption = 'C'#243'digo'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'CLIENTE'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        Title.Caption = 'Cliente'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 250
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'VALOR'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        Title.Alignment = taRightJustify
-        Title.Caption = 'Valor'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 80
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DESCONTO'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        Title.Alignment = taRightJustify
-        Title.Caption = 'Desconto'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 80
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'VALOR_TOTAL'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        Title.Alignment = taRightJustify
-        Title.Caption = 'R$ Total'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 80
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'DATA_VENDA'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        Title.Alignment = taCenter
-        Title.Caption = 'Dt. Venda'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 95
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOME'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        Title.Caption = 'Vendedor'
-        Title.Font.Charset = ANSI_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -12
-        Title.Font.Name = 'Arial'
-        Title.Font.Style = [fsBold]
-        Width = 250
-        Visible = True
-      end>
-  end
   object edPesquisa: TEdit
     Left = 64
     Top = 31
-    Width = 332
+    Width = 328
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
-    TabOrder = 2
+    TabOrder = 1
     OnChange = edPesquisaChange
-    ExplicitWidth = 328
+    ExplicitWidth = 324
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 61
+    Width = 983
+    Height = 568
+    Align = alBottom
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    BevelOuter = bvNone
+    Caption = 'Panel1'
+    TabOrder = 2
+    object dbgVendas: TDBGrid
+      AlignWithMargins = True
+      Left = 4
+      Top = 3
+      Width = 975
+      Height = 562
+      Margins.Left = 4
+      Margins.Right = 4
+      Align = alClient
+      DataSource = dVendas
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'Arial'
+      TitleFont.Style = [fsBold]
+      OnDrawColumnCell = dbgVendasDrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'C'#243'digo'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CLIENTE'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Cliente'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 250
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taRightJustify
+          Title.Caption = 'Valor'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DESCONTO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taRightJustify
+          Title.Caption = 'Desconto'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR_TOTAL'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taRightJustify
+          Title.Caption = 'R$ Total'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 80
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DATA_VENDA'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'Dt. Venda'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 95
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Title.Caption = 'Vendedor'
+          Title.Font.Charset = ANSI_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Arial'
+          Title.Font.Style = [fsBold]
+          Width = 250
+          Visible = True
+        end>
+    end
   end
   object ImageList1: TImageList
     Left = 928
