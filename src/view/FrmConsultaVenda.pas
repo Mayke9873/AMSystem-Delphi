@@ -92,7 +92,8 @@ end;
 
 procedure TfConsultaVendas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Destroy;
+  Action := caFree;
+  fConsultaVendas := nil;
 end;
 
 procedure TfConsultaVendas.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
