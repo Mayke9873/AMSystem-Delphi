@@ -54,7 +54,6 @@ type
     acSair: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
     procedure acSairExecute(Sender: TObject);
     procedure edPesquisaChange(Sender: TObject);
     procedure tbSalvarClick(Sender: TObject);
@@ -87,7 +86,9 @@ uses
 
 procedure TfFuncionario.FormCreate(Sender: TObject);
 begin
+  PageControl1.ActivePageIndex := 0;
   rdbTodosClick(Self);
+  tbCancelarClick(Self);
 end;
 
 procedure TfFuncionario.FormKeyPress(Sender: TObject; var Key: Char);
@@ -174,11 +175,6 @@ begin
   finally
     Funcionario.Free;
   end;
-end;
-
-procedure TfFuncionario.FormActivate(Sender: TObject);
-begin
-  PageControl1.ActivePageIndex := 0;
 end;
 
 procedure TfFuncionario.edPesquisaChange(Sender: TObject);

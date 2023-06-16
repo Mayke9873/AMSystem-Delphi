@@ -15,7 +15,6 @@ object fFuncionario: TfFuncionario
   KeyPreview = True
   Visible = True
   WindowState = wsMaximized
-  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
@@ -104,12 +103,19 @@ object fFuncionario: TfFuncionario
   end
   object PageControl1: TPageControl
     Left = 0
-    Top = 57
+    Top = 56
     Width = 999
     Height = 593
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
     ActivePage = pgTabela
+    Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
+    ExplicitLeft = -1
+    ExplicitWidth = 995
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgFuncionario: TDBGrid
@@ -136,7 +142,6 @@ object fFuncionario: TfFuncionario
         OnDrawColumnCell = dbgFuncionarioDrawColumnCell
         Columns = <
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'Id'
             Font.Charset = DEFAULT_CHARSET
@@ -171,7 +176,6 @@ object fFuncionario: TfFuncionario
             Visible = True
           end
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'RG'
             Font.Charset = DEFAULT_CHARSET
@@ -189,7 +193,6 @@ object fFuncionario: TfFuncionario
             Visible = True
           end
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'Cpf'
             Font.Charset = DEFAULT_CHARSET
@@ -208,7 +211,6 @@ object fFuncionario: TfFuncionario
             Visible = True
           end
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'dtnasc'
             Font.Charset = DEFAULT_CHARSET
@@ -276,7 +278,6 @@ object fFuncionario: TfFuncionario
             Visible = True
           end
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'dtregistro'
             Font.Charset = DEFAULT_CHARSET
@@ -295,25 +296,6 @@ object fFuncionario: TfFuncionario
             Visible = True
           end
           item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'Tipo'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            Title.Alignment = taCenter
-            Title.Font.Charset = ANSI_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Arial'
-            Title.Font.Style = [fsBold]
-            Width = 30
-            Visible = True
-          end
-          item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'Ativo'
             Font.Charset = DEFAULT_CHARSET
@@ -558,16 +540,16 @@ object fFuncionario: TfFuncionario
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 296
+    Width = 288
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 292
+    ExplicitWidth = 284
   end
   object rdbTodos: TRadioButton
-    Left = 408
+    Left = 400
     Top = 34
     Width = 49
     Height = 17
@@ -577,11 +559,11 @@ object fFuncionario: TfFuncionario
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 404
+    ExplicitLeft = 396
   end
   object rdbAtivo: TRadioButton
     Tag = 1
-    Left = 488
+    Left = 480
     Top = 34
     Width = 49
     Height = 17
@@ -589,11 +571,11 @@ object fFuncionario: TfFuncionario
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbTodosClick
-    ExplicitLeft = 484
+    ExplicitLeft = 476
   end
   object rdbInativo: TRadioButton
     Tag = 2
-    Left = 560
+    Left = 552
     Top = 34
     Width = 57
     Height = 17
@@ -601,7 +583,7 @@ object fFuncionario: TfFuncionario
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbTodosClick
-    ExplicitLeft = 556
+    ExplicitLeft = 548
   end
   object ImageList1: TImageList
     Left = 928
