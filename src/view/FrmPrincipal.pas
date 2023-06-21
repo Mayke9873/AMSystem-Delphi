@@ -6,14 +6,12 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Win.TaskbarCore, Vcl.Taskbar,
   Vcl.ComCtrls, Vcl.ToolWin,System.ImageList, Vcl.ImgList, Vcl.Menus, Threading, IPPeerClient, IPPeerServer,
-  System.Tether.Manager, Vcl.OleCtrls, SHDocVw, Vcl.ExtCtrls;
+  System.Tether.Manager, Vcl.OleCtrls, SHDocVw, Vcl.ExtCtrls, Vcl.Imaging.jpeg,
+  uValida;
 
 type
   TfPrincipal = class(TForm)
-    ToolBar1: TToolBar;
-    tbCliente: TToolButton;
     ImageList1: TImageList;
-    ToolButton1: TToolButton;
     MainMenu1: TMainMenu;
     Cadastros1: TMenuItem;
     Cadastros2: TMenuItem;
@@ -23,14 +21,17 @@ type
     N1: TMenuItem;
     N2: TMenuItem;
     Sair1: TMenuItem;
-    tbSair: TToolButton;
     Movimento1: TMenuItem;
     Venda1: TMenuItem;
     ConsultadeVendas1: TMenuItem;
-    Pessoas1: TMenuItem;
     Fornecedores1: TMenuItem;
     N3: TMenuItem;
     AjustedeEstoque1: TMenuItem;
+    Image1: TImage;
+    ToolBar1: TToolBar;
+    tbCliente: TToolButton;
+    ToolButton1: TToolButton;
+    tbSair: TToolButton;
     procedure Cadastros2Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
@@ -43,8 +44,10 @@ type
     procedure Grupos1Click(Sender: TObject);
     procedure Produtos2Click(Sender: TObject);
     procedure FecharSistema;
+    procedure Fornecedores1Click(Sender: TObject);
   private
     { Private declarations }
+    Valida : TValidacoes;
   public
     { Public declarations }
   end;
@@ -56,7 +59,7 @@ implementation
 
   uses
     FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto, FrmFuncionario,
-  FrmVenda;
+  FrmVenda, FrmFornecedor;
 
 {$R *.dfm}
 
@@ -84,7 +87,7 @@ begin
     Abort;
   end;
 
-  if (Application.MessageBox('Deseja sair do sistema?', 'Confirmação', MB_YESNO+32) = IDYES) then  
+  if (Application.MessageBox('Deseja sair do sistema?', 'Confirmação', MB_YESNO + 32) = IDYES) then
   begin
     Application.Terminate;
   end
@@ -95,6 +98,14 @@ end;
 procedure TfPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   FecharSistema();
+end;
+
+procedure TfPrincipal.Fornecedores1Click(Sender: TObject);
+begin
+  if not Assigned(fFornecedor) then
+    fFornecedor := TfFornecedor.Create(fPrincipal)
+  else
+    fFornecedor.Show;
 end;
 
 procedure TfPrincipal.Grupos1Click(Sender: TObject);
