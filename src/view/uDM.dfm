@@ -76,6 +76,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
     object qClienteId: TIntegerField
+      Alignment = taCenter
       FieldName = 'Id'
       Required = True
     end
@@ -85,6 +86,7 @@ object DM: TDM
       Size = 250
     end
     object qClienteRG: TWideStringField
+      Alignment = taCenter
       FieldName = 'RG'
       Size = 10
     end
@@ -110,13 +112,16 @@ object DM: TDM
       Size = 250
     end
     object qClientedtregistro: TDateField
+      Alignment = taCenter
       FieldName = 'dtregistro'
     end
     object qClienteTipo: TWideStringField
+      Alignment = taCenter
       FieldName = 'Tipo'
       Size = 1
     end
     object qClienteAtivo: TWideStringField
+      Alignment = taCenter
       FieldName = 'Ativo'
       Size = 1
     end
@@ -370,199 +375,10 @@ object DM: TDM
       Required = True
     end
   end
-  object qProduto: TZQuery
-    Connection = zCon
-    SortedFields = 'Id'
-    UpdateObject = uProduto
-    SQL.Strings = (
-      'select id, descricao, estoque, unidade, pCompra, pLucro, pVenda,'
-      '  IdGrupo, grupo, dtRegistro, ativo'
-      'FROM produto'
-      'where (((:id = 0) or (id = :id)) and (descricao like :desc)'
-      '  and (:ativo = '#39'T'#39' or ativo = :ativo));')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'desc'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ativo'
-        ParamType = ptUnknown
-      end>
-    IndexFieldNames = 'Id Asc'
-    Left = 24
-    Top = 174
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'desc'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ativo'
-        ParamType = ptUnknown
-      end>
-    object qProdutoid: TIntegerField
-      FieldName = 'id'
-      Required = True
-    end
-    object qProdutodescricao: TWideStringField
-      FieldName = 'descricao'
-      Required = True
-      Size = 255
-    end
-    object qProdutoestoque: TFloatField
-      FieldName = 'estoque'
-    end
-    object qProdutounidade: TWideStringField
-      FieldName = 'unidade'
-      Size = 5
-    end
-    object qProdutopCompra: TFloatField
-      FieldName = 'pCompra'
-    end
-    object qProdutopLucro: TFloatField
-      FieldName = 'pLucro'
-    end
-    object qProdutopVenda: TFloatField
-      FieldName = 'pVenda'
-      Required = True
-    end
-    object qProdutoIdGrupo: TIntegerField
-      FieldName = 'IdGrupo'
-    end
-    object qProdutogrupo: TWideStringField
-      FieldName = 'grupo'
-      Size = 70
-    end
-    object qProdutodtRegistro: TDateField
-      FieldName = 'dtRegistro'
-      Required = True
-    end
-    object qProdutoativo: TWideStringField
-      FieldName = 'ativo'
-      Required = True
-      Size = 1
-    end
-  end
-  object dProduto: TDataSource
-    DataSet = qProduto
-    Left = 88
-    Top = 174
-  end
-  object uProduto: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM PRODUTO'
-      'WHERE'
-      '  PRODUTO.id = :OLD_id')
-    InsertSQL.Strings = (
-      'INSERT INTO PRODUTO'
-      
-        '  (id, descricao, unidade, estoque, pCompra, pLucro, pVenda, IdG' +
-        'rupo,'
-      '   grupo, dtRegistro, ativo)'
-      'SELECT'
-      
-        '  (select coalesce(max(id)+1, 1) from PRODUTO), :descricao, :uni' +
-        'dade, :estoque, :pCompra, :pLucro, :pVenda, :IdGrupo,'
-      '   :grupo, :dtRegistro, :ativo')
-    ModifySQL.Strings = (
-      'UPDATE PRODUTO SET'
-      '  id = :id,'
-      '  descricao = :descricao,'
-      '  estoque = :estoque,'
-      '  unidade = :unidade,'
-      '  pCompra = :pCompra,'
-      '  pLucro = :pLucro,'
-      '  pVenda = :pVenda,'
-      '  IdGrupo = :IdGrupo,'
-      '  grupo = :grupo,'
-      '  dtRegistro = :dtRegistro,'
-      '  ativo = :ativo'
-      'WHERE'
-      '  PRODUTO.id = :OLD_id')
-    UseSequenceFieldForRefreshSQL = False
-    Left = 56
-    Top = 174
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'descricao'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'estoque'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'unidade'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pCompra'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pLucro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pVenda'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'IdGrupo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'grupo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DtRegistro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ativo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_id'
-        ParamType = ptUnknown
-      end>
-  end
   object dFuncionario: TDataSource
     DataSet = qFuncionario
     Left = 88
-    Top = 228
+    Top = 173
   end
   object uFuncionario: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -596,7 +412,7 @@ object DM: TDM
       '  Funcionario.id = :OLD_id')
     UseSequenceFieldForRefreshSQL = False
     Left = 56
-    Top = 228
+    Top = 173
     ParamData = <
       item
         DataType = ftUnknown
@@ -684,7 +500,7 @@ object DM: TDM
       end>
     IndexFieldNames = 'Id Asc'
     Left = 24
-    Top = 228
+    Top = 173
     ParamData = <
       item
         DataType = ftUnknown
@@ -702,6 +518,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
     object qFuncionarioId: TIntegerField
+      Alignment = taCenter
       FieldName = 'Id'
       Required = True
     end
@@ -711,16 +528,19 @@ object DM: TDM
       Size = 255
     end
     object qFuncionarioRG: TWideStringField
+      Alignment = taCenter
       FieldName = 'RG'
       Required = True
       Size = 10
     end
     object qFuncionarioCpf: TWideStringField
+      Alignment = taCenter
       FieldName = 'Cpf'
       Required = True
       Size = 11
     end
     object qFuncionariodtnasc: TDateField
+      Alignment = taCenter
       FieldName = 'dtnasc'
       Required = True
       OnSetText = qFuncionariodtnascSetText
@@ -739,11 +559,495 @@ object DM: TDM
       Size = 250
     end
     object qFuncionariodtregistro: TDateField
+      Alignment = taCenter
       FieldName = 'dtregistro'
       Required = True
     end
     object qFuncionarioAtivo: TWideStringField
+      Alignment = taCenter
       FieldName = 'Ativo'
+      Required = True
+      Size = 1
+    end
+  end
+  object qProduto: TZQuery
+    Connection = zCon
+    SortedFields = 'Id'
+    UpdateObject = uProduto
+    SQL.Strings = (
+      'select id, descricao, estoque, unidade, pCompra, pLucro, pVenda,'
+      '  IdGrupo, grupo, dtRegistro, ativo'
+      'FROM produto'
+      'where (((:id = 0) or (id = :id)) and (descricao like :desc)'
+      '  and (:ativo = '#39'T'#39' or ativo = :ativo));')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'desc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end>
+    IndexFieldNames = 'Id Asc'
+    Left = 336
+    Top = 14
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'desc'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end>
+    object qProdutoid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object qProdutodescricao: TWideStringField
+      FieldName = 'descricao'
+      Required = True
+      Size = 255
+    end
+    object qProdutoestoque: TFloatField
+      FieldName = 'estoque'
+    end
+    object qProdutounidade: TWideStringField
+      FieldName = 'unidade'
+      Size = 5
+    end
+    object qProdutopCompra: TFloatField
+      FieldName = 'pCompra'
+    end
+    object qProdutopLucro: TFloatField
+      FieldName = 'pLucro'
+    end
+    object qProdutopVenda: TFloatField
+      FieldName = 'pVenda'
+      Required = True
+    end
+    object qProdutoIdGrupo: TIntegerField
+      FieldName = 'IdGrupo'
+    end
+    object qProdutogrupo: TWideStringField
+      FieldName = 'grupo'
+      Size = 70
+    end
+    object qProdutodtRegistro: TDateField
+      FieldName = 'dtRegistro'
+      Required = True
+    end
+    object qProdutoativo: TWideStringField
+      FieldName = 'ativo'
+      Required = True
+      Size = 1
+    end
+  end
+  object dProduto: TDataSource
+    DataSet = qProduto
+    Left = 400
+    Top = 14
+  end
+  object uProduto: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM PRODUTO'
+      'WHERE'
+      '  PRODUTO.id = :OLD_id')
+    InsertSQL.Strings = (
+      'INSERT INTO PRODUTO'
+      
+        '  (id, descricao, unidade, estoque, pCompra, pLucro, pVenda, IdG' +
+        'rupo,'
+      '   grupo, dtRegistro, ativo)'
+      'SELECT'
+      
+        '  (select coalesce(max(id)+1, 1) from PRODUTO), :descricao, :uni' +
+        'dade, :estoque, :pCompra, :pLucro, :pVenda, :IdGrupo,'
+      '   :grupo, :dtRegistro, :ativo')
+    ModifySQL.Strings = (
+      'UPDATE PRODUTO SET'
+      '  id = :id,'
+      '  descricao = :descricao,'
+      '  estoque = :estoque,'
+      '  unidade = :unidade,'
+      '  pCompra = :pCompra,'
+      '  pLucro = :pLucro,'
+      '  pVenda = :pVenda,'
+      '  IdGrupo = :IdGrupo,'
+      '  grupo = :grupo,'
+      '  dtRegistro = :dtRegistro,'
+      '  ativo = :ativo'
+      'WHERE'
+      '  PRODUTO.id = :OLD_id')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 368
+    Top = 14
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'descricao'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'estoque'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'unidade'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pCompra'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pLucro'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pVenda'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdGrupo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'grupo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DtRegistro'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_id'
+        ParamType = ptUnknown
+      end>
+  end
+  object qMovEstoque: TZQuery
+    Connection = zCon
+    SortedFields = 'Id'
+    UpdateObject = uMovEstoque
+    SQL.Strings = (
+      'select id, idproduto, quantidade, dataMov, idUsuario,'
+      '       idFornecedor, tipoMov'
+      'from MovEstoque'
+      '  where (:idProd = 0 or idproduto = :idProd)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idProd'
+        ParamType = ptUnknown
+      end>
+    IndexFieldNames = 'Id Asc'
+    Left = 336
+    Top = 62
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idProd'
+        ParamType = ptUnknown
+      end>
+    object qMovEstoqueid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object qMovEstoqueidproduto: TIntegerField
+      FieldName = 'idproduto'
+      Required = True
+    end
+    object qMovEstoquequantidade: TFloatField
+      FieldName = 'quantidade'
+      Required = True
+    end
+    object qMovEstoquedataMov: TDateField
+      FieldName = 'dataMov'
+      Required = True
+    end
+    object qMovEstoqueidUsuario: TSmallintField
+      FieldName = 'idUsuario'
+    end
+    object qMovEstoqueidFornecedor: TSmallintField
+      FieldName = 'idFornecedor'
+    end
+    object qMovEstoquetipoMov: TWideStringField
+      FieldName = 'tipoMov'
+      Required = True
+      Size = 1
+    end
+  end
+  object uMovEstoque: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM MovEstoque'
+      'WHERE'
+      '  MovEstoque.id = :OLD_id ')
+    InsertSQL.Strings = (
+      'INSERT INTO MovEstoque'
+      
+        '  (idproduto, quantidade, dataMov, idUsuario, idFornecedor, tipo' +
+        'Mov)'
+      'VALUES'
+      
+        '  (:idproduto, :quantidade, :dataMov, :idUsuario, :idFornecedor,' +
+        ' :tipoMov)')
+    ModifySQL.Strings = (
+      'UPDATE MovEstoque SET'
+      '  idproduto = :idproduto,'
+      '  quantidade = :quantidade,'
+      '  dataMov = :dataMov,'
+      '  idUsuario = :idUsuario,'
+      '  idFornecedor = :idFornecedor,'
+      '  tipoMov = :tipoMov'
+      'WHERE'
+      '  MovEstoque.id = :OLD_id')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 368
+    Top = 62
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idproduto'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'quantidade'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dataMov'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'idUsuario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'idFornecedor'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'tipoMov'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_id'
+        ParamType = ptUnknown
+      end>
+  end
+  object dFornecedor: TDataSource
+    DataSet = qFornecedor
+    Left = 88
+    Top = 229
+  end
+  object uFornecedor: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM fornecedor'
+      'WHERE'
+      '  fornecedor.id = :OLD_id')
+    InsertSQL.Strings = (
+      'INSERT INTO fornecedor'
+      
+        '  (id, nome, ie, CNPJ, endereco, numEndereco, bairro, dtRegistro' +
+        ', ativo)'
+      'VALUES'
+      
+        '  (:id, :nome, :ie, :CNPJ, :endereco, :numEndereco, :bairro, :dt' +
+        'Registro, '
+      '   :ativo)')
+    ModifySQL.Strings = (
+      'UPDATE fornecedor SET'
+      '  id = :id,'
+      '  nome = :nome,'
+      '  ie = :ie,'
+      '  CNPJ = :CNPJ,'
+      '  endereco = :endereco,'
+      '  numEndereco = :numEndereco,'
+      '  bairro = :bairro,'
+      '  ativo = :ativo'
+      'WHERE'
+      '  fornecedor.id = :OLD_id')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 56
+    Top = 229
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'nome'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ie'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CNPJ'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'endereco'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'numEndereco'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'bairro'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DtRegistro'
+        ParamType = ptUnknown
+      end>
+  end
+  object qFornecedor: TZQuery
+    Connection = zCon
+    SortedFields = 'Id'
+    UpdateObject = uFornecedor
+    OnNewRecord = qFornecedorNewRecord
+    SQL.Strings = (
+      'select'
+      '  id,nome, ie, CNPJ, endereco, numEndereco,'
+      '  bairro, dtRegistro, ativo'
+      'from fornecedor'
+      'where ((:id = 0 or id = :id) and nome like :nome)'
+      #9#9'and (:ativo = '#39'T'#39' or ativo = :ativo);')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'nome'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end>
+    IndexFieldNames = 'Id Asc'
+    Left = 24
+    Top = 229
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'nome'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ativo'
+        ParamType = ptUnknown
+      end>
+    object qFornecedorid: TIntegerField
+      Alignment = taCenter
+      FieldName = 'id'
+      Required = True
+    end
+    object qFornecedornome: TWideStringField
+      FieldName = 'nome'
+      Required = True
+      Size = 255
+    end
+    object qFornecedorie: TWideStringField
+      FieldName = 'ie'
+      Size = 14
+    end
+    object qFornecedorCNPJ: TWideStringField
+      FieldName = 'CNPJ'
+      EditMask = '99.999.999/9999-99;0;_'
+      Size = 14
+    end
+    object qFornecedorendereco: TWideStringField
+      FieldName = 'endereco'
+      Size = 250
+    end
+    object qFornecedornumEndereco: TWideStringField
+      FieldName = 'numEndereco'
+      Size = 6
+    end
+    object qFornecedorbairro: TWideStringField
+      FieldName = 'bairro'
+      Size = 250
+    end
+    object qFornecedordtRegistro: TDateField
+      Alignment = taCenter
+      FieldName = 'dtRegistro'
+      Required = True
+    end
+    object qFornecedorativo: TWideStringField
+      Alignment = taCenter
+      FieldName = 'ativo'
       Required = True
       Size = 1
     end

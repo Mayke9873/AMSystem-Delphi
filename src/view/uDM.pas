@@ -13,8 +13,6 @@ type
     qPesq: TZQuery;
     dPesq: TDataSource;
     qCliente: TZQuery;
-    dCliente: TDataSource;
-    uCliente: TZUpdateSQL;
     qClienteId: TIntegerField;
     qClienteNome: TWideStringField;
     qClienteRG: TWideStringField;
@@ -26,24 +24,12 @@ type
     qClientedtregistro: TDateField;
     qClienteTipo: TWideStringField;
     qClienteAtivo: TWideStringField;
+    dCliente: TDataSource;
+    uCliente: TZUpdateSQL;
     qExecSQL: TZQuery;
     uVenda: TZUpdateSQL;
     qVenda: TZQuery;
     qVendaid: TIntegerField;
-    qProduto: TZQuery;
-    dProduto: TDataSource;
-    uProduto: TZUpdateSQL;
-    qProdutoid: TIntegerField;
-    qProdutodescricao: TWideStringField;
-    qProdutoestoque: TFloatField;
-    qProdutounidade: TWideStringField;
-    qProdutopCompra: TFloatField;
-    qProdutopLucro: TFloatField;
-    qProdutopVenda: TFloatField;
-    qProdutoIdGrupo: TIntegerField;
-    qProdutogrupo: TWideStringField;
-    qProdutodtRegistro: TDateField;
-    qProdutoativo: TWideStringField;
     dFuncionario: TDataSource;
     uFuncionario: TZUpdateSQL;
     qFuncionario: TZQuery;
@@ -57,10 +43,46 @@ type
     qFuncionarioBairro: TWideStringField;
     qFuncionariodtregistro: TDateField;
     qFuncionarioAtivo: TWideStringField;
+    qProduto: TZQuery;
+    qProdutoid: TIntegerField;
+    qProdutodescricao: TWideStringField;
+    qProdutoestoque: TFloatField;
+    qProdutounidade: TWideStringField;
+    qProdutopCompra: TFloatField;
+    qProdutopLucro: TFloatField;
+    qProdutopVenda: TFloatField;
+    qProdutoIdGrupo: TIntegerField;
+    qProdutogrupo: TWideStringField;
+    qProdutodtRegistro: TDateField;
+    qProdutoativo: TWideStringField;
+    dProduto: TDataSource;
+    uProduto: TZUpdateSQL;
+    qMovEstoque: TZQuery;
+    qMovEstoqueid: TIntegerField;
+    qMovEstoqueidproduto: TIntegerField;
+    qMovEstoquequantidade: TFloatField;
+    qMovEstoquedataMov: TDateField;
+    qMovEstoqueidUsuario: TSmallintField;
+    qMovEstoqueidFornecedor: TSmallintField;
+    qMovEstoquetipoMov: TWideStringField;
+    uMovEstoque: TZUpdateSQL;
+    dFornecedor: TDataSource;
+    uFornecedor: TZUpdateSQL;
+    qFornecedor: TZQuery;
+    qFornecedorid: TIntegerField;
+    qFornecedornome: TWideStringField;
+    qFornecedorie: TWideStringField;
+    qFornecedorCNPJ: TWideStringField;
+    qFornecedorendereco: TWideStringField;
+    qFornecedornumEndereco: TWideStringField;
+    qFornecedorbairro: TWideStringField;
+    qFornecedordtRegistro: TDateField;
+    qFornecedorativo: TWideStringField;
     procedure qClienteNewRecord(DataSet: TDataSet);
     procedure qClientedtnascSetText(Sender: TField; const Text: string);
     procedure qFuncionarioNewRecord(DataSet: TDataSet);
     procedure qFuncionariodtnascSetText(Sender: TField; const Text: string);
+    procedure qFornecedorNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -105,6 +127,12 @@ procedure TDM.qClienteNewRecord(DataSet: TDataSet);
 begin
   qClienteativo.AsString := 'S';
   qClientetipo.AsString := 'F';
+end;
+
+procedure TDM.qFornecedorNewRecord(DataSet: TDataSet);
+begin
+  qFornecedorativo.AsString := 'S';
+  qFornecedordtRegistro.AsDateTime := Date;
 end;
 
 procedure TDM.qFuncionariodtnascSetText(Sender: TField; const Text: string);
