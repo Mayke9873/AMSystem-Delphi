@@ -100,7 +100,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
@@ -163,10 +162,10 @@
         <DCCReference Include="src\uVenda.pas"/>
         <DCCReference Include="src\uProduto.pas"/>
         <DCCReference Include="src\uFuncionario.pas"/>
-        <DCCReference Include="c:\program files (x86)\embarcadero\studio\22.0\ObjRepos\EN\DelphiWin32\OKCANCL1.PAS">
-            <Form>OKBottomDlg</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="src\view\FrmFornecedor.pas">
+            <Form>fFornecedor</Form>
         </DCCReference>
+        <DCCReference Include="Consts.pas"/>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>
@@ -195,8 +194,8 @@
                     <Source Name="MainSource">AmSystem.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k280.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp280.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
