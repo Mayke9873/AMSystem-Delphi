@@ -31,6 +31,11 @@ type
     procedure SetUnidade(const Value: String);
     procedure SetEstoque(const Value: Double);
   public
+    procedure Cadastrar;
+    function Pesquisar() : Boolean; overload;
+    function Pesquisar(pID : Integer) : Boolean; overload;
+    function Pesquisar(pDescricao : String) : Boolean; overload;
+  published
     property ID : Integer read FID write SetID;
     property Descricao : String read FDescricao write SetDescricao;
     property Unidade : String read FUnidade write SetUnidade;
@@ -42,11 +47,6 @@ type
     property PorcentLucro : Double read FPorcentLucro write SetPorcentLucro;
     property DataRegistro : TDate read FDataRegistro write SetDataRegistro;
     property Ativo : String read FAtivo write SetAtivo;
-
-    procedure Cadastrar;
-    function Pesquisar() : Boolean; overload;
-    function Pesquisar(pID : Integer) : Boolean; overload;
-    function Pesquisar(pDescricao : String) : Boolean; overload;
   end;
 
 implementation
@@ -61,14 +61,14 @@ begin
   if Length(Descricao) <> 0 then
   begin
     DM.qProdutoID.AsInteger := DM.qProdutoID.AsInteger;
-    DM.qProdutoDescricao.asString := Descricao;
-    DM.qProdutoUnidade.AsString := Unidade;
-    DM.qProdutoIdGrupo.AsInteger := IdGrupo;
-    DM.qProdutoGrupo.asString := DescricaoGrupo;
-    DM.qProdutoPCompra.AsCurrency := PrecoCompra;
-    DM.qProdutoPVenda.AsCurrency := PrecoVenda;
-    DM.qProdutoPLucro.AsFloat := PorcentLucro;
-    DM.qProdutoAtivo.AsString := Ativo;
+    DM.qProdutoDescricao.asString := FDescricao;
+    DM.qProdutoUnidade.AsString := FUnidade;
+    DM.qProdutoIdGrupo.AsInteger := FIdGrupo;
+    DM.qProdutoGrupo.asString := FDescricaoGrupo;
+    DM.qProdutoPCompra.AsCurrency := FPrecoCompra;
+    DM.qProdutoPVenda.AsCurrency := FPrecoVenda;
+    DM.qProdutoPLucro.AsFloat := FPorcentLucro;
+    DM.qProdutoAtivo.AsString := FAtivo;
 
     if (DM.qProduto.State in [dsInsert]) then
     begin
@@ -92,19 +92,19 @@ begin
   DM.qProduto.Close;
   DM.qProduto.Params[0].AsInteger := 0;
   DM.qProduto.Params[1].AsString := '%%';
-  DM.qProduto.Params[2].AsString := Ativo;
+  DM.qProduto.Params[2].AsString := FAtivo;
   DM.qProduto.Open;
 
   if DM.qProduto.RecordCount = 1 then
   begin
     Result := True;
-    ID := DM.qProdutoId.AsInteger;
-    Descricao := DM.qProdutoDescricao.AsString;
+    FID := DM.qProdutoId.AsInteger;
+    FDescricao := DM.qProdutoDescricao.AsString;
     Exit;
   end;
 
-  ID := 0;
-  Descricao := '';
+  FID := 0;
+  FDescricao := '';
 end;
 
 function TProduto.Pesquisar(pDescricao: String): Boolean;
@@ -114,19 +114,19 @@ begin
   DM.qProduto.Close;
   DM.qProduto.Params[0].AsInteger := 0;
   DM.qProduto.Params[1].AsString := '%' + pDescricao + '%';
-  DM.qProduto.Params[2].AsString := Ativo;
+  DM.qProduto.Params[2].AsString := FAtivo;
   DM.qProduto.Open;
 
   if DM.qProduto.RecordCount = 1 then
   begin
     Result := True;
-    ID := DM.qProdutoId.AsInteger;
-    Descricao := DM.qProdutoDescricao.AsString;
+    FID := DM.qProdutoId.AsInteger;
+    FDescricao := DM.qProdutoDescricao.AsString;
     Exit;
   end;
 
-  ID := 0;
-  Descricao := '';
+  FID := 0;
+  FDescricao := '';
 end;
 
 function TProduto.Pesquisar(pID: Integer): Boolean;
@@ -136,20 +136,20 @@ begin
   DM.qProduto.Close;
   DM.qProduto.Params[0].AsInteger := pID;
   DM.qProduto.Params[1].AsString := '%%';
-  DM.qProduto.Params[2].AsString := Ativo;
+  DM.qProduto.Params[2].AsString := FAtivo;
   DM.qProduto.Open;
 
   if DM.qProduto.RecordCount = 1 then
   begin
     Result := True;
-    ID := DM.qProdutoId.AsInteger;
-    Descricao := DM.qProdutoDescricao.AsString;
-    PrecoVenda := DM.qProdutopVenda.AsCurrency;
+    FID := DM.qProdutoId.AsInteger;
+    FDescricao := DM.qProdutoDescricao.AsString;
+    FPrecoVenda := DM.qProdutopVenda.AsCurrency;
     Exit;
   end;
 
-  ID := 0;
-  Descricao := '';
+  FID := 0;
+  FDescricao := '';
 end;
 
 procedure TProduto.SetAtivo(const Value: String);
