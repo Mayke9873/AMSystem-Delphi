@@ -45,6 +45,7 @@ type
     procedure Produtos2Click(Sender: TObject);
     procedure FecharSistema;
     procedure Fornecedores1Click(Sender: TObject);
+    procedure AjustedeEstoque1Click(Sender: TObject);
   private
     { Private declarations }
     Valida : TValidacoes;
@@ -59,13 +60,21 @@ implementation
 
   uses
     FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto, FrmFuncionario,
-  FrmVenda, FrmFornecedor;
+  FrmVenda, FrmFornecedor, FrmAjusteEstoque;
 
 {$R *.dfm}
 
+procedure TfPrincipal.AjustedeEstoque1Click(Sender: TObject);
+begin
+  if not Assigned(fAjusteEstoque) then
+    fAjusteEstoque := TfAjusteEstoque.Create(fPrincipal)
+  else
+    fAjusteEstoque.ShowModal;
+end;
+
 procedure TfPrincipal.Cadastros2Click(Sender: TObject);
 begin
-  if not Assigned(fCliente) then    
+  if not Assigned(fCliente) then
     fCliente := TfCliente.Create(fPrincipal)
   else
     fCliente.Show;

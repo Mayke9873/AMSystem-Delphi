@@ -8828,6 +8828,7 @@ object fPrincipal: TfPrincipal
       end
       object AjustedeEstoque1: TMenuItem
         Caption = 'Ajuste de Estoque'
+        OnClick = AjustedeEstoque1Click
       end
     end
     object Sair1: TMenuItem
