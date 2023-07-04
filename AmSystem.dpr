@@ -23,7 +23,8 @@ uses
   FrmFornecedor in 'src\view\FrmFornecedor.pas' {fFornecedor},
   Consts in 'Consts.pas',
   uEstoque in 'src\uEstoque.pas',
-  FrmAjusteEstoque in 'src\view\FrmAjusteEstoque.pas' {fAjusteEstoque};
+  FrmAjusteEstoque in 'src\view\FrmAjusteEstoque.pas' {fAjusteEstoque},
+  dmProduto in 'src\model\dmProduto.pas' {dmProdutos: TDataModule};
 
 {$R *.res}
 

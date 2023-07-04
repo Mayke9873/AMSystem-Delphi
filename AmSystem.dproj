@@ -172,6 +172,11 @@
             <Form>fAjusteEstoque</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\model\dmProduto.pas">
+            <Form>dmProdutos</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>
