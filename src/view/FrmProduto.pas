@@ -81,7 +81,7 @@ var
 implementation
 
 uses
-  uDM;
+  dmProduto;
 {$R *.dfm}
 
 procedure TfProduto.Consulta;
@@ -136,7 +136,7 @@ begin
 
   venda := compra + (compra * (lucro / 100));
   // dbeValorVenda.Text := FloatToStr(venda);
-  DM.qProdutoPVENDA.asFloat := venda;
+  dmProdutos.qProdutoPVENDA.asFloat := venda;
 end;
 
 procedure TfProduto.dbeValorVendaExit(Sender: TObject);
@@ -168,7 +168,7 @@ begin
 
   lucro := (venda - compra) / compra * 100;
   // dbeLucro.Text := FloatToStr(lucro);
-  DM.qProdutoPLUCRO.asFloat := lucro;
+  dmProdutos.qProdutoPLUCRO.asFloat := lucro;
 end;
 
 procedure TfProduto.edPesquisaChange(Sender: TObject);
@@ -178,8 +178,8 @@ end;
 
 procedure TfProduto.FormCreate(Sender: TObject);
 begin
+  dmProdutos := TdmProdutos.Create(nil);
   Produto := TProduto.Create();
-  //  Cancelar := 'N';
   AlterarCampos(telaPadrao);
 
   Consulta;
@@ -233,7 +233,7 @@ begin
       dbeValorVenda.ReadOnly := True;
 
       if Cancelar = 'S' then
-        DM.qProduto.Cancel;
+        dmProdutos.qProduto.Cancel;
     end;
 
     telaInsert : begin
@@ -261,7 +261,7 @@ begin
       dbeLucro.Clear;
       dbeValorVenda.Clear;
 
-      DM.qProduto.Insert;
+      dmProdutos.qProduto.Insert;
     end;
 
     telaEdit : begin
@@ -281,14 +281,14 @@ begin
       dbeLucro.ReadOnly := false;
       dbeValorVenda.ReadOnly := false;
 
-      DM.qProduto.Edit;
+      dmProdutos.qProduto.Edit;
     end;
   end;
 end;
 
 procedure TfProduto.qProdutoNewRecord(DataSet: TDataSet);
 begin
-  DM.qProdutoATIVO.AsString := 'S';
+  dmProdutos.qProdutoATIVO.AsString := 'S';
 end;
 
 procedure TfProduto.rdbAtivoClick(Sender: TObject);
@@ -349,6 +349,7 @@ end;
 
 procedure TfProduto.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  FreeAndNil(dmProdutos);
   Produto.Free;
   Action := caFree;
   fProduto := nil;

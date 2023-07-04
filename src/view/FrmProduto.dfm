@@ -107,26 +107,27 @@ object fProduto: TfProduto
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 979
+    Width = 991
     Height = 591
-    ActivePage = pgDados
-    Anchors = [akLeft, akTop, akRight, akBottom]
+    ActivePage = pgTabela
+    Align = alBottom
     TabOrder = 1
+    ExplicitLeft = 8
+    ExplicitTop = 57
     ExplicitWidth = 975
-    ExplicitHeight = 590
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       DesignSize = (
-        971
+        983
         563)
       object dbgProduto: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 0
-        Width = 965
+        Width = 977
         Height = 560
         Anchors = [akLeft, akTop, akRight, akBottom]
-        DataSource = DM.dProduto
+        DataSource = dmProdutos.dProduto
         DrawingStyle = gdsGradient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -391,7 +392,7 @@ object fProduto: TfProduto
         Width = 77
         Height = 26
         DataField = 'id'
-        DataSource = DM.dProduto
+        DataSource = dmProdutos.dProduto
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -407,7 +408,7 @@ object fProduto: TfProduto
         Width = 339
         Height = 26
         DataField = 'DESCRICAO'
-        DataSource = DM.dProduto
+        DataSource = dmProdutos.dProduto
         ReadOnly = True
         TabOrder = 1
       end
@@ -417,7 +418,7 @@ object fProduto: TfProduto
         Width = 65
         Height = 26
         DataField = 'UNIDADE'
-        DataSource = DM.dProduto
+        DataSource = dmProdutos.dProduto
         ReadOnly = True
         TabOrder = 2
       end
@@ -427,7 +428,7 @@ object fProduto: TfProduto
         Width = 90
         Height = 26
         DataField = 'PCOMPRA'
-        DataSource = DM.dProduto
+        DataSource = dmProdutos.dProduto
         ReadOnly = True
         TabOrder = 4
       end
@@ -437,7 +438,7 @@ object fProduto: TfProduto
         Width = 90
         Height = 26
         DataField = 'PLUCRO'
-        DataSource = DM.dProduto
+        DataSource = dmProdutos.dProduto
         ReadOnly = True
         TabOrder = 5
         OnExit = dbeLucroExit
@@ -448,7 +449,7 @@ object fProduto: TfProduto
         Width = 90
         Height = 26
         DataField = 'PVENDA'
-        DataSource = DM.dProduto
+        DataSource = dmProdutos.dProduto
         ReadOnly = True
         TabOrder = 6
         OnExit = dbeValorVendaExit
@@ -460,7 +461,7 @@ object fProduto: TfProduto
         Height = 17
         Caption = 'Ativo'
         DataField = 'ativo'
-        DataSource = DM.dProduto
+        DataSource = dmProdutos.dProduto
         ReadOnly = True
         TabOrder = 7
         ValueChecked = 'S'
@@ -472,7 +473,7 @@ object fProduto: TfProduto
         Width = 90
         Height = 26
         DataField = 'ESTOQUE'
-        DataSource = DM.dProduto
+        DataSource = dmProdutos.dProduto
         ReadOnly = True
         TabOrder = 3
       end
@@ -484,7 +485,6 @@ object fProduto: TfProduto
         Height = 26
         CharCase = ecUpperCase
         DataField = 'GRUPO'
-        DataSource = DM.dProduto
         Items.Strings = (
           'BRANCO'
           'BEBIDAS'
@@ -497,16 +497,16 @@ object fProduto: TfProduto
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 316
+    Width = 312
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 312
+    ExplicitWidth = 308
   end
   object rdbTodos: TRadioButton
-    Left = 428
+    Left = 424
     Top = 34
     Width = 49
     Height = 17
@@ -516,10 +516,10 @@ object fProduto: TfProduto
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 424
+    ExplicitLeft = 420
   end
   object rdbAtivo: TRadioButton
-    Left = 508
+    Left = 504
     Top = 34
     Width = 49
     Height = 17
@@ -527,10 +527,10 @@ object fProduto: TfProduto
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbAtivoClick
-    ExplicitLeft = 504
+    ExplicitLeft = 500
   end
   object rdbInativo: TRadioButton
-    Left = 580
+    Left = 576
     Top = 34
     Width = 57
     Height = 17
@@ -538,7 +538,7 @@ object fProduto: TfProduto
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbInativoClick
-    ExplicitLeft = 576
+    ExplicitLeft = 572
   end
   object ImageList1: TImageList
     Left = 928
