@@ -21,7 +21,9 @@ uses
   uProduto in 'src\uProduto.pas',
   uFuncionario in 'src\uFuncionario.pas',
   FrmFornecedor in 'src\view\FrmFornecedor.pas' {fFornecedor},
-  Consts in 'Consts.pas';
+  Consts in 'Consts.pas',
+  uEstoque in 'src\uEstoque.pas',
+  FrmAjusteEstoque in 'src\view\FrmAjusteEstoque.pas' {fAjusteEstoque};
 
 {$R *.res}
 
