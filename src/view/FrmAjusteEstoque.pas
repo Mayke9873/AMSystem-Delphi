@@ -214,15 +214,15 @@ begin
   dmProdutos := TdmProdutos.Create(nil);
 end;
 
+procedure TfAjusteEstoque.FormShow(Sender: TObject);
+begin
+  edIdProduto.SetFocus;
+end;
+
 procedure TfAjusteEstoque.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
     SelectNext(ActiveControl, True, True);
-end;
-
-procedure TfAjusteEstoque.FormShow(Sender: TObject);
-begin
-  edIdProduto.SetFocus;
 end;
 
 end.
