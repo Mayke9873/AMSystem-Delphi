@@ -52,7 +52,7 @@ type
 implementation
 
 uses
-  uDM;
+  dmProduto;
 
 { TProduto }
 
@@ -60,27 +60,27 @@ procedure TProduto.Cadastrar;
 begin
   if Length(Descricao) <> 0 then
   begin
-    DM.qProdutoID.AsInteger := DM.qProdutoID.AsInteger;
-    DM.qProdutoDescricao.asString := FDescricao;
-    DM.qProdutoUnidade.AsString := FUnidade;
-    DM.qProdutoIdGrupo.AsInteger := FIdGrupo;
-    DM.qProdutoGrupo.asString := FDescricaoGrupo;
-    DM.qProdutoPCompra.AsCurrency := FPrecoCompra;
-    DM.qProdutoPVenda.AsCurrency := FPrecoVenda;
-    DM.qProdutoPLucro.AsFloat := FPorcentLucro;
-    DM.qProdutoAtivo.AsString := FAtivo;
+    dmProdutos.qProdutoID.AsInteger := dmProdutos.qProdutoID.AsInteger;
+    dmProdutos.qProdutoDescricao.asString := FDescricao;
+    dmProdutos.qProdutoUnidade.AsString := FUnidade;
+    dmProdutos.qProdutoIdGrupo.AsInteger := FIdGrupo;
+    dmProdutos.qProdutoGrupo.asString := FDescricaoGrupo;
+    dmProdutos.qProdutoPCompra.AsCurrency := FPrecoCompra;
+    dmProdutos.qProdutoPVenda.AsCurrency := FPrecoVenda;
+    dmProdutos.qProdutoPLucro.AsFloat := FPorcentLucro;
+    dmProdutos.qProdutoAtivo.AsString := FAtivo;
 
-    if (DM.qProduto.State in [dsInsert]) then
+    if (dmProdutos.qProduto.State in [dsInsert]) then
     begin
-      DM.qProdutoEstoque.AsFloat := 0;
-      DM.qProdutoDtRegistro.AsDateTime := Now;
+      dmProdutos.qProdutoEstoque.AsFloat := 0;
+      dmProdutos.qProdutoDtRegistro.AsDateTime := Now;
     end;
 
-    DM.qProduto.Post;
+    dmProdutos.qProduto.Post;
   end
   else
   begin
-    DM.qProduto.Cancel;
+    dmProdutos.qProduto.Cancel;
     Application.MessageBox('Campo descrição obrigatório. Por favor, verifique!', 'Atenção', MB_ICONEXCLAMATION);
   end;
 end;
@@ -89,17 +89,17 @@ function TProduto.Pesquisar() : Boolean;
 begin
   Result := False;
 
-  DM.qProduto.Close;
-  DM.qProduto.Params[0].AsInteger := 0;
-  DM.qProduto.Params[1].AsString := '%%';
-  DM.qProduto.Params[2].AsString := FAtivo;
-  DM.qProduto.Open;
+  dmProdutos.qProduto.Close;
+  dmProdutos.qProduto.Params[0].AsInteger := 0;
+  dmProdutos.qProduto.Params[1].AsString := '%%';
+  dmProdutos.qProduto.Params[2].AsString := FAtivo;
+  dmProdutos.qProduto.Open;
 
-  if DM.qProduto.RecordCount = 1 then
+  if dmProdutos.qProduto.RecordCount = 1 then
   begin
     Result := True;
-    FID := DM.qProdutoId.AsInteger;
-    FDescricao := DM.qProdutoDescricao.AsString;
+    FID := dmProdutos.qProdutoId.AsInteger;
+    FDescricao := dmProdutos.qProdutoDescricao.AsString;
     Exit;
   end;
 
@@ -111,17 +111,17 @@ function TProduto.Pesquisar(pDescricao: String): Boolean;
 begin
   Result := False;
 
-  DM.qProduto.Close;
-  DM.qProduto.Params[0].AsInteger := 0;
-  DM.qProduto.Params[1].AsString := '%' + pDescricao + '%';
-  DM.qProduto.Params[2].AsString := FAtivo;
-  DM.qProduto.Open;
+  dmProdutos.qProduto.Close;
+  dmProdutos.qProduto.Params[0].AsInteger := 0;
+  dmProdutos.qProduto.Params[1].AsString := '%' + pDescricao + '%';
+  dmProdutos.qProduto.Params[2].AsString := FAtivo;
+  dmProdutos.qProduto.Open;
 
-  if DM.qProduto.RecordCount = 1 then
+  if dmProdutos.qProduto.RecordCount = 1 then
   begin
     Result := True;
-    FID := DM.qProdutoId.AsInteger;
-    FDescricao := DM.qProdutoDescricao.AsString;
+    FID := dmProdutos.qProdutoId.AsInteger;
+    FDescricao := dmProdutos.qProdutoDescricao.AsString;
     Exit;
   end;
 
@@ -133,18 +133,18 @@ function TProduto.Pesquisar(pID: Integer): Boolean;
 begin
   Result := False;
 
-  DM.qProduto.Close;
-  DM.qProduto.Params[0].AsInteger := pID;
-  DM.qProduto.Params[1].AsString := '%%';
-  DM.qProduto.Params[2].AsString := FAtivo;
-  DM.qProduto.Open;
+  dmProdutos.qProduto.Close;
+  dmProdutos.qProduto.Params[0].AsInteger := pID;
+  dmProdutos.qProduto.Params[1].AsString := '%%';
+  dmProdutos.qProduto.Params[2].AsString := FAtivo;
+  dmProdutos.qProduto.Open;
 
-  if DM.qProduto.RecordCount = 1 then
+  if dmProdutos.qProduto.RecordCount = 1 then
   begin
     Result := True;
-    FID := DM.qProdutoId.AsInteger;
-    FDescricao := DM.qProdutoDescricao.AsString;
-    FPrecoVenda := DM.qProdutopVenda.AsCurrency;
+    FID := dmProdutos.qProdutoId.AsInteger;
+    FDescricao := dmProdutos.qProdutoDescricao.AsString;
+    FPrecoVenda := dmProdutos.qProdutopVenda.AsCurrency;
     Exit;
   end;
 
