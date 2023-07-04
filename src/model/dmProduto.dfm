@@ -4,11 +4,18 @@ inherited dmProdutos: TdmProdutos
     SortedFields = 'Id'
     UpdateObject = uProduto
     SQL.Strings = (
-      'select id, descricao, estoque, unidade, pCompra, pLucro, pVenda,'
+      
+        'SELECT p.id, p.descricao, coalesce(sum(movestoque.quantidade),0)' +
+        ' estoque, unidade, pCompra, pLucro, pVenda,'
       '  IdGrupo, grupo, dtRegistro, ativo'
-      'FROM produto'
-      'where (((:id = 0) or (id = :id)) and (descricao like :desc)'
-      '  and (:ativo = '#39'T'#39' or ativo = :ativo));')
+      'FROM produto p'
+      'left join movestoque on p.id = movestoque.idproduto '
+      'where ((:id = 0) or (p.id = :id)) and (descricao like :desc)'
+      '  and (:ativo = '#39'T'#39' or ativo = :ativo)'
+      
+        '  group by p.id, p.descricao, p.unidade, p.pCompra, pLucro, pVen' +
+        'da,'
+      '  IdGrupo, grupo, dtRegistro, ativo')
     Params = <
       item
         DataType = ftUnknown

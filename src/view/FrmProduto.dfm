@@ -109,8 +109,9 @@ object fProduto: TfProduto
     Top = 56
     Width = 991
     Height = 591
-    ActivePage = pgTabela
+    ActivePage = pgDados
     Align = alBottom
+    Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
     ExplicitLeft = 8
     ExplicitTop = 57
@@ -485,6 +486,7 @@ object fProduto: TfProduto
         Height = 26
         CharCase = ecUpperCase
         DataField = 'GRUPO'
+        DataSource = dmProdutos.dProduto
         Items.Strings = (
           'BRANCO'
           'BEBIDAS'
