@@ -9,6 +9,7 @@ Const
 
   // Tipos
   Ajuste = 'A';
+  Venda = 'V';
 
   Entrada = 1;
   Saida = -1;
