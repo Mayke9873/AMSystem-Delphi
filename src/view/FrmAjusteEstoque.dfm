@@ -11,10 +11,13 @@ object fAjusteEstoque: TfAjusteEstoque
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  KeyPreview = True
   Position = poMainFormCenter
   Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
+  OnShow = FormShow
   TextHeight = 15
   object pnlPrincipal: TPanel
     Left = 0
@@ -28,8 +31,6 @@ object fAjusteEstoque: TfAjusteEstoque
     Padding.Bottom = 8
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 640
-    ExplicitHeight = 300
     object Label1: TLabel
       Left = 9
       Top = 194
@@ -44,7 +45,6 @@ object fAjusteEstoque: TfAjusteEstoque
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitTop = 191
       ExplicitWidth = 120
     end
     object pnlBotoes: TPanel
@@ -57,7 +57,7 @@ object fAjusteEstoque: TfAjusteEstoque
       Caption = 'pnlBotoes'
       ShowCaption = False
       TabOrder = 0
-      ExplicitWidth = 622
+      ExplicitTop = 261
       object pnlSair: TPanel
         Left = 422
         Top = 0
@@ -67,7 +67,6 @@ object fAjusteEstoque: TfAjusteEstoque
         BevelOuter = bvNone
         Caption = 'pnlSair'
         TabOrder = 0
-        ExplicitLeft = 437
         object Shape3: TShape
           Left = 0
           Top = 0
@@ -145,7 +144,7 @@ object fAjusteEstoque: TfAjusteEstoque
       Caption = 'Panel1'
       ShowCaption = False
       TabOrder = 1
-      ExplicitWidth = 622
+      ExplicitTop = -2
       object lblTitulo: TLabel
         AlignWithMargins = True
         Left = 4
@@ -181,9 +180,6 @@ object fAjusteEstoque: TfAjusteEstoque
       Caption = 'pnlEntradaSaida'
       ShowCaption = False
       TabOrder = 2
-      ExplicitLeft = 11
-      ExplicitTop = 205
-      ExplicitWidth = 616
       object Label2: TLabel
         AlignWithMargins = True
         Left = 280
@@ -201,11 +197,10 @@ object fAjusteEstoque: TfAjusteEstoque
         ParentShowHint = False
         ShowHint = True
         WordWrap = True
-        ExplicitTop = 12
         ExplicitWidth = 41
         ExplicitHeight = 30
       end
-      object chkEntrada: TRadioButton
+      object rdEntrada: TRadioButton
         AlignWithMargins = True
         Left = 200
         Top = 3
@@ -219,11 +214,8 @@ object fAjusteEstoque: TfAjusteEstoque
         TabOrder = 0
         TabStop = True
         WordWrap = True
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitHeight = 55
       end
-      object chkSaida: TRadioButton
+      object rdSaida: TRadioButton
         Tag = 1
         AlignWithMargins = True
         Left = 339
@@ -234,9 +226,6 @@ object fAjusteEstoque: TfAjusteEstoque
         Align = alRight
         Caption = 'Sa'#237'da'
         TabOrder = 1
-        ExplicitLeft = 560
-        ExplicitTop = -6
-        ExplicitHeight = 55
       end
     end
     object pnlDados: TPanel
@@ -251,7 +240,6 @@ object fAjusteEstoque: TfAjusteEstoque
       Padding.Right = 8
       ShowCaption = False
       TabOrder = 3
-      ExplicitHeight = 148
       object Label3: TLabel
         AlignWithMargins = True
         Left = 8
@@ -268,11 +256,9 @@ object fAjusteEstoque: TfAjusteEstoque
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 27
-        ExplicitTop = 13
         ExplicitWidth = 91
       end
-      object Panel1: TPanel
+      object pnlPesqProduto: TPanel
         Left = 8
         Top = 24
         Width = 591
@@ -283,13 +269,13 @@ object fAjusteEstoque: TfAjusteEstoque
         Margins.Bottom = 2
         Align = alTop
         BevelOuter = bvNone
-        Caption = 'Panel1'
+        Caption = 'pnlPesqProduto'
         Padding.Bottom = 4
         ParentShowHint = False
         ShowCaption = False
         ShowHint = False
         TabOrder = 0
-        object Panel3: TPanel
+        object pnlProduto: TPanel
           Left = 139
           Top = 0
           Width = 452
@@ -301,9 +287,7 @@ object fAjusteEstoque: TfAjusteEstoque
           Align = alRight
           BevelOuter = bvNone
           Color = clWindow
-          TabOrder = 0
-          ExplicitLeft = 107
-          ExplicitHeight = 25
+          TabOrder = 1
           object Shape2: TShape
             AlignWithMargins = True
             Left = 0
@@ -320,7 +304,7 @@ object fAjusteEstoque: TfAjusteEstoque
             ExplicitLeft = -2
             ExplicitTop = 1
           end
-          object DBEdit2: TDBEdit
+          object edProduto: TEdit
             AlignWithMargins = True
             Left = 3
             Top = 4
@@ -328,14 +312,15 @@ object fAjusteEstoque: TfAjusteEstoque
             Height = 17
             Margins.Top = 4
             Align = alClient
-            BevelInner = bvNone
-            BevelOuter = bvNone
             BorderStyle = bsNone
             TabOrder = 0
+            OnChange = edProdutoChange
+            OnKeyPress = edProdutoKeyPress
             ExplicitLeft = 1
+            ExplicitTop = 5
           end
         end
-        object Panel10: TPanel
+        object pnlIdProduto: TPanel
           Left = 0
           Top = 0
           Width = 137
@@ -347,8 +332,7 @@ object fAjusteEstoque: TfAjusteEstoque
           Align = alLeft
           BevelOuter = bvNone
           Color = clWindow
-          TabOrder = 1
-          ExplicitHeight = 25
+          TabOrder = 0
           object Shape9: TShape
             AlignWithMargins = True
             Left = 0
@@ -366,7 +350,8 @@ object fAjusteEstoque: TfAjusteEstoque
             ExplicitWidth = 92
             ExplicitHeight = 22
           end
-          object DBEdit1: TDBEdit
+          object edIdProduto: TEdit
+            Tag = 1
             AlignWithMargins = True
             Left = 3
             Top = 4
@@ -374,16 +359,13 @@ object fAjusteEstoque: TfAjusteEstoque
             Height = 17
             Margins.Top = 4
             Align = alClient
-            BevelInner = bvNone
-            BevelOuter = bvNone
             BorderStyle = bsNone
             TabOrder = 0
-            ExplicitWidth = 99
-            ExplicitHeight = 21
+            OnExit = edIdProdutoExit
           end
         end
       end
-      object Panel6: TPanel
+      object pnlQuantidade: TPanel
         Left = 8
         Top = 103
         Width = 591
@@ -395,7 +377,7 @@ object fAjusteEstoque: TfAjusteEstoque
         BevelOuter = bvNone
         Caption = 'Quantidade'
         ShowCaption = False
-        TabOrder = 1
+        TabOrder = 2
         object Label5: TLabel
           Left = 0
           Top = 0
@@ -429,7 +411,6 @@ object fAjusteEstoque: TfAjusteEstoque
           ShowCaption = False
           ShowHint = False
           TabOrder = 0
-          ExplicitTop = 18
           object Panel12: TPanel
             Left = 0
             Top = 0
@@ -459,7 +440,8 @@ object fAjusteEstoque: TfAjusteEstoque
               ExplicitTop = -3
               ExplicitWidth = 591
             end
-            object DBEdit3: TDBEdit
+            object edQuantidade: TEdit
+              Tag = 1
               AlignWithMargins = True
               Left = 3
               Top = 4
@@ -467,11 +449,9 @@ object fAjusteEstoque: TfAjusteEstoque
               Height = 17
               Margins.Top = 4
               Align = alClient
-              BevelInner = bvNone
-              BevelOuter = bvNone
+              Alignment = taRightJustify
               BorderStyle = bsNone
               TabOrder = 0
-              ExplicitTop = 7
             end
           end
         end
@@ -485,8 +465,7 @@ object fAjusteEstoque: TfAjusteEstoque
         BevelOuter = bvNone
         Caption = 'Obs'
         ShowCaption = False
-        TabOrder = 2
-        ExplicitTop = 48
+        TabOrder = 1
         object Label4: TLabel
           Left = 0
           Top = 0
@@ -501,7 +480,6 @@ object fAjusteEstoque: TfAjusteEstoque
           Font.Name = 'Segoe UI'
           Font.Style = []
           ParentFont = False
-          ExplicitTop = 3
           ExplicitWidth = 82
         end
         object Panel8: TPanel
@@ -521,7 +499,6 @@ object fAjusteEstoque: TfAjusteEstoque
           ShowCaption = False
           ShowHint = False
           TabOrder = 0
-          ExplicitTop = 17
           object Panel11: TPanel
             Left = 0
             Top = 0
@@ -552,7 +529,7 @@ object fAjusteEstoque: TfAjusteEstoque
               ExplicitWidth = 92
               ExplicitHeight = 22
             end
-            object DBEdit4: TDBEdit
+            object edObs: TEdit
               AlignWithMargins = True
               Left = 3
               Top = 4
@@ -560,15 +537,46 @@ object fAjusteEstoque: TfAjusteEstoque
               Height = 17
               Margins.Top = 4
               Align = alClient
-              BevelInner = bvNone
-              BevelOuter = bvNone
               BorderStyle = bsNone
               TabOrder = 0
+              OnChange = edProdutoChange
+              OnKeyPress = edProdutoKeyPress
+              ExplicitLeft = 6
               ExplicitTop = 7
             end
           end
         end
       end
+    end
+    object gdPesqProduto: TDBGrid
+      Left = 157
+      Top = 89
+      Width = 450
+      Height = 120
+      DataSource = dmProdutos.dProduto
+      TabOrder = 4
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      Visible = False
+      OnDblClick = gdPesqProdutoDblClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'id'
+          Title.Caption = 'C'#243'digo'
+          Width = 90
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'descricao'
+          Title.Caption = 'Descri'#231#227'o'
+          Width = 300
+          Visible = True
+        end>
     end
   end
   object ActionList1: TActionList
@@ -576,6 +584,7 @@ object fAjusteEstoque: TfAjusteEstoque
     Top = 56
     object acAjusteEstoque: TAction
       Caption = 'acAjusteEstoque'
+      ShortCut = 113
       OnExecute = acAjusteEstoqueExecute
     end
     object acSair: TAction
@@ -588,5 +597,12 @@ object fAjusteEstoque: TfAjusteEstoque
       ShortCut = 114
       OnExecute = EntradaSaidaExecute
     end
+  end
+  object tmPesquisar: TTimer
+    Enabled = False
+    Interval = 300
+    OnTimer = tmPesquisarTimer
+    Left = 560
+    Top = 112
   end
 end
