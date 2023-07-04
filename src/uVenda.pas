@@ -18,6 +18,7 @@ type
     procedure SetTotal(const Value: Currency);
     procedure SetDescontoProduto(const Value: Currency);
     procedure SetPrecoProduto(const Value: Currency);
+    procedure Estoque;
     public
       property Total : Currency read FTotal write SetTotal;
       property Desconto : Currency read FDesconto write SetDesconto;
@@ -36,7 +37,7 @@ type
 implementation
 
   uses
-    uDM, FrmVenda;
+    uDM, FrmVenda, uProduto, uEstoque, Consts;
 
 { TVenda }
 
@@ -70,12 +71,36 @@ begin
 
       ExecSQL('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + IntToStr(ID) + ';');
 
-      LimpaProduto();
+      Estoque();
       Result := True;
     end;
 
   end;
 
+end;
+
+procedure TVenda.Estoque;
+var
+  Prod: TEstoque;
+begin
+  Prod := TEstoque.Create;
+  try
+    fVenda.qProdVenda.First;
+    while not fVenda.qProdVenda.Eof do
+    begin
+      Prod.idProduto := fVenda.qProdVendaidprod.AsInteger;
+      Prod.qtd := fVenda.qProdVendaquantidade.AsFloat;
+
+      Prod.MovEstoque(Venda, Saida);
+
+      fVenda.qProdVenda.Next;
+    end;
+
+  finally
+    FreeAndNil(Prod);
+  end;
+
+  LimpaProduto();
 end;
 
 procedure TVenda.InsereVenda(pCodigoVenda : String);
