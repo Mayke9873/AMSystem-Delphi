@@ -185,8 +185,8 @@ object fVenda: TfVenda
   end
   object DBGrid1: TDBGrid
     Left = 8
-    Top = 240
-    Width = 880
+    Top = 244
+    Width = 900
     Height = 320
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -282,7 +282,7 @@ object fVenda: TfVenda
     Top = 300
     Width = 814
     Height = 153
-    DataSource = DM.dProduto
+    DataSource = dmProdutos.dProduto
     Options = [dgTitles, dgIndicator, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 14
     TitleFont.Charset = ANSI_CHARSET

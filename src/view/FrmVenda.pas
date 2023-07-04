@@ -103,12 +103,13 @@ var
 implementation
 
 uses
-  uDM;
+  uDM, dmProduto;
 
 {$R *.dfm}
 
 procedure TfVenda.FormCreate(Sender: TObject);
 begin
+  dmProdutos := TdmProdutos.Create(nil);
   Cliente := TCliente.Create();
   Produto := TProduto.Create();
   Funcionario := TFuncionario.Create();
@@ -214,7 +215,7 @@ begin
     Produto.Ativo := 'S';
     Produto.Pesquisar(edPesqProd.Text);
 
-    if DM.qProduto.RecordCount > 0  then
+    if dmProdutos.qProduto.RecordCount > 0  then
     begin
       dbgPesqProduto.Visible := True;
     end
@@ -495,6 +496,7 @@ end;
 
 procedure TfVenda.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  FreeAndNil(dmProdutos);
   Cliente.Free;
   Venda.Free;
   Action := caFree;
