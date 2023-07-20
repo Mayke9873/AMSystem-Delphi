@@ -48,7 +48,7 @@ type
     rdbAtivo: TRadioButton;
     rdbInativo: TRadioButton;
     ImageList1: TImageList;
-    DbCbGrupo: TDBComboBox;
+    DbCbGrupo: TDBLookupComboBox;
     procedure Consulta;
     procedure FormCreate(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
@@ -182,6 +182,10 @@ begin
   Produto := TProduto.Create();
   AlterarCampos(telaPadrao);
 
+  dmProdutos.qGrupo.Close;
+  dmProdutos.qGrupo.Open;
+  dmProdutos.qGrupo.FetchAll;
+
   Consulta;
 end;
 
@@ -222,8 +226,9 @@ begin
       tbEditar.Enabled := True;
       tbSalvar.Enabled := false;
       tbCancelar.Enabled := false;
-      dbchkAtivo.ReadOnly := True;
+      DbCbGrupo.Enabled := False;
 
+      dbchkAtivo.ReadOnly := True;
       DBEditID.ReadOnly := True;
       dbeDescricao.ReadOnly := True;
       dbeUnidade.ReadOnly := True;
@@ -243,8 +248,9 @@ begin
       tbEditar.Enabled := false;
       tbSalvar.Enabled := True;
       tbCancelar.Enabled := True;
-      dbchkAtivo.ReadOnly := false;
+      DbCbGrupo.Enabled := True;
 
+      dbchkAtivo.ReadOnly := false;
       DBEditID.ReadOnly := True;
       dbeDescricao.ReadOnly := false;
       dbeUnidade.ReadOnly := false;
@@ -271,8 +277,9 @@ begin
       tbEditar.Enabled := false;
       tbSalvar.Enabled := True;
       tbCancelar.Enabled := True;
-      dbchkAtivo.ReadOnly := false;
+      DbCbGrupo.Enabled := True;
 
+      dbchkAtivo.ReadOnly := false;
       DBEditID.ReadOnly := True;
       dbeDescricao.ReadOnly := false;
       dbeUnidade.ReadOnly := false;
@@ -332,11 +339,12 @@ begin
   Cancelar := 'N';
   AlterarCampos(telaPadrao);
 
-  Produto.Descricao := dbeDescricao.Text;
-  Produto.Unidade := dbeUnidade.Text;
-  Produto.PrecoCompra := StrToCurrDef(dbeValorCompra.Text, 0);
-  Produto.PrecoVenda := StrToCurrDef(dbeValorVenda.Text, 0);
-  Produto.PorcentLucro := StrToFloatDef(dbeLucro.Text, 0);
+  Produto.Descricao      := dbeDescricao.Text;
+  Produto.Unidade        := dbeUnidade.Text;
+  Produto.PrecoCompra    := StrToCurrDef(dbeValorCompra.Text, 0);
+  Produto.PrecoVenda     := StrToCurrDef(dbeValorVenda.Text, 0);
+  Produto.PorcentLucro   := StrToFloatDef(dbeLucro.Text, 0);
+  Produto.IdGrupo        := DbCbGrupo.KeyValue;
   Produto.DescricaoGrupo := DbCbGrupo.Text;
 
   if dbchkAtivo.Checked then

@@ -478,20 +478,16 @@ object fProduto: TfProduto
         ReadOnly = True
         TabOrder = 3
       end
-      object DbCbGrupo: TDBComboBox
-        Tag = 1
+      object DbCbGrupo: TDBLookupComboBox
         Left = 10
         Top = 219
         Width = 216
         Height = 26
-        CharCase = ecUpperCase
-        DataField = 'GRUPO'
+        DataField = 'IdGrupo'
         DataSource = dmProdutos.dProduto
-        Items.Strings = (
-          'BRANCO'
-          'BEBIDAS'
-          'QUALQUER'
-          'ROUPAS')
+        KeyField = 'id'
+        ListField = 'descricao'
+        ListSource = dmProdutos.dGrupo
         TabOrder = 8
       end
     end
