@@ -6,15 +6,14 @@ object DM: TDM
     Catalog = ''
     Properties.Strings = (
       'controls_cp=CP_UTF16')
-    Connected = True
-    HostName = '192.168.2.104'
+    HostName = 'localhost'
     Port = 3306
     Database = 'projeto_db'
-    User = 'mayke'
-    Password = 'mayke98'
+    User = 'root'
+    Password = '123456'
     Protocol = 'mysql'
     LibraryLocation = 
-      'D:\Desenvolvimento\Projetos\Delphi\AMSystem-Delphi\libmariadb.dl' +
+      'Z:\Desenvolvimento\Projetos\Delphi\AMSystem-Delphi\libmariadb.dl' +
       'l'
     Left = 24
     Top = 16
