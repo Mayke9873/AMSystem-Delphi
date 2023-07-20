@@ -1,4 +1,7 @@
 inherited dmProdutos: TdmProdutos
+  inherited zCon: TZConnection
+    Connected = True
+  end
   object qProduto: TZQuery
     Connection = zCon
     SortedFields = 'Id'
@@ -316,5 +319,32 @@ inherited dmProdutos: TdmProdutos
         Name = 'OLD_id'
         ParamType = ptUnknown
       end>
+  end
+  object dGrupo: TDataSource
+    DataSet = qGrupo
+    Left = 376
+    Top = 126
+  end
+  object qGrupo: TZQuery
+    Connection = zCon
+    SortedFields = 'Id'
+    SQL.Strings = (
+      'select 0 id, '#39#39' descricao from grupo_produto'
+      'UNION'
+      'select id, descricao from grupo_produto'
+      'where ativo = '#39'S'#39';')
+    Params = <>
+    IndexFieldNames = 'Id Asc'
+    Left = 336
+    Top = 126
+    object qGrupoid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object qGrupodescricao: TWideStringField
+      FieldName = 'descricao'
+      ReadOnly = True
+      Size = 255
+    end
   end
 end

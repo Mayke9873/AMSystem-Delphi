@@ -32,6 +32,10 @@ type
     qMovEstoquetipoMov: TWideStringField;
     qMovEstoqueobs: TWideStringField;
     uMovEstoque: TZUpdateSQL;
+    dGrupo: TDataSource;
+    qGrupo: TZQuery;
+    qGrupoid: TIntegerField;
+    qGrupodescricao: TWideStringField;
   private
     { Private declarations }
   public
