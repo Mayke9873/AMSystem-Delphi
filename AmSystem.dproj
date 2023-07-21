@@ -128,7 +128,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="src\view\uDM.pas">
+        <DCCReference Include="src\model\uDM.pas">
             <Form>DM</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
