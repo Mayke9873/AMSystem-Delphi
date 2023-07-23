@@ -1,4 +1,4 @@
-unit FrmCompras;
+unit FrmCompra;
 
 interface
 
@@ -8,7 +8,7 @@ uses
   ZDataset, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids;
 
 type
-  TCompra = class(TForm)
+  TfCompra = class(TForm)
     Panel1: TPanel;
     Label1: TLabel;
     Label2: TLabel;
@@ -65,7 +65,7 @@ type
   end;
 
 var
-  Compra: TCompra;
+  fCompra: TfCompra;
 
 implementation
 

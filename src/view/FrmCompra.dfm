@@ -1,7 +1,7 @@
-object Compra: TCompra
+object fCompra: TfCompra
   Left = 0
   Top = 0
-  Caption = 'Compra'
+  Caption = 'fCompra'
   ClientHeight = 625
   ClientWidth = 967
   Color = clBtnFace
@@ -21,10 +21,8 @@ object Compra: TCompra
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 400
-    ExplicitTop = 240
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 963
+    ExplicitHeight = 624
     DesignSize = (
       967
       625)
@@ -137,7 +135,7 @@ object Compra: TCompra
       Left = 8
       Top = 28
       Width = 86
-      Height = 26
+      Height = 23
       TabStop = False
       ReadOnly = True
       TabOrder = 0
@@ -146,7 +144,7 @@ object Compra: TCompra
       Left = 8
       Top = 86
       Width = 86
-      Height = 26
+      Height = 23
       TabOrder = 1
     end
     object edIdCliente: TEdit
@@ -154,7 +152,7 @@ object Compra: TCompra
       Left = 8
       Top = 148
       Width = 86
-      Height = 26
+      Height = 23
       TabOrder = 2
     end
     object edIdProd: TEdit
@@ -162,14 +160,14 @@ object Compra: TCompra
       Left = 8
       Top = 212
       Width = 86
-      Height = 26
+      Height = 23
       TabOrder = 3
     end
     object edVendedor: TEdit
       Left = 95
       Top = 86
       Width = 446
-      Height = 26
+      Height = 23
       CharCase = ecUpperCase
       TabOrder = 4
     end
@@ -178,7 +176,7 @@ object Compra: TCompra
       Left = 95
       Top = 148
       Width = 446
-      Height = 26
+      Height = 23
       CharCase = ecUpperCase
       TabOrder = 5
     end
@@ -187,7 +185,7 @@ object Compra: TCompra
       Left = 95
       Top = 212
       Width = 446
-      Height = 26
+      Height = 23
       CharCase = ecUpperCase
       TabOrder = 6
     end
@@ -196,7 +194,7 @@ object Compra: TCompra
       Left = 547
       Top = 212
       Width = 86
-      Height = 26
+      Height = 23
       TabOrder = 7
     end
     object edValorUnitario: TEdit
@@ -204,7 +202,7 @@ object Compra: TCompra
       Left = 640
       Top = 212
       Width = 86
-      Height = 26
+      Height = 23
       TabOrder = 8
     end
     object edDesconto: TEdit
@@ -212,7 +210,7 @@ object Compra: TCompra
       Left = 734
       Top = 212
       Width = 86
-      Height = 26
+      Height = 23
       TabOrder = 9
     end
     object edValorTotal: TEdit
@@ -220,13 +218,13 @@ object Compra: TCompra
       Left = 826
       Top = 212
       Width = 86
-      Height = 26
+      Height = 23
       TabOrder = 10
     end
     object DBGrid1: TDBGrid
       Left = 8
       Top = 244
-      Width = 904
+      Width = 900
       Height = 320
       TabStop = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -391,7 +389,6 @@ object Compra: TCompra
       Top = 118
       Width = 533
       Height = 120
-      DataSource = DM.dFuncionario
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 13
       TitleFont.Charset = DEFAULT_CHARSET
@@ -431,7 +428,6 @@ object Compra: TCompra
       Top = 244
       Width = 533
       Height = 120
-      DataSource = DM.dCliente
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 14
       TitleFont.Charset = DEFAULT_CHARSET
