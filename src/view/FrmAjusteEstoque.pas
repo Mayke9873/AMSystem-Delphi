@@ -61,7 +61,6 @@ type
     procedure edProdutoKeyPress(Sender: TObject; var Key: Char);
     procedure edIdProdutoExit(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     Estoque : TEstoque;
@@ -204,14 +203,8 @@ end;
 
 procedure TfAjusteEstoque.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  FreeAndNil(dmProdutos);
   Action := caFree;
   fAjusteEstoque := nil;
-end;
-
-procedure TfAjusteEstoque.FormCreate(Sender: TObject);
-begin
-  dmProdutos := TdmProdutos.Create(nil);
 end;
 
 procedure TfAjusteEstoque.FormShow(Sender: TObject);

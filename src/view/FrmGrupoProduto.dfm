@@ -97,24 +97,22 @@ object fGrupoProd: TfGrupoProd
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 991
+    Width = 999
     Height = 593
     ActivePage = pgTabela
+    Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
+    ExplicitWidth = 995
     ExplicitHeight = 592
     object pgTabela: TTabSheet
       Caption = 'Tabela'
-      DesignSize = (
-        983
-        565)
       object dbgGrupo: TDBGrid
-        AlignWithMargins = True
-        Left = 3
+        Left = 0
         Top = 0
-        Width = 977
-        Height = 562
-        Anchors = [akLeft, akTop, akRight, akBottom]
+        Width = 991
+        Height = 565
+        Align = alClient
         DataSource = dGrupo
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -236,14 +234,15 @@ object fGrupoProd: TfGrupoProd
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 336
+    Width = 328
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
+    ExplicitWidth = 324
   end
   object rdbTodos: TRadioButton
-    Left = 448
+    Left = 440
     Top = 34
     Width = 49
     Height = 17
@@ -252,24 +251,27 @@ object fGrupoProd: TfGrupoProd
     Checked = True
     TabOrder = 3
     TabStop = True
+    ExplicitLeft = 436
   end
   object rdbAtivo: TRadioButton
-    Left = 528
+    Left = 520
     Top = 34
     Width = 49
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Ativo'
     TabOrder = 4
+    ExplicitLeft = 516
   end
   object rdbInativo: TRadioButton
-    Left = 600
+    Left = 592
     Top = 34
     Width = 57
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Inativo'
     TabOrder = 5
+    ExplicitLeft = 588
   end
   object dGrupo: TDataSource
     DataSet = qGrupo

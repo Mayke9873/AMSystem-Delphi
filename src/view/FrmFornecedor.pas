@@ -87,7 +87,7 @@ var
 implementation
 
 uses
-  uDM, Consts;
+  dmFornecedor, Consts;
 
 {$R *.dfm}
 
@@ -179,7 +179,7 @@ begin
       dbeBairro.ReadOnly    := True;
 
       if Cancelar = 'S' then
-        DM.qFornecedor.Cancel;
+        dmFornecedores.qFornecedor.Cancel;
     end;
 
     telaInsert : begin
@@ -199,11 +199,11 @@ begin
       dbeNumEnd.ReadOnly  := false;
       dbeBairro.ReadOnly  := False;
 
-      DM.qFornecedor.Insert;
+      dmFornecedores.qFornecedor.Insert;
     end;
 
     telaEdit : begin
-      if DM.qFornecedor.IsEmpty then
+      if dmFornecedores.qFornecedor.IsEmpty then
         Exit;
 
       PageControl1.ActivePageIndex := 1;
@@ -222,7 +222,7 @@ begin
       dbeNumEnd.ReadOnly    := false;
       dbeBairro.ReadOnly    := False;
 
-      DM.qFornecedor.Edit;
+      dmFornecedores.qFornecedor.Edit;
     end;
   end;
 end;

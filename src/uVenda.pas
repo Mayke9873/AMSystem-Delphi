@@ -37,7 +37,7 @@ type
 implementation
 
   uses
-    uDM, FrmVenda, uProduto, uEstoque, Consts;
+    uDM, FrmVenda, uProduto, uEstoque, Consts, dmCliente, dmVenda;
 
 { TVenda }
 
@@ -61,7 +61,7 @@ begin
   begin
     if Application.MessageBox('Confirma venda?', 'Atenção', MB_YESNO + MB_ICONQUESTION) = IDYES then
     begin
-      ExecSQL('UPDATE VENDA SET ID_CLIENTE = ' + IntToStr(DM.qClienteId.AsInteger) + ', CLIENTE = ' + QuotedStr(DM.qClienteNome.AsString) +
+      ExecSQL('UPDATE VENDA SET ID_CLIENTE = ' + IntToStr(dmClientes.qClienteId.AsInteger) + ', CLIENTE = ' + QuotedStr(dmClientes.qClienteNome.AsString) +
         ', VALOR = ' + StringReplace(fVenda.edTotalVenda.Text, ',', '.', []) +
         ', DESCONTO = ' + StringReplace(fVenda.edDescontoVenda.Text, ',', '.', []) +
         ', VALOR_TOTAL = ' + StringReplace(fVenda.edTotalVenda.Text, ',', '.', []) +
@@ -109,14 +109,14 @@ begin
   begin
     Total := 0;
     Desconto := 0;
-    DM.qVenda.Open;
-    DM.qVenda.Insert;
-    DM.qVenda.ApplyUpdates;
+    dmVendas.qVenda.Open;
+    dmVendas.qVenda.Insert;
+    dmVendas.qVenda.ApplyUpdates;
 
-    DM.qVenda.Close;
-    DM.qVenda.Open;
-    fVenda.edCodVenda.Text := DM.qVenda.Fields[0].Value;
-    ID := DM.qVenda.Fields[0].Value;
+    dmVendas.qVenda.Close;
+    dmVendas.qVenda.Open;
+    fVenda.edCodVenda.Text := dmVendas.qVenda.Fields[0].Value;
+    ID := dmVendas.qVenda.Fields[0].Value;
   end;
 end;
 

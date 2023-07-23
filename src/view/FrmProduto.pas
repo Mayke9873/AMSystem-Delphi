@@ -178,7 +178,6 @@ end;
 
 procedure TfProduto.FormCreate(Sender: TObject);
 begin
-  dmProdutos := TdmProdutos.Create(nil);
   Produto := TProduto.Create();
   AlterarCampos(telaPadrao);
 
@@ -192,16 +191,15 @@ end;
 procedure TfProduto.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   case Key of
-    27:
-      begin
-        tbSairClick(tbSair);
-        Key := 0;
-      end;
 
-    112:
-      begin
-        tbNovoClick(tbNovo);
-      end;
+    27: begin
+      tbSairClick(tbSair);
+      Key := 0;
+    end;
+
+    112: begin
+      tbNovoClick(tbNovo);
+    end;
 
   end;
 end;
@@ -357,7 +355,6 @@ end;
 
 procedure TfProduto.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  FreeAndNil(dmProdutos);
   Produto.Free;
   Action := caFree;
   fProduto := nil;

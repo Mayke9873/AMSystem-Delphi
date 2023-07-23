@@ -103,13 +103,12 @@ var
 implementation
 
 uses
-  uDM, dmProduto;
+  uDM, dmProduto, dmFuncionario, dmCliente, dmVenda;
 
 {$R *.dfm}
 
 procedure TfVenda.FormCreate(Sender: TObject);
 begin
-  dmProdutos := TdmProdutos.Create(nil);
   Cliente := TCliente.Create();
   Produto := TProduto.Create();
   Funcionario := TFuncionario.Create();
@@ -272,7 +271,7 @@ begin
   begin
     Consulta(TEdit(Sender));
     
-    if DM.qFuncionario.RecordCount > 0 then
+    if dmFuncionarios.qFuncionario.RecordCount > 0 then
       dbgVendedor.Visible := True
     else
       dbgVendedor.Visible := False;
@@ -312,7 +311,7 @@ begin
   begin
     Consulta(TEdit(Sender));
     
-    if DM.qCliente.RecordCount > 0 then
+    if dmClientes.qCliente.RecordCount > 0 then
       dbgCliente.Visible := True
     else
       dbgCliente.Visible := False;
@@ -415,7 +414,7 @@ end;
 
 procedure TfVenda.btnCancelarClick(Sender: TObject);
 begin
-  Venda.ID := DM.qVendaid.AsInteger;
+  Venda.ID := dmVendas.qVendaid.AsInteger;
   Venda.Cancelar;
   LimpaCampos('Venda');
 end;
@@ -496,7 +495,6 @@ end;
 
 procedure TfVenda.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  FreeAndNil(dmProdutos);
   Cliente.Free;
   Venda.Free;
   Action := caFree;

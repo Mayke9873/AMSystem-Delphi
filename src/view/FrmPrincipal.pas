@@ -58,8 +58,8 @@ var
 
 implementation
 
-  uses
-    FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto, FrmFuncionario,
+uses
+  FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto, FrmFuncionario,
   FrmVenda, FrmFornecedor, FrmAjusteEstoque;
 
 {$R *.dfm}

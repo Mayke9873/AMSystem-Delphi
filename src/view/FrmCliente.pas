@@ -9,7 +9,8 @@ uses
   Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.Menus, Vcl.Grids, Vcl.DBGrids,
   ZAbstractRODataset, ZDataset, Vcl.ComCtrls, Vcl.Tabs, Vcl.DockTabSet,
   Vcl.StdCtrls, System.ImageList, Vcl.ImgList, ZAbstractDataset, Vcl.Mask,
-  Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate, Vcl.Buttons, uCliente, uValida;
+  Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate, Vcl.Buttons, uCliente, uValida,
+  System.Threading;
 
 type
   TfCliente = class(TForm)
@@ -98,7 +99,7 @@ var
 
 implementation
 
-uses uDM, Conexao.MySQL;
+uses dmCliente, Conexao.MySQL;
 {$R *.dfm}
 
 procedure TfCliente.DBECPFKeyPress(Sender: TObject; var Key: Char);
@@ -171,6 +172,7 @@ begin
   Cliente := TCliente.Create;
   Consulta;
   PageControl1.TabIndex := 0;
+  tbCancelar.Click;
 end;
 
 procedure TfCliente.FormKeyPress(Sender: TObject; var Key: Char);
@@ -251,7 +253,7 @@ begin
   DBENumEnd.ReadOnly := true;
   DBEBairro.ReadOnly := true;
 
-  DM.qCliente.Cancel;
+  dmClientes.qCliente.Cancel;
 end;
 
 procedure TfCliente.tbEditarClick(Sender: TObject);
@@ -274,7 +276,7 @@ begin
   DBENumEnd.ReadOnly := false;
   DBEBairro.ReadOnly := false;
 
-  DM.qCliente.Edit;
+  dmClientes.qCliente.Edit;
   TipoCadastro := 1;
 end;
 
@@ -297,7 +299,7 @@ begin
   DBENumEnd.ReadOnly := false;
   DBEBairro.ReadOnly := false;
 
-  DM.qCliente.Insert;
+  dmClientes.qCliente.Insert;
   TipoCadastro := 0;
 end;
 

@@ -15,7 +15,6 @@ object fAjusteEstoque: TfAjusteEstoque
   Position = poMainFormCenter
   Visible = True
   OnClose = FormClose
-  OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   TextHeight = 15
@@ -57,7 +56,6 @@ object fAjusteEstoque: TfAjusteEstoque
       Caption = 'pnlBotoes'
       ShowCaption = False
       TabOrder = 0
-      ExplicitTop = 261
       object pnlSair: TPanel
         Left = 422
         Top = 0
@@ -144,7 +142,6 @@ object fAjusteEstoque: TfAjusteEstoque
       Caption = 'Panel1'
       ShowCaption = False
       TabOrder = 1
-      ExplicitTop = -2
       object lblTitulo: TLabel
         AlignWithMargins = True
         Left = 4
@@ -316,8 +313,6 @@ object fAjusteEstoque: TfAjusteEstoque
             TabOrder = 0
             OnChange = edProdutoChange
             OnKeyPress = edProdutoKeyPress
-            ExplicitLeft = 1
-            ExplicitTop = 5
           end
         end
         object pnlIdProduto: TPanel
@@ -541,8 +536,6 @@ object fAjusteEstoque: TfAjusteEstoque
               TabOrder = 0
               OnChange = edProdutoChange
               OnKeyPress = edProdutoKeyPress
-              ExplicitLeft = 6
-              ExplicitTop = 7
             end
           end
         end

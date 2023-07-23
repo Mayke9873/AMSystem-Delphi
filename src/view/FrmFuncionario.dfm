@@ -3,8 +3,8 @@ object fFuncionario: TfFuncionario
   Top = 0
   Margins.Right = 0
   Caption = 'Funcion'#225'rios'
-  ClientHeight = 649
-  ClientWidth = 999
+  ClientHeight = 648
+  ClientWidth = 995
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object fFuncionario: TfFuncionario
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   DesignSize = (
-    999
-    649)
+    995
+    648)
   TextHeight = 13
   object Label9: TLabel
     Left = 8
@@ -38,7 +38,7 @@ object fFuncionario: TfFuncionario
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 999
+    Width = 995
     Height = 29
     ButtonHeight = 29
     ButtonWidth = 29
@@ -49,7 +49,6 @@ object fFuncionario: TfFuncionario
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
-    ExplicitWidth = 995
     object tbNovo: TToolButton
       Left = 0
       Top = 0
@@ -102,30 +101,27 @@ object fFuncionario: TfFuncionario
     end
   end
   object PageControl1: TPageControl
-    Left = 0
+    AlignWithMargins = True
+    Left = 4
     Top = 56
-    Width = 999
-    Height = 593
-    Margins.Left = 0
+    Width = 987
+    Height = 588
+    Margins.Left = 4
     Margins.Top = 0
-    Margins.Right = 0
-    Margins.Bottom = 0
+    Margins.Right = 4
+    Margins.Bottom = 4
     ActivePage = pgTabela
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
-    ExplicitLeft = -1
-    ExplicitWidth = 995
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgFuncionario: TDBGrid
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 985
-        Height = 559
+        Left = 0
+        Top = 0
+        Width = 983
+        Height = 561
         Align = alClient
-        DataSource = DM.dFuncionario
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -435,7 +431,6 @@ object fFuncionario: TfFuncionario
         TabStop = False
         CharCase = ecUpperCase
         DataField = 'id'
-        DataSource = DM.dFuncionario
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -452,7 +447,6 @@ object fFuncionario: TfFuncionario
         Height = 26
         CharCase = ecUpperCase
         DataField = 'nome'
-        DataSource = DM.dFuncionario
         ReadOnly = True
         TabOrder = 1
       end
@@ -463,7 +457,6 @@ object fFuncionario: TfFuncionario
         Height = 26
         CharCase = ecUpperCase
         DataField = 'rg'
-        DataSource = DM.dFuncionario
         ReadOnly = True
         TabOrder = 2
       end
@@ -474,7 +467,6 @@ object fFuncionario: TfFuncionario
         Height = 26
         CharCase = ecUpperCase
         DataField = 'endereco'
-        DataSource = DM.dFuncionario
         ReadOnly = True
         TabOrder = 5
       end
@@ -485,7 +477,6 @@ object fFuncionario: TfFuncionario
         Height = 26
         CharCase = ecUpperCase
         DataField = 'numEndereco'
-        DataSource = DM.dFuncionario
         ReadOnly = True
         TabOrder = 6
       end
@@ -496,7 +487,6 @@ object fFuncionario: TfFuncionario
         Height = 26
         CharCase = ecUpperCase
         DataField = 'bairro'
-        DataSource = DM.dFuncionario
         ReadOnly = True
         TabOrder = 7
       end
@@ -507,7 +497,6 @@ object fFuncionario: TfFuncionario
         Height = 17
         Caption = 'Ativo'
         DataField = 'ativo'
-        DataSource = DM.dFuncionario
         ReadOnly = True
         TabOrder = 8
         ValueChecked = 'S'
@@ -520,7 +509,6 @@ object fFuncionario: TfFuncionario
         Height = 26
         CharCase = ecUpperCase
         DataField = 'Cpf'
-        DataSource = DM.dFuncionario
         ReadOnly = True
         TabOrder = 3
       end
@@ -531,7 +519,6 @@ object fFuncionario: TfFuncionario
         Height = 26
         CharCase = ecUpperCase
         DataField = 'DtNasc'
-        DataSource = DM.dFuncionario
         ReadOnly = True
         TabOrder = 4
       end
@@ -540,16 +527,16 @@ object fFuncionario: TfFuncionario
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 288
+    Width = 272
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 284
+    ExplicitWidth = 276
   end
   object rdbTodos: TRadioButton
-    Left = 400
+    Left = 384
     Top = 34
     Width = 49
     Height = 17
@@ -559,11 +546,11 @@ object fFuncionario: TfFuncionario
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 396
+    ExplicitLeft = 388
   end
   object rdbAtivo: TRadioButton
     Tag = 1
-    Left = 480
+    Left = 464
     Top = 34
     Width = 49
     Height = 17
@@ -571,11 +558,11 @@ object fFuncionario: TfFuncionario
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbTodosClick
-    ExplicitLeft = 476
+    ExplicitLeft = 468
   end
   object rdbInativo: TRadioButton
     Tag = 2
-    Left = 552
+    Left = 536
     Top = 34
     Width = 57
     Height = 17
@@ -583,7 +570,7 @@ object fFuncionario: TfFuncionario
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbTodosClick
-    ExplicitLeft = 548
+    ExplicitLeft = 540
   end
   object ImageList1: TImageList
     Left = 928

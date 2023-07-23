@@ -80,7 +80,7 @@ var
 implementation
 
 uses
-  uDM;
+  dmFuncionario;
 
 {$R *.dfm}
 
@@ -213,7 +213,7 @@ begin
       dbeBairro.ReadOnly := True;
 
       if Cancelar = 'S' then
-        DM.qFuncionario.Cancel;
+        dmFuncionarios.qFuncionario.Cancel;
     end;
 
     telaInsert : begin
@@ -234,7 +234,7 @@ begin
       dbeNumEnd.ReadOnly := false;
       dbeBairro.ReadOnly := False;
 
-      DM.qFuncionario.Insert;
+      dmFuncionarios.qFuncionario.Insert;
     end;
 
     telaEdit : begin
@@ -255,7 +255,7 @@ begin
       dbeNumEnd.ReadOnly := false;
       dbeBairro.ReadOnly := False;
 
-      DM.qFuncionario.Edit;
+      dmFuncionarios.qFuncionario.Edit;
     end;
   end;
 end;

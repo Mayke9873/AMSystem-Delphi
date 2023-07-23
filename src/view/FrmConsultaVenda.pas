@@ -47,7 +47,7 @@ var
 
 implementation
 
-uses uDM, FrmVenda;
+uses dmVenda, FrmVenda;
 {$R *.dfm}
 
 procedure TfConsultaVendas.dbgVendasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -100,16 +100,15 @@ procedure TfConsultaVendas.FormKeyDown(Sender: TObject; var Key: Word; Shift: TS
 begin
 
   case Key of
-    27:
-      begin
-        tbSairClick(tbSair);
-        Key := 0;
-      end;
 
-    112:
-      begin
-        tbNovoClick(tbNovo);
-      end;
+    27: begin
+      tbSairClick(tbSair);
+      Key := 0;
+    end;
+
+    112: begin
+      tbNovoClick(tbNovo);
+    end;
 
   end;
 end;

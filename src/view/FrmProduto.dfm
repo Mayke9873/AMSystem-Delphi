@@ -113,21 +113,16 @@ object fProduto: TfProduto
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 57
-    ExplicitWidth = 975
+    ExplicitWidth = 987
+    ExplicitHeight = 590
     object pgTabela: TTabSheet
       Caption = 'Tabela'
-      DesignSize = (
-        983
-        563)
       object dbgProduto: TDBGrid
-        AlignWithMargins = True
-        Left = 3
+        Left = 0
         Top = 0
-        Width = 977
-        Height = 560
-        Anchors = [akLeft, akTop, akRight, akBottom]
+        Width = 983
+        Height = 563
+        Align = alClient
         DataSource = dmProdutos.dProduto
         DrawingStyle = gdsGradient
         Font.Charset = DEFAULT_CHARSET
@@ -495,16 +490,16 @@ object fProduto: TfProduto
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 312
+    Width = 304
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 308
+    ExplicitWidth = 300
   end
   object rdbTodos: TRadioButton
-    Left = 424
+    Left = 416
     Top = 34
     Width = 49
     Height = 17
@@ -514,10 +509,10 @@ object fProduto: TfProduto
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 420
+    ExplicitLeft = 412
   end
   object rdbAtivo: TRadioButton
-    Left = 504
+    Left = 496
     Top = 34
     Width = 49
     Height = 17
@@ -525,10 +520,10 @@ object fProduto: TfProduto
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbAtivoClick
-    ExplicitLeft = 500
+    ExplicitLeft = 492
   end
   object rdbInativo: TRadioButton
-    Left = 576
+    Left = 568
     Top = 34
     Width = 57
     Height = 17
@@ -536,7 +531,7 @@ object fProduto: TfProduto
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbInativoClick
-    ExplicitLeft = 572
+    ExplicitLeft = 564
   end
   object ImageList1: TImageList
     Left = 928

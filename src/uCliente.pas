@@ -28,7 +28,7 @@ type
 implementation
 
   uses
-    FrmCliente, uDM;
+    FrmCliente, dmCliente;
 
 { TClientes }
 
@@ -44,62 +44,62 @@ end;
 
 function TCliente.Tipo: String;
 begin
-  Result := 'C';
+  Result := 'Cliente';
 end;
 
 procedure TCliente.Editar(Value: TCliente);
 begin
-  if not (dm.qCliente.State in [dsEdit]) then
-    DM.qCliente.Edit;
+  if not (dmClientes.qCliente.State in [dsEdit]) then
+    dmClientes.qCliente.Edit;
 
   if Length(Nome) <> 0 then
   begin
-    DM.qClientenome.asString := Nome;
-    DM.qClienterg.asString := RGIE;
-    DM.qClienteCPFCNPJ.AsString := CPFCNPJ;
-    DM.qClienteendereco.asString := Endereco;
-    DM.qClientenumEndereco.asString := NumEndereco;
-    DM.qClientebairro.asString := Bairro;
-    DM.qClienteAtivo.AsString := Ativo;
+    dmClientes.qClientenome.asString := Nome;
+    dmClientes.qClienterg.asString := RGIE;
+    dmClientes.qClienteCPFCNPJ.AsString := CPFCNPJ;
+    dmClientes.qClienteendereco.asString := Endereco;
+    dmClientes.qClientenumEndereco.asString := NumEndereco;
+    dmClientes.qClientebairro.asString := Bairro;
+    dmClientes.qClienteAtivo.AsString := Ativo;
 
     if DateToStr(DtNasc) <> '  /  /    ' then
-      DM.qClienteDtNasc.AsDateTime := DtNasc;
+      dmClientes.qClienteDtNasc.AsDateTime := DtNasc;
 
-    DM.qCliente.Post;
+    dmClientes.qCliente.Post;
   end
   else
   begin
-    DM.qCliente.Cancel;
+    dmClientes.qCliente.Cancel;
     Application.MessageBox('O campo nome obrigatório. Por favor, verifique!', 'Atenção', mb_OK + MB_ICONEXCLAMATION);
   end;
 end;
 
 procedure TCliente.Cadastrar(Value : TCliente);
 begin
-  if not (dm.qCliente.State in [dsInsert]) then
-    DM.qCliente.Insert;
+  if not (dmClientes.qCliente.State in [dsInsert]) then
+    dmClientes.qCliente.Insert;
 
   if Length(Nome) <> 0 then
   begin
-    DM.qClientenome.asString := Nome;
-    DM.qClienterg.asString := RGIE;
-    DM.qClienteCPFCNPJ.AsString := CPFCNPJ;
-    DM.qClienteendereco.asString := Endereco;
-    DM.qClientenumEndereco.asString := NumEndereco;
-    DM.qClientebairro.asString := Bairro;
-    DM.qClienteAtivo.AsString := Ativo;
-    DM.qClientedtregistro.AsDateTime := Now;
+    dmClientes.qClientenome.asString := Nome;
+    dmClientes.qClienterg.asString := RGIE;
+    dmClientes.qClienteCPFCNPJ.AsString := CPFCNPJ;
+    dmClientes.qClienteendereco.asString := Endereco;
+    dmClientes.qClientenumEndereco.asString := NumEndereco;
+    dmClientes.qClientebairro.asString := Bairro;
+    dmClientes.qClienteAtivo.AsString := Ativo;
+    dmClientes.qClientedtregistro.AsDateTime := Now;
 
     if DateToStr(DtNasc) <> '  /  /    ' then
-      DM.qClienteDtNasc.AsDateTime := DtNasc
+      dmClientes.qClienteDtNasc.AsDateTime := DtNasc
     else
-      DM.qClienteDtNasc.Value := varNull;
+      dmClientes.qClienteDtNasc.AsString := 'null';
 
-    DM.qCliente.Post;
+    dmClientes.qCliente.Post;
   end
   else
   begin
-    DM.qCliente.Cancel;
+    dmClientes.qCliente.Cancel;
     Application.MessageBox('Campo nome obrigatório. Por favor, verifique!', 'Atenção', MB_ICONEXCLAMATION);
   end;
 end;
@@ -109,17 +109,17 @@ function TCliente.Pesquisar(pID : Integer) : Boolean;
 begin
   Result := False;
 
-  DM.qCliente.Close;
-  DM.qCliente.Params[0].AsInteger := pID;
-  DM.qCliente.Params[1].AsString := '%%';
-  DM.qCliente.Params[2].AsString := Ativo;
-  DM.qCliente.Open;
+  dmClientes.qCliente.Close;
+  dmClientes.qCliente.Params[0].AsInteger := pID;
+  dmClientes.qCliente.Params[1].AsString := '%%';
+  dmClientes.qCliente.Params[2].AsString := Ativo;
+  dmClientes.qCliente.Open;
 
-  if DM.qCliente.RecordCount = 1 then
+  if dmClientes.qCliente.RecordCount = 1 then
   begin
     Result := True;
-    Cod := DM.qClienteId.AsInteger;
-    Nome := DM.qClienteNome.AsString;
+    Cod := dmClientes.qClienteId.AsInteger;
+    Nome := dmClientes.qClienteNome.AsString;
     Exit;
   end;
 
@@ -130,16 +130,16 @@ function TCliente.Pesquisar(pNome : String) : Boolean;
 begin
   Result := False;
 
-  DM.qCliente.Close;
-  DM.qCliente.ParamByName('id').AsInteger := 0;
-  DM.qCliente.ParamByName('nome').AsString := '%' + pNome + '%';
-  DM.qCliente.ParamByName('ativo').AsString   := Ativo;
-  DM.qCliente.Open;
+  dmClientes.qCliente.Close;
+  dmClientes.qCliente.ParamByName('id').AsInteger := 0;
+  dmClientes.qCliente.ParamByName('nome').AsString := '%' + pNome + '%';
+  dmClientes.qCliente.ParamByName('ativo').AsString   := Ativo;
+  dmClientes.qCliente.Open;
 
-  if DM.qCliente.RecordCount = 1 then
+  if dmClientes.qCliente.RecordCount = 1 then
   begin
     Result := True;
-    Nome := DM.qClienteNome.AsString;
+    Nome := dmClientes.qClienteNome.AsString;
     Exit;
   end;
 

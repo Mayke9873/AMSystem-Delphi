@@ -2,7 +2,7 @@ unit uFuncionario;
 
 interface
 
-uses uPessoa, uDM;
+uses uPessoa, dmFuncionario;
 
   type
     TFuncionario = class(TPessoa)
@@ -30,23 +30,23 @@ begin
   if Length(Nome) <> 0 then
   begin
     if Cod <> 0 then
-      DM.qFuncionarioId.AsInteger := Cod;
+      dmFuncionarios.qFuncionarioId.AsInteger := Cod;
 
-    DM.qFuncionarionome.asString := Nome;
-    DM.qFuncionarioRG.asString := RGIE;
-    DM.qFuncionarioCPF.AsString := CPFCNPJ;
-    DM.qFuncionarioendereco.asString := Endereco;
-    DM.qFuncionarionumEndereco.asString := NumEndereco;
-    DM.qFuncionariobairro.asString := Bairro;
-    DM.qFuncionarioAtivo.AsString := Ativo;
-    DM.qFuncionariodtregistro.AsDateTime := Now;
-    DM.qFuncionarioDtNasc.AsDateTime := DtNasc;
+    dmFuncionarios.qFuncionarionome.asString := Nome;
+    dmFuncionarios.qFuncionarioRG.asString := RGIE;
+    dmFuncionarios.qFuncionarioCPF.AsString := CPFCNPJ;
+    dmFuncionarios.qFuncionarioendereco.asString := Endereco;
+    dmFuncionarios.qFuncionarionumEndereco.asString := NumEndereco;
+    dmFuncionarios.qFuncionariobairro.asString := Bairro;
+    dmFuncionarios.qFuncionarioAtivo.AsString := Ativo;
+    dmFuncionarios.qFuncionariodtregistro.AsDateTime := Now;
+    dmFuncionarios.qFuncionarioDtNasc.AsDateTime := DtNasc;
 
-    DM.qFuncionario.Post;
+    dmFuncionarios.qFuncionario.Post;
   end
   else
   begin
-    DM.qFuncionario.Cancel;
+    dmFuncionarios.qFuncionario.Cancel;
     Application.MessageBox('Campo nome obrigatório. Por favor, verifique!', 'Atenção', MB_ICONEXCLAMATION);
   end;
 
@@ -54,27 +54,27 @@ end;
 
 procedure TFuncionario.Pesquisar;
 begin
-  DM.qFuncionario.Close;
-  DM.qFuncionario.Params[0].AsInteger := 0;
-  DM.qFuncionario.Params[1].AsString := '%%';
-  DM.qFuncionario.Params[2].AsString := 'S';
-  DM.qFuncionario.Open;
+  dmFuncionarios.qFuncionario.Close;
+  dmFuncionarios.qFuncionario.Params[0].AsInteger := 0;
+  dmFuncionarios.qFuncionario.Params[1].AsString := '%%';
+  dmFuncionarios.qFuncionario.Params[2].AsString := 'S';
+  dmFuncionarios.qFuncionario.Open;
 end;
 
 function TFuncionario.Pesquisar(pID: Integer) : Boolean;
 begin
   Result := False;
-  DM.qFuncionario.Close;
-  DM.qFuncionario.Params[0].AsInteger := pID;
-  DM.qFuncionario.Params[1].AsString := '%%';
-  DM.qFuncionario.Params[2].AsString := 'S';
-  DM.qFuncionario.Open;
+  dmFuncionarios.qFuncionario.Close;
+  dmFuncionarios.qFuncionario.Params[0].AsInteger := pID;
+  dmFuncionarios.qFuncionario.Params[1].AsString := '%%';
+  dmFuncionarios.qFuncionario.Params[2].AsString := 'S';
+  dmFuncionarios.qFuncionario.Open;
 
-  if DM.qFuncionario.RecordCount = 1 then
+  if dmFuncionarios.qFuncionario.RecordCount = 1 then
   begin
     Result := True;
-    Cod := DM.qFuncionarioID.AsInteger;
-    Nome := DM.qFuncionarioNome.AsString;
+    Cod := dmFuncionarios.qFuncionarioID.AsInteger;
+    Nome := dmFuncionarios.qFuncionarioNome.AsString;
     Exit;
   end;
 
@@ -84,16 +84,16 @@ end;
 
 procedure TFuncionario.Pesquisar(pNome: String);
 begin
-  DM.qFuncionario.Close;
-  DM.qFuncionario.Params[0].AsInteger := 0;
-  DM.qFuncionario.Params[1].AsString := '%' + pNome + '%';
-  DM.qFuncionario.Params[2].AsString := Ativo;
-  DM.qFuncionario.Open;
+  dmFuncionarios.qFuncionario.Close;
+  dmFuncionarios.qFuncionario.Params[0].AsInteger := 0;
+  dmFuncionarios.qFuncionario.Params[1].AsString := '%' + pNome + '%';
+  dmFuncionarios.qFuncionario.Params[2].AsString := Ativo;
+  dmFuncionarios.qFuncionario.Open;
 
-  if DM.qFuncionario.RecordCount = 1 then
+  if dmFuncionarios.qFuncionario.RecordCount = 1 then
   begin
-    Cod := DM.qFuncionarioID.AsInteger;
-    Nome := DM.qFuncionarioNome.AsString;
+    Cod := dmFuncionarios.qFuncionarioID.AsInteger;
+    Nome := dmFuncionarios.qFuncionarioNome.AsString;
     Exit;
   end;
 

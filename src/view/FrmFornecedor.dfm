@@ -2,8 +2,8 @@ object fFornecedor: TfFornecedor
   Left = 531
   Top = 374
   Caption = 'Fornecedor'
-  ClientHeight = 645
-  ClientWidth = 983
+  ClientHeight = 644
+  ClientWidth = 979
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,8 +17,8 @@ object fFornecedor: TfFornecedor
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    983
-    645)
+    979
+    644)
   TextHeight = 15
   object Label9: TLabel
     Left = 8
@@ -36,7 +36,7 @@ object fFornecedor: TfFornecedor
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 983
+    Width = 979
     Height = 29
     ButtonHeight = 29
     ButtonWidth = 29
@@ -47,7 +47,7 @@ object fFornecedor: TfFornecedor
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
-    ExplicitWidth = 979
+    ExplicitWidth = 975
     object tbNovo: TToolButton
       Left = 0
       Top = 0
@@ -102,23 +102,23 @@ object fFornecedor: TfFornecedor
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 983
-    Height = 589
-    ActivePage = pgTabela
+    Width = 979
+    Height = 588
+    ActivePage = pgDados
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
-    ExplicitWidth = 979
-    ExplicitHeight = 588
+    ExplicitWidth = 975
+    ExplicitHeight = 587
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgFornecedor: TDBGrid
         Left = 0
         Top = 0
-        Width = 975
-        Height = 559
+        Width = 971
+        Height = 558
         Align = alClient
-        DataSource = DM.dFornecedor
+        DataSource = dmFornecedores.dFornecedor
         DrawingStyle = gdsGradient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -350,7 +350,7 @@ object fFornecedor: TfFornecedor
         Height = 17
         Caption = 'Ativo'
         DataField = 'ativo'
-        DataSource = DM.dFornecedor
+        DataSource = dmFornecedores.dFornecedor
         ReadOnly = True
         TabOrder = 0
         ValueChecked = 'S'
@@ -399,7 +399,7 @@ object fFornecedor: TfFornecedor
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'nome'
-          DataSource = DM.dFornecedor
+          DataSource = dmFornecedores.dFornecedor
           ReadOnly = True
           TabOrder = 0
         end
@@ -447,7 +447,7 @@ object fFornecedor: TfFornecedor
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'Ie'
-          DataSource = DM.dFornecedor
+          DataSource = dmFornecedores.dFornecedor
           ReadOnly = True
           TabOrder = 0
         end
@@ -492,7 +492,7 @@ object fFornecedor: TfFornecedor
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'CNPJ'
-          DataSource = DM.dFornecedor
+          DataSource = dmFornecedores.dFornecedor
           ReadOnly = True
           TabOrder = 0
         end
@@ -538,7 +538,7 @@ object fFornecedor: TfFornecedor
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'endereco'
-          DataSource = DM.dFornecedor
+          DataSource = dmFornecedores.dFornecedor
           ReadOnly = True
           TabOrder = 0
         end
@@ -584,7 +584,7 @@ object fFornecedor: TfFornecedor
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'numEndereco'
-          DataSource = DM.dFornecedor
+          DataSource = dmFornecedores.dFornecedor
           ReadOnly = True
           TabOrder = 0
         end
@@ -627,7 +627,7 @@ object fFornecedor: TfFornecedor
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'bairro'
-          DataSource = DM.dFornecedor
+          DataSource = dmFornecedores.dFornecedor
           ReadOnly = True
           TabOrder = 0
         end
@@ -669,7 +669,7 @@ object fFornecedor: TfFornecedor
           Align = alClient
           BorderStyle = bsNone
           DataField = 'id'
-          DataSource = DM.dFornecedor
+          DataSource = dmFornecedores.dFornecedor
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -685,17 +685,17 @@ object fFornecedor: TfFornecedor
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 232
+    Width = 220
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     CharCase = ecUpperCase
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 228
+    ExplicitWidth = 216
   end
   object rdbTodos: TRadioButton
-    Left = 344
+    Left = 332
     Top = 34
     Width = 51
     Height = 17
@@ -705,11 +705,11 @@ object fFornecedor: TfFornecedor
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 340
+    ExplicitLeft = 328
   end
   object rdbAtivo: TRadioButton
     Tag = 1
-    Left = 424
+    Left = 412
     Top = 34
     Width = 49
     Height = 17
@@ -717,11 +717,11 @@ object fFornecedor: TfFornecedor
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbTodosClick
-    ExplicitLeft = 420
+    ExplicitLeft = 408
   end
   object rdbInativo: TRadioButton
     Tag = 2
-    Left = 496
+    Left = 484
     Top = 34
     Width = 57
     Height = 17
@@ -729,7 +729,7 @@ object fFornecedor: TfFornecedor
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbTodosClick
-    ExplicitLeft = 492
+    ExplicitLeft = 480
   end
   object ImageList1: TImageList
     Left = 928

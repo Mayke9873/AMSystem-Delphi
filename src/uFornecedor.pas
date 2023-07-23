@@ -23,7 +23,7 @@ implementation
 
 { TFornecedor }
 
-uses uDM;
+uses dmFornecedor;
 
 procedure TFornecedor.Pesquisar;
 begin
@@ -33,16 +33,16 @@ end;
 function TFornecedor.Pesquisar(pNome: String) : Boolean;
 begin
 
-  DM.qFornecedor.Close;
-  DM.qFornecedor.ParamByName('id').AsInteger := 0;
-  DM.qFornecedor.ParamByName('nome').AsString := '%' + pNome + '%';
-  DM.qFornecedor.ParamByName('ativo').AsString   := Ativo;
-  DM.qFornecedor.Open;
+  dmFornecedores.qFornecedor.Close;
+  dmFornecedores.qFornecedor.ParamByName('id').AsInteger := 0;
+  dmFornecedores.qFornecedor.ParamByName('nome').AsString := '%' + pNome + '%';
+  dmFornecedores.qFornecedor.ParamByName('ativo').AsString   := Ativo;
+  dmFornecedores.qFornecedor.Open;
 
-  if DM.qFornecedor.RecordCount = 1 then
+  if dmFornecedores.qFornecedor.RecordCount = 1 then
   begin
     Result := True;
-    Nome := DM.qClienteNome.AsString;
+    Nome := dmFornecedores.qFornecedorNome.AsString;
     Exit;
   end;
 
@@ -54,17 +54,17 @@ procedure TFornecedor.Cadastrar(Value: TFornecedor);
 begin
   if not (Length(Value.Nome) = 0) then
   begin
-    DM.qFornecedorId.AsInteger  := Cod;
-    DM.qFornecedorNome.AsString := Nome;
-    DM.qFornecedorie.AsString   := RGIE;
-    DM.qFornecedorCNPJ.AsString := CPFCNPJ;
-    DM.qFornecedorendereco.AsString := Endereco;
-    DM.qFornecedornumEndereco.AsString := NumEndereco;
-    DM.qFornecedorbairro.AsString := Bairro;
-    DM.qFornecedorativo.AsString := Ativo;
+    dmFornecedores.qFornecedorId.AsInteger  := Cod;
+    dmFornecedores.qFornecedorNome.AsString := Nome;
+    dmFornecedores.qFornecedorie.AsString   := RGIE;
+    dmFornecedores.qFornecedorCNPJ.AsString := CPFCNPJ;
+    dmFornecedores.qFornecedorendereco.AsString := Endereco;
+    dmFornecedores.qFornecedornumEndereco.AsString := NumEndereco;
+    dmFornecedores.qFornecedorbairro.AsString := Bairro;
+    dmFornecedores.qFornecedorativo.AsString := Ativo;
 
-    DM.qFornecedor.Post;
-    DM.qFornecedor.Refresh;
+    dmFornecedores.qFornecedor.Post;
+    dmFornecedores.qFornecedor.Refresh;
   end;
 
 end;

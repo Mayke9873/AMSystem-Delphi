@@ -72,13 +72,13 @@ object fConsultaVendas: TfConsultaVendas
   object edPesquisa: TEdit
     Left = 64
     Top = 31
-    Width = 328
+    Width = 316
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 1
     OnChange = edPesquisaChange
-    ExplicitWidth = 324
+    ExplicitWidth = 312
   end
   object Panel1: TPanel
     Left = 0
@@ -90,6 +90,8 @@ object fConsultaVendas: TfConsultaVendas
     BevelOuter = bvNone
     Caption = 'Panel1'
     TabOrder = 2
+    ExplicitWidth = 979
+    ExplicitHeight = 567
     object dbgVendas: TDBGrid
       AlignWithMargins = True
       Left = 4

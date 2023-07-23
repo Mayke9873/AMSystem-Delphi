@@ -2,8 +2,8 @@ object fVenda: TfVenda
   Left = 0
   Top = 0
   Caption = 'Vendas'
-  ClientHeight = 625
-  ClientWidth = 967
+  ClientHeight = 624
+  ClientWidth = 963
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -20,8 +20,8 @@ object fVenda: TfVenda
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    967
-    625)
+    963
+    624)
   TextHeight = 18
   object Label1: TLabel
     Left = 8
@@ -187,7 +187,7 @@ object fVenda: TfVenda
     Left = 8
     Top = 244
     Width = 900
-    Height = 320
+    Height = 319
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = dProdVenda
@@ -349,7 +349,6 @@ object fVenda: TfVenda
     Top = 54
     Width = 533
     Height = 120
-    DataSource = DM.dFuncionario
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 3
     TitleFont.Charset = ANSI_CHARSET
@@ -391,7 +390,6 @@ object fVenda: TfVenda
     Top = 262
     Width = 533
     Height = 120
-    DataSource = DM.dCliente
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 6
     TitleFont.Charset = ANSI_CHARSET
@@ -573,18 +571,18 @@ object fVenda: TfVenda
   end
   object pnlBotoes: TPanel
     Left = 0
-    Top = 570
-    Width = 967
+    Top = 569
+    Width = 963
     Height = 55
     Align = alBottom
     BevelOuter = bvNone
     Caption = 'pnlBotoes'
     ShowCaption = False
     TabOrder = 17
-    ExplicitTop = 569
-    ExplicitWidth = 963
+    ExplicitTop = 568
+    ExplicitWidth = 959
     DesignSize = (
-      967
+      963
       55)
     object btnSair: TButton
       Left = 401

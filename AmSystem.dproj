@@ -177,6 +177,24 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="src\model\dmVenda.pas">
+            <Form>dmVendas</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="src\model\dmFuncionario.pas">
+            <Form>dmFuncionarios</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="src\model\dmFornecedor.pas">
+            <Form>dmFornecedores</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="src\model\dmCliente.pas">
+            <Form>dmClientes</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>

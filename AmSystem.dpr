@@ -24,7 +24,11 @@ uses
   Consts in 'Consts.pas',
   uEstoque in 'src\uEstoque.pas',
   FrmAjusteEstoque in 'src\view\FrmAjusteEstoque.pas' {fAjusteEstoque},
-  dmProduto in 'src\model\dmProduto.pas' {dmProdutos: TDataModule};
+  dmProduto in 'src\model\dmProduto.pas' {dmProdutos: TDataModule},
+  dmVenda in 'src\model\dmVenda.pas' {dmVendas: TDataModule},
+  dmFuncionario in 'src\model\dmFuncionario.pas' {dmFuncionarios: TDataModule},
+  dmFornecedor in 'src\model\dmFornecedor.pas' {dmFornecedores: TDataModule},
+  dmCliente in 'src\model\dmCliente.pas' {dmClientes: TDataModule};
 
 {$R *.res}
 
@@ -33,5 +37,10 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TfPrincipal, fPrincipal);
+  Application.CreateForm(TdmVendas, dmVendas);
+  Application.CreateForm(TdmFuncionarios, dmFuncionarios);
+  Application.CreateForm(TdmProdutos, dmProdutos);
+  Application.CreateForm(TdmFornecedores, dmFornecedores);
+  Application.CreateForm(TdmClientes, dmClientes);
   Application.Run;
 end.

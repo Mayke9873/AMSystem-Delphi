@@ -2,8 +2,8 @@ object fCliente: TfCliente
   Left = 0
   Top = 0
   Caption = 'Cadastro Cliente'
-  ClientHeight = 648
-  ClientWidth = 995
+  ClientHeight = 647
+  ClientWidth = 991
   Color = clBtnFace
   DefaultMonitor = dmMainForm
   Font.Charset = DEFAULT_CHARSET
@@ -20,8 +20,8 @@ object fCliente: TfCliente
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    995
-    648)
+    991
+    647)
   TextHeight = 13
   object Label9: TLabel
     Left = 8
@@ -39,7 +39,7 @@ object fCliente: TfCliente
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 995
+    Width = 991
     Height = 29
     ButtonHeight = 29
     ButtonWidth = 29
@@ -50,7 +50,7 @@ object fCliente: TfCliente
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
-    ExplicitWidth = 991
+    ExplicitWidth = 987
     object tbNovo: TToolButton
       Left = 0
       Top = 0
@@ -108,24 +108,23 @@ object fCliente: TfCliente
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 995
-    Height = 592
+    Width = 991
+    Height = 591
     ActivePage = pgTabela
+    Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
+    ExplicitWidth = 987
+    ExplicitHeight = 590
     object pgTabela: TTabSheet
       Caption = 'Tabela'
-      DesignSize = (
-        987
-        564)
       object DBGrid1: TDBGrid
-        AlignWithMargins = True
-        Left = 3
+        Left = 0
         Top = 0
-        Width = 981
-        Height = 561
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        DataSource = DM.dCliente
+        Width = 983
+        Height = 563
+        Align = alClient
+        DataSource = dmClientes.dCliente
         DrawingStyle = gdsGradient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -144,7 +143,6 @@ object fCliente: TfCliente
         OnDblClick = tbEditarClick
         Columns = <
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'Id'
             Title.Alignment = taCenter
@@ -169,7 +167,6 @@ object fCliente: TfCliente
             Visible = True
           end
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'RG'
             Title.Alignment = taCenter
@@ -244,7 +241,6 @@ object fCliente: TfCliente
             Visible = True
           end
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'dtregistro'
             Title.Alignment = taCenter
@@ -258,7 +254,6 @@ object fCliente: TfCliente
             Visible = True
           end
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'Tipo'
             Title.Alignment = taCenter
@@ -271,7 +266,6 @@ object fCliente: TfCliente
             Visible = True
           end
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'Ativo'
             Title.Alignment = taCenter
@@ -412,7 +406,7 @@ object fCliente: TfCliente
         Columns = 2
         Ctl3D = True
         DataField = 'tipo'
-        DataSource = DM.dCliente
+        DataSource = dmClientes.dCliente
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -439,7 +433,7 @@ object fCliente: TfCliente
         Height = 17
         Caption = 'Ativo'
         DataField = 'ativo'
-        DataSource = DM.dCliente
+        DataSource = dmClientes.dCliente
         ReadOnly = True
         TabOrder = 1
         ValueChecked = 'S'
@@ -488,7 +482,7 @@ object fCliente: TfCliente
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'nome'
-          DataSource = DM.dCliente
+          DataSource = dmClientes.dCliente
           ReadOnly = True
           TabOrder = 0
         end
@@ -536,7 +530,7 @@ object fCliente: TfCliente
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'rg'
-          DataSource = DM.dCliente
+          DataSource = dmClientes.dCliente
           ReadOnly = True
           TabOrder = 0
         end
@@ -581,7 +575,7 @@ object fCliente: TfCliente
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'CPFCNPJ'
-          DataSource = DM.dCliente
+          DataSource = dmClientes.dCliente
           ReadOnly = True
           TabOrder = 0
           OnKeyPress = DBECPFKeyPress
@@ -626,7 +620,7 @@ object fCliente: TfCliente
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'DtNasc'
-          DataSource = DM.dCliente
+          DataSource = dmClientes.dCliente
           ReadOnly = True
           TabOrder = 0
         end
@@ -672,7 +666,7 @@ object fCliente: TfCliente
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'endereco'
-          DataSource = DM.dCliente
+          DataSource = dmClientes.dCliente
           ReadOnly = True
           TabOrder = 0
         end
@@ -718,7 +712,7 @@ object fCliente: TfCliente
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'numEndereco'
-          DataSource = DM.dCliente
+          DataSource = dmClientes.dCliente
           ReadOnly = True
           TabOrder = 0
         end
@@ -761,7 +755,7 @@ object fCliente: TfCliente
           BorderStyle = bsNone
           CharCase = ecUpperCase
           DataField = 'bairro'
-          DataSource = DM.dCliente
+          DataSource = dmClientes.dCliente
           ReadOnly = True
           TabOrder = 0
         end
@@ -803,7 +797,7 @@ object fCliente: TfCliente
           Align = alClient
           BorderStyle = bsNone
           DataField = 'id'
-          DataSource = DM.dCliente
+          DataSource = dmClientes.dCliente
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -819,17 +813,17 @@ object fCliente: TfCliente
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 308
+    Width = 288
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     CharCase = ecUpperCase
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 304
+    ExplicitWidth = 284
   end
   object rdbTodos: TRadioButton
-    Left = 420
+    Left = 400
     Top = 34
     Width = 49
     Height = 17
@@ -839,10 +833,10 @@ object fCliente: TfCliente
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 416
+    ExplicitLeft = 396
   end
   object rdbAtivo: TRadioButton
-    Left = 500
+    Left = 480
     Top = 34
     Width = 49
     Height = 17
@@ -850,10 +844,10 @@ object fCliente: TfCliente
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbAtivoClick
-    ExplicitLeft = 496
+    ExplicitLeft = 476
   end
   object rdbInativo: TRadioButton
-    Left = 572
+    Left = 552
     Top = 34
     Width = 57
     Height = 17
@@ -861,7 +855,7 @@ object fCliente: TfCliente
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbInativoClick
-    ExplicitLeft = 568
+    ExplicitLeft = 548
   end
   object ImageList1: TImageList
     Left = 928
