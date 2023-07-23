@@ -195,6 +195,11 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="src\view\FrmCompra.pas">
+            <Form>fCompra</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\uCompra.pas"/>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>

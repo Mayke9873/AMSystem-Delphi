@@ -28,7 +28,9 @@ uses
   dmVenda in 'src\model\dmVenda.pas' {dmVendas: TDataModule},
   dmFuncionario in 'src\model\dmFuncionario.pas' {dmFuncionarios: TDataModule},
   dmFornecedor in 'src\model\dmFornecedor.pas' {dmFornecedores: TDataModule},
-  dmCliente in 'src\model\dmCliente.pas' {dmClientes: TDataModule};
+  dmCliente in 'src\model\dmCliente.pas' {dmClientes: TDataModule},
+  FrmCompra in 'src\view\FrmCompra.pas' {fCompra},
+  uCompra in 'src\uCompra.pas';
 
 {$R *.res}
 
@@ -42,5 +44,6 @@ begin
   Application.CreateForm(TdmProdutos, dmProdutos);
   Application.CreateForm(TdmFornecedores, dmFornecedores);
   Application.CreateForm(TdmClientes, dmClientes);
+  Application.CreateForm(TfCompra, fCompra);
   Application.Run;
 end.
