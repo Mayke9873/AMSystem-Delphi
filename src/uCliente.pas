@@ -115,7 +115,7 @@ begin
   dmClientes.qCliente.Params[2].AsString := Ativo;
   dmClientes.qCliente.Open;
 
-  if dmClientes.qCliente.RecordCount = 1 then
+  if (dmClientes.qCliente.RecordCount = 1) and not (pID = 0) then
   begin
     Result := True;
     Cod := dmClientes.qClienteId.AsInteger;

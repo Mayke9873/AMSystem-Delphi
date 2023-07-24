@@ -139,7 +139,7 @@ begin
   dmProdutos.qProduto.Params[2].AsString := FAtivo;
   dmProdutos.qProduto.Open;
 
-  if dmProdutos.qProduto.RecordCount = 1 then
+  if (dmProdutos.qProduto.RecordCount = 1) and not (pID = 0) then
   begin
     Result := True;
     FID := dmProdutos.qProdutoId.AsInteger;

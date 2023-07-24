@@ -70,7 +70,7 @@ begin
   dmFuncionarios.qFuncionario.Params[2].AsString := 'S';
   dmFuncionarios.qFuncionario.Open;
 
-  if dmFuncionarios.qFuncionario.RecordCount = 1 then
+  if (dmFuncionarios.qFuncionario.RecordCount = 1) and not (pId = 0) then
   begin
     Result := True;
     Cod := dmFuncionarios.qFuncionarioID.AsInteger;
