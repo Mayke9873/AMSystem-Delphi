@@ -9,13 +9,13 @@ uses
 type
   TCliente = class(TPessoa)
   private
-    FDtNasc  : TDate;
+    FDtNasc  : String;
     FTpPessoa: String;
-    procedure SetDtNasc(const Value: TDate);
+    procedure SetDtNasc(const Value: String);
     procedure SetTpPessoa(const Value: String);
   public
     Conexao : IConexao;
-    property DtNasc : TDate read FDtNasc write SetDtNasc;
+    property DtNasc : String read FDtNasc write SetDtNasc;
     property TpPessoa : String read FTpPessoa write SetTpPessoa;
     procedure Cadastrar(Value : TCliente);
     procedure Editar(Value : TCliente);
@@ -32,21 +32,6 @@ implementation
 
 { TClientes }
 
-procedure TCliente.SetDtNasc(const Value: TDate);
-begin
-  FDtNasc := Value;
-end;
-
-procedure TCliente.SetTpPessoa(const Value: String);
-begin
-  FTpPessoa := Value;
-end;
-
-function TCliente.Tipo: String;
-begin
-  Result := 'Cliente';
-end;
-
 procedure TCliente.Editar(Value: TCliente);
 begin
   if not (dmClientes.qCliente.State in [dsEdit]) then
@@ -61,16 +46,17 @@ begin
     dmClientes.qClientenumEndereco.asString := NumEndereco;
     dmClientes.qClientebairro.asString := Bairro;
     dmClientes.qClienteAtivo.AsString := Ativo;
-
-    if DateToStr(DtNasc) <> '  /  /    ' then
-      dmClientes.qClienteDtNasc.AsDateTime := DtNasc;
-
+    dmClientes.qClienteDtNasc.AsString := FDtNasc;
+    
+    if FDtNasc = '' then
+      dmClientes.qClientedtnasc.Clear;
+      
     dmClientes.qCliente.Post;
   end
   else
   begin
     dmClientes.qCliente.Cancel;
-    Application.MessageBox('O campo nome obrigatório. Por favor, verifique!', 'Atenção', mb_OK + MB_ICONEXCLAMATION);
+    Application.MessageBox('O campo nome obrigatório. Por favor, verifique!', 'AmSystem', mb_OK + MB_ICONEXCLAMATION);
   end;
 end;
 
@@ -88,19 +74,13 @@ begin
     dmClientes.qClientenumEndereco.asString := NumEndereco;
     dmClientes.qClientebairro.asString := Bairro;
     dmClientes.qClienteAtivo.AsString := Ativo;
-    dmClientes.qClientedtregistro.AsDateTime := Now;
-
-    if DateToStr(DtNasc) <> '  /  /    ' then
-      dmClientes.qClienteDtNasc.AsDateTime := DtNasc
-    else
-      dmClientes.qClienteDtNasc.AsString := 'null';
-
+    dmClientes.qClienteDtNasc.AsString := DtNasc;
     dmClientes.qCliente.Post;
   end
   else
   begin
     dmClientes.qCliente.Cancel;
-    Application.MessageBox('Campo nome obrigatório. Por favor, verifique!', 'Atenção', MB_ICONEXCLAMATION);
+    Application.MessageBox('Campo nome obrigatório. Por favor, verifique!', 'AmSystem', MB_ICONEXCLAMATION);
   end;
 end;
 
@@ -144,6 +124,24 @@ begin
   end;
 
   Nome := '';
+end;
+
+procedure TCliente.SetDtNasc(const Value: String);
+begin
+  FDtNasc := '';
+
+  if not ((Value = '  /  /  ') or (Value = '  /  /    ')) then
+    FDtNasc := Value;
+end;
+
+procedure TCliente.SetTpPessoa(const Value: String);
+begin
+  FTpPessoa := Value;
+end;
+
+function TCliente.Tipo: String;
+begin
+  Result := 'Cliente';
 end;
 
 end.
