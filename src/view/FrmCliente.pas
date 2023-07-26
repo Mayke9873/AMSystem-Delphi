@@ -333,24 +333,13 @@ begin
   Cliente.Endereco := DBEEndereco.Text;
   Cliente.NumEndereco := DBENumEnd.Text;
   Cliente.Bairro := DBEBairro.Text;
-
-  if DBENasc.Text <> '  /  /    ' then
-  begin
-    try
-        Cliente.DtNasc := StrToDate(DBENasc.Text);
-    except
-      Application.MessageBox('Data inválida. Por favor, verifique!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
-    end;
-  end;
+  Cliente.DtNasc := DBENasc.Text;
 
   if DBCheckBox1.Checked then
-  begin
-    Cliente.Ativo := DBCheckBox1.ValueChecked;
-  end
+    Cliente.Ativo := DBCheckBox1.ValueChecked
+
   else
-  begin
     Cliente.Ativo := DBCheckBox1.ValueUnchecked;
-  end;
 
   NovoOuEditar(TipoCadastro);
   Consulta;
