@@ -3,7 +3,7 @@ unit uValida;
 interface
 
 uses
-  Data.DB, Vcl.Forms, System.UITypes, Winapi.Windows, System.SysUtils;
+  Data.DB, Vcl.Forms, System.UITypes, Winapi.Windows, System.SysUtils,   Vcl.DBGrids, Vcl.Controls;
 
 type
   TValidacoes = class
@@ -16,6 +16,8 @@ type
     procedure SomenteNumeroInteiro(var key: char);
 
   end;
+
+  procedure PosicionaGrid(grid: TDBGrid; campo: TWinControl);
 
 implementation
 
@@ -35,7 +37,7 @@ begin
       Sender.AsString := Text;
       Result := true;
     except
-      Application.MessageBox('Data inválida. Por favor, verifique!', 'Atenção', MB_OK + MB_ICONWARNING);
+      Application.MessageBox('Data inválida. Por favor, verifique!', 'AmSystem', MB_OK + MB_ICONWARNING);
       if Screen.Cursor = crHourGlass then
       begin
         Screen.Cursor := crDefault;
@@ -58,7 +60,7 @@ begin
       Sender.asString := Text;
       Result := true;
     except
-      Application.MessageBox('Valor inválido. Por favor, verifique!','Atenção', MB_OK + MB_ICONWARNING);
+      Application.MessageBox('Valor inválido. Por favor, verifique!','AmSystem', MB_OK + MB_ICONWARNING);
       if Screen.Cursor = crHourGlass then
       begin
         Screen.Cursor := crDefault;
@@ -77,6 +79,13 @@ procedure TValidacoes.SomenteNumeroInteiro(var key: char);
 begin
   if not CharInSet(key, ['0'..'9', #8, #13]) then
    key:=#0;
+end;
+
+procedure PosicionaGrid(grid: TDBGrid; campo: TWinControl);
+begin
+  grid.Left := campo.Left;
+  grid.Top  := campo.Top + campo.Height;
+  grid.BringToFront;
 end;
 
 end.
