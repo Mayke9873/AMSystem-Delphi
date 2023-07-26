@@ -2,6 +2,7 @@ inherited dmClientes: TdmClientes
   object qCliente: TZQuery
     Connection = DM.zCon
     UpdateObject = uCliente
+    OnNewRecord = qClienteNewRecord
     SQL.Strings = (
       
         'SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bai' +
@@ -64,6 +65,7 @@ inherited dmClientes: TdmClientes
     end
     object qClientedtnasc: TDateField
       FieldName = 'dtnasc'
+      OnSetText = qClientedtnascSetText
       EditMask = '!99/99/9999;1;_'
     end
     object qClienteEndereco: TWideStringField

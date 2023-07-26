@@ -22,6 +22,7 @@ type
     qClienteAtivo: TWideStringField;
     dCliente: TDataSource;
     uCliente: TZUpdateSQL;
+    procedure qClienteNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -36,5 +37,12 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TdmClientes.qClienteNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  qClienteAtivo.AsString := 'S';
+  qClienteDtRegistro.AsDateTime := Now;
+end;
 
 end.
