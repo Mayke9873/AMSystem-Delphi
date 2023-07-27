@@ -171,7 +171,6 @@ begin
     else
       Estoque.MovEstoque(Ajuste, Saida);
 
-    Application.MessageBox('Ajuste realizado com sucesso!','' , 32);
     LimpaTela;
   finally
     FreeAndNil(Estoque);

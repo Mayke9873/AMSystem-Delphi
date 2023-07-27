@@ -3,7 +3,7 @@ unit uEstoque;
 interface
 
 uses
-  System.SysUtils;
+  System.SysUtils, Vcl.Forms;
 
 type
   TEstoque = class
@@ -44,6 +44,11 @@ uses dmProduto;
 
 procedure TEstoque.MovEstoque(const tipo : String; multiplo : Integer);
 begin
+  if Fqtd = 0 then
+  begin
+    Application.MessageBox('Quantidade não pode ser 0 ou vazio.'#13'Por favor, verifique!', 'AmSystem', 48);
+    Exit;
+  end;
     dmProdutos.qMovEstoque.Open;
     dmProdutos.qMovEstoque.Insert;
     dmProdutos.qMovEstoqueIdProduto.AsInteger := FidProduto;
@@ -54,6 +59,8 @@ begin
     dmProdutos.qMovEstoquetipoMov.AsString    := tipo;
     dmProdutos.qMovEstoqueidFornecedor.AsInteger := FidFornecedor;
     dmProdutos.qMovEstoque.Post;
+
+    Application.MessageBox('Ajuste realizado com sucesso!','' , 32);
 end;
 
 procedure TEstoque.SetCod(const Value: integer);
