@@ -44,6 +44,5 @@ begin
   Application.CreateForm(TdmProdutos, dmProdutos);
   Application.CreateForm(TdmFornecedores, dmFornecedores);
   Application.CreateForm(TdmClientes, dmClientes);
-  Application.CreateForm(TfCompra, fCompra);
   Application.Run;
 end.
