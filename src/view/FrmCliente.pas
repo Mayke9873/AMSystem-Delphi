@@ -10,23 +10,16 @@ uses
   ZAbstractRODataset, ZDataset, Vcl.ComCtrls, Vcl.Tabs, Vcl.DockTabSet,
   Vcl.StdCtrls, System.ImageList, Vcl.ImgList, ZAbstractDataset, Vcl.Mask,
   Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate, Vcl.Buttons, uCliente, uValida,
-  System.Threading;
+  System.Threading, Skia, Skia.Vcl;
 
 type
   TfCliente = class(TForm)
-    ToolBar1: TToolBar;
-    tbNovo: TToolButton;
     ImageList1: TImageList;
-    tbEditar: TToolButton;
-    tbSalvar: TToolButton;
-    tbCancelar: TToolButton;
-    tbSair: TToolButton;
     PageControl1: TPageControl;
     pgTabela: TTabSheet;
     DBGrid1: TDBGrid;
     pgDados: TTabSheet;
     Label1: TLabel;
-    ToolButton1: TToolButton;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -65,12 +58,13 @@ type
     DBENumEnd: TDBEdit;
     DBEBairro: TDBEdit;
     DBEditID: TDBEdit;
-    procedure tbSairClick(Sender: TObject);
-    procedure tbNovoClick(Sender: TObject);
-    procedure tbCancelarClick(Sender: TObject);
+    pnlBotoes: TPanel;
+    tbNovo: TSkSvg;
+    tbEditar: TSkSvg;
+    tbSalvar: TSkSvg;
+    tbCancelar: TSkSvg;
+    tbSair: TSkSvg;
     procedure DBGrid1DblClick(Sender: TObject);
-    procedure tbSalvarClick(Sender: TObject);
-    procedure tbEditarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edPesquisaChange(Sender: TObject);
@@ -83,12 +77,19 @@ type
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBECPFKeyPress(Sender: TObject; var Key: Char);
+    procedure tbNovoClick(Sender: TObject);
+    procedure tbEditarClick(Sender: TObject);
+    procedure tbSalvarClick(Sender: TObject);
+    procedure tbCancelarClick(Sender: TObject);
+    procedure tbSairClick(Sender: TObject);
   private
     { Private declarations }
     Cliente : TCliente;
     TipoCadastro : Integer;
     Valida : TValidacoes;
     procedure NovoOuEditar(Tipo : Integer);
+    procedure Opacidade;
+    procedure AjustaTela(aValue: Boolean);
 
   public
     { Public declarations }
@@ -172,7 +173,9 @@ begin
   Cliente := TCliente.Create;
   Consulta;
   PageControl1.TabIndex := 0;
-  tbCancelar.Click;
+  tbCancelarClick(tbCancelar);
+
+  Opacidade();
 end;
 
 procedure TfCliente.FormKeyPress(Sender: TObject; var Key: Char);
@@ -233,79 +236,34 @@ begin
   Consulta;
 end;
 
-procedure TfCliente.tbCancelarClick(Sender: TObject);
-begin
-  PageControl1.ActivePageIndex := 0;
-  DBGrid1.Enabled := true;
-  tbNovo.Enabled := true;
-  tbEditar.Enabled := true;
-  tbSalvar.Enabled := false;
-  tbCancelar.Enabled := false;
-  DBCheckBox1.ReadOnly := true;
-  DBRadioGroup1.ReadOnly := true;
-
-  DBEditID.ReadOnly := true;
-  DBENome.ReadOnly := true;
-  DBERG.ReadOnly := true;
-  DBECPF.ReadOnly := true;
-  DBENasc.ReadOnly := true;
-  DBEEndereco.ReadOnly := true;
-  DBENumEnd.ReadOnly := true;
-  DBEBairro.ReadOnly := true;
-
-  dmClientes.qCliente.Cancel;
-end;
-
-procedure TfCliente.tbEditarClick(Sender: TObject);
-begin
-  PageControl1.ActivePageIndex := 1;
-  DBGrid1.Enabled := false;
-  tbNovo.Enabled := false;
-  tbEditar.Enabled := false;
-  tbSalvar.Enabled := true;
-  tbCancelar.Enabled := true;
-  DBCheckBox1.ReadOnly := false;
-  DBRadioGroup1.ReadOnly := false;
-
-  DBEditID.ReadOnly := false;
-  DBENome.ReadOnly := false;
-  DBERG.ReadOnly := false;
-  DBECPF.ReadOnly := false;
-  DBENasc.ReadOnly := false;
-  DBEEndereco.ReadOnly := false;
-  DBENumEnd.ReadOnly := false;
-  DBEBairro.ReadOnly := false;
-
-  dmClientes.qCliente.Edit;
-  TipoCadastro := 1;
-end;
-
 procedure TfCliente.tbNovoClick(Sender: TObject);
 begin
   PageControl1.ActivePageIndex := 1;
-  DBGrid1.Enabled := false;
-  tbNovo.Enabled := false;
-  tbEditar.Enabled := false;
-  tbSalvar.Enabled := true;
-  tbCancelar.Enabled := true;
-  DBCheckBox1.ReadOnly := false;
-  DBRadioGroup1.ReadOnly := false;
 
-  DBENome.ReadOnly := false;
-  DBERG.ReadOnly := false;
-  DBECPF.ReadOnly := false;
-  DBENasc.ReadOnly := false;
-  DBEEndereco.ReadOnly := false;
-  DBENumEnd.ReadOnly := false;
-  DBEBairro.ReadOnly := false;
+  AjustaTela(False);
+  Opacidade();
+
+  DBENome.SetFocus;
 
   dmClientes.qCliente.Insert;
   TipoCadastro := 0;
 end;
 
+procedure TfCliente.tbEditarClick(Sender: TObject);
+begin
+  PageControl1.ActivePageIndex := 1;
+
+  AjustaTela(False);
+  Opacidade();
+
+  DBENome.SetFocus;
+
+  dmClientes.qCliente.Edit;
+  TipoCadastro := 1;
+end;
+
 procedure TfCliente.tbSalvarClick(Sender: TObject);
 begin
-
   SelectNext(ActiveControl, True, True);
 
   DBEditID.ReadOnly := true;
@@ -343,6 +301,58 @@ begin
 
   NovoOuEditar(TipoCadastro);
   Consulta;
+
+  Opacidade();
+end;
+
+procedure TfCliente.tbCancelarClick(Sender: TObject);
+begin
+  PageControl1.ActivePageIndex := 0;
+
+  AjustaTela(True);
+  Opacidade();
+
+  dmClientes.qCliente.Cancel;
+
+end;
+
+procedure TfCliente.AjustaTela(aValue: Boolean);
+begin
+  DBGrid1.Enabled       := aValue;
+  tbNovo.Enabled        := aValue;
+  tbEditar.Enabled      := aValue;
+  tbSalvar.Enabled      := not aValue;
+  tbCancelar.Enabled    := not aValue;
+
+  DBCheckBox1.ReadOnly  := aValue;
+  DBRadioGroup1.ReadOnly:= aValue;
+
+  DBENome.ReadOnly      := aValue;
+  DBERG.ReadOnly        := aValue;
+  DBECPF.ReadOnly       := aValue;
+  DBENasc.ReadOnly      := aValue;
+  DBEEndereco.ReadOnly  := aValue;
+  DBENumEnd.ReadOnly    := aValue;
+  DBEBairro.ReadOnly    := aValue;
+end;
+
+procedure TfCliente.Opacidade;
+var
+  i: Integer;
+begin
+  for i := 0 to ComponentCount-1 do
+  begin
+    if (Components[i]) is TSkSvg then
+    begin
+      case TSkSvg(Components[i]).Enabled of
+
+        True  : TSkSvg(Components[i]).Opacity := 255;
+
+        False : TSkSvg(Components[i]).Opacity := 100;
+
+      end;
+    end;
+  end;
 end;
 
 procedure TfCliente.tbSairClick(Sender: TObject);
