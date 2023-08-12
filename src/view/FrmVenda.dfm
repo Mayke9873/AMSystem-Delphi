@@ -349,6 +349,7 @@ object fVenda: TfVenda
     Top = 54
     Width = 533
     Height = 120
+    DataSource = dmFuncionarios.dFuncionario
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 3
     TitleFont.Charset = ANSI_CHARSET
@@ -390,6 +391,7 @@ object fVenda: TfVenda
     Top = 262
     Width = 533
     Height = 120
+    DataSource = dmClientes.dCliente
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 6
     TitleFont.Charset = ANSI_CHARSET
