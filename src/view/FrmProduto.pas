@@ -342,8 +342,10 @@ begin
   Produto.PrecoCompra    := StrToCurrDef(dbeValorCompra.Text, 0);
   Produto.PrecoVenda     := StrToCurrDef(dbeValorVenda.Text, 0);
   Produto.PorcentLucro   := StrToFloatDef(dbeLucro.Text, 0);
-  Produto.IdGrupo        := DbCbGrupo.KeyValue;
   Produto.DescricaoGrupo := DbCbGrupo.Text;
+
+  if DbCbGrupo.KeyValue <> Null then
+  Produto.IdGrupo        := DbCbGrupo.KeyValue;
 
   if dbchkAtivo.Checked then
     Produto.Ativo := dbchkAtivo.ValueChecked
