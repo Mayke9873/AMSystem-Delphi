@@ -490,16 +490,16 @@ object fProduto: TfProduto
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 304
+    Width = 300
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 2
     OnChange = edPesquisaChange
-    ExplicitWidth = 300
+    ExplicitWidth = 296
   end
   object rdbTodos: TRadioButton
-    Left = 416
+    Left = 412
     Top = 34
     Width = 49
     Height = 17
@@ -509,10 +509,10 @@ object fProduto: TfProduto
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 412
+    ExplicitLeft = 408
   end
   object rdbAtivo: TRadioButton
-    Left = 496
+    Left = 492
     Top = 34
     Width = 49
     Height = 17
@@ -520,10 +520,10 @@ object fProduto: TfProduto
     Caption = 'Ativo'
     TabOrder = 4
     OnClick = rdbAtivoClick
-    ExplicitLeft = 492
+    ExplicitLeft = 488
   end
   object rdbInativo: TRadioButton
-    Left = 568
+    Left = 564
     Top = 34
     Width = 57
     Height = 17
@@ -531,7 +531,7 @@ object fProduto: TfProduto
     Caption = 'Inativo'
     TabOrder = 5
     OnClick = rdbInativoClick
-    ExplicitLeft = 564
+    ExplicitLeft = 560
   end
   object ImageList1: TImageList
     Left = 928

@@ -186,7 +186,7 @@ object fVenda: TfVenda
   object DBGrid1: TDBGrid
     Left = 8
     Top = 244
-    Width = 900
+    Width = 904
     Height = 319
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
