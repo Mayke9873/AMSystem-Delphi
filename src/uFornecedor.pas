@@ -10,9 +10,7 @@ type
     private
 
     public
-      procedure Pesquisar; overload;
-      function Pesquisar(pNome : String) : Boolean; overload;
-      function Pesquisar(pID : integer) : Boolean; overload;
+      function Pesquisar(const pNome: String = ''; const pId: Integer = 0) : Boolean;
       procedure Cadastrar(Value : TFornecedor);
 
     published
@@ -25,16 +23,10 @@ implementation
 
 uses dmFornecedor;
 
-procedure TFornecedor.Pesquisar;
+function TFornecedor.Pesquisar(const pNome: String = ''; const pId: Integer = 0) : Boolean;
 begin
-
-end;
-
-function TFornecedor.Pesquisar(pNome: String) : Boolean;
-begin
-
   dmFornecedores.qFornecedor.Close;
-  dmFornecedores.qFornecedor.ParamByName('id').AsInteger := 0;
+  dmFornecedores.qFornecedor.ParamByName('id').AsInteger := pId;
   dmFornecedores.qFornecedor.ParamByName('nome').AsString := '%' + pNome + '%';
   dmFornecedores.qFornecedor.ParamByName('ativo').AsString   := Ativo;
   dmFornecedores.qFornecedor.Open;
@@ -48,6 +40,7 @@ begin
 
   Nome := '';
   Result := False;
+
 end;
 
 procedure TFornecedor.Cadastrar(Value: TFornecedor);
@@ -66,11 +59,6 @@ begin
     dmFornecedores.qFornecedor.Post;
     dmFornecedores.qFornecedor.Refresh;
   end;
-
-end;
-
-function TFornecedor.Pesquisar(pID: integer) : Boolean;
-begin
 
 end;
 
