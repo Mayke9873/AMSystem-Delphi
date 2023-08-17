@@ -7,11 +7,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Win.TaskbarCore, Vcl.Taskbar,
   Vcl.ComCtrls, Vcl.ToolWin,System.ImageList, Vcl.ImgList, Vcl.Menus, Threading, IPPeerClient, IPPeerServer,
   System.Tether.Manager, Vcl.OleCtrls, SHDocVw, Vcl.ExtCtrls, Vcl.Imaging.jpeg,
-  uValida;
+  uValida, Skia, Skia.Vcl;
 
 type
   TfPrincipal = class(TForm)
-    ImageList1: TImageList;
     MainMenu1: TMainMenu;
     Cadastros1: TMenuItem;
     Cadastros2: TMenuItem;
@@ -28,17 +27,22 @@ type
     N3: TMenuItem;
     AjustedeEstoque1: TMenuItem;
     Image1: TImage;
-    ToolBar1: TToolBar;
-    tbCliente: TToolButton;
-    ToolButton1: TToolButton;
-    tbSair: TToolButton;
+    N4: TMenuItem;
+    Compra1: TMenuItem;
+    ConsultadeCompras1: TMenuItem;
+    pnlBotoes: TPanel;
+    pnlCliente: TPanel;
+    SkSvg1: TSkSvg;
+    pnlVenda: TPanel;
+    SkSvg2: TSkSvg;
+    pnlSair: TPanel;
+    SkSvg3: TSkSvg;
     procedure Cadastros2Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure tbClienteClick(Sender: TObject);
     procedure Venda1Click(Sender: TObject);
-    procedure ToolButton1Click(Sender: TObject);
     procedure ConsultadeVendas1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
     procedure Grupos1Click(Sender: TObject);
@@ -46,6 +50,10 @@ type
     procedure FecharSistema;
     procedure Fornecedores1Click(Sender: TObject);
     procedure AjustedeEstoque1Click(Sender: TObject);
+    procedure Compra1Click(Sender: TObject);
+    procedure pnlClienteClick(Sender: TObject);
+    procedure pnlSairClick(Sender: TObject);
+    procedure pnlVendaClick(Sender: TObject);
   private
     { Private declarations }
     Valida : TValidacoes;
@@ -60,7 +68,7 @@ implementation
 
 uses
   FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto, FrmFuncionario,
-  FrmVenda, FrmFornecedor, FrmAjusteEstoque;
+  FrmVenda, FrmFornecedor, FrmAjusteEstoque, FrmCompra;
 
 {$R *.dfm}
 
@@ -80,6 +88,14 @@ begin
     fCliente.Show;
 end;
 
+procedure TfPrincipal.Compra1Click(Sender: TObject);
+begin
+  if not Assigned(fCompra) then
+    fCompra := TfCompra.Create(fPrincipal)
+  else
+    fCompra.Show;
+end;
+
 procedure TfPrincipal.ConsultadeVendas1Click(Sender: TObject);
 begin
   if not Assigned(fConsultaVendas) then
@@ -92,7 +108,7 @@ procedure TfPrincipal.FecharSistema;
 begin
   if MDIChildCount > 0 then
   begin
-    Application.MessageBox('Não é possivel fechar o sistema. Por favor, feche todas as telas!', 'Atenção', 48);
+    Application.MessageBox('Não é possivel fechar o sistema.'#13'Por favor, feche todas as telas e tente novamente!', 'Atenção', 48);
     Abort;
   end;
 
@@ -125,6 +141,21 @@ begin
     fGrupoProd.Show;
 end;
 
+procedure TfPrincipal.pnlClienteClick(Sender: TObject);
+begin
+  Cadastros2.Click;
+end;
+
+procedure TfPrincipal.pnlSairClick(Sender: TObject);
+begin
+  FecharSistema();
+end;
+
+procedure TfPrincipal.pnlVendaClick(Sender: TObject);
+begin
+  Venda1.Click;
+end;
+
 procedure TfPrincipal.Produtos1Click(Sender: TObject);
 begin
   if not Assigned(fProduto) then
@@ -143,7 +174,7 @@ end;
 
 procedure TfPrincipal.Sair1Click(Sender: TObject);
 begin
-  tbSairClick(tbSair);
+  FecharSistema();
 end;
 
 procedure TfPrincipal.tbClienteClick(Sender: TObject);
@@ -157,11 +188,6 @@ end;
 procedure TfPrincipal.tbSairClick(Sender: TObject);
 begin
   FecharSistema();
-end;
-
-procedure TfPrincipal.ToolButton1Click(Sender: TObject);
-begin
-  Venda1Click(Venda1);
 end;
 
 procedure TfPrincipal.Venda1Click(Sender: TObject);
