@@ -10,6 +10,13 @@ object fCompra: TfCompra
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  FormStyle = fsMDIChild
+  KeyPreview = True
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
@@ -39,25 +46,12 @@ object fCompra: TfCompra
       Font.Style = []
       ParentFont = False
     end
-    object Label2: TLabel
-      Left = 8
-      Top = 66
-      Width = 68
-      Height = 18
-      Caption = 'Vendedor'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Arial'
-      Font.Style = []
-      ParentFont = False
-    end
     object Label3: TLabel
       Left = 8
-      Top = 128
-      Width = 49
+      Top = 56
+      Width = 81
       Height = 18
-      Caption = 'Cliente'
+      Caption = 'Fornecedor'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
@@ -140,20 +134,13 @@ object fCompra: TfCompra
       ReadOnly = True
       TabOrder = 0
     end
-    object edIdVendedor: TEdit
+    object edIdFornecedor: TEdit
       Left = 8
-      Top = 86
+      Top = 76
       Width = 86
       Height = 23
       TabOrder = 1
-    end
-    object edIdCliente: TEdit
-      Tag = 1
-      Left = 8
-      Top = 148
-      Width = 86
-      Height = 23
-      TabOrder = 2
+      OnExit = edIdFornecedorExit
     end
     object edIdProd: TEdit
       Tag = 2
@@ -161,33 +148,29 @@ object fCompra: TfCompra
       Top = 212
       Width = 86
       Height = 23
-      TabOrder = 3
-    end
-    object edVendedor: TEdit
-      Left = 95
-      Top = 86
-      Width = 446
-      Height = 23
-      CharCase = ecUpperCase
       TabOrder = 4
+      OnExit = edIdFornecedorExit
     end
-    object edCliente: TEdit
-      Tag = 1
+    object edFornecedor: TEdit
       Left = 95
-      Top = 148
+      Top = 76
       Width = 446
       Height = 23
       CharCase = ecUpperCase
-      TabOrder = 5
+      TabOrder = 2
+      OnChange = edFornecedorChange
+      OnKeyDown = edPesqProdKeyDown
     end
     object edPesqProd: TEdit
-      Tag = 2
+      Tag = 1
       Left = 95
       Top = 212
       Width = 446
       Height = 23
       CharCase = ecUpperCase
-      TabOrder = 6
+      TabOrder = 5
+      OnChange = edPesqProdChange
+      OnKeyDown = edPesqProdKeyDown
     end
     object edQtdProduto: TEdit
       Tag = 99
@@ -195,7 +178,7 @@ object fCompra: TfCompra
       Top = 212
       Width = 86
       Height = 23
-      TabOrder = 7
+      TabOrder = 6
     end
     object edValorUnitario: TEdit
       Tag = 99
@@ -203,7 +186,7 @@ object fCompra: TfCompra
       Top = 212
       Width = 86
       Height = 23
-      TabOrder = 8
+      TabOrder = 7
     end
     object edDesconto: TEdit
       Tag = 99
@@ -211,7 +194,7 @@ object fCompra: TfCompra
       Top = 212
       Width = 86
       Height = 23
-      TabOrder = 9
+      TabOrder = 8
     end
     object edValorTotal: TEdit
       Tag = 99
@@ -219,18 +202,19 @@ object fCompra: TfCompra
       Top = 212
       Width = 86
       Height = 23
-      TabOrder = 10
+      TabOrder = 9
     end
     object DBGrid1: TDBGrid
       Left = 8
       Top = 244
-      Width = 900
+      Width = 904
       Height = 320
       TabStop = False
       Anchors = [akLeft, akTop, akRight, akBottom]
       DataSource = dProdVenda
+      DefaultDrawing = False
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 11
+      TabOrder = 10
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
@@ -319,20 +303,22 @@ object fCompra: TfCompra
         end>
     end
     object dbgPesqProduto: TDBGrid
-      Tag = 2
-      Left = 910
-      Top = 386
-      Width = 814
+      Tag = 1
+      Left = 934
+      Top = 298
+      Width = 813
       Height = 153
       DataSource = dmProdutos.dProduto
       Options = [dgTitles, dgIndicator, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 12
+      ReadOnly = True
+      TabOrder = 11
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       Visible = False
+      OnKeyDown = dbgFornecedorKeyDown
       Columns = <
         item
           Expanded = False
@@ -384,23 +370,27 @@ object fCompra: TfCompra
           Visible = True
         end>
     end
-    object dbgVendedor: TDBGrid
-      Left = 918
-      Top = 118
+    object dbgFornecedor: TDBGrid
+      Left = 934
+      Top = 115
       Width = 533
       Height = 120
+      TabStop = False
+      DataSource = dmFornecedores.dFornecedor
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 13
+      ReadOnly = True
+      TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       Visible = False
+      OnKeyDown = dbgFornecedorKeyDown
       Columns = <
         item
           Expanded = False
-          FieldName = 'Id'
+          FieldName = 'id'
           Title.Caption = 'C'#243'digo'
           Title.Font.Charset = ANSI_CHARSET
           Title.Font.Color = clWindowText
@@ -412,46 +402,7 @@ object fCompra: TfCompra
         end
         item
           Expanded = False
-          FieldName = 'Nome'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -15
-          Title.Font.Name = 'Arial'
-          Title.Font.Style = [fsBold]
-          Width = 420
-          Visible = True
-        end>
-    end
-    object dbgCliente: TDBGrid
-      Tag = 1
-      Left = 918
-      Top = 244
-      Width = 533
-      Height = 120
-      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 14
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -12
-      TitleFont.Name = 'Segoe UI'
-      TitleFont.Style = []
-      Visible = False
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'Id'
-          Title.Caption = 'C'#243'digo'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -15
-          Title.Font.Name = 'Arial'
-          Title.Font.Style = [fsBold]
-          Width = 80
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Nome'
+          FieldName = 'nome'
           Title.Font.Charset = ANSI_CHARSET
           Title.Font.Color = clWindowText
           Title.Font.Height = -15
@@ -469,7 +420,7 @@ object fCompra: TfCompra
       BevelOuter = bvNone
       Caption = 'pnlDesconto'
       ShowCaption = False
-      TabOrder = 15
+      TabOrder = 12
       object Label9: TLabel
         Left = 0
         Top = 0
@@ -540,7 +491,7 @@ object fCompra: TfCompra
       BevelOuter = bvNone
       Caption = 'pnlTotal'
       ShowCaption = False
-      TabOrder = 16
+      TabOrder = 13
       object Label10: TLabel
         Left = 0
         Top = 0
@@ -614,7 +565,7 @@ object fCompra: TfCompra
       BevelOuter = bvNone
       Caption = 'pnlBotoes'
       ShowCaption = False
-      TabOrder = 17
+      TabOrder = 14
       ExplicitTop = 569
       ExplicitWidth = 963
       DesignSize = (
@@ -625,8 +576,8 @@ object fCompra: TfCompra
         Top = 7
         Width = 125
         Height = 32
+        Action = acSair
         Anchors = [akLeft, akBottom]
-        Caption = 'Esc - Sair'
         DragCursor = crHandPoint
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -641,8 +592,8 @@ object fCompra: TfCompra
         Top = 7
         Width = 125
         Height = 32
+        Action = acExcluirProduto
         Anchors = [akLeft, akBottom]
-        Caption = 'F5 - Excluir Produto'
         DragCursor = crHandPoint
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -657,8 +608,8 @@ object fCompra: TfCompra
         Top = 7
         Width = 125
         Height = 32
+        Action = acCancelar
         Anchors = [akLeft, akBottom]
-        Caption = 'F4 - Cancelar'
         DragCursor = crHandPoint
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -673,9 +624,9 @@ object fCompra: TfCompra
         Top = 7
         Width = 125
         Height = 32
+        Action = acSalvar
         Anchors = [akLeft, akBottom]
         BiDiMode = bdLeftToRight
-        Caption = 'F3 - Salvar'
         DragCursor = crHandPoint
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -879,5 +830,34 @@ object fCompra: TfCompra
         Name = 'OLD_ex'
         ParamType = ptUnknown
       end>
+  end
+  object ActionList1: TActionList
+    Left = 544
+    Top = 568
+    object acSair: TAction
+      Caption = 'Esc - Sair'
+      ShortCut = 27
+      OnExecute = acSairExecute
+    end
+    object acSalvar: TAction
+      Caption = 'F3 - Salvar'
+      ShortCut = 114
+      OnExecute = acSalvarExecute
+    end
+    object acCancelar: TAction
+      Caption = 'F4 - Cancelar'
+      ShortCut = 115
+    end
+    object acExcluirProduto: TAction
+      Caption = 'F5 - Excluir Produto'
+      ShortCut = 116
+    end
+  end
+  object tmPesquisa: TTimer
+    Enabled = False
+    Interval = 300
+    OnTimer = tmPesquisaTimer
+    Left = 496
+    Top = 24
   end
 end
