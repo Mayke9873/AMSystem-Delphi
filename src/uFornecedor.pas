@@ -31,9 +31,10 @@ begin
   dmFornecedores.qFornecedor.ParamByName('ativo').AsString   := Ativo;
   dmFornecedores.qFornecedor.Open;
 
-  if dmFornecedores.qFornecedor.RecordCount = 1 then
+  if (dmFornecedores.qFornecedor.RecordCount = 1) and not (pId = 0) then
   begin
     Result := True;
+    Cod  := dmFornecedores.qFornecedorid.AsInteger;
     Nome := dmFornecedores.qFornecedorNome.AsString;
     Exit;
   end;
