@@ -62,6 +62,8 @@ type
     procedure edIdProdutoExit(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
+    procedure edProdutoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure gdPesqProdutoKeyPress(Sender: TObject; var Key: Char);
   private
     Estoque : TEstoque;
     Descricao : String;
@@ -81,6 +83,12 @@ implementation
 {$R *.dfm}
 
 uses dmProduto, uProduto;
+
+procedure TfAjusteEstoque.edProdutoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if (Key = VK_DOWN) and (gdPesqProduto.Visible) then
+    gdPesqProduto.SetFocus;
+end;
 
 procedure TfAjusteEstoque.edProdutoKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -150,6 +158,14 @@ procedure TfAjusteEstoque.gdPesqProdutoDblClick(Sender: TObject);
 begin
   edIdProduto.Text := gdPesqProduto.Fields[0].Value;
   edProduto.Text   := gdPesqProduto.Fields[1].Value;
+  edObs.SetFocus;
+  gdPesqProduto.Visible := False;
+end;
+
+procedure TfAjusteEstoque.gdPesqProdutoKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+    gdPesqProdutoDblClick(Sender);
 end;
 
 procedure TfAjusteEstoque.edIdProdutoExit(Sender: TObject);
@@ -213,7 +229,7 @@ end;
 
 procedure TfAjusteEstoque.FormKeyPress(Sender: TObject; var Key: Char);
 begin
-  if Key = #13 then
+  if (Key = #13) and not (ActiveControl is TDBGrid) then
     SelectNext(ActiveControl, True, True);
 end;
 

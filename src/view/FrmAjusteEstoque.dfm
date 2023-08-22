@@ -312,7 +312,10 @@ object fAjusteEstoque: TfAjusteEstoque
             BorderStyle = bsNone
             TabOrder = 0
             OnChange = edProdutoChange
+            OnKeyDown = edProdutoKeyDown
             OnKeyPress = edProdutoKeyPress
+            ExplicitLeft = 1
+            ExplicitTop = 5
           end
         end
         object pnlIdProduto: TPanel
@@ -542,11 +545,12 @@ object fAjusteEstoque: TfAjusteEstoque
       end
     end
     object gdPesqProduto: TDBGrid
-      Left = 157
-      Top = 89
+      Left = 17
+      Top = 87
       Width = 450
       Height = 120
       DataSource = dmProdutos.dProduto
+      ReadOnly = True
       TabOrder = 4
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -555,6 +559,7 @@ object fAjusteEstoque: TfAjusteEstoque
       TitleFont.Style = []
       Visible = False
       OnDblClick = gdPesqProdutoDblClick
+      OnKeyPress = gdPesqProdutoKeyPress
       Columns = <
         item
           Expanded = False
@@ -593,7 +598,7 @@ object fAjusteEstoque: TfAjusteEstoque
   end
   object tmPesquisar: TTimer
     Enabled = False
-    Interval = 300
+    Interval = 200
     OnTimer = tmPesquisarTimer
     Left = 560
     Top = 112
