@@ -267,7 +267,7 @@ end;
 
 procedure TfVenda.edVendedorChange(Sender: TObject);
 begin
-    if (Trim(edVendedor.Text) <> '') and (Trim(edIdVendedor.Text) = '') then
+  if (Trim(edVendedor.Text) <> '') and (Trim(edIdVendedor.Text) = '') then
   begin
     Consulta(TEdit(Sender));
     
