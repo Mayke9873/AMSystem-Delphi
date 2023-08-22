@@ -70,7 +70,7 @@ type
     procedure tmPesquisaTimer(Sender: TObject);
     procedure edPesqProdChange(Sender: TObject);
     procedure edPesqProdKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure dbgFornecedorKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure dbgFornecedorKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     Fornecedor: TFornecedor;
@@ -165,9 +165,9 @@ begin
 end;
 
 
-procedure TfCompra.dbgFornecedorKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfCompra.dbgFornecedorKeyPress(Sender: TObject; var Key: Char);
 begin
-  if Key = VK_RETURN then
+    if Key = #13 then
   begin
     case TDBGrid(Sender).Tag of
       0: begin
@@ -184,7 +184,6 @@ begin
 
         edQtdProduto.Text := '1';
         edDesconto.Text := '0,00';
-        edQtdProduto.SetFocus;
       end;
     end;
   end;

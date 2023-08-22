@@ -77,6 +77,7 @@ object fCompra: TfCompra
       Top = 192
       Width = 29
       Height = 18
+      Anchors = [akTop, akRight]
       Caption = 'Qtd.'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -90,6 +91,7 @@ object fCompra: TfCompra
       Top = 192
       Width = 55
       Height = 18
+      Anchors = [akTop, akRight]
       Caption = 'R$ Unit.'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -103,6 +105,7 @@ object fCompra: TfCompra
       Top = 192
       Width = 41
       Height = 18
+      Anchors = [akTop, akRight]
       Caption = 'Desc.'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -116,6 +119,7 @@ object fCompra: TfCompra
       Top = 192
       Width = 56
       Height = 18
+      Anchors = [akTop, akRight]
       Caption = 'R$ Total'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -167,6 +171,7 @@ object fCompra: TfCompra
       Top = 212
       Width = 446
       Height = 23
+      Anchors = [akLeft, akTop, akRight]
       CharCase = ecUpperCase
       TabOrder = 5
       OnChange = edPesqProdChange
@@ -178,7 +183,8 @@ object fCompra: TfCompra
       Top = 212
       Width = 86
       Height = 23
-      TabOrder = 6
+      Anchors = [akTop, akRight]
+      TabOrder = 7
     end
     object edValorUnitario: TEdit
       Tag = 99
@@ -186,7 +192,8 @@ object fCompra: TfCompra
       Top = 212
       Width = 86
       Height = 23
-      TabOrder = 7
+      Anchors = [akTop, akRight]
+      TabOrder = 8
     end
     object edDesconto: TEdit
       Tag = 99
@@ -194,7 +201,8 @@ object fCompra: TfCompra
       Top = 212
       Width = 86
       Height = 23
-      TabOrder = 8
+      Anchors = [akTop, akRight]
+      TabOrder = 9
     end
     object edValorTotal: TEdit
       Tag = 99
@@ -202,7 +210,8 @@ object fCompra: TfCompra
       Top = 212
       Width = 86
       Height = 23
-      TabOrder = 9
+      Anchors = [akTop, akRight]
+      TabOrder = 10
     end
     object DBGrid1: TDBGrid
       Left = 8
@@ -214,7 +223,7 @@ object fCompra: TfCompra
       DataSource = dProdVenda
       DefaultDrawing = False
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-      TabOrder = 10
+      TabOrder = 11
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
@@ -311,14 +320,14 @@ object fCompra: TfCompra
       DataSource = dmProdutos.dProduto
       Options = [dgTitles, dgIndicator, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ReadOnly = True
-      TabOrder = 11
+      TabOrder = 6
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       Visible = False
-      OnKeyDown = dbgFornecedorKeyDown
+      OnKeyPress = dbgFornecedorKeyPress
       Columns = <
         item
           Expanded = False
@@ -386,7 +395,7 @@ object fCompra: TfCompra
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       Visible = False
-      OnKeyDown = dbgFornecedorKeyDown
+      OnKeyPress = dbgFornecedorKeyPress
       Columns = <
         item
           Expanded = False
