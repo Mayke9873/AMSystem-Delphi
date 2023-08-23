@@ -23,7 +23,7 @@ type
     procedure SettipoMov(const Value: String);
     procedure Setobs(const Value: String);
   public
-    procedure MovEstoque(const tipo : String; multiplo : Integer);
+    procedure MovEstoque(const tipo : String; multiplo : Integer; ajuste: Boolean = False);
 
   published
     property Cod : integer read FCod write SetCod;
@@ -42,24 +42,26 @@ implementation
 
 uses dmProduto;
 
-procedure TEstoque.MovEstoque(const tipo : String; multiplo : Integer);
+procedure TEstoque.MovEstoque(const tipo : String; multiplo : Integer; ajuste: Boolean = False);
 begin
   if Fqtd = 0 then
   begin
     Application.MessageBox('Quantidade não pode ser 0 ou vazio.'#13'Por favor, verifique!', 'AmSystem', 48);
     Exit;
   end;
-    dmProdutos.qMovEstoque.Open;
-    dmProdutos.qMovEstoque.Insert;
-    dmProdutos.qMovEstoqueIdProduto.AsInteger := FidProduto;
-    dmProdutos.qMovEstoqueQuantidade.AsFloat  := Fqtd * multiplo;
-    dmProdutos.qMovEstoqueObs.AsString        := Fobs;
-    dmProdutos.qMovEstoquedataMov.AsDateTime  := Now;
-    dmProdutos.qMovEstoqueidUsuario.AsInteger := 1;
-    dmProdutos.qMovEstoquetipoMov.AsString    := tipo;
-    dmProdutos.qMovEstoqueidFornecedor.AsInteger := FidFornecedor;
-    dmProdutos.qMovEstoque.Post;
 
+  dmProdutos.qMovEstoque.Open;
+  dmProdutos.qMovEstoque.Insert;
+  dmProdutos.qMovEstoqueIdProduto.AsInteger := FidProduto;
+  dmProdutos.qMovEstoqueQuantidade.AsFloat  := Fqtd * multiplo;
+  dmProdutos.qMovEstoqueObs.AsString        := Fobs;
+  dmProdutos.qMovEstoquedataMov.AsDateTime  := Now;
+  dmProdutos.qMovEstoqueidUsuario.AsInteger := 1;
+  dmProdutos.qMovEstoquetipoMov.AsString    := tipo;
+  dmProdutos.qMovEstoqueidFornecedor.AsInteger := FidFornecedor;
+  dmProdutos.qMovEstoque.Post;
+
+  if ajuste then  
     Application.MessageBox('Ajuste realizado com sucesso!','' , 32);
 end;
 

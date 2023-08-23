@@ -7,12 +7,14 @@ Const
   telaInsert = 1;
   telaEdit = 2;
 
-  // Tipos
+// Tipos movimentacoes de estoque //
   Ajuste = 'A';
   Venda = 'V';
+  Compra = 'C';
 
   Entrada = 1;
   Saida = -1;
+// ------------------------------//
 
 implementation
 

@@ -36,9 +36,9 @@ object fCompra: TfCompra
     object Label1: TLabel
       Left = 8
       Top = 8
-      Width = 65
+      Width = 77
       Height = 18
-      Caption = 'N'#186' Venda'
+      Caption = 'N'#186' Compra'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
@@ -73,7 +73,7 @@ object fCompra: TfCompra
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 547
+      Left = 523
       Top = 192
       Width = 29
       Height = 18
@@ -85,9 +85,10 @@ object fCompra: TfCompra
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
+      ExplicitLeft = 547
     end
     object Label6: TLabel
-      Left = 640
+      Left = 616
       Top = 192
       Width = 55
       Height = 18
@@ -99,9 +100,10 @@ object fCompra: TfCompra
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
+      ExplicitLeft = 640
     end
     object Label7: TLabel
-      Left = 734
+      Left = 710
       Top = 192
       Width = 41
       Height = 18
@@ -113,9 +115,10 @@ object fCompra: TfCompra
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
+      ExplicitLeft = 734
     end
     object Label8: TLabel
-      Left = 826
+      Left = 802
       Top = 192
       Width = 56
       Height = 18
@@ -127,8 +130,9 @@ object fCompra: TfCompra
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
+      ExplicitLeft = 826
     end
-    object edCodVenda: TEdit
+    object edCodCompra: TEdit
       Tag = 99
       Left = 8
       Top = 28
@@ -169,59 +173,66 @@ object fCompra: TfCompra
       Tag = 1
       Left = 95
       Top = 212
-      Width = 446
+      Width = 422
       Height = 23
       Anchors = [akLeft, akTop, akRight]
       CharCase = ecUpperCase
       TabOrder = 5
       OnChange = edPesqProdChange
       OnKeyDown = edPesqProdKeyDown
+      ExplicitWidth = 418
     end
     object edQtdProduto: TEdit
       Tag = 99
-      Left = 547
+      Left = 523
       Top = 212
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 7
+      OnExit = edQtdProdutoExit
+      ExplicitLeft = 519
     end
     object edValorUnitario: TEdit
       Tag = 99
-      Left = 640
+      Left = 616
       Top = 212
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 8
+      ExplicitLeft = 612
     end
     object edDesconto: TEdit
       Tag = 99
-      Left = 734
+      Left = 710
       Top = 212
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 9
+      OnExit = edDescontoExit
+      ExplicitLeft = 706
     end
     object edValorTotal: TEdit
       Tag = 99
-      Left = 826
+      Left = 802
       Top = 212
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 10
+      OnEnter = edValorTotalEnter
+      ExplicitLeft = 798
     end
     object DBGrid1: TDBGrid
       Left = 8
       Top = 244
-      Width = 904
+      Width = 880
       Height = 320
       TabStop = False
       Anchors = [akLeft, akTop, akRight, akBottom]
-      DataSource = dProdVenda
-      DefaultDrawing = False
+      DataSource = dProdCompra
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 11
       TitleFont.Charset = DEFAULT_CHARSET
@@ -233,11 +244,13 @@ object fCompra: TfCompra
         item
           Expanded = False
           FieldName = 'id'
+          ReadOnly = True
           Visible = False
         end
         item
           Expanded = False
           FieldName = 'idprod'
+          ReadOnly = True
           Title.Caption = 'C'#243'digo'
           Title.Font.Charset = ANSI_CHARSET
           Title.Font.Color = clWindowText
@@ -250,6 +263,7 @@ object fCompra: TfCompra
         item
           Expanded = False
           FieldName = 'descricao'
+          ReadOnly = True
           Title.Caption = 'Descri'#231#227'o'
           Title.Font.Charset = ANSI_CHARSET
           Title.Font.Color = clWindowText
@@ -262,6 +276,7 @@ object fCompra: TfCompra
         item
           Expanded = False
           FieldName = 'quantidade'
+          ReadOnly = True
           Title.Caption = 'Qtd.'
           Title.Font.Charset = ANSI_CHARSET
           Title.Font.Color = clWindowText
@@ -274,6 +289,7 @@ object fCompra: TfCompra
         item
           Expanded = False
           FieldName = 'valor'
+          ReadOnly = True
           Title.Alignment = taRightJustify
           Title.Caption = 'R$ Unit.'
           Title.Font.Charset = ANSI_CHARSET
@@ -287,6 +303,7 @@ object fCompra: TfCompra
         item
           Expanded = False
           FieldName = 'desconto'
+          ReadOnly = True
           Title.Alignment = taRightJustify
           Title.Caption = 'Desconto'
           Title.Font.Charset = ANSI_CHARSET
@@ -300,6 +317,7 @@ object fCompra: TfCompra
         item
           Expanded = False
           FieldName = 'total'
+          ReadOnly = True
           Title.Alignment = taRightJustify
           Title.Caption = 'R$ Total'
           Title.Font.Charset = ANSI_CHARSET
@@ -648,92 +666,92 @@ object fCompra: TfCompra
       end
     end
   end
-  object dProdVenda: TDataSource
-    DataSet = qProdVenda
+  object dProdCompra: TDataSource
+    DataSet = qProdCompra
     Left = 856
     Top = 544
   end
-  object qProdVenda: TZQuery
+  object qProdCompra: TZQuery
     Connection = DM.zCon
-    UpdateObject = uProdVenda
+    UpdateObject = uProdCompra
     SQL.Strings = (
       
-        'Select id, idVenda, idprod, descricao, valor, desconto, quantida' +
-        'de, total, ex'
-      '  From Venda_item where idvenda = :idVenda and ex = 9;')
+        'Select id, idCompra, idprod, descricao, valor, desconto, quantid' +
+        'ade, total, ex'
+      '  From Compra_item where idCompra = :idCompra and ex = 9;')
     Params = <
       item
-        DataType = ftUnknown
-        Name = 'idVenda'
+        DataType = ftWideString
+        Name = 'idCompra'
         ParamType = ptUnknown
       end>
     Left = 798
     Top = 512
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'idVenda'
+        DataType = ftWideString
+        Name = 'idCompra'
         ParamType = ptUnknown
       end>
-    object qProdVendaid: TIntegerField
+    object qProdCompraid: TIntegerField
       FieldName = 'id'
       Required = True
     end
-    object qProdVendaidprod: TIntegerField
+    object qProdCompraidprod: TIntegerField
       FieldName = 'idprod'
       Required = True
     end
-    object qProdVendadescricao: TWideStringField
+    object qProdCompradescricao: TWideStringField
       FieldName = 'descricao'
       Required = True
       Size = 255
     end
-    object qProdVendaquantidade: TFloatField
+    object qProdCompraquantidade: TFloatField
       FieldName = 'quantidade'
       Required = True
     end
-    object qProdVendadesconto: TFloatField
+    object qProdCompradesconto: TFloatField
       FieldName = 'desconto'
       Required = True
     end
-    object qProdVendatotal: TFloatField
+    object qProdCompratotal: TFloatField
       FieldName = 'total'
       Required = True
       DisplayFormat = '###,###,##0.00'
     end
-    object qProdVendavalor: TFloatField
+    object qProdCompravalor: TFloatField
       FieldName = 'valor'
       Required = True
       DisplayFormat = '###,###,##0.00'
     end
   end
-  object uProdVenda: TZUpdateSQL
+  object uProdCompra: TZUpdateSQL
     DeleteSQL.Strings = (
-      'DELETE FROM Venda_item'
+      'DELETE FROM Compra_item'
       'WHERE'
-      '  Venda_item.id = :OLD_id AND'
-      '  Venda_item.idVenda = :OLD_idVenda AND'
-      '  Venda_item.idprod = :OLD_idprod AND'
-      '  Venda_item.valor = :OLD_valor AND'
-      '  Venda_item.desconto = :OLD_desconto AND'
-      '  Venda_item.quantidade = :OLD_quantidade AND'
-      '  Venda_item.total = :OLD_total AND'
-      '  Venda_item.ex = :OLD_ex')
+      '  Compra_item.id = :OLD_id AND'
+      '  Compra_item.idVenda = :OLD_idCompra AND'
+      '  Compra_item.idprod = :OLD_idprod AND'
+      '  Compra_item.valor = :OLD_valor AND'
+      '  Compra_item.desconto = :OLD_desconto AND'
+      '  Compra_item.quantidade = :OLD_quantidade AND'
+      '  Compra_item.total = :OLD_total AND'
+      '  Compra_item.ex = :OLD_ex')
     InsertSQL.Strings = (
-      'INSERT INTO Venda_item'
+      'INSERT INTO Compra_item'
       
-        '  (idVenda, idprod, descricao, valor, desconto, quantidade, tota' +
-        'l, '
+        '  (idCompra, idprod, descricao, valor, desconto, quantidade, tot' +
+        'al, '
       '   ex)'
       'VALUES'
       
-        '  ((select max(id) from Venda), :idprod, :descricao, :valor, :de' +
-        'sconto, :quantidade, '
+        '  ((select max(id) from Compra), :idprod, :descricao, :valor, :d' +
+        'esconto, :quantidade, '
       '   :total, 9)')
     ModifySQL.Strings = (
-      'UPDATE Venda_item SET'
+      'UPDATE Compra_item SET'
       '  id = :id,'
-      '  idVenda = :idVenda,'
+      '  idCompra = :idCompra,'
       '  idprod = :idprod,'
       '  descricao = :descricao,'
       '  valor = :valor,'
@@ -742,14 +760,14 @@ object fCompra: TfCompra
       '  total = :total,'
       '  ex = :ex'
       'WHERE'
-      '  Venda_item.id = :OLD_id AND'
-      '  Venda_item.idVenda = :OLD_idVenda AND'
-      '  Venda_item.idprod = :OLD_idprod AND'
-      '  Venda_item.valor = :OLD_valor AND'
-      '  Venda_item.desconto = :OLD_desconto AND'
-      '  Venda_item.quantidade = :OLD_quantidade AND'
-      '  Venda_item.total = :OLD_total AND'
-      '  Venda_item.ex = :OLD_ex')
+      '  Compra_item.id = :OLD_id AND'
+      '  Compra_item.idVenda = :OLD_idCompra AND'
+      '  Compra_item.idprod = :OLD_idprod AND'
+      '  Compra_item.valor = :OLD_valor AND'
+      '  Compra_item.desconto = :OLD_desconto AND'
+      '  Compra_item.quantidade = :OLD_quantidade AND'
+      '  Compra_item.total = :OLD_total AND'
+      '  Compra_item.ex = :OLD_ex')
     UseSequenceFieldForRefreshSQL = False
     Left = 827
     Top = 528
@@ -761,7 +779,7 @@ object fCompra: TfCompra
       end
       item
         DataType = ftUnknown
-        Name = 'idVenda'
+        Name = 'idCompra'
         ParamType = ptUnknown
       end
       item
@@ -806,7 +824,7 @@ object fCompra: TfCompra
       end
       item
         DataType = ftUnknown
-        Name = 'OLD_idVenda'
+        Name = 'OLD_idCompra'
         ParamType = ptUnknown
       end
       item
@@ -856,10 +874,12 @@ object fCompra: TfCompra
     object acCancelar: TAction
       Caption = 'F4 - Cancelar'
       ShortCut = 115
+      OnExecute = acCancelarExecute
     end
     object acExcluirProduto: TAction
       Caption = 'F5 - Excluir Produto'
       ShortCut = 116
+      OnExecute = acExcluirProdutoExecute
     end
   end
   object tmPesquisa: TTimer

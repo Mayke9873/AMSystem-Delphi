@@ -170,16 +170,13 @@
         <DCCReference Include="src\uEstoque.pas"/>
         <DCCReference Include="src\view\FrmAjusteEstoque.pas">
             <Form>fAjusteEstoque</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\model\dmProduto.pas">
             <Form>dmProdutos</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="src\model\dmVenda.pas">
             <Form>dmVendas</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="src\model\dmFuncionario.pas">
@@ -192,14 +189,17 @@
         </DCCReference>
         <DCCReference Include="src\model\dmCliente.pas">
             <Form>dmClientes</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="src\view\FrmCompra.pas">
             <Form>fCompra</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\uCompra.pas"/>
+        <DCCReference Include="src\model\dmCompra.pas">
+            <Form>dmCompras</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>
