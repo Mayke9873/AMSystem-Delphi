@@ -3,7 +3,7 @@ unit uProduto;
 interface
 
   uses
-    SysUtils, Vcl.Forms, Winapi.Windows, Data.DB;
+    SysUtils, Vcl.Forms, Winapi.Windows, Data.DB, ZDataset;
 
 type
   TProduto = class
@@ -32,6 +32,7 @@ type
     procedure SetEstoque(const Value: Double);
   public
     procedure Cadastrar;
+    procedure LimpaProduto(Query: TZQuery);
     function Pesquisar() : Boolean; overload;
     function Pesquisar(pID : Integer) : Boolean; overload;
     function Pesquisar(pDescricao : String) : Boolean; overload;
@@ -150,6 +151,13 @@ begin
 
   FID := 0;
   FDescricao := '';
+end;
+
+procedure TProduto.LimpaProduto(Query: TZQuery);
+begin
+  Query.Close;
+  Query.Params[0].AsInteger := 0;
+  Query.Open;
 end;
 
 procedure TProduto.SetAtivo(const Value: String);
