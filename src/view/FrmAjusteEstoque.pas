@@ -183,9 +183,9 @@ begin
     Estoque.obs := edObs.Text;
 
     if rdEntrada.Checked then
-      Estoque.MovEstoque(Ajuste, Entrada)
+      Estoque.MovEstoque(Ajuste, Entrada, True)
     else
-      Estoque.MovEstoque(Ajuste, Saida);
+      Estoque.MovEstoque(Ajuste, Saida, True);
 
     LimpaTela;
   finally
