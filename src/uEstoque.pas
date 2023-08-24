@@ -60,6 +60,7 @@ begin
   dmProdutos.qMovEstoquetipoMov.AsString    := tipo;
   dmProdutos.qMovEstoqueidFornecedor.AsInteger := FidFornecedor;
   dmProdutos.qMovEstoque.Post;
+  dmProdutos.qProduto.Refresh;
 
   if ajuste then  
     Application.MessageBox('Ajuste realizado com sucesso!','' , 32);
