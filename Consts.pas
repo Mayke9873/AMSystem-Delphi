@@ -11,6 +11,7 @@ Const
   Ajuste = 'A';
   Venda = 'V';
   Compra = 'C';
+  Insercao = 'I';
 
   Entrada = 1;
   Saida = -1;
