@@ -53,11 +53,14 @@ type
 implementation
 
 uses
-  dmProduto;
+  dmProduto, uEstoque, Consts;
 
 { TProduto }
 
 procedure TProduto.Cadastrar;
+var
+  LEstoque: TEstoque;
+  LMovimentaEstoque: Boolean;
 begin
   if Length(Descricao) <> 0 then
   begin
@@ -72,12 +75,26 @@ begin
     dmProdutos.qProdutoAtivo.AsString := FAtivo;
 
     if (dmProdutos.qProduto.State in [dsInsert]) then
-    begin
-      dmProdutos.qProdutoEstoque.AsFloat := 0;
       dmProdutos.qProdutoDtRegistro.AsDateTime := Now;
-    end;
+
+    LMovimentaEstoque := (dmProdutos.qProduto.State in [dsInsert]);
 
     dmProdutos.qProduto.Post;
+    dmProdutos.qProduto.Refresh;
+    dmProdutos.qProduto.Last;
+
+    if LMovimentaEstoque and not (Estoque = 0) then
+    begin
+      LEstoque := TEstoque.Create;
+      try
+        LEstoque.idProduto := dmProdutos.qProdutoID.AsInteger;
+        LEstoque.qtd := Estoque;
+
+        LEstoque.MovEstoque(Insercao, Entrada);
+      finally
+        LEstoque.Free;
+      end;
+    end;
   end
   else
   begin

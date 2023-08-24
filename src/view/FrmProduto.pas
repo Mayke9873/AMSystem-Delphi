@@ -343,6 +343,7 @@ begin
   Produto.PrecoVenda     := StrToCurrDef(dbeValorVenda.Text, 0);
   Produto.PorcentLucro   := StrToFloatDef(dbeLucro.Text, 0);
   Produto.DescricaoGrupo := DbCbGrupo.Text;
+  Produto.Estoque        := StrToFloatDef(dbeEstoque.Text, 0);
 
   if DbCbGrupo.KeyValue <> Null then
   Produto.IdGrupo        := DbCbGrupo.KeyValue;
