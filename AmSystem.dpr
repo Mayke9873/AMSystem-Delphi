@@ -31,7 +31,9 @@ uses
   dmCliente in 'src\model\dmCliente.pas' {dmClientes: TDataModule},
   FrmCompra in 'src\view\FrmCompra.pas' {fCompra},
   uCompra in 'src\uCompra.pas',
-  dmCompra in 'src\model\dmCompra.pas' {dmCompras: TDataModule};
+  dmCompra in 'src\model\dmCompra.pas' {dmCompras: TDataModule},
+  uGrupoProduto in 'src\uGrupoProduto.pas',
+  uGrupo in 'src\uGrupo.pas';
 
 {$R *.res}
 
