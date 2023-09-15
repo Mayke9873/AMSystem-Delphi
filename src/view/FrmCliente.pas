@@ -174,8 +174,6 @@ begin
   Consulta;
   PageControl1.TabIndex := 0;
   tbCancelarClick(tbCancelar);
-
-  Opacidade();
 end;
 
 procedure TfCliente.FormKeyPress(Sender: TObject; var Key: Char);
@@ -241,7 +239,6 @@ begin
   PageControl1.ActivePageIndex := 1;
 
   AjustaTela(False);
-  Opacidade();
 
   DBENome.SetFocus;
 
@@ -254,7 +251,6 @@ begin
   PageControl1.ActivePageIndex := 1;
 
   AjustaTela(False);
-  Opacidade();
 
   DBENome.SetFocus;
 
@@ -310,7 +306,6 @@ begin
   PageControl1.ActivePageIndex := 0;
 
   AjustaTela(True);
-  Opacidade();
 
   dmClientes.qCliente.Cancel;
 
@@ -334,6 +329,8 @@ begin
   DBEEndereco.ReadOnly  := aValue;
   DBENumEnd.ReadOnly    := aValue;
   DBEBairro.ReadOnly    := aValue;
+
+  Opacidade();
 end;
 
 procedure TfCliente.Opacidade;
