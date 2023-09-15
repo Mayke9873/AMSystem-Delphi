@@ -36,6 +36,8 @@ type
     qGrupo: TZQuery;
     qGrupoid: TIntegerField;
     qGrupodescricao: TWideStringField;
+    qGrupoativo: TWideStringField;
+    procedure qProdutoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -50,5 +52,10 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TdmProdutos.qProdutoNewRecord(DataSet: TDataSet);
+begin
+  qProdutoativo.AsString := 'S';
+end;
 
 end.

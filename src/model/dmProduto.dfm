@@ -6,6 +6,7 @@ inherited dmProdutos: TdmProdutos
     Connection = zCon
     SortedFields = 'Id'
     UpdateObject = uProduto
+    OnNewRecord = qProdutoNewRecord
     SQL.Strings = (
       
         'SELECT p.id, p.descricao, coalesce(sum(movestoque.quantidade),0)' +
