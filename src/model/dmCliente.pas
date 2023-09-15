@@ -42,6 +42,7 @@ procedure TdmClientes.qClienteNewRecord(DataSet: TDataSet);
 begin
   inherited;
   qClienteAtivo.AsString := 'S';
+  qClienteTipo.AsString  := 'F';
   qClienteDtRegistro.AsDateTime := Now;
 end;
 
