@@ -2,8 +2,8 @@ object fGrupoProd: TfGrupoProd
   Left = 0
   Top = 0
   Caption = 'Grupo de Produto'
-  ClientHeight = 649
-  ClientWidth = 999
+  ClientHeight = 647
+  ClientWidth = 991
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,8 +16,8 @@ object fGrupoProd: TfGrupoProd
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    999
-    649)
+    991
+    647)
   TextHeight = 13
   object Label9: TLabel
     Left = 8
@@ -32,88 +32,26 @@ object fGrupoProd: TfGrupoProd
     Font.Style = []
     ParentFont = False
   end
-  object ToolBar1: TToolBar
-    Left = 0
-    Top = 0
-    Width = 999
-    Height = 29
-    ButtonHeight = 29
-    ButtonWidth = 29
-    Caption = 'ToolBar1'
-    Color = clBtnShadow
-    Images = ImageList1
-    ParentColor = False
-    ParentShowHint = False
-    ShowHint = False
-    TabOrder = 0
-    ExplicitWidth = 995
-    object tbNovo: TToolButton
-      Left = 0
-      Top = 0
-      Hint = 'Novo - F1'
-      Margins.Left = 7
-      Caption = 'Novo'
-      ImageIndex = 0
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object tbEditar: TToolButton
-      Left = 29
-      Top = 0
-      Hint = 'Editar - F2'
-      Caption = 'Editar'
-      ImageIndex = 1
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object tbSalvar: TToolButton
-      Left = 58
-      Top = 0
-      Caption = 'Salvar'
-      ImageIndex = 2
-    end
-    object tbCancelar: TToolButton
-      Left = 87
-      Top = 0
-      Caption = 'Cancelar'
-      ImageIndex = 3
-    end
-    object tbSair: TToolButton
-      Left = 116
-      Top = 0
-      Action = acSair
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton1: TToolButton
-      Left = 145
-      Top = 0
-      Width = 5
-      Caption = 'ToolButton1'
-      ImageIndex = 5
-      Style = tbsSeparator
-    end
-  end
   object PageControl1: TPageControl
     Left = 0
-    Top = 56
-    Width = 999
+    Top = 54
+    Width = 991
     Height = 593
     ActivePage = pgTabela
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 1
-    ExplicitWidth = 995
+    TabOrder = 0
+    ExplicitWidth = 987
     ExplicitHeight = 592
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgGrupo: TDBGrid
         Left = 0
         Top = 0
-        Width = 991
+        Width = 983
         Height = 565
         Align = alClient
-        DataSource = dGrupo
+        DataSource = dmGrupos.dGrupo
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -144,6 +82,11 @@ object fGrupoProd: TfGrupoProd
           item
             Expanded = False
             FieldName = 'descricao'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
             Title.Caption = 'Descri'#231#227'o'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -151,6 +94,25 @@ object fGrupoProd: TfGrupoProd
             Title.Font.Name = 'Arial'
             Title.Font.Style = [fsBold]
             Width = 250
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'ativo'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Title.Alignment = taCenter
+            Title.Caption = 'Ativo'
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -12
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = [fsBold]
+            Width = 40
             Visible = True
           end>
       end
@@ -196,7 +158,7 @@ object fGrupoProd: TfGrupoProd
         Width = 77
         Height = 26
         DataField = 'id'
-        DataSource = dGrupo
+        DataSource = dmGrupos.dGrupo
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -207,23 +169,24 @@ object fGrupoProd: TfGrupoProd
         TabOrder = 0
       end
       object dbeDescricao: TDBEdit
-        Left = 10
-        Top = 91
+        Left = 8
+        Top = 90
         Width = 339
         Height = 26
+        CharCase = ecUpperCase
         DataField = 'DESCRICAO'
-        DataSource = dGrupo
+        DataSource = dmGrupos.dGrupo
         ReadOnly = True
         TabOrder = 1
       end
       object dbchkAtivo: TDBCheckBox
-        Left = 291
+        Left = 289
         Top = 38
         Width = 58
         Height = 17
         Caption = 'Ativo'
         DataField = 'ativo'
-        DataSource = dGrupo
+        DataSource = dmGrupos.dGrupo
         ReadOnly = True
         TabOrder = 2
         ValueChecked = 'S'
@@ -234,49 +197,223 @@ object fGrupoProd: TfGrupoProd
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 328
+    Width = 284
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
-    TabOrder = 2
-    ExplicitWidth = 324
+    TabOrder = 1
+    ExplicitWidth = 280
   end
   object rdbTodos: TRadioButton
-    Left = 440
+    Left = 396
     Top = 34
     Width = 49
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Todos'
     Checked = True
-    TabOrder = 3
+    TabOrder = 2
     TabStop = True
-    ExplicitLeft = 436
+    OnClick = rdbTodosClick
+    ExplicitLeft = 392
   end
   object rdbAtivo: TRadioButton
-    Left = 520
+    Left = 476
     Top = 34
     Width = 49
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Ativo'
-    TabOrder = 4
-    ExplicitLeft = 516
+    TabOrder = 3
+    OnClick = rdbTodosClick
+    ExplicitLeft = 472
   end
   object rdbInativo: TRadioButton
-    Left = 592
+    Left = 548
     Top = 34
     Width = 57
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Inativo'
-    TabOrder = 5
-    ExplicitLeft = 588
+    TabOrder = 4
+    OnClick = rdbTodosClick
+    ExplicitLeft = 544
   end
-  object dGrupo: TDataSource
-    DataSet = qGrupo
-    Left = 122
-    Top = 568
+  object pnlBotoes: TPanel
+    Left = 0
+    Top = 0
+    Width = 991
+    Height = 29
+    Align = alTop
+    BevelOuter = bvNone
+    Caption = 'pnlBotoes'
+    Padding.Left = 4
+    ShowCaption = False
+    TabOrder = 5
+    ExplicitWidth = 987
+    object tbNovo: TSkSvg
+      AlignWithMargins = True
+      Left = 4
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = tbNovoClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"add-file-5" data-name="Flat Line" xmlns="http://www.w3.org/2000' +
+        '/svg" class="icon flat-line"><path id="secondary" d="M11.5,19A6.' +
+        '5,6.5,0,0,1,18,12.5V5H16V3H5A1,1,0,0,0,4,4V20a1,1,0,0,0,1,1h6.82' +
+        'A6.3,6.3,0,0,1,11.5,19Z" style="fill: rgb(44, 169, 188); stroke-' +
+        'width: 2;"></path><path id="primary" d="M18,13V5L16,3H5A1,1,0,0,' +
+        '0,4,4V20a1,1,0,0,0,1,1h7" style="fill: none; stroke: rgb(0, 0, 0' +
+        '); stroke-linecap: round; stroke-linejoin: round; stroke-width: ' +
+        '2;"></path><path id="primary-2" data-name="primary" d="M16,19h4m' +
+        '-2-2v4M8,13h2m4-4H8m8-6V5h2Z" style="fill: none; stroke: rgb(0, ' +
+        '0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-wid' +
+        'th: 2;"></path></svg>'
+      ExplicitLeft = 0
+      ExplicitTop = -3
+    end
+    object tbEditar: TSkSvg
+      AlignWithMargins = True
+      Left = 37
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = tbEditarClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"agenda-pencil" data-name="Flat Line" xmlns="http://www.w3.org/2' +
+        '000/svg" class="icon flat-line"><path id="secondary" d="M20.71,7' +
+        '.69l-1.4-1.4a1,1,0,0,0-1.4,0L13,11.2V14h2.8l4.91-4.91A1,1,0,0,0,' +
+        '20.71,7.69Z" style="fill: rgb(44, 169, 188); stroke-width: 2;"><' +
+        '/path><path id="primary" d="M18,18v2a1,1,0,0,1-1,1H5a1,1,0,0,1-1' +
+        '-1V4A1,1,0,0,1,5,3H15" style="fill: none; stroke: rgb(0, 0, 0); ' +
+        'stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"' +
+        '></path><path id="primary-2" data-name="primary" d="M20.71,9.09,' +
+        '15.8,14H13V11.2l4.91-4.91a1,1,0,0,1,1.4,0l1.4,1.4A1,1,0,0,1,20.7' +
+        '1,9.09ZM3,8H5M3,12H5M3,16H5" style="fill: none; stroke: rgb(0, 0' +
+        ', 0); stroke-linecap: round; stroke-linejoin: round; stroke-widt' +
+        'h: 2;"></path></svg>'
+      ExplicitLeft = 33
+      ExplicitTop = 5
+    end
+    object tbSalvar: TSkSvg
+      AlignWithMargins = True
+      Left = 70
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = tbSalvarClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"approved-file-3" data-name="Flat Line" xmlns="http://www.w3.org' +
+        '/2000/svg" class="icon flat-line"><path id="secondary" d="M19,3H' +
+        '8V5H6v8a4.19,4.19,0,0,1,.5,0,7,7,0,0,1,7,7,6.63,6.63,0,0,1-.08,1' +
+        'H19a1,1,0,0,0,1-1V4A1,1,0,0,0,19,3Z" style="fill: rgb(44, 169, 1' +
+        '88); stroke-width: 2;"></path><polyline id="primary" points="4 1' +
+        '9 6 21 10 17" style="fill: none; stroke: rgb(0, 0, 0); stroke-li' +
+        'necap: round; stroke-linejoin: round; stroke-width: 2;"></polyli' +
+        'ne><path id="primary-2" data-name="primary" d="M13,21h6a1,1,0,0,' +
+        '0,1-1V4a1,1,0,0,0-1-1H8L6,5v9" style="fill: none; stroke: rgb(0,' +
+        ' 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-wi' +
+        'dth: 2;"></path><path id="primary-3" data-name="primary" d="M16,' +
+        '13H13m3-4H10M6,5H8V3Z" style="fill: none; stroke: rgb(0, 0, 0); ' +
+        'stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"' +
+        '></path></svg>'
+      ExplicitLeft = 66
+      ExplicitTop = 5
+    end
+    object tbCancelar: TSkSvg
+      AlignWithMargins = True
+      Left = 103
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = tbCancelarClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"delete-file" data-name="Flat Line" xmlns="http://www.w3.org/200' +
+        '0/svg" class="icon flat-line"><path id="secondary" d="M6,21a1,1,' +
+        '0,0,1-1-1V4A1,1,0,0,1,6,3h9l4,4V20a1,1,0,0,1-1,1Z" style="fill: ' +
+        'rgb(44, 169, 188); stroke-width: 2;"></path><line id="primary" x' +
+        '1="10.5" y1="10.5" x2="13.5" y2="13.5" style="fill: none; stroke' +
+        ': rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; s' +
+        'troke-width: 2;"></line><line id="primary-2" data-name="primary"' +
+        ' x1="13.5" y1="10.5" x2="10.5" y2="13.5" style="fill: none; stro' +
+        'ke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round;' +
+        ' stroke-width: 2;"></line><path id="primary-3" data-name="primar' +
+        'y" d="M6,21a1,1,0,0,1-1-1V4A1,1,0,0,1,6,3h9l4,4V20a1,1,0,0,1-1,1' +
+        'Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: roun' +
+        'd; stroke-linejoin: round; stroke-width: 2;"></path></svg>'
+      ExplicitLeft = 99
+      ExplicitTop = 5
+    end
+    object tbSair: TSkSvg
+      AlignWithMargins = True
+      Left = 136
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = tbSairClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"sign-out-alt-2" data-name="Flat Line" xmlns="http://www.w3.org/' +
+        '2000/svg" class="icon flat-line"><rect id="secondary" x="3" y="3' +
+        '" width="10" height="18" rx="1" style="fill: rgb(44, 169, 188); ' +
+        'stroke-width: 2;"></rect><line id="primary" x1="8" y1="12" x2="2' +
+        '1" y2="12" style="fill: none; stroke: rgb(0, 0, 0); stroke-linec' +
+        'ap: round; stroke-linejoin: round; stroke-width: 2;"></line><pol' +
+        'yline id="primary-2" data-name="primary" points="17 16 21 12 17 ' +
+        '8" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: roun' +
+        'd; stroke-linejoin: round; stroke-width: 2;"></polyline><path id' +
+        '="primary-3" data-name="primary" d="M13,8V4a1,1,0,0,0-1-1H4A1,1,' +
+        '0,0,0,3,4V20a1,1,0,0,0,1,1h8a1,1,0,0,0,1-1V16" style="fill: none' +
+        '; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: ' +
+        'round; stroke-width: 2;"></path></svg>'
+      ExplicitLeft = 132
+      ExplicitTop = 5
+    end
   end
   object ImageList1: TImageList
     Left = 928
@@ -551,204 +688,6 @@ object fGrupoProd: TfGrupoProd
       C003C003C0030000C003C007C0030001E007800FC0038001F00F801FC0078001
       FC3F803FFFFF8001FFFFFFFFFFFF800100000000000000000000000000000000
       000000000000}
-  end
-  object uGrupo: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM PRODUTO'
-      'WHERE'
-      '  PRODUTO.id = :OLD_id AND'
-      '  PRODUTO.descricao = :OLD_descricao AND'
-      
-        '  ((PRODUTO.unidade IS NULL AND :OLD_unidade IS NULL) OR (PRODUT' +
-        'O.unidade = :OLD_unidade)) AND'
-      
-        '  ((PRODUTO.estoque IS NULL AND :OLD_estoque IS NULL) OR (PRODUT' +
-        'O.estoque = :OLD_estoque)) AND'
-      
-        '  ((PRODUTO.pCompra IS NULL AND :OLD_pCompra IS NULL) OR (PRODUT' +
-        'O.pCompra = :OLD_pCompra)) AND'
-      
-        '  ((PRODUTO.pLucro IS NULL AND :OLD_pLucro IS NULL) OR (PRODUTO.' +
-        'pLucro = :OLD_pLucro)) AND'
-      '  PRODUTO.pVenda = :OLD_pVenda AND'
-      
-        '  ((PRODUTO.grupo IS NULL AND :OLD_grupo IS NULL) OR (PRODUTO.gr' +
-        'upo = :OLD_grupo)) AND'
-      '  PRODUTO.dtRegistro = :OLD_dtRegistro AND'
-      '  PRODUTO.ativo = :OLD_ativo')
-    InsertSQL.Strings = (
-      'INSERT INTO PRODUTO'
-      
-        '  (id, descricao, unidade, estoque, pCompra, pLucro, pVenda, gru' +
-        'po, dtRegistro, '
-      '   ativo)'
-      'VALUES'
-      
-        '  (:id, :descricao, :unidade, :estoque, :pCompra, :pLucro, :pVen' +
-        'da, :grupo, '
-      '   :dtRegistro, :ativo)')
-    ModifySQL.Strings = (
-      'UPDATE PRODUTO SET'
-      '  id = :id,'
-      '  descricao = :descricao,'
-      '  unidade = :unidade,'
-      '  estoque = :estoque,'
-      '  pCompra = :pCompra,'
-      '  pLucro = :pLucro,'
-      '  pVenda = :pVenda,'
-      '  grupo = :grupo,'
-      '  dtRegistro = :dtRegistro,'
-      '  ativo = :ativo'
-      'WHERE'
-      '  PRODUTO.id = :OLD_id AND'
-      '  PRODUTO.descricao = :OLD_descricao AND'
-      
-        '  ((PRODUTO.unidade IS NULL AND :OLD_unidade IS NULL) OR (PRODUT' +
-        'O.unidade = :OLD_unidade)) AND'
-      
-        '  ((PRODUTO.estoque IS NULL AND :OLD_estoque IS NULL) OR (PRODUT' +
-        'O.estoque = :OLD_estoque)) AND'
-      
-        '  ((PRODUTO.pCompra IS NULL AND :OLD_pCompra IS NULL) OR (PRODUT' +
-        'O.pCompra = :OLD_pCompra)) AND'
-      
-        '  ((PRODUTO.pLucro IS NULL AND :OLD_pLucro IS NULL) OR (PRODUTO.' +
-        'pLucro = :OLD_pLucro)) AND'
-      '  PRODUTO.pVenda = :OLD_pVenda AND'
-      
-        '  ((PRODUTO.grupo IS NULL AND :OLD_grupo IS NULL) OR (PRODUTO.gr' +
-        'upo = :OLD_grupo)) AND'
-      '  PRODUTO.dtRegistro = :OLD_dtRegistro AND'
-      '  PRODUTO.ativo = :OLD_ativo')
-    UseSequenceFieldForRefreshSQL = False
-    Left = 75
-    Top = 569
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'descricao'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'unidade'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'estoque'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pCompra'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pLucro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pVenda'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'grupo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DtRegistro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ativo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_descricao'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_unidade'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_estoque'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_pCompra'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_pLucro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_pVenda'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_grupo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_dtRegistro'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'OLD_ativo'
-        ParamType = ptUnknown
-      end>
-  end
-  object qGrupo: TZQuery
-    Connection = DM.zCon
-    SortedFields = 'Id'
-    UpdateObject = uGrupo
-    SQL.Strings = (
-      'SELECT id, descricao, ativo FROM Grupo_produto')
-    Params = <>
-    IndexFieldNames = 'Id Asc'
-    Left = 28
-    Top = 568
-    object qGrupoid: TIntegerField
-      FieldName = 'id'
-      Required = True
-    end
-    object qGrupodescricao: TWideStringField
-      FieldName = 'descricao'
-      Required = True
-      Size = 255
-    end
-    object qGrupoativo: TWideStringField
-      FieldName = 'ativo'
-      Required = True
-      Size = 1
-    end
   end
   object ActionList1: TActionList
     Images = ImageList1

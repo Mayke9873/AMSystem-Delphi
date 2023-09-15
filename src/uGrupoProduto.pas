@@ -2,12 +2,13 @@ unit uGrupoProduto;
 
 interface
 
-uses uGrupo, dmProduto;
+uses uGrupo, dmProduto, Vcl.Forms, Winapi.Windows, dmGrupo, System.SysUtils;
 
 type
-  TGrupoProduto = class(TGrupos)     
+  TGrupoProduto = class(TGrupos)
+  public
     procedure Cadastrar;
-    function Pesquisar(pDescricao: String): Boolean;
+    function Pesquisar(pId: String = ''; pDescricao: String = ''): Boolean;
   end;
 
 implementation
@@ -16,24 +17,38 @@ implementation
 
 procedure TGrupoProduto.Cadastrar;
 begin
+  if Length(Descricao) <> 0 then
+  begin
+    dmGrupos.qGrupoID.AsInteger := dmProdutos.qGrupoID.AsInteger;
+    dmGrupos.qGrupoDescricao.asString := Descricao;
+    dmGrupos.qGrupoAtivo.AsString := Ativo;
 
+    dmGrupos.qGrupo.Post;
+    dmGrupos.qGrupo.Refresh;
+    dmGrupos.qGrupo.Last;
+  end
+  else
+  begin
+    dmGrupos.qGrupo.Cancel;
+    Application.MessageBox('Campo descrição obrigatório. Por favor, verifique!', 'Atenção', MB_ICONEXCLAMATION);
+  end;
 end;
 
-function TGrupoProduto.Pesquisar(pDescricao: String): Boolean;
+function TGrupoProduto.Pesquisar(pId: String = ''; pDescricao: String = ''): Boolean;
 begin
   Result := False;
 
-  dmProdutos.qGrupo.Close;
-//  dmProdutos.qGrupo.Params[0].AsInteger := 0;
-//  dmProdutos.qGrupo.Params[1].AsString := '%' + pDescricao + '%';
-//  dmProdutos.qGrupo.Params[2].AsString := Ativo;
-  dmProdutos.qGrupo.Open;
+  dmGrupos.qGrupo.Close;
+  dmGrupos.qGrupo.Params[0].AsInteger := StrToIntDef(pId, 0);
+  dmGrupos.qGrupo.Params[1].AsString := '%' + pDescricao + '%';
+  dmGrupos.qGrupo.Params[2].AsString := Ativo;
+  dmGrupos.qGrupo.Open;
 
-  if dmProdutos.qGrupo.RecordCount = 1 then
+  if dmGrupos.qGrupo.RecordCount = 1 then
   begin
     Result := True;
-    ID := dmProdutos.qGrupoId.AsInteger;
-    Descricao := dmProdutos.qGrupoDescricao.AsString;
+    ID := dmGrupos.qGrupoId.AsInteger;
+    Descricao := dmGrupos.qGrupoDescricao.AsString;
     Exit;
   end;
 

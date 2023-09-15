@@ -33,7 +33,8 @@ uses
   uCompra in 'src\uCompra.pas',
   dmCompra in 'src\model\dmCompra.pas' {dmCompras: TDataModule},
   uGrupoProduto in 'src\uGrupoProduto.pas',
-  uGrupo in 'src\uGrupo.pas';
+  uGrupo in 'src\uGrupo.pas',
+  dmGrupo in 'src\model\dmGrupo.pas' {dmGrupos: TDataModule};
 
 {$R *.res}
 
@@ -48,5 +49,6 @@ begin
   Application.CreateForm(TdmFornecedores, dmFornecedores);
   Application.CreateForm(TdmClientes, dmClientes);
   Application.CreateForm(TdmCompras, dmCompras);
+  Application.CreateForm(TdmGrupos, dmGrupos);
   Application.Run;
 end.
