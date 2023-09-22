@@ -34,6 +34,7 @@ type
     tbSalvar: TSkSvg;
     tbCancelar: TSkSvg;
     tbSair: TSkSvg;
+    tmPesquisar: TTimer;
     procedure acSairExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -43,6 +44,9 @@ type
     procedure tbNovoClick(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
     procedure rdbTodosClick(Sender: TObject);
+    procedure tmPesquisarTimer(Sender: TObject);
+    procedure edPesquisaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edPesquisaKeyPress(Sender: TObject; var Key: Char);
 
   private
     Grupo: TGrupoProduto;
@@ -125,6 +129,13 @@ begin
   Grupo.Cadastrar;
 end;
 
+procedure TfGrupoProd.tmPesquisarTimer(Sender: TObject);
+begin
+  Consulta();
+
+  tmPesquisar.Enabled := False;
+end;
+
 procedure TfGrupoProd.acSairExecute(Sender: TObject);
 begin
   Close;
@@ -197,20 +208,30 @@ begin
   if rdbTodos.Checked then
   begin
     Grupo.Ativo := 'T';
-    Grupo.Pesquisar(edPesquisa.Text);
+    Grupo.Pesquisar('', edPesquisa.Text);
   end;
 
   if rdbAtivo.Checked then
   begin
     Grupo.Ativo := 'S';
-    Grupo.Pesquisar(edPesquisa.Text);
+    Grupo.Pesquisar('', edPesquisa.Text);
   end;
 
   if rdbInativo.Checked then
   begin
     Grupo.Ativo := 'N';
-    Grupo.Pesquisar(edPesquisa.Text);
+    Grupo.Pesquisar('', edPesquisa.Text);
   end;
+end;
+
+procedure TfGrupoProd.edPesquisaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  tmPesquisar.Enabled := False;
+end;
+
+procedure TfGrupoProd.edPesquisaKeyPress(Sender: TObject; var Key: Char);
+begin
+  tmPesquisar.Enabled := True;
 end;
 
 procedure TfGrupoProd.FormClose(Sender: TObject; var Action: TCloseAction);

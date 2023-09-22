@@ -82,11 +82,6 @@ object fGrupoProd: TfGrupoProd
           item
             Expanded = False
             FieldName = 'descricao'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
             Title.Caption = 'Descri'#231#227'o'
             Title.Font.Charset = ANSI_CHARSET
             Title.Font.Color = clWindowText
@@ -100,11 +95,6 @@ object fGrupoProd: TfGrupoProd
             Alignment = taCenter
             Expanded = False
             FieldName = 'ativo'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Ativo'
             Title.Font.Charset = ANSI_CHARSET
@@ -197,15 +187,17 @@ object fGrupoProd: TfGrupoProd
   object edPesquisa: TEdit
     Left = 64
     Top = 32
-    Width = 284
+    Width = 280
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 1
-    ExplicitWidth = 280
+    OnKeyDown = edPesquisaKeyDown
+    OnKeyPress = edPesquisaKeyPress
+    ExplicitWidth = 276
   end
   object rdbTodos: TRadioButton
-    Left = 396
+    Left = 392
     Top = 34
     Width = 49
     Height = 17
@@ -215,10 +207,10 @@ object fGrupoProd: TfGrupoProd
     TabOrder = 2
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 392
+    ExplicitLeft = 388
   end
   object rdbAtivo: TRadioButton
-    Left = 476
+    Left = 472
     Top = 34
     Width = 49
     Height = 17
@@ -226,10 +218,10 @@ object fGrupoProd: TfGrupoProd
     Caption = 'Ativo'
     TabOrder = 3
     OnClick = rdbTodosClick
-    ExplicitLeft = 472
+    ExplicitLeft = 468
   end
   object rdbInativo: TRadioButton
-    Left = 548
+    Left = 544
     Top = 34
     Width = 57
     Height = 17
@@ -237,7 +229,7 @@ object fGrupoProd: TfGrupoProd
     Caption = 'Inativo'
     TabOrder = 4
     OnClick = rdbTodosClick
-    ExplicitLeft = 544
+    ExplicitLeft = 540
   end
   object pnlBotoes: TPanel
     Left = 0
@@ -699,5 +691,12 @@ object fGrupoProd: TfGrupoProd
       ShortCut = 27
       OnExecute = acSairExecute
     end
+  end
+  object tmPesquisar: TTimer
+    Enabled = False
+    Interval = 300
+    OnTimer = tmPesquisarTimer
+    Left = 180
+    Top = 214
   end
 end
