@@ -27,6 +27,7 @@ type
     qVendasNOME: TWideStringField;
     Panel1: TPanel;
     dbgVendas: TDBGrid;
+    ToolButton1: TToolButton;
     procedure tbNovoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure tbSairClick(Sender: TObject);
@@ -36,6 +37,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure dbgVendasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure ToolButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +49,7 @@ var
 
 implementation
 
-uses dmVenda, FrmVenda;
+uses dmVenda, FrmVenda, FrmRelVendas;
 {$R *.dfm}
 
 procedure TfConsultaVendas.dbgVendasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -130,6 +132,14 @@ end;
 procedure TfConsultaVendas.tbSairClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfConsultaVendas.ToolButton1Click(Sender: TObject);
+begin
+  if not  Assigned(fRelVendas) then
+    fRelVendas := TfRelVendas.Create(fConsultaVendas)
+  else
+    fRelVendas.ShowModal;
 end;
 
 end.

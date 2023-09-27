@@ -68,17 +68,24 @@ object fConsultaVendas: TfConsultaVendas
       ImageIndex = 4
       OnClick = tbSairClick
     end
+    object ToolButton1: TToolButton
+      Left = 66
+      Top = 0
+      Caption = 'ToolButton1'
+      ImageIndex = 3
+      OnClick = ToolButton1Click
+    end
   end
   object edPesquisa: TEdit
     Left = 64
     Top = 31
-    Width = 316
+    Width = 304
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 1
     OnChange = edPesquisaChange
-    ExplicitWidth = 312
+    ExplicitWidth = 300
   end
   object Panel1: TPanel
     Left = 0

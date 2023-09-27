@@ -34,7 +34,9 @@ uses
   dmCompra in 'src\model\dmCompra.pas' {dmCompras: TDataModule},
   uGrupoProduto in 'src\uGrupoProduto.pas',
   uGrupo in 'src\uGrupo.pas',
-  dmGrupo in 'src\model\dmGrupo.pas' {dmGrupos: TDataModule};
+  dmGrupo in 'src\model\dmGrupo.pas' {dmGrupos: TDataModule},
+  FrmRelVendas in 'src\view\FrmRelVendas.pas' {fRelVendas},
+  uRelVendas in 'src\Reports\uRelVendas.pas' {fRelVendas_I};
 
 {$R *.res}
 

@@ -63,4 +63,78 @@ inherited dmVendas: TdmVendas
         ParamType = ptUnknown
       end>
   end
+  object qConsVendas: TZReadOnlyQuery
+    Connection = DM.zCon
+    SortedFields = 'ID'
+    SortType = stDescending
+    SQL.Strings = (
+      'SELECT'
+      
+        '  a.ID, a.CLIENTE, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DATA_VE' +
+        'NDA, b.NOME'
+      'FROM VENDA a'
+      'LEFT JOIN  FUNCIONARIO b on  a.VENDEDOR = b.ID'
+      '  WHERE ex = 0 and'
+      '    (:dt = 0 or (a.DATA_VENDA between :dt and :dtF))'
+      '    order by id desc;')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'dt'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dtF'
+        ParamType = ptUnknown
+      end>
+    IndexFieldNames = 'ID Desc'
+    Left = 24
+    Top = 128
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'dt'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dtF'
+        ParamType = ptUnknown
+      end>
+    object qConsVendasID: TIntegerField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object qConsVendasCLIENTE: TWideStringField
+      FieldName = 'CLIENTE'
+      ReadOnly = True
+      Size = 250
+    end
+    object qConsVendasVALOR: TFloatField
+      FieldName = 'VALOR'
+      ReadOnly = True
+      currency = True
+    end
+    object qConsVendasDESCONTO: TFloatField
+      FieldName = 'DESCONTO'
+      ReadOnly = True
+      EditFormat = '#.##'
+      currency = True
+    end
+    object qConsVendasVALOR_TOTAL: TFloatField
+      FieldName = 'VALOR_TOTAL'
+      ReadOnly = True
+      currency = True
+    end
+    object qConsVendasDATA_VENDA: TDateField
+      FieldName = 'DATA_VENDA'
+      ReadOnly = True
+    end
+    object qConsVendasNOME: TWideStringField
+      FieldName = 'NOME'
+      ReadOnly = True
+      Size = 255
+    end
+  end
 end

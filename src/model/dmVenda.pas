@@ -11,6 +11,14 @@ type
     qVenda: TZQuery;
     qVendaid: TIntegerField;
     uVenda: TZUpdateSQL;
+    qConsVendas: TZReadOnlyQuery;
+    qConsVendasID: TIntegerField;
+    qConsVendasCLIENTE: TWideStringField;
+    qConsVendasVALOR: TFloatField;
+    qConsVendasDESCONTO: TFloatField;
+    qConsVendasVALOR_TOTAL: TFloatField;
+    qConsVendasDATA_VENDA: TDateField;
+    qConsVendasNOME: TWideStringField;
   private
     { Private declarations }
   public
