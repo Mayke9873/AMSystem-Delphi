@@ -19,6 +19,7 @@ object fPrincipal: TfPrincipal
   Position = poScreenCenter
   Visible = True
   OnClose = FormClose
+  OnCreate = FormCreate
   TextHeight = 13
   object Image1: TImage
     Left = 0
