@@ -5,15 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ToolWin, System.ImageList, Vcl.ImgList,
-  Vcl.StdCtrls, ZAbstractRODataset, ZDataset, Vcl.ExtCtrls;
+  Vcl.StdCtrls, ZAbstractRODataset, ZDataset, Vcl.ExtCtrls, Skia, Skia.Vcl;
 
 type
   TfConsultaVendas = class(TForm)
-    ToolBar1: TToolBar;
-    tbNovo: TToolButton;
-    tbSair: TToolButton;
-    ImageList1: TImageList;
-    ToolButton2: TToolButton;
     edPesquisa: TEdit;
     Label9: TLabel;
     qVendas: TZReadOnlyQuery;
@@ -27,7 +22,12 @@ type
     qVendasNOME: TWideStringField;
     Panel1: TPanel;
     dbgVendas: TDBGrid;
-    ToolButton1: TToolButton;
+    pnlBotoes: TPanel;
+    tbNovo: TSkSvg;
+    tbEditar: TSkSvg;
+    tbSair: TSkSvg;
+    tbCancelar: TSkSvg;
+    ToolButton1: TSkSvg;
     procedure tbNovoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure tbSairClick(Sender: TObject);
