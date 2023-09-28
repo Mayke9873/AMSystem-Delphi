@@ -12,9 +12,7 @@ object DM: TDM
     User = 'root'
     Password = '123456'
     Protocol = 'mysql'
-    LibraryLocation = 
-      'D:\Desenvolvimento\Projetos\Delphi\AMSystem-Delphi\libmariadb.dl' +
-      'l'
+    LibraryLocation = '.\libmariadb.dll'
     Left = 24
     Top = 16
   end
