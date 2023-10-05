@@ -215,6 +215,10 @@
             <Form>fRelVendas_I</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\view\FrmConsultaCompra.pas">
+            <Form>fConsultaCompra</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>

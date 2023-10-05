@@ -4,7 +4,7 @@ object fPrincipal: TfPrincipal
   Caption = 'AmSystem'
   ClientHeight = 600
   ClientWidth = 1000
-  Color = clWhite
+  Color = clAppWorkSpace
   TransparentColor = True
   TransparentColorValue = clFuchsia
   Ctl3D = False
@@ -7090,7 +7090,7 @@ object fPrincipal: TfPrincipal
     ParentDoubleBuffered = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitTop = 8
+    ExplicitWidth = 996
     object pnlCliente: TPanel
       AlignWithMargins = True
       Left = 10
@@ -7294,7 +7294,7 @@ object fPrincipal: TfPrincipal
       end
       object ConsultadeCompras1: TMenuItem
         Caption = 'Consulta de Compras'
-        Visible = False
+        OnClick = ConsultadeCompras1Click
       end
       object N3: TMenuItem
         Caption = '-'

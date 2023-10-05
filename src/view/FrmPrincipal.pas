@@ -55,6 +55,7 @@ type
     procedure pnlSairClick(Sender: TObject);
     procedure pnlVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ConsultadeCompras1Click(Sender: TObject);
   private
     { Private declarations }
     Valida : TValidacoes;
@@ -70,7 +71,7 @@ implementation
 
 uses
   FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto, FrmFuncionario,
-  FrmVenda, FrmFornecedor, FrmAjusteEstoque, FrmCompra;
+  FrmVenda, FrmFornecedor, FrmAjusteEstoque, FrmCompra, FrmConsultaCompra;
 
 {$R *.dfm}
 
@@ -96,6 +97,14 @@ begin
     fCompra := TfCompra.Create(fPrincipal)
   else
     fCompra.Show;
+end;
+
+procedure TfPrincipal.ConsultadeCompras1Click(Sender: TObject);
+begin
+  if not Assigned(fConsultaCompras) then
+    fConsultaCompras := TfConsultaCompra.Create(fPrincipal)
+  else
+    fConsultaCompras.Show;
 end;
 
 procedure TfPrincipal.ConsultadeVendas1Click(Sender: TObject);
