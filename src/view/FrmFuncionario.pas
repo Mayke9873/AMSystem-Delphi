@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ZSqlUpdate, System.ImageList, Vcl.ImgList,
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, uFuncionario;
+  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, uFuncionario, Skia, Skia.Vcl;
 
 Const
   telaPadrao = 0;
@@ -17,13 +17,6 @@ Const
 type
   TfFuncionario = class(TForm)
     Label9: TLabel;
-    ToolBar1: TToolBar;
-    tbNovo: TToolButton;
-    tbEditar: TToolButton;
-    tbSalvar: TToolButton;
-    tbCancelar: TToolButton;
-    tbSair: TToolButton;
-    ToolButton1: TToolButton;
     PageControl1: TPageControl;
     pgTabela: TTabSheet;
     dbgFuncionario: TDBGrid;
@@ -52,6 +45,12 @@ type
     ImageList1: TImageList;
     ActionList1: TActionList;
     acSair: TAction;
+    pnlBotoes: TPanel;
+    tbNovo: TSkSvg;
+    tbEditar: TSkSvg;
+    tbSalvar: TSkSvg;
+    tbCancelar: TSkSvg;
+    tbSair: TSkSvg;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure acSairExecute(Sender: TObject);
@@ -69,6 +68,7 @@ type
     Ativo : String;
     procedure AlterarCampos(pTipo: Integer);
     function isAtivo(Sender : TRadioButton) : String;
+    procedure Opacidade;
     { Private declarations }
   public
     { Public declarations }
@@ -258,6 +258,8 @@ begin
       dmFuncionarios.qFuncionario.Edit;
     end;
   end;
+
+  Opacidade();
 end;
 
 procedure TfFuncionario.dbgFuncionarioDrawColumnCell(Sender: TObject;
@@ -281,6 +283,25 @@ begin
      dbgFuncionario.Canvas.Font.Color := clBlack;
      dbgFuncionario.Canvas.FillRect(Rect);
      dbgFuncionario.DefaultDrawDataCell(Rect,Column.Field,State)
+  end;
+end;
+
+procedure TfFuncionario.Opacidade;
+var
+  i: Integer;
+begin
+  for i := 0 to ComponentCount-1 do
+  begin
+    if (Components[i]) is TSkSvg then
+    begin
+      case TSkSvg(Components[i]).Enabled of
+
+        True  : TSkSvg(Components[i]).Opacity := 255;
+
+        False : TSkSvg(Components[i]).Opacity := 100;
+
+      end;
+    end;
   end;
 end;
 

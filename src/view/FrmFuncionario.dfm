@@ -3,7 +3,7 @@ object fFuncionario: TfFuncionario
   Top = 0
   Margins.Right = 0
   Caption = 'Funcion'#225'rios'
-  ClientHeight = 648
+  ClientHeight = 647
   ClientWidth = 995
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,93 +20,26 @@ object fFuncionario: TfFuncionario
   OnKeyPress = FormKeyPress
   DesignSize = (
     995
-    648)
+    647)
   TextHeight = 13
   object Label9: TLabel
-    Left = 8
-    Top = 35
-    Width = 50
-    Height = 13
+    Left = 5
+    Top = 33
+    Width = 59
+    Height = 17
     Caption = 'Pesquisar:'
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
   end
-  object ToolBar1: TToolBar
-    Left = 0
-    Top = 0
-    Width = 995
-    Height = 29
-    ButtonHeight = 29
-    ButtonWidth = 29
-    Caption = 'ToolBar1'
-    Color = clBtnShadow
-    Images = ImageList1
-    ParentColor = False
-    ParentShowHint = False
-    ShowHint = False
-    TabOrder = 0
-    ExplicitWidth = 991
-    object tbNovo: TToolButton
-      Left = 0
-      Top = 0
-      Hint = 'Novo - F1'
-      Margins.Left = 7
-      Caption = 'Novo'
-      ImageIndex = 0
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = tbNovoClick
-    end
-    object tbEditar: TToolButton
-      Left = 29
-      Top = 0
-      Hint = 'Editar - F2'
-      Caption = 'Editar'
-      ImageIndex = 1
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = tbEditarClick
-    end
-    object tbSalvar: TToolButton
-      Left = 58
-      Top = 0
-      Caption = 'Salvar'
-      ImageIndex = 2
-      OnClick = tbSalvarClick
-    end
-    object tbCancelar: TToolButton
-      Left = 87
-      Top = 0
-      Caption = 'Cancelar'
-      ImageIndex = 3
-      OnClick = tbCancelarClick
-    end
-    object ToolButton1: TToolButton
-      Left = 116
-      Top = 0
-      Width = 5
-      Caption = 'ToolButton1'
-      ImageIndex = 5
-      Style = tbsSeparator
-    end
-    object tbSair: TToolButton
-      Left = 121
-      Top = 0
-      Action = acSair
-      ParentShowHint = False
-      ShowHint = True
-    end
-  end
   object PageControl1: TPageControl
-    AlignWithMargins = True
-    Left = 4
+    Left = 0
     Top = 56
-    Width = 987
-    Height = 588
+    Width = 995
+    Height = 591
     Margins.Left = 4
     Margins.Top = 0
     Margins.Right = 4
@@ -114,23 +47,26 @@ object fFuncionario: TfFuncionario
     ActivePage = pgTabela
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 1
+    TabOrder = 0
     ExplicitLeft = -1
+    ExplicitWidth = 987
+    ExplicitHeight = 588
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgFuncionario: TDBGrid
         Left = 0
         Top = 0
-        Width = 979
-        Height = 560
+        Width = 987
+        Height = 563
         Align = alClient
         DataSource = dmFuncionarios.dFuncionario
+        DrawingStyle = gdsGradient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         ParentFont = False
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -537,52 +473,245 @@ object fFuncionario: TfFuncionario
     end
   end
   object edPesquisa: TEdit
-    Left = 64
+    Left = 70
     Top = 32
-    Width = 268
+    Width = 280
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
-    TabOrder = 2
+    CharCase = ecUpperCase
+    TabOrder = 1
     OnChange = edPesquisaChange
-    ExplicitWidth = 264
   end
   object rdbTodos: TRadioButton
-    Left = 380
+    Left = 392
     Top = 34
-    Width = 49
+    Width = 59
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Todos'
     Checked = True
-    TabOrder = 3
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 376
   end
   object rdbAtivo: TRadioButton
     Tag = 1
-    Left = 460
+    Left = 472
     Top = 34
-    Width = 49
+    Width = 51
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Ativo'
-    TabOrder = 4
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
     OnClick = rdbTodosClick
-    ExplicitLeft = 456
   end
   object rdbInativo: TRadioButton
     Tag = 2
-    Left = 532
+    Left = 544
     Top = 34
-    Width = 57
+    Width = 59
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Inativo'
-    TabOrder = 5
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
     OnClick = rdbTodosClick
-    ExplicitLeft = 528
+  end
+  object pnlBotoes: TPanel
+    Left = 0
+    Top = 0
+    Width = 995
+    Height = 29
+    Align = alTop
+    BevelOuter = bvNone
+    Caption = 'pnlBotoes'
+    Padding.Left = 4
+    ShowCaption = False
+    TabOrder = 5
+    ExplicitLeft = 4
+    ExplicitTop = 8
+    ExplicitWidth = 991
+    object tbNovo: TSkSvg
+      AlignWithMargins = True
+      Left = 4
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = tbNovoClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"add-file-5" data-name="Flat Line" xmlns="http://www.w3.org/2000' +
+        '/svg" class="icon flat-line"><path id="secondary" d="M11.5,19A6.' +
+        '5,6.5,0,0,1,18,12.5V5H16V3H5A1,1,0,0,0,4,4V20a1,1,0,0,0,1,1h6.82' +
+        'A6.3,6.3,0,0,1,11.5,19Z" style="fill: rgb(44, 169, 188); stroke-' +
+        'width: 2;"></path><path id="primary" d="M18,13V5L16,3H5A1,1,0,0,' +
+        '0,4,4V20a1,1,0,0,0,1,1h7" style="fill: none; stroke: rgb(0, 0, 0' +
+        '); stroke-linecap: round; stroke-linejoin: round; stroke-width: ' +
+        '2;"></path><path id="primary-2" data-name="primary" d="M16,19h4m' +
+        '-2-2v4M8,13h2m4-4H8m8-6V5h2Z" style="fill: none; stroke: rgb(0, ' +
+        '0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-wid' +
+        'th: 2;"></path></svg>'
+      ExplicitLeft = 0
+      ExplicitTop = -3
+    end
+    object tbEditar: TSkSvg
+      AlignWithMargins = True
+      Left = 37
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = tbEditarClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"agenda-pencil" data-name="Flat Line" xmlns="http://www.w3.org/2' +
+        '000/svg" class="icon flat-line"><path id="secondary" d="M20.71,7' +
+        '.69l-1.4-1.4a1,1,0,0,0-1.4,0L13,11.2V14h2.8l4.91-4.91A1,1,0,0,0,' +
+        '20.71,7.69Z" style="fill: rgb(44, 169, 188); stroke-width: 2;"><' +
+        '/path><path id="primary" d="M18,18v2a1,1,0,0,1-1,1H5a1,1,0,0,1-1' +
+        '-1V4A1,1,0,0,1,5,3H15" style="fill: none; stroke: rgb(0, 0, 0); ' +
+        'stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"' +
+        '></path><path id="primary-2" data-name="primary" d="M20.71,9.09,' +
+        '15.8,14H13V11.2l4.91-4.91a1,1,0,0,1,1.4,0l1.4,1.4A1,1,0,0,1,20.7' +
+        '1,9.09ZM3,8H5M3,12H5M3,16H5" style="fill: none; stroke: rgb(0, 0' +
+        ', 0); stroke-linecap: round; stroke-linejoin: round; stroke-widt' +
+        'h: 2;"></path></svg>'
+      ExplicitLeft = 33
+      ExplicitTop = 5
+    end
+    object tbSalvar: TSkSvg
+      AlignWithMargins = True
+      Left = 70
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = tbSalvarClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"approved-file-3" data-name="Flat Line" xmlns="http://www.w3.org' +
+        '/2000/svg" class="icon flat-line"><path id="secondary" d="M19,3H' +
+        '8V5H6v8a4.19,4.19,0,0,1,.5,0,7,7,0,0,1,7,7,6.63,6.63,0,0,1-.08,1' +
+        'H19a1,1,0,0,0,1-1V4A1,1,0,0,0,19,3Z" style="fill: rgb(44, 169, 1' +
+        '88); stroke-width: 2;"></path><polyline id="primary" points="4 1' +
+        '9 6 21 10 17" style="fill: none; stroke: rgb(0, 0, 0); stroke-li' +
+        'necap: round; stroke-linejoin: round; stroke-width: 2;"></polyli' +
+        'ne><path id="primary-2" data-name="primary" d="M13,21h6a1,1,0,0,' +
+        '0,1-1V4a1,1,0,0,0-1-1H8L6,5v9" style="fill: none; stroke: rgb(0,' +
+        ' 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-wi' +
+        'dth: 2;"></path><path id="primary-3" data-name="primary" d="M16,' +
+        '13H13m3-4H10M6,5H8V3Z" style="fill: none; stroke: rgb(0, 0, 0); ' +
+        'stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"' +
+        '></path></svg>'
+      ExplicitLeft = 66
+      ExplicitTop = 5
+    end
+    object tbCancelar: TSkSvg
+      AlignWithMargins = True
+      Left = 103
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = tbCancelarClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"delete-file" data-name="Flat Line" xmlns="http://www.w3.org/200' +
+        '0/svg" class="icon flat-line"><path id="secondary" d="M6,21a1,1,' +
+        '0,0,1-1-1V4A1,1,0,0,1,6,3h9l4,4V20a1,1,0,0,1-1,1Z" style="fill: ' +
+        'rgb(44, 169, 188); stroke-width: 2;"></path><line id="primary" x' +
+        '1="10.5" y1="10.5" x2="13.5" y2="13.5" style="fill: none; stroke' +
+        ': rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; s' +
+        'troke-width: 2;"></line><line id="primary-2" data-name="primary"' +
+        ' x1="13.5" y1="10.5" x2="10.5" y2="13.5" style="fill: none; stro' +
+        'ke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round;' +
+        ' stroke-width: 2;"></line><path id="primary-3" data-name="primar' +
+        'y" d="M6,21a1,1,0,0,1-1-1V4A1,1,0,0,1,6,3h9l4,4V20a1,1,0,0,1-1,1' +
+        'Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: roun' +
+        'd; stroke-linejoin: round; stroke-width: 2;"></path></svg>'
+      ExplicitLeft = 99
+      ExplicitTop = 5
+    end
+    object tbSair: TSkSvg
+      AlignWithMargins = True
+      Left = 136
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 0
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      OnClick = acSairExecute
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"sign-out-alt-2" data-name="Flat Line" xmlns="http://www.w3.org/' +
+        '2000/svg" class="icon flat-line"><rect id="secondary" x="3" y="3' +
+        '" width="10" height="18" rx="1" style="fill: rgb(44, 169, 188); ' +
+        'stroke-width: 2;"></rect><line id="primary" x1="8" y1="12" x2="2' +
+        '1" y2="12" style="fill: none; stroke: rgb(0, 0, 0); stroke-linec' +
+        'ap: round; stroke-linejoin: round; stroke-width: 2;"></line><pol' +
+        'yline id="primary-2" data-name="primary" points="17 16 21 12 17 ' +
+        '8" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: roun' +
+        'd; stroke-linejoin: round; stroke-width: 2;"></polyline><path id' +
+        '="primary-3" data-name="primary" d="M13,8V4a1,1,0,0,0-1-1H4A1,1,' +
+        '0,0,0,3,4V20a1,1,0,0,0,1,1h8a1,1,0,0,0,1-1V16" style="fill: none' +
+        '; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: ' +
+        'round; stroke-width: 2;"></path></svg>'
+      ExplicitLeft = 132
+      ExplicitTop = 5
+    end
   end
   object ImageList1: TImageList
     Left = 928

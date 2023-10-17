@@ -1,9 +1,9 @@
 object fCliente: TfCliente
   Left = 0
   Top = 0
-  Caption = 'Cadastro Cliente'
+  Caption = 'Clientes'
   ClientHeight = 647
-  ClientWidth = 991
+  ClientWidth = 995
   Color = clBtnFace
   DefaultMonitor = dmMainForm
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object fCliente: TfCliente
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    991
+    995
     647)
   TextHeight = 13
   object Label9: TLabel
@@ -39,7 +39,7 @@ object fCliente: TfCliente
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 991
+    Width = 995
     Height = 591
     ActivePage = pgTabela
     Align = alBottom
@@ -52,7 +52,7 @@ object fCliente: TfCliente
       object DBGrid1: TDBGrid
         Left = 0
         Top = 0
-        Width = 983
+        Width = 987
         Height = 563
         Align = alClient
         DataSource = dmClientes.dCliente
@@ -750,7 +750,7 @@ object fCliente: TfCliente
     CharCase = ecUpperCase
     TabOrder = 1
     OnChange = edPesquisaChange
-    ExplicitWidth = 276
+    ExplicitWidth = 272
   end
   object rdbTodos: TRadioButton
     Left = 392
@@ -769,7 +769,7 @@ object fCliente: TfCliente
     TabOrder = 2
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 388
+    ExplicitLeft = 384
   end
   object rdbAtivo: TRadioButton
     Left = 472
@@ -786,7 +786,7 @@ object fCliente: TfCliente
     ParentFont = False
     TabOrder = 3
     OnClick = rdbAtivoClick
-    ExplicitLeft = 468
+    ExplicitLeft = 464
   end
   object rdbInativo: TRadioButton
     Left = 544
@@ -803,12 +803,12 @@ object fCliente: TfCliente
     ParentFont = False
     TabOrder = 4
     OnClick = rdbInativoClick
-    ExplicitLeft = 540
+    ExplicitLeft = 536
   end
   object pnlBotoes: TPanel
     Left = 0
     Top = 0
-    Width = 991
+    Width = 995
     Height = 29
     Align = alTop
     BevelOuter = bvNone
