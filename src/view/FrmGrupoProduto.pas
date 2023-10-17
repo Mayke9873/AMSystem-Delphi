@@ -47,6 +47,7 @@ type
     procedure tmPesquisarTimer(Sender: TObject);
     procedure edPesquisaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edPesquisaKeyPress(Sender: TObject; var Key: Char);
+    procedure dbgGrupoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 
   private
     Grupo: TGrupoProduto;
@@ -96,7 +97,6 @@ procedure TfGrupoProd.tbCancelarClick(Sender: TObject);
 begin
   Cancelar := False;
   AlterarCampos(telaPadrao);
-  Opacidade();
 end;
 
 procedure TfGrupoProd.tbEditarClick(Sender: TObject);
@@ -221,6 +221,29 @@ begin
   begin
     Grupo.Ativo := 'N';
     Grupo.Pesquisar('', edPesquisa.Text);
+  end;
+end;
+
+procedure TfGrupoProd.dbgGrupoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if dbgGrupo.DataSource.DataSet.State in [dsEdit, dsInsert, dsBrowse] then //Cor da linha selecionada
+  begin
+     if Rect.Top = TStringGrid(dbgGrupo).CellRect(0,TStringGrid(dbgGrupo).Row).Top then
+     begin
+        dbgGrupo.Canvas.FillRect(Rect);
+        dbgGrupo.Canvas.Brush.Color := TColor($FFFF00);
+        dbgGrupo.Canvas.Font.Color := clBlack;
+        dbgGrupo.Canvas.Font.Style := [fsBold];
+        dbgGrupo.DefaultDrawDataCell(Rect,Column.Field,State)
+     end;
+  end;
+
+  if gdSelected in State then  //Cor da célula selecionada
+  begin
+     dbgGrupo.Canvas.Brush.Color := TColor($FCCC33);
+     dbgGrupo.Canvas.Font.Color := clBlack;
+     dbgGrupo.Canvas.FillRect(Rect);
+     dbgGrupo.DefaultDrawDataCell(Rect,Column.Field,State)
   end;
 end;
 

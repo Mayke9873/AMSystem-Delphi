@@ -48,9 +48,8 @@ object fFuncionario: TfFuncionario
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
-    ExplicitLeft = -1
-    ExplicitWidth = 987
-    ExplicitHeight = 588
+    ExplicitWidth = 991
+    ExplicitHeight = 590
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgFuncionario: TDBGrid
@@ -475,16 +474,17 @@ object fFuncionario: TfFuncionario
   object edPesquisa: TEdit
     Left = 70
     Top = 32
-    Width = 280
+    Width = 276
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     CharCase = ecUpperCase
     TabOrder = 1
     OnChange = edPesquisaChange
+    ExplicitWidth = 272
   end
   object rdbTodos: TRadioButton
-    Left = 392
+    Left = 388
     Top = 34
     Width = 59
     Height = 17
@@ -500,10 +500,11 @@ object fFuncionario: TfFuncionario
     TabOrder = 2
     TabStop = True
     OnClick = rdbTodosClick
+    ExplicitLeft = 384
   end
   object rdbAtivo: TRadioButton
     Tag = 1
-    Left = 472
+    Left = 468
     Top = 34
     Width = 51
     Height = 17
@@ -517,10 +518,11 @@ object fFuncionario: TfFuncionario
     ParentFont = False
     TabOrder = 3
     OnClick = rdbTodosClick
+    ExplicitLeft = 464
   end
   object rdbInativo: TRadioButton
     Tag = 2
-    Left = 544
+    Left = 540
     Top = 34
     Width = 59
     Height = 17
@@ -534,6 +536,7 @@ object fFuncionario: TfFuncionario
     ParentFont = False
     TabOrder = 4
     OnClick = rdbTodosClick
+    ExplicitLeft = 536
   end
   object pnlBotoes: TPanel
     Left = 0
@@ -546,8 +549,6 @@ object fFuncionario: TfFuncionario
     Padding.Left = 4
     ShowCaption = False
     TabOrder = 5
-    ExplicitLeft = 4
-    ExplicitTop = 8
     ExplicitWidth = 991
     object tbNovo: TSkSvg
       AlignWithMargins = True

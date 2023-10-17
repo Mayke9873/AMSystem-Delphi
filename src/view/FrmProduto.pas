@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
   System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ComCtrls, Vcl.ToolWin, uProduto;
+  Vcl.ComCtrls, Vcl.ToolWin, uProduto, Skia, Skia.Vcl;
 
 Const
   telaPadrao = 0;
@@ -16,13 +16,6 @@ Const
 type
   TfProduto = class(TForm)
     Label9: TLabel;
-    ToolBar1: TToolBar;
-    tbNovo: TToolButton;
-    tbEditar: TToolButton;
-    tbSalvar: TToolButton;
-    tbCancelar: TToolButton;
-    ToolButton1: TToolButton;
-    tbSair: TToolButton;
     PageControl1: TPageControl;
     pgTabela: TTabSheet;
     dbgProduto: TDBGrid;
@@ -49,6 +42,12 @@ type
     rdbInativo: TRadioButton;
     ImageList1: TImageList;
     DbCbGrupo: TDBLookupComboBox;
+    pnlBotoes: TPanel;
+    tbNovo: TSkSvg;
+    tbEditar: TSkSvg;
+    tbSalvar: TSkSvg;
+    tbCancelar: TSkSvg;
+    tbSair: TSkSvg;
     procedure Consulta;
     procedure FormCreate(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
@@ -66,11 +65,13 @@ type
     procedure dbeValorVendaExit(Sender: TObject);
     procedure qProdutoNewRecord(DataSet: TDataSet);
     procedure tbSalvarClick(Sender: TObject);
+    procedure dbgProdutoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
     Produto : TProduto;
     Cancelar : String;
     procedure AlterarCampos(pTipo : Integer);
+    procedure Opacidade;
   public
     { Public declarations }
   end;
@@ -169,6 +170,29 @@ begin
   lucro := (venda - compra) / compra * 100;
   // dbeLucro.Text := FloatToStr(lucro);
   dmProdutos.qProdutoPLUCRO.asFloat := lucro;
+end;
+
+procedure TfProduto.dbgProdutoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if dbgProduto.DataSource.DataSet.State in [dsEdit, dsInsert, dsBrowse] then //Cor da linha selecionada
+  begin
+     if Rect.Top = TStringGrid(dbgProduto).CellRect(0,TStringGrid(dbgProduto).Row).Top then
+     begin
+        dbgProduto.Canvas.FillRect(Rect);
+        dbgProduto.Canvas.Brush.Color := TColor($FFFF00);
+        dbgProduto.Canvas.Font.Color := clBlack;
+        dbgProduto.Canvas.Font.Style := [fsBold];
+        dbgProduto.DefaultDrawDataCell(Rect,Column.Field,State)
+     end;
+  end;
+
+  if gdSelected in State then  //Cor da célula selecionada
+  begin
+     dbgProduto.Canvas.Brush.Color := TColor($FCCC33);
+     dbgProduto.Canvas.Font.Color := clBlack;
+     dbgProduto.Canvas.FillRect(Rect);
+     dbgProduto.DefaultDrawDataCell(Rect,Column.Field,State)
+  end;
 end;
 
 procedure TfProduto.edPesquisaChange(Sender: TObject);
@@ -287,6 +311,27 @@ begin
       dbeValorVenda.ReadOnly := false;
 
       dmProdutos.qProduto.Edit;
+    end;
+  end;
+
+  Opacidade();
+end;
+
+procedure TfProduto.Opacidade;
+var
+  i: Integer;
+begin
+  for i := 0 to ComponentCount-1 do
+  begin
+    if (Components[i]) is TSkSvg then
+    begin
+      case TSkSvg(Components[i]).Enabled of
+
+        True  : TSkSvg(Components[i]).Opacity := 255;
+
+        False : TSkSvg(Components[i]).Opacity := 100;
+
+      end;
     end;
   end;
 end;

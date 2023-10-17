@@ -6,19 +6,12 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, System.ImageList, Vcl.ImgList,
   Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, uFornecedor;
+  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, uFornecedor, Skia, Skia.Vcl;
 
 
 type
   TfFornecedor = class(TForm)
     Label9: TLabel;
-    ToolBar1: TToolBar;
-    tbNovo: TToolButton;
-    tbEditar: TToolButton;
-    tbSalvar: TToolButton;
-    tbCancelar: TToolButton;
-    tbSair: TToolButton;
-    ToolButton1: TToolButton;
     PageControl1: TPageControl;
     pgTabela: TTabSheet;
     dbgFornecedor: TDBGrid;
@@ -59,6 +52,12 @@ type
     ImageList1: TImageList;
     ActionList1: TActionList;
     acSair: TAction;
+    pnlBotoes: TPanel;
+    tbNovo: TSkSvg;
+    tbEditar: TSkSvg;
+    tbSalvar: TSkSvg;
+    tbCancelar: TSkSvg;
+    tbSair: TSkSvg;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure dbgFornecedorDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -76,6 +75,7 @@ type
     Fornecedor : TFornecedor;
     procedure AlterarCampos(pTipo: Integer);
     function isAtivo(Sender: TRadioButton): String;
+    procedure Opacidade;
     { Private declarations }
   public
     { Public declarations }
@@ -223,6 +223,27 @@ begin
       dbeBairro.ReadOnly    := False;
 
       dmFornecedores.qFornecedor.Edit;
+    end;
+  end;
+
+  Opacidade();
+end;
+
+procedure TfFornecedor.Opacidade;
+var
+  i: Integer;
+begin
+  for i := 0 to ComponentCount-1 do
+  begin
+    if (Components[i]) is TSkSvg then
+    begin
+      case TSkSvg(Components[i]).Enabled of
+
+        True  : TSkSvg(Components[i]).Opacity := 255;
+
+        False : TSkSvg(Components[i]).Opacity := 100;
+
+      end;
     end;
   end;
 end;

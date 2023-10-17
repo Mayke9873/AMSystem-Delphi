@@ -3,7 +3,7 @@ object fGrupoProd: TfGrupoProd
   Top = 0
   Caption = 'Grupo de Produto'
   ClientHeight = 647
-  ClientWidth = 991
+  ClientWidth = 995
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,48 +16,48 @@ object fGrupoProd: TfGrupoProd
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    991
+    995
     647)
   TextHeight = 13
   object Label9: TLabel
-    Left = 8
-    Top = 35
-    Width = 50
-    Height = 13
+    Left = 5
+    Top = 33
+    Width = 59
+    Height = 17
     Caption = 'Pesquisar:'
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
   end
   object PageControl1: TPageControl
     Left = 0
-    Top = 54
-    Width = 991
-    Height = 593
+    Top = 56
+    Width = 995
+    Height = 591
     ActivePage = pgTabela
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
-    ExplicitWidth = 987
-    ExplicitHeight = 592
+    ExplicitWidth = 991
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgGrupo: TDBGrid
         Left = 0
         Top = 0
-        Width = 983
-        Height = 565
+        Width = 987
+        Height = 563
         Align = alClient
         DataSource = dmGrupos.dGrupo
+        DrawingStyle = gdsGradient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         ParentFont = False
         ReadOnly = True
         TabOrder = 0
@@ -66,6 +66,7 @@ object fGrupoProd: TfGrupoProd
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+        OnDrawColumnCell = dbgGrupoDrawColumnCell
         Columns = <
           item
             Expanded = False
@@ -185,56 +186,70 @@ object fGrupoProd: TfGrupoProd
     end
   end
   object edPesquisa: TEdit
-    Left = 64
+    Left = 70
     Top = 32
-    Width = 280
+    Width = 276
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 1
     OnKeyDown = edPesquisaKeyDown
     OnKeyPress = edPesquisaKeyPress
-    ExplicitWidth = 276
   end
   object rdbTodos: TRadioButton
-    Left = 392
+    Left = 388
     Top = 34
-    Width = 49
+    Width = 58
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Todos'
     Checked = True
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 388
   end
   object rdbAtivo: TRadioButton
-    Left = 472
+    Left = 468
     Top = 34
-    Width = 49
+    Width = 58
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Ativo'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 3
     OnClick = rdbTodosClick
-    ExplicitLeft = 468
   end
   object rdbInativo: TRadioButton
-    Left = 544
+    Left = 540
     Top = 34
-    Width = 57
+    Width = 66
     Height = 17
     Anchors = [akTop, akRight]
     Caption = 'Inativo'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 4
     OnClick = rdbTodosClick
-    ExplicitLeft = 540
   end
   object pnlBotoes: TPanel
     Left = 0
     Top = 0
-    Width = 991
+    Width = 995
     Height = 29
     Align = alTop
     BevelOuter = bvNone
