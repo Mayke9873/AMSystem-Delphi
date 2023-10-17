@@ -80,11 +80,10 @@ procedure TfConsultaCompra.edPesquisaChange(Sender: TObject);
 begin
   qCompras.Close;
   qCompras.SQL.Clear;
-  qCompras.SQL.Add('SELECT a.ID, a.CLIENTE, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DATA_VENDA, b.NOME ' +
-    'FROM VENDA a LEFT JOIN  FUNCIONARIO b on  a.VENDEDOR = b.ID WHERE ex = 0 and cliente like ' +
+  qCompras.SQL.Add('SELECT a.ID, a.Fornecedor cliente, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DATA_COMPRA DATA_VENDA, b.NOME ' +
+    'FROM COMPRA a LEFT JOIN  FUNCIONARIO b on  a.USUARIO = b.ID WHERE ex = 0 and a.Fornecedor like ' +
     QuotedStr('%' + edPesquisa.Text + '%') + ' order by id desc;');
   qCompras.Open;
-
 end;
 
 procedure TfConsultaCompra.FormActivate(Sender: TObject);
