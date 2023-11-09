@@ -49,7 +49,7 @@ var
 
 implementation
 
-uses dmVenda, FrmVenda, FrmRelVendas;
+uses dmCompra, FrmCompra, FrmRelVendas;
 {$R *.dfm}
 
 procedure TfConsultaCompra.dbgVendasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -125,7 +125,7 @@ end;
 
 procedure TfConsultaCompra.tbNovoClick(Sender: TObject);
 begin
-  fVenda := TfVenda.Create(fConsultaCompras);
+  fCompra := TfCompra.Create(fConsultaCompras);
 end;
 
 procedure TfConsultaCompra.tbSairClick(Sender: TObject);
@@ -136,8 +136,11 @@ end;
 procedure TfConsultaCompra.ToolButton1Click(Sender: TObject);
 begin
   if not  Assigned(fRelVendas) then
-    fRelVendas := TfRelVendas.Create(fConsultaCompras)
-  else
+    fRelVendas := TfRelVendas.Create(fConsultaCompras);
+
+    fRelVendas.SkLabel1.Caption := StringReplace(fRelVendas.SkLabel1.Caption, 'Vendas', 'Compras', []);
+    fRelVendas.SkLabel2.Caption := StringReplace(fRelVendas.SkLabel2.Caption, 'vendas', 'compras', []);
+    fRelVendas.Tag := 1;
     fRelVendas.ShowModal;
 end;
 
