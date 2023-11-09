@@ -11,6 +11,13 @@ type
     qCompra: TZQuery;
     uCompra: TZUpdateSQL;
     qCompraid: TIntegerField;
+    qConsCompras: TZReadOnlyQuery;
+    qConsComprasID: TZIntegerField;
+    qConsComprasVALOR: TZBCDField;
+    qConsComprasDESCONTO: TZBCDField;
+    qConsComprasVALOR_TOTAL: TZBCDField;
+    qConsComprasDATA_COMPRA: TZDateField;
+    qConsComprasNOME: TZUnicodeStringField;
   private
     { Private declarations }
   public
