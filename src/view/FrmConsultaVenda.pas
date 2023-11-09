@@ -137,9 +137,9 @@ end;
 procedure TfConsultaVendas.ToolButton1Click(Sender: TObject);
 begin
   if not  Assigned(fRelVendas) then
-    fRelVendas := TfRelVendas.Create(fConsultaVendas)
-  else
-    fRelVendas.ShowModal;
+    fRelVendas := TfRelVendas.Create(fConsultaVendas);
+
+   fRelVendas.ShowModal;
 end;
 
 end.
