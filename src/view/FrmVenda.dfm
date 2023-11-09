@@ -186,7 +186,7 @@ object fVenda: TfVenda
   object DBGrid1: TDBGrid
     Left = 8
     Top = 244
-    Width = 904
+    Width = 900
     Height = 319
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -672,17 +672,13 @@ object fVenda: TfVenda
       '  From Venda_item where idvenda = :idVenda and ex = 9;')
     Params = <
       item
-        DataType = ftUnknown
         Name = 'idVenda'
-        ParamType = ptUnknown
       end>
     Left = 798
     Top = 512
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'idVenda'
-        ParamType = ptUnknown
       end>
     object qProdVendaid: TIntegerField
       FieldName = 'id'
@@ -692,28 +688,37 @@ object fVenda: TfVenda
       FieldName = 'idprod'
       Required = True
     end
+    object qProdVendaquantidade: TZBCDField
+      FieldName = 'quantidade'
+      Required = True
+      Precision = 5
+      Size = 3
+    end
     object qProdVendadescricao: TWideStringField
       FieldName = 'descricao'
       Required = True
       Size = 255
     end
-    object qProdVendaquantidade: TFloatField
-      FieldName = 'quantidade'
-      Required = True
-    end
-    object qProdVendadesconto: TFloatField
+    object qProdVendadesconto: TZBCDField
       FieldName = 'desconto'
       Required = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 5
+      Size = 2
     end
-    object qProdVendatotal: TFloatField
+    object qProdVendatotal: TZBCDField
       FieldName = 'total'
       Required = True
       DisplayFormat = '###,###,##0.00'
+      Precision = 5
+      Size = 2
     end
-    object qProdVendavalor: TFloatField
+    object qProdVendavalor: TZBCDField
       FieldName = 'valor'
       Required = True
       DisplayFormat = '###,###,##0.00'
+      Precision = 5
+      Size = 2
     end
   end
   object uProdVenda: TZUpdateSQL
@@ -764,89 +769,55 @@ object fVenda: TfVenda
     Top = 528
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'idVenda'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'idprod'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'descricao'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'valor'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'desconto'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'quantidade'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'total'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ex'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_idVenda'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_idprod'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_valor'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_desconto'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_quantidade'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_total'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_ex'
-        ParamType = ptUnknown
       end>
   end
 end

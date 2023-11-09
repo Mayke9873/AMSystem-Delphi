@@ -73,7 +73,7 @@ object fCompra: TfCompra
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 523
+      Left = 507
       Top = 192
       Width = 29
       Height = 18
@@ -88,7 +88,7 @@ object fCompra: TfCompra
       ExplicitLeft = 547
     end
     object Label6: TLabel
-      Left = 616
+      Left = 600
       Top = 192
       Width = 55
       Height = 18
@@ -103,7 +103,7 @@ object fCompra: TfCompra
       ExplicitLeft = 640
     end
     object Label7: TLabel
-      Left = 710
+      Left = 694
       Top = 192
       Width = 41
       Height = 18
@@ -118,7 +118,7 @@ object fCompra: TfCompra
       ExplicitLeft = 734
     end
     object Label8: TLabel
-      Left = 802
+      Left = 786
       Top = 192
       Width = 56
       Height = 18
@@ -173,62 +173,62 @@ object fCompra: TfCompra
       Tag = 1
       Left = 95
       Top = 212
-      Width = 422
+      Width = 406
       Height = 23
       Anchors = [akLeft, akTop, akRight]
       CharCase = ecUpperCase
       TabOrder = 5
       OnChange = edPesqProdChange
       OnKeyDown = edPesqProdKeyDown
-      ExplicitWidth = 418
+      ExplicitWidth = 402
     end
     object edQtdProduto: TEdit
       Tag = 99
-      Left = 523
+      Left = 507
       Top = 212
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 7
       OnExit = edQtdProdutoExit
-      ExplicitLeft = 519
+      ExplicitLeft = 503
     end
     object edValorUnitario: TEdit
       Tag = 99
-      Left = 616
+      Left = 600
       Top = 212
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 8
-      ExplicitLeft = 612
+      ExplicitLeft = 596
     end
     object edDesconto: TEdit
       Tag = 99
-      Left = 710
+      Left = 694
       Top = 212
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 9
       OnExit = edDescontoExit
-      ExplicitLeft = 706
+      ExplicitLeft = 690
     end
     object edValorTotal: TEdit
       Tag = 99
-      Left = 802
+      Left = 786
       Top = 212
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 10
       OnEnter = edValorTotalEnter
-      ExplicitLeft = 798
+      ExplicitLeft = 782
     end
     object DBGrid1: TDBGrid
       Left = 8
       Top = 244
-      Width = 880
+      Width = 864
       Height = 320
       TabStop = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -683,7 +683,7 @@ object fCompra: TfCompra
       item
         DataType = ftWideString
         Name = 'idCompra'
-        ParamType = ptUnknown
+        SQLType = stUnicodeString
       end>
     Left = 798
     Top = 512
@@ -691,7 +691,7 @@ object fCompra: TfCompra
       item
         DataType = ftWideString
         Name = 'idCompra'
-        ParamType = ptUnknown
+        SQLType = stUnicodeString
       end>
     object qProdCompraid: TIntegerField
       FieldName = 'id'
@@ -706,23 +706,33 @@ object fCompra: TfCompra
       Required = True
       Size = 255
     end
-    object qProdCompraquantidade: TFloatField
-      FieldName = 'quantidade'
-      Required = True
-    end
-    object qProdCompradesconto: TFloatField
+    object qProdCompradesconto: TZBCDField
       FieldName = 'desconto'
       Required = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 6
+      Size = 2
     end
-    object qProdCompratotal: TFloatField
+    object qProdCompraquantidade: TZBCDField
+      FieldName = 'quantidade'
+      Required = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 5
+      Size = 3
+    end
+    object qProdCompratotal: TZBCDField
       FieldName = 'total'
       Required = True
       DisplayFormat = '###,###,##0.00'
+      Precision = 6
+      Size = 2
     end
-    object qProdCompravalor: TFloatField
+    object qProdCompravalor: TZBCDField
       FieldName = 'valor'
       Required = True
       DisplayFormat = '###,###,##0.00'
+      Precision = 6
+      Size = 2
     end
   end
   object uProdCompra: TZUpdateSQL
@@ -773,89 +783,55 @@ object fCompra: TfCompra
     Top = 528
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'idCompra'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'idprod'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'descricao'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'valor'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'desconto'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'quantidade'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'total'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ex'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_idCompra'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_idprod'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_valor'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_desconto'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_quantidade'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_total'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_ex'
-        ParamType = ptUnknown
       end>
   end
   object ActionList1: TActionList

@@ -1,7 +1,4 @@
 inherited dmCompras: TdmCompras
-  inherited zCon: TZConnection
-    Connected = True
-  end
   object qCompra: TZQuery
     Connection = zCon
     UpdateObject = uCompra
@@ -36,54 +33,100 @@ inherited dmCompras: TdmCompras
     Top = 68
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'ID_FORNECEDOR'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'FORNECEDOR'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'VALOR'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'DESC'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'TOTAL'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'PAGO'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'VENDEDOR'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'DATA'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end>
+  end
+  object qConsCompras: TZReadOnlyQuery
+    SortedFields = 'ID'
+    SortType = stDescending
+    Connection = DM.zCon
+    SQL.Strings = (
+      'SELECT'
+      
+        '  a.ID, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DATA_COMPRA, a. FO' +
+        'RNECEDOR NOME'
+      'FROM COMPRA a'
+      'LEFT JOIN  FUNCIONARIO b on  a.USUARIO = b.ID'
+      '  WHERE ex = 0 and'
+      '    (:dt = 0 or (a.DATA_COMPRA between :dt and :dtF))'
+      '    order by id desc;')
+    Params = <
+      item
+        Name = 'dt'
+      end
+      item
+        Name = 'dtF'
+      end>
+    IndexFieldNames = 'ID Desc'
+    Left = 24
+    Top = 128
+    ParamData = <
+      item
+        Name = 'dt'
+      end
+      item
+        Name = 'dtF'
+      end>
+    object qConsComprasID: TZIntegerField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object qConsComprasVALOR: TZBCDField
+      FieldName = 'VALOR'
+      ReadOnly = True
+      DisplayFormat = '###,###,#00.00'
+      Precision = 6
+      Size = 2
+    end
+    object qConsComprasDESCONTO: TZBCDField
+      FieldName = 'DESCONTO'
+      ReadOnly = True
+      DisplayFormat = '###,###,#00.00'
+      Precision = 6
+      Size = 2
+    end
+    object qConsComprasVALOR_TOTAL: TZBCDField
+      FieldName = 'VALOR_TOTAL'
+      ReadOnly = True
+      DisplayFormat = '###,###,#00.00'
+      Precision = 6
+      Size = 2
+    end
+    object qConsComprasDATA_COMPRA: TZDateField
+      FieldName = 'DATA_COMPRA'
+      ReadOnly = True
+    end
+    object qConsComprasNOME: TZUnicodeStringField
+      FieldName = 'NOME'
+      ReadOnly = True
+      Size = 255
+    end
   end
 end

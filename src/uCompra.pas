@@ -108,9 +108,8 @@ begin
   begin
     Total := 0;
     Desconto := 0;
-    dmCompras.qCompra.Open;
-    dmCompras.qCompra.Insert;
-    dmCompras.qCompra.ApplyUpdates;
+
+    ExecSQL('insert into compra (ID, EX) select (select coalesce(max(id)+1, 1) from compra), 1;');
 
     dmCompras.qCompra.Close;
     dmCompras.qCompra.Open;

@@ -15,9 +15,9 @@ type
     dVendas: TDataSource;
     qVendasID: TIntegerField;
     qVendasCLIENTE: TWideStringField;
-    qVendasVALOR: TFloatField;
-    qVendasDESCONTO: TFloatField;
-    qVendasVALOR_TOTAL: TFloatField;
+    qVendasVALOR: TZBCDField;
+    qVendasDESCONTO: TZBCDField;
+    qVendasVALOR_TOTAL: TZBCDField;
     qVendasDATA_VENDA: TDateField;
     qVendasNOME: TWideStringField;
     Panel1: TPanel;

@@ -38,13 +38,13 @@ object fConsultaCompra: TfConsultaCompra
   object edPesquisa: TEdit
     Left = 64
     Top = 31
-    Width = 280
+    Width = 256
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 0
     OnChange = edPesquisaChange
-    ExplicitWidth = 276
+    ExplicitWidth = 252
   end
   object Panel1: TPanel
     Left = 0
@@ -107,7 +107,7 @@ object fConsultaCompra: TfConsultaCompra
           Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
-          Title.Caption = 'Cliente'
+          Title.Caption = 'Fornecedor'
           Title.Font.Charset = ANSI_CHARSET
           Title.Font.Color = clWindowText
           Title.Font.Height = -12
@@ -187,23 +187,6 @@ object fConsultaCompra: TfConsultaCompra
           Title.Font.Name = 'Arial'
           Title.Font.Style = [fsBold]
           Width = 95
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NOME'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Title.Caption = 'Vendedor'
-          Title.Font.Charset = ANSI_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -12
-          Title.Font.Name = 'Arial'
-          Title.Font.Style = [fsBold]
-          Width = 250
           Visible = True
         end>
     end
@@ -396,9 +379,9 @@ object fConsultaCompra: TfConsultaCompra
     end
   end
   object qCompras: TZReadOnlyQuery
-    Connection = DM.zCon
     SortedFields = 'ID'
     SortType = stDescending
+    Connection = DM.zCon
     SQL.Strings = (
       
         'SELECT a.ID, a.Fornecedor cliente, a.VALOR, a.DESCONTO, a.VALOR_' +
@@ -420,21 +403,26 @@ object fConsultaCompra: TfConsultaCompra
       ReadOnly = True
       Size = 250
     end
-    object qComprasVALOR: TFloatField
+    object qComprasVALOR: TZBCDField
       FieldName = 'VALOR'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 6
+      Size = 2
     end
-    object qComprasDESCONTO: TFloatField
+    object qComprasDESCONTO: TZBCDField
       FieldName = 'DESCONTO'
       ReadOnly = True
-      EditFormat = '#.##'
-      currency = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 6
+      Size = 2
     end
-    object qComprasVALOR_TOTAL: TFloatField
+    object qComprasVALOR_TOTAL: TZBCDField
       FieldName = 'VALOR_TOTAL'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 6
+      Size = 2
     end
     object qComprasDATA_VENDA: TDateField
       FieldName = 'DATA_VENDA'

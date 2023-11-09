@@ -33,40 +33,28 @@ inherited dmVendas: TdmVendas
     Top = 68
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'ID_CLIENTE'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'CLIENTE'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'VALOR'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'DESC'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'TOTAL'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end>
   end
   object qConsVendas: TZReadOnlyQuery
-    Connection = DM.zCon
     SortedFields = 'ID'
     SortType = stDescending
+    Connection = DM.zCon
     SQL.Strings = (
       'SELECT'
       
@@ -79,28 +67,20 @@ inherited dmVendas: TdmVendas
       '    order by id desc;')
     Params = <
       item
-        DataType = ftUnknown
         Name = 'dt'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'dtF'
-        ParamType = ptUnknown
       end>
     IndexFieldNames = 'ID Desc'
     Left = 24
     Top = 128
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'dt'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'dtF'
-        ParamType = ptUnknown
       end>
     object qConsVendasID: TIntegerField
       FieldName = 'ID'
@@ -111,23 +91,28 @@ inherited dmVendas: TdmVendas
       ReadOnly = True
       Size = 250
     end
-    object qConsVendasVALOR: TFloatField
+    object qConsVendasVALOR: TZBCDField
       FieldName = 'VALOR'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '###,###,#00.00'
+      Precision = 6
+      Size = 2
     end
-    object qConsVendasDESCONTO: TFloatField
+    object qConsVendasDESCONTO: TZBCDField
       FieldName = 'DESCONTO'
       ReadOnly = True
-      EditFormat = '#.##'
-      currency = True
+      DisplayFormat = '###,###,#00.00'
+      Precision = 6
+      Size = 2
     end
-    object qConsVendasVALOR_TOTAL: TFloatField
+    object qConsVendasVALOR_TOTAL: TZBCDField
       FieldName = 'VALOR_TOTAL'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '###,###,#00.00'
+      Precision = 6
+      Size = 2
     end
-    object qConsVendasDATA_VENDA: TDateField
+    object qConsVendasDATA_VENDA: TZDateField
       FieldName = 'DATA_VENDA'
       ReadOnly = True
     end

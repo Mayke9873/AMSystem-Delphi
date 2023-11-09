@@ -5,14 +5,17 @@ object DM: TDM
     ControlsCodePage = cCP_UTF16
     Catalog = ''
     Properties.Strings = (
-      'controls_cp=CP_UTF16')
+      'controls_cp=CP_UTF16'
+      'RawStringEncoding=DB_CP')
     HostName = 'localhost'
     Port = 3306
     Database = 'projeto_db'
     User = 'root'
     Password = '123456'
     Protocol = 'mysql'
-    LibraryLocation = '.\libmariadb.dll'
+    LibraryLocation = 
+      'D:\Desenvolvimento\Projetos\Delphi\AMSystem-Delphi\bin\libmariad' +
+      'b.dll'
     Left = 24
     Top = 16
   end

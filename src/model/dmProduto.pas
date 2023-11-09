@@ -13,9 +13,9 @@ type
     qProdutodescricao: TWideStringField;
     qProdutoestoque: TFloatField;
     qProdutounidade: TWideStringField;
-    qProdutopCompra: TFloatField;
-    qProdutopLucro: TFloatField;
-    qProdutopVenda: TFloatField;
+    qProdutopCompra: TZBCDField;
+    qProdutopLucro: TZBCDField;
+    qProdutopVenda: TZBCDField;
     qProdutoIdGrupo: TIntegerField;
     qProdutogrupo: TWideStringField;
     qProdutodtRegistro: TDateField;
@@ -25,18 +25,17 @@ type
     qMovEstoque: TZQuery;
     qMovEstoqueid: TIntegerField;
     qMovEstoqueidproduto: TIntegerField;
-    qMovEstoquequantidade: TFloatField;
+    qMovEstoqueidUsuario: TZShortIntField;
     qMovEstoquedataMov: TDateField;
-    qMovEstoqueidUsuario: TSmallintField;
-    qMovEstoqueidFornecedor: TSmallintField;
+    qMovEstoquequantidade: TZDoubleField;
+    qMovEstoqueidFornecedor: TZShortIntField;
     qMovEstoquetipoMov: TWideStringField;
     qMovEstoqueobs: TWideStringField;
     uMovEstoque: TZUpdateSQL;
     dGrupo: TDataSource;
     qGrupo: TZQuery;
-    qGrupoid: TIntegerField;
+    qGrupoid: TZInt64Field;
     qGrupodescricao: TWideStringField;
-    qGrupoativo: TWideStringField;
     procedure qProdutoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }

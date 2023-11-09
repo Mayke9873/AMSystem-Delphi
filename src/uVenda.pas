@@ -109,9 +109,8 @@ begin
   begin
     Total := 0;
     Desconto := 0;
-    dmVendas.qVenda.Open;
-    dmVendas.qVenda.Insert;
-    dmVendas.qVenda.ApplyUpdates;
+
+    ExecSQL('insert into venda (ID, EX) select (select coalesce(max(id)+1, 1) from venda), 1;');
 
     dmVendas.qVenda.Close;
     dmVendas.qVenda.Open;

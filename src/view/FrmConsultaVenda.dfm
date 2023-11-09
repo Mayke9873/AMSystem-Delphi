@@ -38,13 +38,13 @@ object fConsultaVendas: TfConsultaVendas
   object edPesquisa: TEdit
     Left = 64
     Top = 31
-    Width = 300
+    Width = 288
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 0
     OnChange = edPesquisaChange
-    ExplicitWidth = 296
+    ExplicitWidth = 284
   end
   object Panel1: TPanel
     Left = 0
@@ -219,6 +219,7 @@ object fConsultaVendas: TfConsultaVendas
     Padding.Left = 4
     ShowCaption = False
     TabOrder = 2
+    ExplicitWidth = 979
     object tbNovo: TSkSvg
       AlignWithMargins = True
       Left = 4
@@ -395,9 +396,9 @@ object fConsultaVendas: TfConsultaVendas
     end
   end
   object qVendas: TZReadOnlyQuery
-    Connection = DM.zCon
     SortedFields = 'ID'
     SortType = stDescending
+    Connection = DM.zCon
     SQL.Strings = (
       
         'SELECT a.ID, a.CLIENTE, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DA' +
@@ -419,21 +420,26 @@ object fConsultaVendas: TfConsultaVendas
       ReadOnly = True
       Size = 250
     end
-    object qVendasVALOR: TFloatField
+    object qVendasVALOR: TZBCDField
       FieldName = 'VALOR'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 6
+      Size = 2
     end
-    object qVendasDESCONTO: TFloatField
+    object qVendasDESCONTO: TZBCDField
       FieldName = 'DESCONTO'
       ReadOnly = True
-      EditFormat = '#.##'
-      currency = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 6
+      Size = 2
     end
-    object qVendasVALOR_TOTAL: TFloatField
+    object qVendasVALOR_TOTAL: TZBCDField
       FieldName = 'VALOR_TOTAL'
       ReadOnly = True
-      currency = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 6
+      Size = 2
     end
     object qVendasDATA_VENDA: TDateField
       FieldName = 'DATA_VENDA'

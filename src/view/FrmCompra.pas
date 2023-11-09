@@ -50,10 +50,10 @@ type
     qProdCompraid: TIntegerField;
     qProdCompraidprod: TIntegerField;
     qProdCompradescricao: TWideStringField;
-    qProdCompraquantidade: TFloatField;
-    qProdCompradesconto: TFloatField;
-    qProdCompratotal: TFloatField;
-    qProdCompravalor: TFloatField;
+    qProdCompradesconto: TZBCDField;
+    qProdCompraquantidade: TZBCDField;
+    qProdCompratotal: TZBCDField;
+    qProdCompravalor: TZBCDField;
     uProdCompra: TZUpdateSQL;
     ActionList1: TActionList;
     acSair: TAction;
@@ -296,7 +296,7 @@ begin
     qProdCompra.ApplyUpdates;
     qProdCompra.Close;
   finally
-    qProdCompra.ParamByName('idCompra').AsString := '' + edCodCompra.Text + '';
+    qProdCompra.ParamByName('idCompra').AsInteger := StrToIntDef(edCodCompra.Text, 0);
     qProdCompra.Open;
   end;
 

@@ -4,9 +4,6 @@ Coordinates=575,232,84,58
 [qProdVendaidprod]
 Coordinates=570,386,122,36
 
-[qProdVendaquantidade]
-Coordinates=724,1,149,36
-
 [Label2]
 Coordinates=138,300,53,58
 
@@ -49,9 +46,6 @@ Coordinates=730,166,141,36
 [dbgVendedor]
 Coordinates=10,368,91,36
 
-[qProdVendadesconto]
-Coordinates=730,276,138,36
-
 [qProdVenda]
 Coordinates=10,10,86,212
 
@@ -73,12 +67,6 @@ Coordinates=378,300,80,58
 [edCliente]
 Coordinates=640,300,69,58
 
-[qProdVendavalor]
-Coordinates=730,551,114,36
-
-[qProdVendatotal]
-Coordinates=711,655,110,36
-
 [dbgPesqProduto]
 Coordinates=719,300,110,36
 
@@ -98,6 +86,6 @@ Coordinates=434,10,53,58
 Coordinates=209,232,88,58
 
 []
-Coordinates=266,10,89,102
+Coordinates=730,276,138,36
 Visible=True
 

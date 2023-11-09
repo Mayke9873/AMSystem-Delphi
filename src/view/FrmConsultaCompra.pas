@@ -15,9 +15,9 @@ type
     dCompras: TDataSource;
     qComprasID: TIntegerField;
     qComprasCLIENTE: TWideStringField;
-    qComprasVALOR: TFloatField;
-    qComprasDESCONTO: TFloatField;
-    qComprasVALOR_TOTAL: TFloatField;
+    qComprasVALOR: TZBCDField;
+    qComprasDESCONTO: TZBCDField;
+    qComprasVALOR_TOTAL: TZBCDField;
     qComprasDATA_VENDA: TDateField;
     qComprasNOME: TWideStringField;
     Panel1: TPanel;

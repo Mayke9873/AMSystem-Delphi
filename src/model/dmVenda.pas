@@ -14,10 +14,10 @@ type
     qConsVendas: TZReadOnlyQuery;
     qConsVendasID: TIntegerField;
     qConsVendasCLIENTE: TWideStringField;
-    qConsVendasVALOR: TFloatField;
-    qConsVendasDESCONTO: TFloatField;
-    qConsVendasVALOR_TOTAL: TFloatField;
-    qConsVendasDATA_VENDA: TDateField;
+    qConsVendasVALOR: TZBCDField;
+    qConsVendasDESCONTO: TZBCDField;
+    qConsVendasVALOR_TOTAL: TZBCDField;
+    qConsVendasDATA_VENDA: TZDateField;
     qConsVendasNOME: TWideStringField;
   private
     { Private declarations }

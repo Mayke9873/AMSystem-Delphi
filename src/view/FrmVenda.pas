@@ -41,10 +41,10 @@ type
     qProdVendaid: TIntegerField;
     qProdVendaidprod: TIntegerField;
     qProdVendadescricao: TWideStringField;
-    qProdVendaquantidade: TFloatField;
-    qProdVendadesconto: TFloatField;
-    qProdVendatotal: TFloatField;
-    qProdVendavalor: TFloatField;
+    qProdVendaquantidade: TZBCDField;
+    qProdVendadesconto: TZBCDField;
+    qProdVendatotal: TZBCDField;
+    qProdVendavalor: TZBCDField;
     pnlDesconto: TPanel;
     Panel1: TPanel;
     Shape1: TShape;
@@ -255,7 +255,7 @@ begin
     qProdVenda.ApplyUpdates;
     qProdVenda.Close;
   finally
-    qProdVenda.ParamByName('idVenda').AsString := '' + edCodVenda.Text + '';
+    qProdVenda.ParamByName('idVenda').AsInteger := StrToIntDef(edCodVenda.Text, 0);
     qProdVenda.Open;
   end;
 

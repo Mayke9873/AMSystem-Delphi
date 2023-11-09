@@ -1,12 +1,12 @@
 inherited dmProdutos: TdmProdutos
   inherited zCon: TZConnection
-    Connected = True
+    LibraryLocation = ''
   end
   object qProduto: TZQuery
-    Connection = zCon
     SortedFields = 'Id'
-    UpdateObject = uProduto
+    Connection = zCon
     OnNewRecord = qProdutoNewRecord
+    UpdateObject = uProduto
     SQL.Strings = (
       
         'SELECT p.id, p.descricao, coalesce(sum(movestoque.quantidade),0)' +
@@ -22,38 +22,26 @@ inherited dmProdutos: TdmProdutos
       '  IdGrupo, grupo, dtRegistro, ativo')
     Params = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'desc'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     IndexFieldNames = 'Id Asc'
     Left = 336
     Top = 14
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'desc'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     object qProdutoid: TIntegerField
       FieldName = 'id'
@@ -71,16 +59,6 @@ inherited dmProdutos: TdmProdutos
       FieldName = 'unidade'
       Size = 5
     end
-    object qProdutopCompra: TFloatField
-      FieldName = 'pCompra'
-    end
-    object qProdutopLucro: TFloatField
-      FieldName = 'pLucro'
-    end
-    object qProdutopVenda: TFloatField
-      FieldName = 'pVenda'
-      Required = True
-    end
     object qProdutoIdGrupo: TIntegerField
       FieldName = 'IdGrupo'
     end
@@ -96,6 +74,25 @@ inherited dmProdutos: TdmProdutos
       FieldName = 'ativo'
       Required = True
       Size = 1
+    end
+    object qProdutopCompra: TZBCDField
+      FieldName = 'pCompra'
+      DisplayFormat = '###,###,##0.00'
+      Precision = 5
+      Size = 2
+    end
+    object qProdutopLucro: TZBCDField
+      FieldName = 'pLucro'
+      DisplayFormat = '###,###,##0.00'
+      Precision = 5
+      Size = 2
+    end
+    object qProdutopVenda: TZBCDField
+      FieldName = 'pVenda'
+      Required = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 5
+      Size = 2
     end
   end
   object dProduto: TDataSource
@@ -139,64 +136,40 @@ inherited dmProdutos: TdmProdutos
     Top = 14
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'descricao'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'estoque'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'unidade'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'pCompra'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'pLucro'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'pVenda'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'IdGrupo'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'grupo'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'DtRegistro'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end>
   end
   object qMovEstoque: TZQuery
@@ -209,17 +182,13 @@ inherited dmProdutos: TdmProdutos
       '  where (:idProd = 0 or idproduto = :idProd)')
     Params = <
       item
-        DataType = ftUnknown
         Name = 'idProd'
-        ParamType = ptUnknown
       end>
     Left = 336
     Top = 62
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'idProd'
-        ParamType = ptUnknown
       end>
     object qMovEstoqueid: TIntegerField
       FieldName = 'id'
@@ -229,7 +198,7 @@ inherited dmProdutos: TdmProdutos
       FieldName = 'idproduto'
       Required = True
     end
-    object qMovEstoquequantidade: TFloatField
+    object qMovEstoquequantidade: TZDoubleField
       FieldName = 'quantidade'
       Required = True
     end
@@ -237,10 +206,10 @@ inherited dmProdutos: TdmProdutos
       FieldName = 'dataMov'
       Required = True
     end
-    object qMovEstoqueidUsuario: TSmallintField
+    object qMovEstoqueidUsuario: TZShortIntField
       FieldName = 'idUsuario'
     end
-    object qMovEstoqueidFornecedor: TSmallintField
+    object qMovEstoqueidFornecedor: TZShortIntField
       FieldName = 'idFornecedor'
     end
     object qMovEstoquetipoMov: TWideStringField
@@ -281,44 +250,28 @@ inherited dmProdutos: TdmProdutos
     Top = 62
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'idproduto'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'quantidade'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'dataMov'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'idUsuario'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'idFornecedor'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'tipoMov'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'obs'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end>
   end
   object dGrupo: TDataSource
@@ -327,8 +280,8 @@ inherited dmProdutos: TdmProdutos
     Top = 126
   end
   object qGrupo: TZQuery
-    Connection = zCon
     SortedFields = 'Id'
+    Connection = zCon
     SQL.Strings = (
       'select 0 id, '#39#39' descricao from grupo_produto'
       'UNION'
@@ -338,9 +291,9 @@ inherited dmProdutos: TdmProdutos
     IndexFieldNames = 'Id Asc'
     Left = 336
     Top = 126
-    object qGrupoid: TIntegerField
+    object qGrupoid: TZInt64Field
       FieldName = 'id'
-      Required = True
+      ReadOnly = True
     end
     object qGrupodescricao: TWideStringField
       FieldName = 'descricao'
