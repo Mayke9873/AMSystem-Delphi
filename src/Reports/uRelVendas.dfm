@@ -198,11 +198,16 @@ object fRelVendas_I: TfRelVendas_I
       Left = 38
       Top = 185
       Width = 718
-      Height = 25
+      Height = 21
       BandType = btFooter
+      Borders.Sides = sdCustom
+      Borders.DrawLeft = False
+      Borders.DrawTop = True
+      Borders.DrawRight = False
+      Borders.DrawBottom = False
       object RLLabel5: TRLLabel
         Left = 0
-        Top = 9
+        Top = 5
         Width = 69
         Height = 16
         Align = faLeftBottom
@@ -210,7 +215,7 @@ object fRelVendas_I: TfRelVendas_I
       end
       object RLSystemInfo1: TRLSystemInfo
         Left = 466
-        Top = 9
+        Top = 5
         Width = 252
         Height = 16
         Align = faRightBottom

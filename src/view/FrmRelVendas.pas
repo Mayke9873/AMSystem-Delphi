@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Skia, Skia.Vcl, Vcl.WinXPickers, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons, System.Actions, Vcl.ActnList;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Skia, Skia.Vcl, Vcl.WinXPickers, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons, System.Actions, Vcl.ActnList,
+  ZDataset;
 
 type
   TfRelVendas = class(TForm)
@@ -21,7 +22,7 @@ type
     DatePicker1: TDatePicker;
     DatePicker2: TDatePicker;
     SkLabel2: TSkLabel;
-    CheckBox1: TCheckBox;
+    ckTodos: TCheckBox;
     ActionList1: TActionList;
     acImprimir: TAction;
     acSair: TAction;
@@ -30,7 +31,7 @@ type
     procedure acSairExecute(Sender: TObject);
     procedure acImprimirExecute(Sender: TObject);
   private
-    procedure AbreConsulta;
+    procedure AbreConsulta(pQuery: TZQuery);
   public
     { Public declarations }
   end;
@@ -42,7 +43,7 @@ implementation
 
 {$R *.dfm}
 
-uses uRelVendas, dmVenda;
+uses uRelVendas, dmVenda, dmCompra;
 
 procedure TfRelVendas.FormCreate(Sender: TObject);
 begin
@@ -54,31 +55,47 @@ procedure TfRelVendas.acImprimirExecute(Sender: TObject);
 begin
   fRelVendas_I := TfRelVendas_I.Create(nil);
   try
-    AbreConsulta();
-    fRelVendas_I.DS.DataSet := dmVendas.qConsVendas;
+    case Self.Tag of
+      0: AbreConsulta(TZQuery(dmVendas.qConsVendas));
+
+      1: begin
+        AbreConsulta(TZQuery(dmCompras.qConsCompras));
+
+        fRelVendas_I.RLLabel6.Caption    := StringReplace(fRelVendas_I.RLLabel6.Caption, 'vendas', 'compras', []);
+        fRelVendas_I.RLLabel4.Caption    := StringReplace(fRelVendas_I.RLLabel4.Caption, 'Venda', 'Compra', []);
+        fRelVendas_I.RLDBText4.DataField := 'Data_compra';
+        fRelVendas_I.RLLabel2.Caption    := 'Fornecedor';
+        fRelVendas_I.RLDBText2.DataField := 'Nome';
+      end;
+        
+    end;
+
     fRelVendas_I.rpVenda.PreviewModal;
+    
   finally
     FreeAndNil(fRelVendas_I);
   end;
 end;
 
+procedure TfRelVendas.AbreConsulta(pQuery: TZQuery);
+begin
+  pQuery.Close;
+
+  if ckTodos.Checked then
+   PQuery.Params[0].AsInteger := 0
+  else
+   PQuery.Params[0].AsDate := DatePicker1.Date;
+
+   PQuery.Params[1].AsDate := DatePicker2.Date;
+
+  PQuery.Open;
+
+  fRelVendas_I.DS.DataSet := PQuery;
+end;
+
 procedure TfRelVendas.acSairExecute(Sender: TObject);
 begin
   Close;
-end;
-
-procedure TfRelVendas.AbreConsulta;
-begin
-  dmVendas.qConsVendas.Close;
-
-  if CheckBox1.Checked then
-    dmVendas.qConsVendas.Params[0].AsInteger := 0
-  else
-    dmVendas.qConsVendas.Params[0].AsDate := DatePicker1.Date;
-
-    dmVendas.qConsVendas.Params[1].AsDate := DatePicker2.Date;
-
-  dmVendas.qConsVendas.Open;
 end;
 
 procedure TfRelVendas.FormClose(Sender: TObject; var Action: TCloseAction);
