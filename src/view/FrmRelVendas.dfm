@@ -12,7 +12,6 @@ object fRelVendas: TfRelVendas
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poMainFormCenter
-  Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
   TextHeight = 15
@@ -97,7 +96,6 @@ object fRelVendas: TfRelVendas
           Flat = True
           Spacing = 0
           ExplicitTop = 3
-          ExplicitHeight = 311
         end
       end
       object pnlSair: TPanel
@@ -183,7 +181,7 @@ object fRelVendas: TfRelVendas
         Font.Style = []
         TabOrder = 1
       end
-      object CheckBox1: TCheckBox
+      object ckTodos: TCheckBox
         Left = 273
         Top = 70
         Width = 53
