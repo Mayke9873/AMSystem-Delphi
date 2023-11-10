@@ -38,13 +38,13 @@ object fConsultaVendas: TfConsultaVendas
   object edPesquisa: TEdit
     Left = 64
     Top = 31
-    Width = 288
+    Width = 284
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     TabOrder = 0
     OnChange = edPesquisaChange
-    ExplicitWidth = 284
+    ExplicitWidth = 280
   end
   object Panel1: TPanel
     Left = 0
@@ -358,14 +358,14 @@ object fConsultaVendas: TfConsultaVendas
         'd; stroke-linejoin: round; stroke-width: 2;"></path></svg>'
       ExplicitTop = 1
     end
-    object ToolButton1: TSkSvg
+    object tbRelatorio: TSkSvg
       AlignWithMargins = True
       Left = 146
       Top = 2
       Width = 29
       Height = 25
       Cursor = crHandPoint
-      Hint = 'Relat'#243'rio de Vendas'
+      Hint = 'Relat'#243'rio de Estoque'
       Margins.Left = 10
       Margins.Top = 2
       Margins.Right = 4
@@ -373,7 +373,7 @@ object fConsultaVendas: TfConsultaVendas
       Align = alLeft
       ParentShowHint = False
       ShowHint = True
-      OnClick = ToolButton1Click
+      OnClick = tbRelatorioClick
       Svg.Source = 
         '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
         ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +

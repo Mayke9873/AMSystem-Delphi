@@ -27,7 +27,7 @@ type
     tbEditar: TSkSvg;
     tbSair: TSkSvg;
     tbCancelar: TSkSvg;
-    ToolButton1: TSkSvg;
+    tbRelatorio: TSkSvg;
     procedure tbNovoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure tbSairClick(Sender: TObject);
@@ -37,7 +37,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure dbgVendasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
-    procedure ToolButton1Click(Sender: TObject);
+    procedure tbRelatorioClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -134,7 +134,7 @@ begin
   Close;
 end;
 
-procedure TfConsultaVendas.ToolButton1Click(Sender: TObject);
+procedure TfConsultaVendas.tbRelatorioClick(Sender: TObject);
 begin
   if not  Assigned(fRelVendas) then
     fRelVendas := TfRelVendas.Create(fConsultaVendas);
