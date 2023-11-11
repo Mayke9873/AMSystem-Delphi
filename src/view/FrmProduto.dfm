@@ -2,8 +2,8 @@ object fProduto: TfProduto
   Left = 0
   Top = 0
   Caption = 'Cadastro de Produtos'
-  ClientHeight = 647
-  ClientWidth = 995
+  ClientHeight = 646
+  ClientWidth = 991
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object fProduto: TfProduto
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   DesignSize = (
-    995
-    647)
+    991
+    646)
   TextHeight = 13
   object Label9: TLabel
     Left = 5
@@ -38,14 +38,12 @@ object fProduto: TfProduto
   object PageControl1: TPageControl
     Left = 0
     Top = 56
-    Width = 995
-    Height = 591
+    Width = 991
+    Height = 590
     ActivePage = pgTabela
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
-    ExplicitWidth = 987
-    ExplicitHeight = 590
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgProduto: TDBGrid
@@ -422,7 +420,7 @@ object fProduto: TfProduto
   object edPesquisa: TEdit
     Left = 70
     Top = 32
-    Width = 276
+    Width = 264
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
@@ -430,7 +428,7 @@ object fProduto: TfProduto
     OnChange = edPesquisaChange
   end
   object rdbTodos: TRadioButton
-    Left = 388
+    Left = 376
     Top = 34
     Width = 58
     Height = 17
@@ -448,7 +446,7 @@ object fProduto: TfProduto
     OnClick = rdbTodosClick
   end
   object rdbAtivo: TRadioButton
-    Left = 468
+    Left = 456
     Top = 34
     Width = 58
     Height = 17
@@ -464,7 +462,7 @@ object fProduto: TfProduto
     OnClick = rdbAtivoClick
   end
   object rdbInativo: TRadioButton
-    Left = 540
+    Left = 528
     Top = 34
     Width = 66
     Height = 17
@@ -482,7 +480,7 @@ object fProduto: TfProduto
   object pnlBotoes: TPanel
     Left = 0
     Top = 0
-    Width = 995
+    Width = 991
     Height = 29
     Align = alTop
     BevelOuter = bvNone
@@ -490,7 +488,6 @@ object fProduto: TfProduto
     Padding.Left = 4
     ShowCaption = False
     TabOrder = 5
-    ExplicitLeft = -4
     object tbNovo: TSkSvg
       AlignWithMargins = True
       Left = 4
@@ -653,6 +650,41 @@ object fProduto: TfProduto
         'round; stroke-width: 2;"></path></svg>'
       ExplicitLeft = 132
       ExplicitTop = 5
+    end
+    object tbRelatorio: TSkSvg
+      AlignWithMargins = True
+      Left = 179
+      Top = 2
+      Width = 29
+      Height = 25
+      Cursor = crHandPoint
+      Hint = 'Relat'#243'rio de Estoque'
+      Margins.Left = 10
+      Margins.Top = 2
+      Margins.Right = 4
+      Margins.Bottom = 2
+      Align = alLeft
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = tbRelatorioClick
+      Svg.Source = 
+        '<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo' +
+        ', www.svgrepo.com, Generator: SVG Repo Mixer Tools -->'#13#10'<svg fil' +
+        'l="#000000" width="800px" height="800px" viewBox="0 0 24 24" id=' +
+        '"chart-presentation" data-name="Flat Line" xmlns="http://www.w3.' +
+        'org/2000/svg" class="icon flat-line"><circle id="secondary" cx="' +
+        '11" cy="16" r="3" style="fill: rgb(44, 169, 188); stroke-width: ' +
+        '2;"></circle><polyline id="primary" points="8 10 10 8 14 10 16 7' +
+        '" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round' +
+        '; stroke-linejoin: round; stroke-width: 2;"></polyline><path id=' +
+        '"primary-2" data-name="primary" d="M4,15V3H20V15a1,1,0,0,1-1,1H1' +
+        '8" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: roun' +
+        'd; stroke-linejoin: round; stroke-width: 2;"></path><path id="pr' +
+        'imary-3" data-name="primary" d="M8.83,18.12,6,21M11,13a3,3,0,1,0' +
+        ',3,3A3,3,0,0,0,11,13ZM3,3H21" style="fill: none; stroke: rgb(0, ' +
+        '0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-wid' +
+        'th: 2;"></path></svg>'
+      ExplicitLeft = 234
     end
   end
   object ImageList1: TImageList

@@ -48,6 +48,7 @@ type
     tbSalvar: TSkSvg;
     tbCancelar: TSkSvg;
     tbSair: TSkSvg;
+    tbRelatorio: TSkSvg;
     procedure Consulta;
     procedure FormCreate(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
@@ -66,6 +67,7 @@ type
     procedure qProdutoNewRecord(DataSet: TDataSet);
     procedure tbSalvarClick(Sender: TObject);
     procedure dbgProdutoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure tbRelatorioClick(Sender: TObject);
   private
     { Private declarations }
     Produto : TProduto;
@@ -82,7 +84,7 @@ var
 implementation
 
 uses
-  dmProduto;
+  dmProduto, FrmRelVendas;
 {$R *.dfm}
 
 procedure TfProduto.Consulta;
@@ -370,6 +372,21 @@ end;
 procedure TfProduto.tbNovoClick(Sender: TObject);
 begin
   AlterarCampos(telaInsert);
+end;
+
+procedure TfProduto.tbRelatorioClick(Sender: TObject);
+begin
+  if not  Assigned(fRelVendas) then
+  fRelVendas := TfRelVendas.Create(fProduto);
+
+  fRelVendas.SkLabel1.Caption := StringReplace(fRelVendas.SkLabel1.Caption, 'Vendas', 'Estoque', []);
+  fRelVendas.SkLabel2.Caption := StringReplace(fRelVendas.SkLabel2.Caption, 'vendas', 'estoque', []);
+  fRelVendas.Tag := 2;
+  fRelVendas.ckTodos.Checked := True;
+  fRelVendas.pnlPrincipal.Visible := False;
+  fRelVendas.ClientHeight := 100;
+
+  fRelVendas.ShowModal;
 end;
 
 procedure TfProduto.tbSairClick(Sender: TObject);
