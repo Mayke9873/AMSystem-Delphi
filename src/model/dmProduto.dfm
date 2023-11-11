@@ -1,5 +1,6 @@
 inherited dmProdutos: TdmProdutos
   inherited zCon: TZConnection
+    Connected = True
     LibraryLocation = ''
   end
   object qProduto: TZQuery
@@ -299,6 +300,107 @@ inherited dmProdutos: TdmProdutos
       FieldName = 'descricao'
       ReadOnly = True
       Size = 255
+    end
+  end
+  object qConsProdutos: TZReadOnlyQuery
+    Connection = zCon
+    SQL.Strings = (
+      
+        'SELECT p.id, p.descricao, coalesce(sum(movestoque.quantidade),0)' +
+        ' estoque, unidade, pCompra, pLucro, pVenda,'
+      '  IdGrupo, grupo, dtRegistro, ativo,'
+      
+        '  (pCompra * ( coalesce(sum(movestoque.quantidade),0))) totCompr' +
+        'a,'
+      '  (pVenda  * ( coalesce(sum(movestoque.quantidade),0))) totVenda'
+      'FROM produto p'
+      'left join movestoque on p.id = movestoque.idproduto '
+      'where (:dt = 0 or movestoque.dataMov BETWEEN :dt and :dtF)'
+      '  and (ativo = '#39'S'#39')'
+      
+        '  group by p.id, p.descricao, p.unidade, p.pCompra, pLucro, pVen' +
+        'da,'
+      '  IdGrupo, grupo, dtRegistro, ativo')
+    Params = <
+      item
+        Name = 'dt'
+      end
+      item
+        Name = 'dtF'
+      end>
+    Left = 32
+    Top = 128
+    ParamData = <
+      item
+        Name = 'dt'
+      end
+      item
+        Name = 'dtF'
+      end>
+    object qConsProdutosid: TZIntegerField
+      FieldName = 'id'
+      ReadOnly = True
+    end
+    object qConsProdutosdescricao: TZUnicodeStringField
+      FieldName = 'descricao'
+      ReadOnly = True
+      Size = 255
+    end
+    object qConsProdutosestoque: TZDoubleField
+      FieldName = 'estoque'
+      ReadOnly = True
+      DisplayFormat = '###,###,##0.000'
+    end
+    object qConsProdutosunidade: TZUnicodeStringField
+      FieldName = 'unidade'
+      ReadOnly = True
+      Size = 5
+    end
+    object qConsProdutospCompra: TZBCDField
+      FieldName = 'pCompra'
+      ReadOnly = True
+      Precision = 5
+      Size = 2
+    end
+    object qConsProdutospLucro: TZBCDField
+      FieldName = 'pLucro'
+      ReadOnly = True
+      Precision = 5
+      Size = 2
+    end
+    object qConsProdutospVenda: TZBCDField
+      FieldName = 'pVenda'
+      ReadOnly = True
+      Precision = 5
+      Size = 2
+    end
+    object qConsProdutosIdGrupo: TZIntegerField
+      FieldName = 'IdGrupo'
+      ReadOnly = True
+    end
+    object qConsProdutosgrupo: TZUnicodeStringField
+      FieldName = 'grupo'
+      ReadOnly = True
+      Size = 70
+    end
+    object qConsProdutosdtRegistro: TZDateField
+      FieldName = 'dtRegistro'
+      ReadOnly = True
+    end
+    object qConsProdutosativo: TZUnicodeStringField
+      FieldName = 'ativo'
+      ReadOnly = True
+      Size = 1
+    end
+    object qConsProdutostotCompra: TZDoubleField
+      FieldName = 'totCompra'
+      ReadOnly = True
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qConsProdutostotVenda: TZDoubleField
+      FieldName = 'totVenda'
+      ReadOnly = True
+      DisplayFormat = '###,###,##0.00'
     end
   end
 end

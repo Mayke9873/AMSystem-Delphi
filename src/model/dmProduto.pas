@@ -36,6 +36,20 @@ type
     qGrupo: TZQuery;
     qGrupoid: TZInt64Field;
     qGrupodescricao: TWideStringField;
+    qConsProdutos: TZReadOnlyQuery;
+    qConsProdutosid: TZIntegerField;
+    qConsProdutosdescricao: TZUnicodeStringField;
+    qConsProdutosestoque: TZDoubleField;
+    qConsProdutosunidade: TZUnicodeStringField;
+    qConsProdutospCompra: TZBCDField;
+    qConsProdutospLucro: TZBCDField;
+    qConsProdutospVenda: TZBCDField;
+    qConsProdutosIdGrupo: TZIntegerField;
+    qConsProdutosgrupo: TZUnicodeStringField;
+    qConsProdutosdtRegistro: TZDateField;
+    qConsProdutosativo: TZUnicodeStringField;
+    qConsProdutostotCompra: TZDoubleField;
+    qConsProdutostotVenda: TZDoubleField;
     procedure qProdutoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
