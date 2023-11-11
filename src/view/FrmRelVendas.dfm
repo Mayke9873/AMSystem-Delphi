@@ -136,7 +136,7 @@ object fRelVendas: TfRelVendas
         end
       end
     end
-    object Panel3: TPanel
+    object pnlPrincipal: TPanel
       Left = 0
       Top = 35
       Width = 528
@@ -188,6 +188,15 @@ object fRelVendas: TfRelVendas
         Height = 17
         Caption = 'Todos'
         TabOrder = 2
+      end
+      object ckKardex: TCheckBox
+        Left = 226
+        Top = 142
+        Width = 57
+        Height = 17
+        Caption = 'Kardex'
+        TabOrder = 3
+        Visible = False
       end
     end
   end
