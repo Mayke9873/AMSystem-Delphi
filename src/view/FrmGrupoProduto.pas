@@ -65,7 +65,7 @@ var
 implementation
 
 uses
-  uDM, Consts, dmProduto, dmGrupo;
+  uDM, Consts, dmProduto, dmGrupo, FrmPrincipal;
 
 {$R *.dfm}
 
@@ -259,8 +259,7 @@ end;
 
 procedure TfGrupoProd.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Action := caFree;
-  fGrupoProd := nil;
+  Forms.FecharForm(Self, Action);
 end;
 
 end.

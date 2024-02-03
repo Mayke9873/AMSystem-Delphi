@@ -87,7 +87,7 @@ var
 implementation
 
 uses
-  dmFornecedor, Consts;
+  dmFornecedor, Consts, FrmPrincipal;
 
 {$R *.dfm}
 
@@ -297,8 +297,7 @@ end;
 
 procedure TfFornecedor.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Action := caFree;
-  fFornecedor := nil;
+  Forms.FecharForm(Self, Action);
 end;
 
 end.

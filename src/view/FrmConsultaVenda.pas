@@ -49,7 +49,7 @@ var
 
 implementation
 
-uses dmVenda, FrmVenda, FrmRelVendas;
+uses dmVenda, FrmVenda, FrmRelVendas, FrmPrincipal;
 {$R *.dfm}
 
 procedure TfConsultaVendas.dbgVendasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -94,8 +94,7 @@ end;
 
 procedure TfConsultaVendas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Action := caFree;
-  fConsultaVendas := nil;
+  Forms.FecharForm(Self, Action);
 end;
 
 procedure TfConsultaVendas.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

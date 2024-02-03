@@ -82,7 +82,7 @@ implementation
 
 {$R *.dfm}
 
-uses dmProduto, uProduto;
+uses dmProduto, uProduto, FrmPrincipal;
 
 procedure TfAjusteEstoque.edProdutoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
@@ -218,8 +218,7 @@ end;
 
 procedure TfAjusteEstoque.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Action := caFree;
-  fAjusteEstoque := nil;
+  Forms.FecharForm(Self, Action);
 end;
 
 procedure TfAjusteEstoque.FormShow(Sender: TObject);

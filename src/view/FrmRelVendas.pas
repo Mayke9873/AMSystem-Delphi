@@ -44,7 +44,7 @@ implementation
 
 {$R *.dfm}
 
-uses uRelVendas, dmVenda, dmCompra, dmProduto, uRelEstoque;
+uses uRelVendas, dmVenda, dmCompra, dmProduto, uRelEstoque, FrmPrincipal;
 
 procedure TfRelVendas.FormCreate(Sender: TObject);
 begin
@@ -119,8 +119,7 @@ end;
 
 procedure TfRelVendas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Action := caFree;
-  fRelVendas := nil;
+  Forms.FecharForm(Self, Action);
 end;
 
 end.

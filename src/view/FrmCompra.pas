@@ -96,7 +96,7 @@ implementation
 
 {$R *.dfm}
 
-uses dmFornecedor, dmProduto, dmCompra, uDM;
+uses dmFornecedor, dmProduto, dmCompra, uDM, FrmPrincipal;
 
 procedure TfCompra.FormCreate(Sender: TObject);
 begin
@@ -382,8 +382,7 @@ end;
 
 procedure TfCompra.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Action := caFree;
-  fCompra := nil;
+  Forms.FecharForm(Self, Action);
 end;
 
 end.

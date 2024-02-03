@@ -84,7 +84,7 @@ var
 implementation
 
 uses
-  dmProduto, FrmRelVendas;
+  dmProduto, FrmRelVendas, FrmPrincipal;
 {$R *.dfm}
 
 procedure TfProduto.Consulta;
@@ -421,8 +421,7 @@ end;
 procedure TfProduto.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Produto.Free;
-  Action := caFree;
-  fProduto := nil;
+  Forms.FecharForm(Self, Action);
 end;
 
 end.

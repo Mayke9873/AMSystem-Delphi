@@ -100,7 +100,7 @@ var
 
 implementation
 
-uses dmCliente, Conexao.MySQL;
+uses dmCliente, Conexao.MySQL, FrmPrincipal;
 {$R *.dfm}
 
 procedure TfCliente.DBECPFKeyPress(Sender: TObject; var Key: Char);
@@ -360,8 +360,7 @@ end;
 procedure TfCliente.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Cliente.Free;
-  Action := caFree;
-  fCliente := nil;
+  Forms.FecharForm(Self, Action);
 end;
 
 end.

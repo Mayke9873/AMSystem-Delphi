@@ -80,7 +80,7 @@ var
 implementation
 
 uses
-  dmFuncionario;
+  dmFuncionario, FrmPrincipal;
 
 {$R *.dfm}
 
@@ -312,8 +312,7 @@ end;
 
 procedure TfFuncionario.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Action := caFree;
-  fFuncionario := nil;
+  Forms.FecharForm(Self, Action);
 end;
 
 end.
