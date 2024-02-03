@@ -38,6 +38,8 @@ uses
   FrmRelVendas in 'src\view\FrmRelVendas.pas' {fRelVendas},
   uRelVendas in 'src\Reports\uRelVendas.pas' {fRelVendas_I},
   FrmConsultaCompra in 'src\view\FrmConsultaCompra.pas' {fConsultaCompra};
+  FrmConsultaCompra in 'src\view\FrmConsultaCompra.pas' {fConsultaCompra},
+  uForms in 'src\uForms.pas';
 
 {$R *.res}
 
