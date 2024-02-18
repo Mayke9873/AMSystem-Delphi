@@ -1,17 +1,14 @@
 inherited dmGrupos: TdmGrupos
-  inherited zCon: TZConnection
-    Connected = True
-  end
   object dGrupo: TDataSource
     DataSet = qGrupo
     Left = 16
     Top = 200
   end
   object qGrupo: TZQuery
-    Connection = zCon
     SortedFields = 'Id'
-    UpdateObject = uGrupo
+    Connection = zCon
     OnNewRecord = qGrupoNewRecord
+    UpdateObject = uGrupo
     SQL.Strings = (
       'select id, descricao, ativo from grupo_produto'
       '  where (0 = :id or id = :id) and '
@@ -19,38 +16,26 @@ inherited dmGrupos: TdmGrupos
       '  ('#39'T'#39' = :ativo or ativo = :ativo)')
     Params = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'pesq'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     IndexFieldNames = 'Id Asc'
     Left = 16
     Top = 102
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'pesq'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     object qGrupoid: TIntegerField
       FieldName = 'id'
@@ -88,19 +73,13 @@ inherited dmGrupos: TdmGrupos
     Top = 150
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'descricao'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end>
   end
 end

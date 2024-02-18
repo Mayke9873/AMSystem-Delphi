@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, uDM, Data.DB, ZSqlUpdate, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  ZAbstractConnection, ZConnection;
+  ZAbstractConnection, ZConnection, ZAbstractTable;
 
 type
   TdmProdutos = class(TDM)

@@ -36,61 +36,41 @@ inherited dmFornecedores: TdmFornecedores
     Top = 229
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ie'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'CNPJ'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'endereco'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'numEndereco'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'bairro'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'DtRegistro'
-        ParamType = ptUnknown
       end>
   end
   object qFornecedor: TZQuery
-    Connection = zCon
     SortedFields = 'Id'
-    UpdateObject = uFornecedor
+    Connection = zCon
     OnNewRecord = qFornecedorNewRecord
+    UpdateObject = uFornecedor
     SQL.Strings = (
       'select'
       '  id,nome, ie, CNPJ, endereco, numEndereco,'
@@ -100,38 +80,26 @@ inherited dmFornecedores: TdmFornecedores
       #9#9'and (:ativo = '#39'T'#39' or ativo = :ativo);')
     Params = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     IndexFieldNames = 'Id Asc'
     Left = 24
     Top = 229
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     object qFornecedorid: TIntegerField
       Alignment = taCenter

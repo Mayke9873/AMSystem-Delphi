@@ -1,9 +1,8 @@
 inherited dmProdutos: TdmProdutos
   inherited zCon: TZConnection
-    Connected = True
     LibraryLocation = ''
   end
-  object qProduto: TZQuery
+  object qProduto: TZQuery [4]
     SortedFields = 'Id'
     Connection = zCon
     OnNewRecord = qProdutoNewRecord
@@ -96,12 +95,12 @@ inherited dmProdutos: TdmProdutos
       Size = 2
     end
   end
-  object dProduto: TDataSource
+  object dProduto: TDataSource [5]
     DataSet = qProduto
     Left = 400
     Top = 14
   end
-  object uProduto: TZUpdateSQL
+  object uProduto: TZUpdateSQL [6]
     DeleteSQL.Strings = (
       'DELETE FROM PRODUTO'
       'WHERE'
@@ -173,7 +172,7 @@ inherited dmProdutos: TdmProdutos
         Name = 'OLD_id'
       end>
   end
-  object qMovEstoque: TZQuery
+  object qMovEstoque: TZQuery [7]
     Connection = zCon
     UpdateObject = uMovEstoque
     SQL.Strings = (
@@ -223,7 +222,7 @@ inherited dmProdutos: TdmProdutos
       Size = 250
     end
   end
-  object uMovEstoque: TZUpdateSQL
+  object uMovEstoque: TZUpdateSQL [8]
     DeleteSQL.Strings = (
       'DELETE FROM MovEstoque'
       'WHERE'
@@ -275,12 +274,12 @@ inherited dmProdutos: TdmProdutos
         Name = 'OLD_id'
       end>
   end
-  object dGrupo: TDataSource
+  object dGrupo: TDataSource [9]
     DataSet = qGrupo
     Left = 376
     Top = 126
   end
-  object qGrupo: TZQuery
+  object qGrupo: TZQuery [10]
     SortedFields = 'Id'
     Connection = zCon
     SQL.Strings = (
@@ -302,7 +301,7 @@ inherited dmProdutos: TdmProdutos
       Size = 255
     end
   end
-  object qConsProdutos: TZReadOnlyQuery
+  object qConsProdutos: TZReadOnlyQuery [11]
     Connection = zCon
     SQL.Strings = (
       

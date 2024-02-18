@@ -1,10 +1,10 @@
 inherited dmFuncionarios: TdmFuncionarios
-  object dFuncionario: TDataSource
+  object dFuncionario: TDataSource [4]
     DataSet = qFuncionario
     Left = 88
     Top = 173
   end
-  object uFuncionario: TZUpdateSQL
+  object uFuncionario: TZUpdateSQL [5]
     DeleteSQL.Strings = (
       'DELETE FROM Funcionario'
       'WHERE'
@@ -39,66 +39,44 @@ inherited dmFuncionarios: TdmFuncionarios
     Top = 173
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'rg'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'CPF'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'DtNasc'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'endereco'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'numEndereco'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'bairro'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'DtRegistro'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end>
   end
-  object qFuncionario: TZQuery
-    Connection = zCon
+  object qFuncionario: TZQuery [6]
     SortedFields = 'Id'
-    UpdateObject = uFuncionario
+    Connection = zCon
     OnNewRecord = qFuncionarioNewRecord
+    UpdateObject = uFuncionario
     SQL.Strings = (
       
         'SELECT Id, Nome, RG, Cpf, dtnasc, Endereco, numendereco, Bairro,' +
@@ -108,38 +86,26 @@ inherited dmFuncionarios: TdmFuncionarios
       #9#9'and (:ativo = '#39'T'#39' or ativo = :ativo);')
     Params = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     IndexFieldNames = 'Id Asc'
     Left = 24
     Top = 173
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     object qFuncionarioId: TIntegerField
       Alignment = taCenter

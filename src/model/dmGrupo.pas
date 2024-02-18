@@ -3,7 +3,7 @@ unit dmGrupo;
 interface
 
 uses
-  System.SysUtils, System.Classes, uDM, Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZAbstractConnection, ZConnection, ZSqlUpdate;
+  System.SysUtils, System.Classes, uDM, Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZAbstractConnection, ZConnection, ZSqlUpdate, ZAbstractTable;
 
 type
   TdmGrupos = class(TDM)

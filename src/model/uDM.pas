@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, ZAbstractConnection, ZConnection, Data.DB,
   ZAbstractRODataset, ZDataset, ZAbstractDataset, ZSqlUpdate, Vcl.Forms,
-  Winapi.Windows, System.UITypes;
+  Winapi.Windows, System.UITypes, ZAbstractTable;
 
 type
   TDM = class(TDataModule)

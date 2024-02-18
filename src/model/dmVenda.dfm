@@ -1,5 +1,5 @@
 inherited dmVendas: TdmVendas
-  object qVenda: TZQuery
+  object qVenda: TZQuery [4]
     Connection = zCon
     UpdateObject = uVenda
     SQL.Strings = (
@@ -12,7 +12,7 @@ inherited dmVendas: TdmVendas
       Required = True
     end
   end
-  object uVenda: TZUpdateSQL
+  object uVenda: TZUpdateSQL [5]
     DeleteSQL.Strings = (
       'DELETE FROM Venda'
       'WHERE'
@@ -51,7 +51,7 @@ inherited dmVendas: TdmVendas
         Name = 'OLD_id'
       end>
   end
-  object qConsVendas: TZReadOnlyQuery
+  object qConsVendas: TZReadOnlyQuery [6]
     SortedFields = 'ID'
     SortType = stDescending
     Connection = DM.zCon

@@ -1,8 +1,8 @@
 inherited dmClientes: TdmClientes
   object qCliente: TZQuery
     Connection = DM.zCon
-    UpdateObject = uCliente
     OnNewRecord = qClienteNewRecord
+    UpdateObject = uCliente
     SQL.Strings = (
       
         'SELECT Id, Nome, RG, CpfCnpj, dtnasc, Endereco, numendereco, Bai' +
@@ -12,37 +12,25 @@ inherited dmClientes: TdmClientes
       '    and ((:ativo = '#39'T'#39') or (ativo = :ativo));')
     Params = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     Left = 16
     Top = 104
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end>
     object qClienteId: TIntegerField
       Alignment = taCenter
@@ -164,114 +152,70 @@ inherited dmClientes: TdmClientes
     Top = 104
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'rg'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'CPFCNPJ'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'DtNasc'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'endereco'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'numEndereco'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'bairro'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'DtRegistro'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'tipo'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'ativo'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_id'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_nome'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_rg'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_CPFCNPJ'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_DtNasc'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_endereco'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_numEndereco'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_bairro'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_DtRegistro'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_tipo'
-        ParamType = ptUnknown
       end
       item
-        DataType = ftUnknown
         Name = 'OLD_ativo'
-        ParamType = ptUnknown
       end>
   end
 end
