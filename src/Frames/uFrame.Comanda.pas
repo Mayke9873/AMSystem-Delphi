@@ -12,6 +12,7 @@ type
     pnlFrame: TPanel;
     lNumeroComanda: TLabel;
     lValor: TLabel;
+    lNome: TLabel;
   private
     { Private declarations }
   public
