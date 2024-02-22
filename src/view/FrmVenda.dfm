@@ -87,14 +87,14 @@ object fVenda: TfVenda
     Height = 26
     TabStop = False
     ReadOnly = True
-    TabOrder = 0
+    TabOrder = 2
   end
   object edIdVendedor: TEdit
     Left = 8
     Top = 86
     Width = 86
     Height = 26
-    TabOrder = 1
+    TabOrder = 4
     OnExit = edIdVendedorExit
   end
   object edIdCliente: TEdit
@@ -103,7 +103,7 @@ object fVenda: TfVenda
     Top = 148
     Width = 86
     Height = 26
-    TabOrder = 4
+    TabOrder = 6
     OnExit = edIdVendedorExit
   end
   object edIdProd: TEdit
@@ -112,7 +112,7 @@ object fVenda: TfVenda
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 7
+    TabOrder = 8
     OnExit = edIdVendedorExit
   end
   object edVendedor: TEdit
@@ -121,7 +121,7 @@ object fVenda: TfVenda
     Width = 446
     Height = 26
     CharCase = ecUpperCase
-    TabOrder = 2
+    TabOrder = 5
     OnChange = edVendedorChange
     OnKeyDown = edVendedorKeyDown
   end
@@ -132,7 +132,7 @@ object fVenda: TfVenda
     Width = 446
     Height = 26
     CharCase = ecUpperCase
-    TabOrder = 5
+    TabOrder = 7
     OnChange = edClienteChange
     OnKeyDown = edVendedorKeyDown
   end
@@ -143,7 +143,7 @@ object fVenda: TfVenda
     Width = 446
     Height = 26
     CharCase = ecUpperCase
-    TabOrder = 8
+    TabOrder = 9
     OnChange = edPesqProdChange
     OnKeyDown = edVendedorKeyDown
   end
@@ -153,7 +153,7 @@ object fVenda: TfVenda
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 9
+    TabOrder = 10
     OnEnter = edQtdProdutoEnter
     OnExit = edQtdProdutoExit
   end
@@ -163,7 +163,7 @@ object fVenda: TfVenda
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 10
+    TabOrder = 11
   end
   object edDesconto: TEdit
     Tag = 99
@@ -171,7 +171,7 @@ object fVenda: TfVenda
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 11
+    TabOrder = 12
     OnExit = edDescontoExit
   end
   object edValorTotal: TEdit
@@ -180,19 +180,19 @@ object fVenda: TfVenda
     Top = 212
     Width = 86
     Height = 26
-    TabOrder = 12
+    TabOrder = 13
     OnEnter = edValorTotalEnter
   end
   object DBGrid1: TDBGrid
     Left = 8
     Top = 244
-    Width = 900
+    Width = 904
     Height = 319
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = dProdVenda
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 13
+    TabOrder = 14
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
@@ -284,7 +284,7 @@ object fVenda: TfVenda
     Height = 153
     DataSource = dmProdutos.dProduto
     Options = [dgTitles, dgIndicator, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 14
+    TabOrder = 16
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
@@ -393,7 +393,7 @@ object fVenda: TfVenda
     Height = 120
     DataSource = dmClientes.dCliente
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 6
+    TabOrder = 15
     TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -16
@@ -435,7 +435,7 @@ object fVenda: TfVenda
     BevelOuter = bvNone
     Caption = 'pnlDesconto'
     ShowCaption = False
-    TabOrder = 15
+    TabOrder = 0
     object Label9: TLabel
       Left = 0
       Top = 0
@@ -506,7 +506,7 @@ object fVenda: TfVenda
     BevelOuter = bvNone
     Caption = 'pnlTotal'
     ShowCaption = False
-    TabOrder = 16
+    TabOrder = 1
     object Label10: TLabel
       Left = 0
       Top = 0
@@ -600,7 +600,7 @@ object fVenda: TfVenda
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 0
+      TabOrder = 3
       OnClick = btnSairClick
     end
     object btnExcluirProduto: TButton
@@ -617,7 +617,7 @@ object fVenda: TfVenda
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 2
       OnClick = btnExcluirProdutoClick
     end
     object btnCancelar: TButton
@@ -634,7 +634,7 @@ object fVenda: TfVenda
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btnCancelarClick
     end
     object btnSalvar: TButton
@@ -653,7 +653,7 @@ object fVenda: TfVenda
       Font.Style = []
       ParentBiDiMode = False
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 0
       OnClick = btnSalvarClick
     end
   end
