@@ -36,4 +36,20 @@ object DM: TDM
     Left = 176
     Top = 24
   end
+  object qParametro: TZTable
+    Connection = zCon
+    SequenceField = 'idCliente'
+    Active = True
+    TableName = 'parametro'
+    Left = 64
+    Top = 16
+    object qParametroidCliente: TZIntegerField
+      FieldName = 'idCliente'
+      Required = True
+    end
+    object qParametroUsa_PDV: TZUnicodeStringField
+      FieldName = 'Usa_PDV'
+      Size = 1
+    end
+  end
 end

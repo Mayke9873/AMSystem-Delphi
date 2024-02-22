@@ -13,6 +13,9 @@ type
     qPesq: TZQuery;
     dPesq: TDataSource;
     qExecSQL: TZQuery;
+    qParametro: TZTable;
+    qParametroidCliente: TZIntegerField;
+    qParametroUsa_PDV: TZUnicodeStringField;
     procedure qClientedtnascSetText(Sender: TField; const Text: string);
     procedure qFuncionariodtnascSetText(Sender: TField; const Text: string);
   private
