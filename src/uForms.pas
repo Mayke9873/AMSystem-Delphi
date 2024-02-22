@@ -23,7 +23,7 @@ procedure TForms.CriaForm(aValue: TForm; aClass: TFormClass);
 var
   I: Integer;
 begin
-  for I := 0 to Screen.FormCount - 1 - 1 do
+  for I := 0 to Screen.FormCount - 1 do
   begin
     if Screen.Forms[I] is aClass then
     begin
