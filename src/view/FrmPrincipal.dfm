@@ -7246,14 +7246,14 @@ object fPrincipal: TfPrincipal
     Left = 216
     object Cadastros1: TMenuItem
       Caption = 'Cadastros'
-      object Cadastros2: TMenuItem
+      object Clientes1: TMenuItem
         Caption = 'Clientes'
         ShortCut = 32880
-        OnClick = Cadastros2Click
+        OnClick = Clientes1Click
       end
-      object Produtos2: TMenuItem
+      object Funcionarios1: TMenuItem
         Caption = 'Funcion'#225'rios'
-        OnClick = Produtos2Click
+        OnClick = Funcionarios1Click
       end
       object Fornecedores1: TMenuItem
         Caption = 'Fornecedores'

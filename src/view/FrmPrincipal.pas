@@ -13,9 +13,9 @@ type
   TfPrincipal = class(TForm)
     MainMenu1: TMainMenu;
     Cadastros1: TMenuItem;
-    Cadastros2: TMenuItem;
+    Clientes1: TMenuItem;
     Produtos1: TMenuItem;
-    Produtos2: TMenuItem;
+    Funcionarios1: TMenuItem;
     Grupos1: TMenuItem;
     N1: TMenuItem;
     N2: TMenuItem;
@@ -37,7 +37,7 @@ type
     SkSvg2: TSkSvg;
     pnlSair: TPanel;
     SkSvg3: TSkSvg;
-    procedure Cadastros2Click(Sender: TObject);
+    procedure Clientes1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -46,7 +46,7 @@ type
     procedure ConsultadeVendas1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
     procedure Grupos1Click(Sender: TObject);
-    procedure Produtos2Click(Sender: TObject);
+    procedure Funcionarios1Click(Sender: TObject);
     procedure FecharSistema;
     procedure Fornecedores1Click(Sender: TObject);
     procedure AjustedeEstoque1Click(Sender: TObject);
