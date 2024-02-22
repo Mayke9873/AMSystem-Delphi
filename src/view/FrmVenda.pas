@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
   Vcl.DBGrids, ZAbstractRODataset, ZDataset, ZSqlUpdate, ZAbstractDataset,
   System.StrUtils, Vcl.ExtCtrls, uCliente, Vcl.Buttons, uVenda, uProduto,
-  uFuncionario;
+  uFuncionario, uVenda_Itens;
 
 type
   TfVenda = class(TForm)
@@ -87,11 +87,13 @@ type
     Cliente : TCliente;
     Funcionario : TFuncionario;
     Venda : TVenda;
+    Prod_Venda : TVenda_Itens;
     procedure Consulta(Sender : TEdit);
     procedure ConsultaPorID(Sender : TEdit);
     procedure LimpaCampos(pTipo : String);
     procedure FocarGrid(edit : TEdit);
     procedure PreencheCampos(grid : TDBGrid);
+    procedure LimpaProduto;
 
   public
     { Public declarations }
@@ -103,7 +105,7 @@ var
 implementation
 
 uses
-  uDM, dmProduto, dmFuncionario, dmCliente, dmVenda;
+  uDM, dmProduto, dmFuncionario, dmCliente, dmVenda, FrmPrincipal;
 
 {$R *.dfm}
 
@@ -231,11 +233,11 @@ end;
 
 procedure TfVenda.edValorTotalEnter(Sender: TObject);
 begin
-
   If not Produto.Pesquisar(StrToIntDef(edIdProd.Text, 0)) then
     Exit;
 
   Venda.InsereVenda(edCodVenda.Text);
+  edCodVenda.Text := Venda.ID.ToString;
 
   Venda.PrecoProduto    := StrToCurr(edValorUnitario.Text) * strtoFLoat(edQtdProduto.Text);
   Venda.DescontoProduto := StrToCurr(edDesconto.Text);
@@ -245,15 +247,29 @@ begin
   try
     qProdVenda.Open;
     qProdVenda.Insert;
-    qProdVendaidprod.AsInteger := StrToInt(edIdProd.Text);
+    qProdVendaidprod.AsInteger   := StrToInt(edIdProd.Text);
     qProdVendadescricao.AsString := edPesqProd.Text;
-    qProdVendavalor.AsFloat := StrToFloat(edValorUnitario.Text);
-    qProdVendadesconto.AsFloat := StrToFloat(edDesconto.Text);
+    qProdVendavalor.AsFloat      := StrToFloat(edValorUnitario.Text);
+    qProdVendadesconto.AsFloat   := StrToFloat(edDesconto.Text);
     qProdVendaquantidade.AsFloat := StrToFloat(edQtdProduto.Text);
-    qProdVendatotal.AsFloat := (Venda.PrecoProduto);
+    qProdVendatotal.AsFloat      := (Venda.PrecoProduto);
+
+    Prod_Venda := TVenda_Itens.Create;
+    with Prod_Venda do
+    begin
+      id          := StrToInt(edIdProd.Text);
+      idVenda     := Venda.ID;
+      valor_unit  := StrToFloat(edValorUnitario.Text);
+      desconto    := StrToFloat(edDesconto.Text);
+      quantidade  := StrToFloat(edQtdProduto.Text);
+      total       := (Venda.PrecoProduto);
+
+      Venda.Itens.Add(Prod_Venda);
+    end;
 
     qProdVenda.ApplyUpdates;
     qProdVenda.Close;
+
   finally
     qProdVenda.ParamByName('idVenda').AsInteger := StrToIntDef(edCodVenda.Text, 0);
     qProdVenda.Open;
@@ -345,7 +361,6 @@ end;
 
 procedure TfVenda.btnSalvarClick(Sender: TObject);
 begin
-
   Funcionario.Nome := edVendedor.Text;
   if not Funcionario.Pesquisar(Funcionario.Cod) then
   begin
@@ -362,7 +377,10 @@ begin
 
   Venda.ID := StrToIntDef(edCodVenda.Text, 0);
   if Venda.Finaliza() then
+  begin
+    LimpaProduto();
     LimpaCampos('Venda');
+  end;
 end;
 
 procedure TfVenda.Consulta(Sender : TEdit);
@@ -387,6 +405,7 @@ begin
       Funcionario.Ativo := 'S';
       Funcionario.Pesquisar(StrToIntDef(edIdVendedor.Text, 0));
       edVendedor.Text := Funcionario.Nome;
+      Venda.idVendedor := Funcionario.Cod;
     end;
 
     2 : begin
@@ -415,8 +434,11 @@ end;
 procedure TfVenda.btnCancelarClick(Sender: TObject);
 begin
   Venda.ID := dmVendas.qVendaid.AsInteger;
-  Venda.Cancelar;
-  LimpaCampos('Venda');
+  if Venda.Cancelar then
+  begin
+    LimpaProduto();
+    LimpaCampos('Venda');
+  end;
 end;
 
 procedure TfVenda.btnExcluirProdutoClick(Sender: TObject);
@@ -426,6 +448,11 @@ begin
     Venda.PrecoProduto    := StrToCurr(DBGrid1.Fields[6].AsString);
     Venda.DescontoProduto := StrToCurr(DBGrid1.Fields[5].AsString);
     Venda.ExcluirProduto();
+
+    qProdVenda.Close;
+    qProdVenda.Params[0].AsInteger := Venda.ID;
+    qProdVenda.Open;
+
     edTotalVenda.Text := FormatFloat('###,##0.00', Venda.Total);
     edDescontoVenda.Text := FormatFloat('###,##0.00', Venda.Desconto);
   end;
@@ -433,7 +460,6 @@ end;
 
 procedure TfVenda.btnSairClick(Sender: TObject);
 begin
-
   if (Trim(edCodVenda.Text) = '') and (Application.MessageBox('Deseja sair da venda?', 'Confirmação', MB_YESNO + 32) = 6) then
   begin
     Close;
@@ -490,15 +516,23 @@ begin
       edQtdProduto.SetFocus; 
     end;
   end;
-  
+end;
+
+procedure TfVenda.LimpaProduto;
+begin
+  qProdVenda.Close;
+  qProdVenda.Params[0].AsInteger := 0;
+  qProdVenda.Open;
 end;
 
 procedure TfVenda.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Cliente.Free;
   Venda.Free;
-  Action := caFree;
-  fVenda := nil;
+  Funcionario.Free;
+  Produto.Free;
+
+  Forms.FecharForm(Self, Action);
 end;
 
 end.
