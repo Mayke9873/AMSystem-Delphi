@@ -1,4 +1,4 @@
-object fConsultaCompra: TfConsultaCompra
+object fConsultaCompras: TfConsultaCompras
   Left = 0
   Top = 0
   Caption = 'Consulta de Compras'

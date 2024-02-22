@@ -8,7 +8,7 @@ uses
   Vcl.StdCtrls, ZAbstractRODataset, ZDataset, Vcl.ExtCtrls, Skia, Skia.Vcl;
 
 type
-  TfConsultaCompra = class(TForm)
+  TfConsultaCompras = class(TForm)
     edPesquisa: TEdit;
     Label9: TLabel;
     qCompras: TZReadOnlyQuery;
@@ -45,14 +45,14 @@ type
   end;
 
 var
-  fConsultaCompras: TfConsultaCompra;
+  fConsultaCompras: TfConsultaCompras;
 
 implementation
 
 uses dmCompra, FrmCompra, FrmRelVendas, FrmPrincipal;
 {$R *.dfm}
 
-procedure TfConsultaCompra.dbgVendasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+procedure TfConsultaCompras.dbgVendasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
   if dbgVendas.DataSource.DataSet.State in [dsEdit, dsInsert, dsBrowse] then //Cor da linha selecionada
@@ -76,7 +76,7 @@ begin
   end;
 end;
 
-procedure TfConsultaCompra.edPesquisaChange(Sender: TObject);
+procedure TfConsultaCompras.edPesquisaChange(Sender: TObject);
 begin
   qCompras.Close;
   qCompras.SQL.Clear;
@@ -86,17 +86,17 @@ begin
   qCompras.Open;
 end;
 
-procedure TfConsultaCompra.FormActivate(Sender: TObject);
+procedure TfConsultaCompras.FormActivate(Sender: TObject);
 begin
   qCompras.Open;
 end;
 
-procedure TfConsultaCompra.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfConsultaCompras.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Forms.FecharForm(Self, Action);
 end;
 
-procedure TfConsultaCompra.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfConsultaCompras.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
 
   case Key of
@@ -113,7 +113,7 @@ begin
   end;
 end;
 
-procedure TfConsultaCompra.FormKeyPress(Sender: TObject; var Key: Char);
+procedure TfConsultaCompras.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
   begin
@@ -122,17 +122,17 @@ begin
   end;
 end;
 
-procedure TfConsultaCompra.tbNovoClick(Sender: TObject);
+procedure TfConsultaCompras.tbNovoClick(Sender: TObject);
 begin
   fCompra := TfCompra.Create(fConsultaCompras);
 end;
 
-procedure TfConsultaCompra.tbSairClick(Sender: TObject);
+procedure TfConsultaCompras.tbSairClick(Sender: TObject);
 begin
   Close;
 end;
 
-procedure TfConsultaCompra.tbRelatorioClick(Sender: TObject);
+procedure TfConsultaCompras.tbRelatorioClick(Sender: TObject);
 begin
   if not  Assigned(fRelVendas) then
     fRelVendas := TfRelVendas.Create(fConsultaCompras);
