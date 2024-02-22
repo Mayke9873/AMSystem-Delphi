@@ -20,11 +20,22 @@ uses
   FrmPrincipal;
 
 procedure TForms.CriaForm(aValue: TForm; aClass: TFormClass);
+var
+  I: Integer;
 begin
+  for I := 0 to Screen.FormCount - 1 - 1 do
+  begin
+    if Screen.Forms[I] is aClass then
+    begin
+      aValue := Screen.Forms[I];
+      Break;
+    end;
+  end;
+
   if not Assigned(aValue) then
     aValue := aClass.Create(fPrincipal)
   else
-    aValue.Show;
+    aValue.BringToFront;
 
   AtivaPanel(False);
 end;
@@ -35,7 +46,12 @@ begin
   TForm(Sender) := nil;
 
   if fPrincipal.MDIChildCount = 1 then
-    AtivaPanel(True);
+    AtivaPanel(True)
+  else
+  begin
+    TForm(Sender) := fPrincipal.ActiveMDIChild;
+    TForm(Sender).BringToFront;
+  end;
 end;
 
 procedure TForms.AtivaPanel(PanelVisible: Boolean);
