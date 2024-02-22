@@ -358,7 +358,7 @@ end;
 
 procedure TfCompra.acSairExecute(Sender: TObject);
 begin
-  if (Trim(edCodCompra.Text) = '') and (Application.MessageBox('Deseja sair da venda?', 'Confirmação', MB_YESNO + 32) = 6) then
+  if (Trim(edCodCompra.Text) = '') and (Application.MessageBox('Deseja sair da compra?', 'Confirmação', MB_YESNO + 32) = 6) then
   begin
     Close;
   end
