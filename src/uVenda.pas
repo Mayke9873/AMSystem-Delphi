@@ -3,35 +3,47 @@ unit uVenda;
 interface
 
 uses
-  ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows, Interfaces, uCliente;
+  ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows, Interfaces, uCliente, uVenda_Itens,
+  System.Generics.Collections;
 
 type
   TVenda = class
-    private
+  private
     FID: Integer;
     FDesconto: Currency;
     FTotal: Currency;
     FDescontoProduto: Currency;
     FPrecoProduto: Currency;
+    FItens: TObjectList<TVenda_Itens>;
+    FidVendedor: Integer;
     procedure SetID(const Value: Integer);
     procedure SetDesconto(const Value: Currency);
     procedure SetTotal(const Value: Currency);
     procedure SetDescontoProduto(const Value: Currency);
     procedure SetPrecoProduto(const Value: Currency);
+    procedure SetItens(const Value: TObjectList<TVenda_Itens>);
     procedure Estoque;
-    public
-      property Total : Currency read FTotal write SetTotal;
-      property Desconto : Currency read FDesconto write SetDesconto;
-      property PrecoProduto : Currency read FPrecoProduto write SetPrecoProduto;
-      property DescontoProduto : Currency read FDescontoProduto write SetDescontoProduto;
-      property ID : Integer read FID write SetID;
-      procedure Soma;
-      procedure Subtrair;
-      procedure LimpaProduto;
-      procedure ExcluirProduto;
-      procedure InsereVenda(pCodigoVenda : String);
-      function Cancelar: Boolean;
-      function Finaliza: Boolean;
+    procedure AbreVenda;
+    procedure SetidVendedor(const Value: Integer);
+
+  public
+    property Total : Currency read FTotal write SetTotal;
+    property Desconto : Currency read FDesconto write SetDesconto;
+    property PrecoProduto : Currency read FPrecoProduto write SetPrecoProduto;
+    property DescontoProduto : Currency read FDescontoProduto write SetDescontoProduto;
+    property ID : Integer read FID write SetID;
+    property Itens: TObjectList<TVenda_Itens> read FItens write SetItens;
+    property idVendedor: Integer read FidVendedor write SetidVendedor;
+    procedure Soma;
+    procedure Subtrair;
+    procedure LimpaProduto;
+    procedure ExcluirProduto;
+    procedure InsereVenda(pCodigoVenda : String);
+    function Cancelar: Boolean;
+    function Finaliza: Boolean;
+
+    constructor Create;
+    destructor Destroy; override;
   End;
 
 implementation
@@ -47,11 +59,6 @@ begin
       ' IdVenda = '+ IntToStr(ID) +';');
 
   Subtrair();
-
-  fVenda.qProdVenda.Close;
-  fVenda.qProdVenda.Params[0].AsInteger := ID;
-  fVenda.qProdVenda.Open;
-
 end;
 
 function TVenda.Finaliza : Boolean;
@@ -62,16 +69,17 @@ begin
     if Application.MessageBox('Confirma venda?', 'Atenção', MB_YESNO + MB_ICONQUESTION) = IDYES then
     begin
       ExecSQL('UPDATE VENDA SET ID_CLIENTE = ' + IntToStr(dmClientes.qClienteId.AsInteger) + ', CLIENTE = ' + QuotedStr(dmClientes.qClienteNome.AsString) +
-        ', VALOR = ' + StringReplace(fVenda.edTotalVenda.Text, ',', '.', []) +
-        ', DESCONTO = ' + StringReplace(fVenda.edDescontoVenda.Text, ',', '.', []) +
-        ', VALOR_TOTAL = ' + StringReplace(fVenda.edTotalVenda.Text, ',', '.', []) +
-        ', PAGO = ' + StringReplace(fVenda.edTotalVenda.Text, ',', '.', []) +
-        ', VENDEDOR = ' + QuotedStr(fVenda.edIdVendedor.Text) + ', DATA_VENDA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) +
+        ', VALOR = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
+        ', DESCONTO = ' + StringReplace(FloatToStr(Desconto), ',', '.', []) +
+        ', VALOR_TOTAL = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
+        ', PAGO = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
+        ', VENDEDOR = ' + QuotedStr(idVendedor.ToString) + ', DATA_VENDA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) +
         ', EX = 0 WHERE ID = ' + IntToStr(ID) + ';');
 
       ExecSQL('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + IntToStr(ID) + ';');
 
       Estoque();
+      FItens.Clear;
       Result := True;
     end;
 
@@ -79,28 +87,36 @@ begin
 
 end;
 
+constructor TVenda.Create;
+begin
+  Itens := TObjectList<TVenda_Itens>.Create;
+end;
+
+destructor TVenda.Destroy;
+begin
+  FreeAndNil(Itens);
+  inherited;
+end;
+
 procedure TVenda.Estoque;
 var
   Prod: TEstoque;
+  I: Integer;
 begin
   Prod := TEstoque.Create;
   try
-    fVenda.qProdVenda.First;
-    while not fVenda.qProdVenda.Eof do
+    FItens.First;
+    for I := 0 to FItens.Count -1 do
     begin
-      Prod.idProduto := fVenda.qProdVendaidprod.AsInteger;
-      Prod.qtd := fVenda.qProdVendaquantidade.AsFloat;
+      Prod.idProduto := FItens[I].id;
+      Prod.qtd :=  FItens[I].quantidade;
 
       Prod.MovEstoque(Venda, Saida);
-
-      fVenda.qProdVenda.Next;
     end;
 
   finally
     FreeAndNil(Prod);
   end;
-
-  LimpaProduto();
 end;
 
 procedure TVenda.InsereVenda(pCodigoVenda : String);
@@ -112,18 +128,20 @@ begin
 
     ExecSQL('insert into venda (ID, EX) select (select coalesce(max(id)+1, 1) from venda), 1;');
 
-    dmVendas.qVenda.Close;
-    dmVendas.qVenda.Open;
-    fVenda.edCodVenda.Text := dmVendas.qVenda.Fields[0].Value;
-    ID := dmVendas.qVenda.Fields[0].Value;
+    AbreVenda();
   end;
+end;
+
+procedure TVenda.AbreVenda;
+begin
+  dmVendas.qVenda.Close;
+  dmVendas.qVenda.Open;
+  ID := dmVendas.qVenda.Fields[0].Value;
 end;
 
 procedure TVenda.LimpaProduto;
 begin
-  fVenda.qProdVenda.Close;
-  fVenda.qProdVenda.Params[0].AsInteger := 0;
-  fVenda.qProdVenda.Open;
+// Implementar algo q limpe a grid.
 end;
 
 function TVenda.Cancelar : Boolean;
@@ -136,7 +154,6 @@ begin
     ExecSQL('Delete from venda_item where idVenda = '+  IntToStr(ID));
     Result := True;
   end;
-
 end;
 
 procedure TVenda.Soma;
@@ -165,6 +182,16 @@ end;
 procedure TVenda.SetID(const Value: Integer);
 begin
   FID := Value;
+end;
+
+procedure TVenda.SetidVendedor(const Value: Integer);
+begin
+  FidVendedor := Value;
+end;
+
+procedure TVenda.SetItens(const Value: TObjectList<TVenda_Itens>);
+begin
+  FItens := Value;
 end;
 
 procedure TVenda.SetPrecoProduto(const Value: Currency);
