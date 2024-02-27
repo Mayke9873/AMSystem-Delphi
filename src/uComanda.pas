@@ -49,49 +49,35 @@ begin
 
   case VerificaComanda(comanda) of
     True : begin
-      LSQL := 'update comanda set em_Uso = ''S'', em_Caixa = ''S'' ';
-
-      if Trim(nome) <> '' then
-        LSQL := LSQL + ', nome = '+ QuotedStr(nome);
+      LSQL := 'update comanda set em_Uso = ''S'', em_Caixa = ''S'' ' +
+              IfThen(Trim(nome) <> '', ', nome = '+ QuotedStr(nome), '');
 
       LSQL := LSQL + ' where comanda = '+ IntToStr(comanda);
-
-
-      ExecSQL(LSQL);
     end;
 
     False: begin
-      LSQL := 'insert into comanda (comanda) values ';
+      LSQL := 'insert into comanda (comanda '+
+              IfThen(Trim(nome) <> '', ', nome)', ')') + 'values ';
 
-      if Trim(nome) <> '' then
-      begin
-        StringReplace(LSQL, '(comanda)', '(comanda, nome)', []);
-
-        LSQL := LSQL + '('+ IntToStr(comanda) +', '+ QuotedStr(nome) +')';
-      end
-      else
-        LSQL := LSQL + '('+ IntToStr(comanda) +')';
-
-      ExecSQL(LSQL);
+      LSQL := LSQL + IfThen(Trim(nome) <> '',
+                        '('+ IntToStr(comanda) +', '+ QuotedStr(nome) +')',
+                        '('+ IntToStr(comanda) +')');
     end;
-
   end;
 
+  ExecSQL(LSQL);
   Result := Self;
 end;
 
 function TComanda.VerificaComanda(comanda: Integer = 0): Boolean;
 begin
-  Result := False;
-
   FQuery.SQL.Clear;
   FQuery.Close;
   FQuery.SQL.Add('select comanda, nome, em_Uso, em_Caixa ');
   FQuery.SQL.Add(' from comanda where comanda = '+ IntToStr(comanda));
   FQuery.Open;
 
-  if FQuery.RecordCount > 0 then
-    Result := True;
+  Result := FQuery.RecordCount > 0;
 end;
 
 function TComanda.CadastraComanda: Boolean;
