@@ -50,6 +50,7 @@ type
     qConsProdutosativo: TZUnicodeStringField;
     qConsProdutostotCompra: TZDoubleField;
     qConsProdutostotVenda: TZDoubleField;
+    qMovEstoqueidMovimentacao: TZIntegerField;
     procedure qProdutoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }

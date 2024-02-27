@@ -15,6 +15,7 @@ type
     FtipoMov: String;
     FidFornecedor: integer;
     Fobs: String;
+    FidMovimentacao: Integer;
     procedure SetidProduto(const Value: integer);
     procedure Setqtd(const Value: Double);
     procedure SetCod(const Value: integer);
@@ -22,6 +23,7 @@ type
     procedure SetidFornecedor(const Value: integer);
     procedure SettipoMov(const Value: String);
     procedure Setobs(const Value: String);
+    procedure SetidMovimentacao(const Value: Integer);
   public
     procedure MovEstoque(const tipo : String; multiplo : Integer; ajuste: Boolean = False);
 
@@ -33,6 +35,7 @@ type
     property dataMov : TDate read FdataMov write SetdataMov;
     property tipoMov : String read FtipoMov write SettipoMov;
     property idFornecedor : integer read FidFornecedor write SetidFornecedor;
+    property idMovimentacao: Integer read FidMovimentacao write SetidMovimentacao;
 
   end;
 
@@ -58,7 +61,8 @@ begin
   dmProdutos.qMovEstoquedataMov.AsDateTime  := Now;
   dmProdutos.qMovEstoqueidUsuario.AsInteger := 1;
   dmProdutos.qMovEstoquetipoMov.AsString    := tipo;
-  dmProdutos.qMovEstoqueidFornecedor.AsInteger := FidFornecedor;
+  dmProdutos.qMovEstoqueidFornecedor.AsInteger   := FidFornecedor;
+  dmProdutos.qMovEstoqueidMovimentacao.AsInteger := FidMovimentacao;
   dmProdutos.qMovEstoque.Post;
   dmProdutos.qProduto.Refresh;
 
@@ -79,6 +83,11 @@ end;
 procedure TEstoque.SetidFornecedor(const Value: integer);
 begin
   FidFornecedor := Value;
+end;
+
+procedure TEstoque.SetidMovimentacao(const Value: Integer);
+begin
+  FidMovimentacao := Value;
 end;
 
 procedure TEstoque.SetidProduto(const Value: integer);

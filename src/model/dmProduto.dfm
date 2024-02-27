@@ -2,7 +2,7 @@ inherited dmProdutos: TdmProdutos
   inherited zCon: TZConnection
     LibraryLocation = ''
   end
-  object qProduto: TZQuery [4]
+  object qProduto: TZQuery
     SortedFields = 'Id'
     Connection = zCon
     OnNewRecord = qProdutoNewRecord
@@ -95,12 +95,12 @@ inherited dmProdutos: TdmProdutos
       Size = 2
     end
   end
-  object dProduto: TDataSource [5]
+  object dProduto: TDataSource
     DataSet = qProduto
     Left = 400
     Top = 14
   end
-  object uProduto: TZUpdateSQL [6]
+  object uProduto: TZUpdateSQL
     DeleteSQL.Strings = (
       'DELETE FROM PRODUTO'
       'WHERE'
@@ -172,12 +172,12 @@ inherited dmProdutos: TdmProdutos
         Name = 'OLD_id'
       end>
   end
-  object qMovEstoque: TZQuery [7]
+  object qMovEstoque: TZQuery
     Connection = zCon
     UpdateObject = uMovEstoque
     SQL.Strings = (
       'select id, idproduto, quantidade, dataMov, idUsuario,'
-      '       idFornecedor, tipoMov, obs'
+      '       idFornecedor, tipoMov, idMovimentacao, obs'
       'from MovEstoque'
       '  where (:idProd = 0 or idproduto = :idProd)')
     Params = <
@@ -221,8 +221,11 @@ inherited dmProdutos: TdmProdutos
       FieldName = 'obs'
       Size = 250
     end
+    object qMovEstoqueidMovimentacao: TZIntegerField
+      FieldName = 'idMovimentacao'
+    end
   end
-  object uMovEstoque: TZUpdateSQL [8]
+  object uMovEstoque: TZUpdateSQL
     DeleteSQL.Strings = (
       'DELETE FROM MovEstoque'
       'WHERE'
@@ -230,10 +233,10 @@ inherited dmProdutos: TdmProdutos
     InsertSQL.Strings = (
       'INSERT INTO MovEstoque'
       '  (idproduto, quantidade, dataMov, idUsuario, idFornecedor,'
-      '  obs, tipoMov)'
+      '  obs, tipoMov, idMovimentacao)'
       'VALUES'
       '  (:idproduto, :quantidade, :dataMov, :idUsuario, :idFornecedor,'
-      '  :obs, :tipoMov)')
+      '  :obs, :tipoMov, :idMovimentacao)')
     ModifySQL.Strings = (
       'UPDATE MovEstoque SET'
       '  idproduto = :idproduto,'
@@ -242,6 +245,7 @@ inherited dmProdutos: TdmProdutos
       '  idUsuario = :idUsuario,'
       '  idFornecedor = :idFornecedor,'
       '  tipoMov = :tipoMov,'
+      '  idMovimentacao = :idMovimentacao,'
       '  obs = :obs'
       'WHERE'
       '  MovEstoque.id = :OLD_id')
@@ -268,18 +272,21 @@ inherited dmProdutos: TdmProdutos
         Name = 'tipoMov'
       end
       item
+        Name = 'idMovimentacao'
+      end
+      item
         Name = 'obs'
       end
       item
         Name = 'OLD_id'
       end>
   end
-  object dGrupo: TDataSource [9]
+  object dGrupo: TDataSource
     DataSet = qGrupo
     Left = 376
     Top = 126
   end
-  object qGrupo: TZQuery [10]
+  object qGrupo: TZQuery
     SortedFields = 'Id'
     Connection = zCon
     SQL.Strings = (
@@ -301,7 +308,7 @@ inherited dmProdutos: TdmProdutos
       Size = 255
     end
   end
-  object qConsProdutos: TZReadOnlyQuery [11]
+  object qConsProdutos: TZReadOnlyQuery
     Connection = zCon
     SQL.Strings = (
       
