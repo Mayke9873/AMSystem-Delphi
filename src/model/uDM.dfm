@@ -47,6 +47,10 @@ object DM: TDM
       FieldName = 'idCliente'
       Required = True
     end
+    object qParametroUsa_comanda: TZUnicodeStringField
+      FieldName = 'Usa_comanda'
+      Size = 1
+    end
     object qParametroUsa_PDV: TZUnicodeStringField
       FieldName = 'Usa_PDV'
       Size = 1
