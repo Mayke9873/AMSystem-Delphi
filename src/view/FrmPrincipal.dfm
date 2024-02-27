@@ -1,9 +1,10 @@
 object fPrincipal: TfPrincipal
   Left = 0
   Top = 0
+  Width = 1112
+  Height = 778
+  AutoScroll = True
   Caption = 'AmSystem'
-  ClientHeight = 600
-  ClientWidth = 1000
   Color = clAppWorkSpace
   TransparentColor = True
   TransparentColorValue = clFuchsia
@@ -18,14 +19,18 @@ object fPrincipal: TfPrincipal
   Menu = MainMenu1
   Position = poScreenCenter
   Visible = True
+  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
+  DesignSize = (
+    1100
+    720)
   TextHeight = 13
   object Image1: TImage
     Left = 0
     Top = 41
-    Width = 1000
-    Height = 559
+    Width = 1100
+    Height = 679
     Align = alClient
     DragKind = dkDock
     Picture.Data = {
@@ -7075,7 +7080,7 @@ object fPrincipal: TfPrincipal
   object pnlBotoes: TPanel
     Left = 0
     Top = 0
-    Width = 1000
+    Width = 1100
     Height = 41
     Align = alTop
     BevelOuter = bvNone
@@ -7090,7 +7095,7 @@ object fPrincipal: TfPrincipal
     ParentDoubleBuffered = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 996
+    ExplicitWidth = 1096
     object pnlCliente: TPanel
       AlignWithMargins = True
       Left = 10
@@ -7186,10 +7191,7 @@ object fPrincipal: TfPrincipal
           ',1,1H20a1,1,0,0,0,1-1V17Z" style="fill: none; stroke: rgb(0, 0, ' +
           '0); stroke-linecap: round; stroke-linejoin: round; stroke-width:' +
           ' 2;"></path></svg>'
-        ExplicitLeft = -1
-        ExplicitTop = 0
-        ExplicitWidth = 35
-        ExplicitHeight = 35
+        ExplicitWidth = 30
       end
     end
     object pnlSair: TPanel
@@ -7241,6 +7243,20 @@ object fPrincipal: TfPrincipal
         ExplicitHeight = 35
       end
     end
+  end
+  object pnlComandas: TPanel
+    Left = 2
+    Top = 42
+    Width = 1166
+    Height = 463
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    BevelOuter = bvNone
+    Caption = 'pnlComandas'
+    ShowCaption = False
+    TabOrder = 1
+    Visible = False
+    ExplicitWidth = 1162
+    ExplicitHeight = 462
   end
   object MainMenu1: TMainMenu
     Left = 216
@@ -7309,5 +7325,11 @@ object fPrincipal: TfPrincipal
       ShortCut = 32883
       OnClick = Sair1Click
     end
+  end
+  object tmComanda: TTimer
+    Enabled = False
+    OnTimer = tmComandaTimer
+    Left = 264
+    Top = 186
   end
 end

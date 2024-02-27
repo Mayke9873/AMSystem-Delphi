@@ -3,11 +3,13 @@
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Win.TaskbarCore, Vcl.Taskbar,
-  Vcl.ComCtrls, Vcl.ToolWin,System.ImageList, Vcl.ImgList, Vcl.Menus, Threading, IPPeerClient, IPPeerServer,
-  System.Tether.Manager, Vcl.OleCtrls, SHDocVw, Vcl.ExtCtrls, Vcl.Imaging.jpeg,
-  uValida, Skia, Skia.Vcl;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  System.Win.TaskbarCore, Vcl.Taskbar, Vcl.ComCtrls, Vcl.ToolWin,
+  System.ImageList, Vcl.ImgList, Vcl.Menus, Threading, IPPeerClient,
+  IPPeerServer, System.Tether.Manager, Vcl.OleCtrls, SHDocVw, Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg, uValida, Skia, Skia.Vcl, ZDataset, uComanda,
+  System.Generics.Collections, Vcl.StdCtrls, uForms;
 
 type
   TfPrincipal = class(TForm)
@@ -37,11 +39,11 @@ type
     SkSvg2: TSkSvg;
     pnlSair: TPanel;
     SkSvg3: TSkSvg;
+    tmComanda: TTimer;
+    pnlComandas: TPanel;
     procedure Clientes1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
-    procedure tbSairClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure tbClienteClick(Sender: TObject);
     procedure Venda1Click(Sender: TObject);
     procedure ConsultadeVendas1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
@@ -56,63 +58,54 @@ type
     procedure pnlVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ConsultadeCompras1Click(Sender: TObject);
+    procedure tmComandaTimer(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
-    Valida : TValidacoes;
-    function VersaoExe: String;
+    function VersaoExe: string;
+    procedure Comandas(Sender: TObject);
+    procedure ClickComandas(Sender: TObject);
+
   public
     { Public declarations }
   end;
 
 var
   fPrincipal: TfPrincipal;
+  Forms: TForms;
 
 implementation
 
 uses
-  FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto, FrmFuncionario,
-  FrmVenda, FrmFornecedor, FrmAjusteEstoque, FrmCompra, FrmConsultaCompra;
+  FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto,
+  FrmFuncionario, FrmVenda, FrmFornecedor, FrmAjusteEstoque, FrmCompra,
+  FrmConsultaCompra, uFrame.Comanda, FrmPDV, uDM;
 
 {$R *.dfm}
 
 procedure TfPrincipal.AjustedeEstoque1Click(Sender: TObject);
 begin
-  if not Assigned(fAjusteEstoque) then
-    fAjusteEstoque := TfAjusteEstoque.Create(fPrincipal)
-  else
-    fAjusteEstoque.ShowModal;
+  Forms.CriaForm(fAjusteEstoque, TfAjusteEstoque);
 end;
 
-procedure TfPrincipal.Cadastros2Click(Sender: TObject);
+procedure TfPrincipal.Clientes1Click(Sender: TObject);
 begin
-  if not Assigned(fCliente) then
-    fCliente := TfCliente.Create(fPrincipal)
-  else
-    fCliente.Show;
+  Forms.CriaForm(fCliente, TfCliente);
 end;
 
 procedure TfPrincipal.Compra1Click(Sender: TObject);
 begin
-  if not Assigned(fCompra) then
-    fCompra := TfCompra.Create(fPrincipal)
-  else
-    fCompra.Show;
+  Forms.CriaForm(fCompra, TfCompra);
 end;
 
 procedure TfPrincipal.ConsultadeCompras1Click(Sender: TObject);
 begin
-  if not Assigned(fConsultaCompras) then
-    fConsultaCompras := TfConsultaCompra.Create(fPrincipal)
-  else
-    fConsultaCompras.Show;
+  Forms.CriaForm(fConsultaCompras, TfConsultaCompras);
 end;
 
 procedure TfPrincipal.ConsultadeVendas1Click(Sender: TObject);
 begin
-  if not Assigned(fConsultaVendas) then
-    fConsultaVendas := TfConsultaVendas.Create(fPrincipal)
-  else
-    fConsultaVendas.Show;
+  Forms.CriaForm(fConsultaVendas, TfConsultaVendas);
 end;
 
 procedure TfPrincipal.FecharSistema;
@@ -125,10 +118,16 @@ begin
 
   if (Application.MessageBox('Deseja sair do sistema?', 'Confirmação', MB_YESNO + 32) = IDYES) then
   begin
+    FreeAndNil(Forms);
     Application.Terminate;
   end
   else
     Abort;
+end;
+
+procedure TfPrincipal.FormActivate(Sender: TObject);
+begin
+  pnlComandas.Visible := True;
 end;
 
 procedure TfPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -139,20 +138,27 @@ end;
 procedure TfPrincipal.FormCreate(Sender: TObject);
 begin
   Caption := 'AmSystem :::: V.' + VersaoExe;
+  Forms := TForms.Create;
+
+  if DM.qParametroUsa_comanda.AsString = 'S' then
+  begin
+    pnlComandas.Visible := True;
+    Comandas(Application);
+  end;
 end;
 
-function TfPrincipal.VersaoExe: String;
+function TfPrincipal.VersaoExe: string;
 type
   PFFI = ^vs_FixedFileInfo;
 var
-  F : PFFI;
-  Handle : Dword;
-  Len : Longint;
-  Data : Pchar;
-  Buffer : Pointer;
-  Tamanho : Dword;
+  F: PFFI;
+  Handle: Dword;
+  Len: Longint;
+  Data: Pchar;
+  Buffer: Pointer;
+  Tamanho: Dword;
   Parquivo: Pchar;
-  Arquivo : String;
+  Arquivo: string;
 begin
   Arquivo := Application.ExeName;
   Parquivo := StrAlloc(Length(Arquivo) + 1);
@@ -161,17 +167,13 @@ begin
   Result := '';
   if Len > 0 then
   begin
-    Data:=StrAlloc(Len+1);
-    if GetFileVersionInfo(Parquivo,Handle,Len,Data) then
+    Data := StrAlloc(Len + 1);
+    if GetFileVersionInfo(Parquivo, Handle, Len, Data) then
     begin
-      VerQueryValue(Data, '\',Buffer,Tamanho);
+      VerQueryValue(Data, '\', Buffer, Tamanho);
       F := PFFI(Buffer);
 
-      Result := Format('%d.%d.%d.%d',
-      [HiWord(F^.dwFileVersionMs),
-      LoWord(F^.dwFileVersionMs),
-      HiWord(F^.dwFileVersionLs),
-      Loword(F^.dwFileVersionLs)] );
+      Result := Format('%d.%d.%d.%d', [HiWord(F^.dwFileVersionMs), LoWord(F^.dwFileVersionMs), HiWord(F^.dwFileVersionLs), Loword(F^.dwFileVersionLs)]);
     end;
     StrDispose(Data);
   end;
@@ -181,23 +183,17 @@ end;
 
 procedure TfPrincipal.Fornecedores1Click(Sender: TObject);
 begin
-  if not Assigned(fFornecedor) then
-    fFornecedor := TfFornecedor.Create(fPrincipal)
-  else
-    fFornecedor.Show;
+  Forms.CriaForm(fFornecedor, TfFornecedor);
 end;
 
 procedure TfPrincipal.Grupos1Click(Sender: TObject);
 begin
-  if not Assigned(fGrupoProd) then
-    fGrupoProd := TfGrupoProd.Create(fPrincipal)
-  else
-    fGrupoProd.Show;
+  Forms.CriaForm(fGrupoProd, TfGrupoProd);
 end;
 
 procedure TfPrincipal.pnlClienteClick(Sender: TObject);
 begin
-  Cadastros2.Click;
+  Clientes1.Click;
 end;
 
 procedure TfPrincipal.pnlSairClick(Sender: TObject);
@@ -212,18 +208,12 @@ end;
 
 procedure TfPrincipal.Produtos1Click(Sender: TObject);
 begin
-  if not Assigned(fProduto) then
-    fProduto := TfProduto.Create(fPrincipal)
-  else
-    fProduto.Show;
+  Forms.CriaForm(fProduto, TfProduto);
 end;
 
-procedure TfPrincipal.Produtos2Click(Sender: TObject);
+procedure TfPrincipal.Funcionarios1Click(Sender: TObject);
 begin
-  if not Assigned(fFuncionario) then
-    fFuncionario := TfFuncionario.Create(fPrincipal)
-  else
-    fFuncionario.Show;
+  Forms.CriaForm(fFuncionario, TfFuncionario);
 end;
 
 procedure TfPrincipal.Sair1Click(Sender: TObject);
@@ -231,25 +221,106 @@ begin
   FecharSistema();
 end;
 
-procedure TfPrincipal.tbClienteClick(Sender: TObject);
+procedure TfPrincipal.tmComandaTimer(Sender: TObject);
 begin
-  if not Assigned(fCliente) then  
-    fCliente := TfCliente.Create(fPrincipal)
-  else
-    fCliente.Show;
+  tmComanda.Enabled := False;
+  Comandas(Sender);
 end;
 
-procedure TfPrincipal.tbSairClick(Sender: TObject);
+procedure TfPrincipal.Comandas(Sender: TObject);
+var
+  LFrame: TFrameComanda;
+  left, top, I: Integer;
+  LComandas: TComanda;
+  AComandas: TObjectList<TComanda>;
+  PositionScroll: Integer;
 begin
-  FecharSistema();
+  left := 1;
+  top := 2;
+
+  LComandas := TComanda.Create;
+  try
+    LComandas.em_Uso := 'N';
+    AComandas := LComandas.ListaComandas;
+    for I := 0 to AComandas.Count - 1 do
+      FindComponent('CMD' + AComandas[I].id.ToString).Free;
+
+    LComandas.em_Uso := 'S';
+    AComandas := LComandas.ListaComandas;      //Cria frames de todas as comandas em aberto.
+    for I := 0 to AComandas.Count - 1 do
+    begin
+
+      if (FindComponent('CMD' + AComandas[I].id.ToString) = nil) then
+      begin
+        LFrame := TFrameComanda.Create(Self);
+        LFrame.Name := 'CMD' + AComandas[I].id.ToString;
+        LFrame.Parent := pnlComandas;
+        LFrame.pnlFrame.OnClick := ClickComandas;
+        LFrame.lNome.OnClick := ClickComandas;
+        LFrame.lValor.OnClick := ClickComandas;
+        LFrame.lNumeroComanda.OnClick := ClickComandas;
+        LFrame.lNumeroComanda.Caption := AComandas[I].comanda.ToString;
+        LFrame.pnlFrame.Tag := AComandas[I].comanda;
+        LFrame.lValor.Tag := AComandas[I].comanda;
+        LFrame.lNumeroComanda.Tag := AComandas[I].comanda;
+        LFrame.lNome.Tag := AComandas[I].comanda;
+      end
+      else
+        LFrame := TFrameComanda(FindComponent('CMD' + AComandas[I].id.ToString));
+
+      LFrame.lNome.Caption := AComandas[I].nome;
+      LFrame.lNome.Visible := not (Trim(AComandas[I].nome) = '');
+
+      LFrame.lValor.Caption := FormatCurr('#0.00', AComandas[I].valTotal);
+      LFrame.pnlFrame.Hint := 'CMD ' + (AComandas[I].nome);
+
+      LFrame.Left := left;
+      LFrame.Top := top;
+
+      if AComandas[I].em_Caixa = 'S' then
+        LFrame.spColor.Brush.Color := $565fe2
+      else
+        LFrame.spColor.Brush.Color := clSkyBlue;
+
+      left := left + LFrame.Width + 2;
+      if left + LFrame.Width >= pnlComandas.Width then
+      begin
+        left := 1;
+        top := top + LFrame.Height + 2;
+      end;
+    end;
+
+  finally
+    pnlComandas.Refresh;
+    LComandas.Free;
+    tmComanda.Enabled := True;
+  end;
+end;
+
+procedure TfPrincipal.ClickComandas(Sender: TObject);
+var
+  LMessage: string;
+begin
+  pnlComandas.Visible := False;
+
+  LMessage := (TFrameComanda(Sender).Hint);
+  LMessage := (TFrameComanda(Sender).Tag.ToString);  //TO DO: Abrir comanda pela tag.
+
+  if (TFrame(Sender).Hint = 'CMD ') then
+    LMessage := (TFrame(Sender).Hint + TFrame(Sender).Tag.ToString);
+
+  ShowMessage(LMessage);
+
+  pnlComandas.Visible := True;
 end;
 
 procedure TfPrincipal.Venda1Click(Sender: TObject);
 begin
-  if not Assigned(fVenda) then
-    fVenda := TfVenda.Create(fPrincipal)
+  if (DM.qParametroUsa_PDV.AsString = 'S') then
+    Forms.CriaForm(fPDV, TfPDV)
   else
-    fVenda.Show;
+    Forms.CriaForm(fVenda, TfVenda);
 end;
 
 end.
+
