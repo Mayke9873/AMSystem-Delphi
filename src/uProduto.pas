@@ -116,8 +116,9 @@ begin
   if dmProdutos.qProduto.RecordCount = 1 then
   begin
     Result := True;
-    FID := dmProdutos.qProdutoId.AsInteger;
-    FDescricao := dmProdutos.qProdutoDescricao.AsString;
+    FID         := dmProdutos.qProdutoId.AsInteger;
+    FDescricao  := dmProdutos.qProdutoDescricao.AsString;
+    FPrecoVenda := dmProdutos.qProdutopVenda.AsFloat;
     Exit;
   end;
 
