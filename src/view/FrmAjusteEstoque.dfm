@@ -14,7 +14,6 @@ object fAjusteEstoque: TfAjusteEstoque
   KeyPreview = True
   Position = poMainFormCenter
   Visible = True
-  OnClose = FormClose
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   TextHeight = 15
@@ -55,7 +54,7 @@ object fAjusteEstoque: TfAjusteEstoque
       BevelOuter = bvNone
       Caption = 'pnlBotoes'
       ShowCaption = False
-      TabOrder = 0
+      TabOrder = 4
       object pnlSair: TPanel
         Left = 422
         Top = 0
@@ -64,7 +63,7 @@ object fAjusteEstoque: TfAjusteEstoque
         Align = alRight
         BevelOuter = bvNone
         Caption = 'pnlSair'
-        TabOrder = 0
+        TabOrder = 1
         object Shape3: TShape
           Left = 0
           Top = 0
@@ -100,7 +99,7 @@ object fAjusteEstoque: TfAjusteEstoque
         Align = alLeft
         BevelOuter = bvNone
         Caption = 'pnlAjustarEstoque'
-        TabOrder = 1
+        TabOrder = 0
         object Shape1: TShape
           Left = 0
           Top = 0
@@ -141,7 +140,7 @@ object fAjusteEstoque: TfAjusteEstoque
       BevelOuter = bvNone
       Caption = 'Panel1'
       ShowCaption = False
-      TabOrder = 1
+      TabOrder = 0
       object lblTitulo: TLabel
         AlignWithMargins = True
         Left = 4
@@ -176,7 +175,7 @@ object fAjusteEstoque: TfAjusteEstoque
       BevelOuter = bvNone
       Caption = 'pnlEntradaSaida'
       ShowCaption = False
-      TabOrder = 2
+      TabOrder = 3
       object Label2: TLabel
         AlignWithMargins = True
         Left = 280
@@ -236,7 +235,7 @@ object fAjusteEstoque: TfAjusteEstoque
       Padding.Left = 8
       Padding.Right = 8
       ShowCaption = False
-      TabOrder = 3
+      TabOrder = 1
       object Label3: TLabel
         AlignWithMargins = True
         Left = 8
@@ -314,8 +313,6 @@ object fAjusteEstoque: TfAjusteEstoque
             OnChange = edProdutoChange
             OnKeyDown = edProdutoKeyDown
             OnKeyPress = edProdutoKeyPress
-            ExplicitLeft = 1
-            ExplicitTop = 5
           end
         end
         object pnlIdProduto: TPanel
@@ -551,7 +548,7 @@ object fAjusteEstoque: TfAjusteEstoque
       Height = 120
       DataSource = dmProdutos.dProduto
       ReadOnly = True
-      TabOrder = 4
+      TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12

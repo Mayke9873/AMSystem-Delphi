@@ -51,7 +51,6 @@ type
     edIdProduto: TEdit;
     edQuantidade: TEdit;
     edObs: TEdit;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure acSairExecute(Sender: TObject);
     procedure EntradaSaidaExecute(Sender: TObject);
     procedure acAjusteEstoqueExecute(Sender: TObject);
@@ -214,11 +213,6 @@ end;
 procedure TfAjusteEstoque.acSairExecute(Sender: TObject);
 begin
   Close;
-end;
-
-procedure TfAjusteEstoque.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  Forms.FecharForm(Self, Action);
 end;
 
 procedure TfAjusteEstoque.FormShow(Sender: TObject);
