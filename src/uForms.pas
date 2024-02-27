@@ -17,7 +17,7 @@ type
 implementation
 
 uses
-  FrmPrincipal;
+  FrmPrincipal, uDM;
 
 procedure TForms.CriaForm(aValue: TForm; aClass: TFormClass);
 var
@@ -46,7 +46,10 @@ begin
   TForm(Sender) := nil;
 
   if fPrincipal.MDIChildCount = 1 then
-    AtivaPanel(True)
+  begin
+    if DM.qParametroUsa_comanda.AsString = 'S' then
+      AtivaPanel(True);
+  end
   else
   begin
     TForm(Sender) := fPrincipal.ActiveMDIChild;
@@ -56,7 +59,9 @@ end;
 
 procedure TForms.AtivaPanel(PanelVisible: Boolean);
 begin
+
   fPrincipal.pnlComandas.Visible := PanelVisible;
+  fPrincipal.tmComanda.Enabled   := PanelVisible;
 end;
 
 end.
