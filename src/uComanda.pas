@@ -15,6 +15,7 @@ type
     Fnome: String;
     FQuery: TZQuery;
     FListaComandas: TObjectList<TComanda>;
+    FvalTotal: Currency;
     procedure Setcomanda(const Value: integer);
     procedure Setem_Caixa(const Value: String);
     procedure Setem_Uso(const Value: String);
@@ -22,6 +23,7 @@ type
     procedure Setnome(const Value: String);
     procedure SetListaComandas(const Value: TObjectList<TComanda>);
     function GetListaComandas: TObjectList<TComanda>;
+    procedure SetvalTotal(const Value: Currency);
   public
     function VerificaComanda(comanda: Integer = 0): Boolean;
     function AbreComanda(comanda: Integer = 0; nome: String = ''): TComanda;
@@ -32,6 +34,7 @@ type
     property nome: String read Fnome write Setnome;
     property em_Uso: String read Fem_Uso write Setem_Uso;
     property em_Caixa: String read Fem_Caixa write Setem_Caixa;
+    property valTotal: Currency read FvalTotal write SetvalTotal;
     property ListaComandas: TObjectList<TComanda> read GetListaComandas write SetListaComandas;
     constructor Create;
     destructor Destroy; override;
@@ -108,8 +111,10 @@ begin
 
   FQuery.SQL.Clear;
   FQuery.Close;
-  FQuery.SQL.Add('select id, comanda, nome, em_Uso, em_Caixa ');
-  FQuery.SQL.Add(' from comanda where em_uso like '+ QuotedStr(em_Uso) );
+  FQuery.SQL.Add('select comanda.id, comanda, nome, em_Uso, em_Caixa, sum(coalesce(vc.total, 0)) total ');
+  FQuery.SQL.Add(' from comanda left join venda_comanda VC on Vc.idComanda = comanda.comanda and VC.status = ''A''');
+  FQuery.SQL.Add(' where em_uso like '+ QuotedStr(em_Uso) );
+  FQuery.SQL.Add(' group by comanda.id');
   FQuery.SQL.Add(' order by comanda');
   FQuery.Open;
 
@@ -125,6 +130,7 @@ begin
       FListaComandas[I].nome     := FQuery.Fields[2].AsString;
       FListaComandas[I].em_Uso   := FQuery.Fields[3].AsString;
       FListaComandas[I].em_Caixa := FQuery.Fields[4].AsString;
+      FListaComandas[I].valTotal := FQuery.Fields[5].AsCurrency;
       FQuery.Next;
     end;
   end;
@@ -160,6 +166,11 @@ end;
 procedure TComanda.Setnome(const Value: String);
 begin
   Fnome := Value;
+end;
+
+procedure TComanda.SetvalTotal(const Value: Currency);
+begin
+  FvalTotal := Value;
 end;
 
 end.
