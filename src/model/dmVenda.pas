@@ -19,6 +19,26 @@ type
     qConsVendasVALOR_TOTAL: TZBCDField;
     qConsVendasDATA_VENDA: TZDateField;
     qConsVendasNOME: TWideStringField;
+    qVenda_comanda: TZQuery;
+    IntegerField1: TIntegerField;
+    uVenda_comanda: TZUpdateSQL;
+    CdsItens: TClientDataSet;
+    CdsItenscodProduto: TIntegerField;
+    CdsItensprodDescricao: TStringField;
+    CdsItensprodQtd: TFloatField;
+    CdsItensprodUnit: TCurrencyField;
+    CdsItensprodTotal: TCurrencyField;
+    CdsItensID: TIntegerField;
+    dProdVenda: TDataSource;
+    uProdVenda: TZUpdateSQL;
+    qProdVenda: TZQuery;
+    qProdVendaid: TIntegerField;
+    qProdVendaidprod: TIntegerField;
+    qProdVendaquantidade: TZBCDField;
+    qProdVendadescricao: TWideStringField;
+    qProdVendadesconto: TZBCDField;
+    qProdVendatotal: TZBCDField;
+    qProdVendavalor: TZBCDField;
   private
     { Private declarations }
   public
