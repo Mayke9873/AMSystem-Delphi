@@ -25,6 +25,7 @@ type
     procedure Estoque;
     procedure AbreVenda;
     procedure SetidVendedor(const Value: Integer);
+    procedure ItensPDV;
 
   public
     property Total : Currency read FTotal write SetTotal;
@@ -36,8 +37,8 @@ type
     property idVendedor: Integer read FidVendedor write SetidVendedor;
     procedure Soma;
     procedure Subtrair;
-    procedure LimpaProduto;
-    procedure ExcluirProduto;
+    procedure LimpaVenda;
+    procedure ExcluirProduto(index: Integer = 0);
     procedure InsereVenda(pCodigoVenda : String);
     function Cancelar: Boolean;
     function Finaliza: Boolean;
@@ -53,10 +54,16 @@ implementation
 
 { TVenda }
 
-procedure TVenda.ExcluirProduto;
+procedure TVenda.ExcluirProduto(index: Integer = 0);
 begin
-  ExecSQL('Update Venda_item set ex = 1 where id = '+ fVenda.DBGrid1.Fields[0].AsString +' and ' +
-      ' IdVenda = '+ IntToStr(ID) +';');
+  if not (DM.qParametroUsa_PDV.AsString = 'S') then
+    ExecSQL('Update Venda_item set ex = 1 where id = '+ fVenda.DBGrid1.Fields[0].AsString +' and ' +
+            ' IdVenda = '+ IntToStr(ID) +';');
+
+  PrecoProduto := FItens[index].total;
+  Desconto     := FItens[index].desconto;
+
+  FItens.Delete(index);
 
   Subtrair();
 end;
@@ -64,11 +71,15 @@ end;
 function TVenda.Finaliza : Boolean;
 begin
   Result := False;
-  if ID <> 0 then
+  if (ID <> 0) or (DM.qParametroUsa_PDV.AsString = 'S') then
   begin
     if Application.MessageBox('Confirma venda?', 'Atenção', MB_YESNO + MB_ICONQUESTION) = IDYES then
     begin
-      ExecSQL('UPDATE VENDA SET ID_CLIENTE = ' + IntToStr(dmClientes.qClienteId.AsInteger) + ', CLIENTE = ' + QuotedStr(dmClientes.qClienteNome.AsString) +
+
+      ItensPDV();
+
+      ExecSQL('UPDATE VENDA SET ID_CLIENTE = ' + IntToStr(dmClientes.qClienteId.AsInteger) +
+        ', CLIENTE = ' + QuotedStr(dmClientes.qClienteNome.AsString) +
         ', VALOR = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
         ', DESCONTO = ' + StringReplace(FloatToStr(Desconto), ',', '.', []) +
         ', VALOR_TOTAL = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
@@ -82,9 +93,32 @@ begin
       FItens.Clear;
       Result := True;
     end;
-
   end;
+end;
 
+procedure TVenda.ItensPDV;
+var
+  Item: TVenda_Itens;
+begin
+  if DM.qParametroUsa_PDV.AsString = 'S' then
+  begin
+    InsereVenda('');
+
+    for Item in FItens do
+    begin
+      dmVendas.qProdVenda.Open;
+      dmVendas.qProdVenda.Insert;
+      dmVendas.qProdVendaidprod.AsInteger := Item.id;
+      dmVendas.qProdVendadescricao.AsString := Item.descricao;
+      dmVendas.qProdVendavalor.AsFloat := Item.valor_unit;
+      dmVendas.qProdVendadesconto.AsFloat := Item.desconto;
+      dmVendas.qProdVendaquantidade.AsFloat := Item.quantidade;
+      dmVendas.qProdVendatotal.AsFloat := Item.total;
+
+      dmVendas.qProdVenda.ApplyUpdates;
+      dmVendas.qProdVenda.Close;
+    end;
+  end;
 end;
 
 constructor TVenda.Create;
@@ -101,15 +135,15 @@ end;
 procedure TVenda.Estoque;
 var
   Prod: TEstoque;
-  I: Integer;
+  Item: TVenda_Itens;
 begin
   Prod := TEstoque.Create;
   try
-    FItens.First;
-    for I := 0 to FItens.Count -1 do
+    for Item in FItens do
     begin
-      Prod.idProduto := FItens[I].id;
-      Prod.qtd :=  FItens[I].quantidade;
+      Prod.idProduto      := Item.id;
+      Prod.qtd            := Item.quantidade;
+      Prod.idMovimentacao := FID;
 
       Prod.MovEstoque(Venda, Saida);
     end;
@@ -123,8 +157,11 @@ procedure TVenda.InsereVenda(pCodigoVenda : String);
 begin
   if Length(pCodigoVenda) = 0 then
   begin
-    Total := 0;
-    Desconto := 0;
+    if not (DM.qParametroUsa_PDV.AsString = 'S') then
+    begin
+      Total := 0;
+      Desconto := 0;
+    end;
 
     ExecSQL('insert into venda (ID, EX) select (select coalesce(max(id)+1, 1) from venda), 1;');
 
@@ -139,9 +176,11 @@ begin
   ID := dmVendas.qVenda.Fields[0].Value;
 end;
 
-procedure TVenda.LimpaProduto;
+procedure TVenda.LimpaVenda;
 begin
-// Implementar algo q limpe a grid.
+  FItens.Clear;
+  FTotal    := 0;
+  FDesconto := 0;
 end;
 
 function TVenda.Cancelar : Boolean;
@@ -149,7 +188,7 @@ begin
   Result := False;
   if Application.MessageBox('Deseja cancelar venda?', 'Atenção', MB_YESNO + MB_ICONQUESTION) = IDYES then
   begin
-    LimpaProduto;
+    LimpaVenda;
     ExecSQL('Delete from venda where ID = ' + IntToStr(ID));
     ExecSQL('Delete from venda_item where idVenda = '+  IntToStr(ID));
     Result := True;
