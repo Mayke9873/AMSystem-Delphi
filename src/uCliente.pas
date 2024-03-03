@@ -4,7 +4,7 @@ interface
 
 uses
   uPessoa, ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows,
-  Interfaces;
+  Interfaces, System.StrUtils;
 
 type
   TCliente = class(TPessoa)
@@ -13,6 +13,7 @@ type
     FTpPessoa: String;
     procedure SetDtNasc(const Value: String);
     procedure SetTpPessoa(const Value: String);
+    function DigitoCPF(aCPF: String): String;
   public
     Conexao : IConexao;
     property DtNasc : String read FDtNasc write SetDtNasc;
@@ -22,6 +23,7 @@ type
     function Pesquisar(pNome : String) : Boolean; overload;
     function Pesquisar(pID : Integer) : Boolean; overload;
     function Tipo: String; override;
+    function CPFValido(aCPF: string): Boolean;
   end;
 
 
@@ -33,7 +35,7 @@ implementation
 { TClientes }
 
 procedure TCliente.Editar(Value: TCliente);
-begin
+begin  
   if not (dmClientes.qCliente.State in [dsEdit]) then
     dmClientes.qCliente.Edit;
 
@@ -142,6 +144,36 @@ end;
 function TCliente.Tipo: String;
 begin
   Result := 'Cliente';
+end;
+
+function TCliente.CPFValido(aCPF: string): Boolean;
+var
+  CpfLimpo: String;
+begin  
+  CpfLimpo   := StringReplace(StringReplace(aCPF, '-', '', []), '.', '', [rfReplaceAll]);
+  Delete(CpfLimpo, Length(CpfLimpo) -1, 2);
+
+  CpfLimpo := CpfLimpo + DigitoCPF(CpfLimpo);
+  CpfLimpo := CpfLimpo + DigitoCPF(CpfLimpo);
+
+  Result := StringReplace(StringReplace(aCPF, '-', '', []), '.', '', [rfReplaceAll]) = CpfLimpo;
+end;
+
+function TCliente.DigitoCPF(aCPF: String): String;
+var
+  I, J, soma: Integer;
+begin
+  J := 2;
+  Soma := 0;
+  
+  for I := Length(aCPF) downto 1 do
+  begin
+    soma := soma + (J * StrToInt(aCPF[I]));
+    Inc(J);
+  end;
+
+  soma := 11 - (Soma mod 11);
+  Result := IfThen(soma > 9, '0', soma.ToString);
 end;
 
 end.
