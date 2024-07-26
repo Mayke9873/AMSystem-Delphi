@@ -66,7 +66,7 @@ type
     procedure ClickComandas(Sender: TObject);
 
   public
-    { Public declarations }
+    comanda: TComanda;
   end;
 
 var
@@ -139,7 +139,7 @@ begin
   Caption := 'AmSystem :::: V.' + VersaoExe;
   Forms := TForms.Create;
 
-  if DM.qParametroUsa_comanda.AsString = 'S' then
+  if (DM.qParametroUsa_comanda.AsString = 'S') then
   begin
     pnlComandas.Visible := True;
     Comandas(Application);
@@ -251,18 +251,18 @@ begin
 
       if (FindComponent('CMD' + AComandas[I].id.ToString) = nil) then
       begin
-        LFrame := TFrameComanda.Create(Self);
-        LFrame.Name := 'CMD' + AComandas[I].id.ToString;
-        LFrame.Parent := pnlComandas;
+        LFrame                  := TFrameComanda.Create(Self);
+        LFrame.Name             := 'CMD' + AComandas[I].id.ToString;
+        LFrame.Parent           := pnlComandas;
         LFrame.pnlFrame.OnClick := ClickComandas;
-        LFrame.lNome.OnClick := ClickComandas;
-        LFrame.lValor.OnClick := ClickComandas;
+        LFrame.lNome.OnClick    := ClickComandas;
+        LFrame.lValor.OnClick   := ClickComandas;
         LFrame.lNumeroComanda.OnClick := ClickComandas;
         LFrame.lNumeroComanda.Caption := AComandas[I].comanda.ToString;
-        LFrame.pnlFrame.Tag := AComandas[I].comanda;
-        LFrame.lValor.Tag := AComandas[I].comanda;
-        LFrame.lNumeroComanda.Tag := AComandas[I].comanda;
-        LFrame.lNome.Tag := AComandas[I].comanda;
+        LFrame.pnlFrame.Tag           := AComandas[I].comanda;
+        LFrame.lValor.Tag             := AComandas[I].comanda;
+        LFrame.lNumeroComanda.Tag     := AComandas[I].comanda;
+        LFrame.lNome.Tag              := AComandas[I].comanda;
       end
       else
         LFrame := TFrameComanda(FindComponent('CMD' + AComandas[I].id.ToString));
@@ -297,20 +297,14 @@ begin
 end;
 
 procedure TfPrincipal.ClickComandas(Sender: TObject);
-var
-  LMessage: string;
 begin
-  pnlComandas.Visible := False;
-
-  LMessage := (TFrameComanda(Sender).Hint);
-  LMessage := (TFrameComanda(Sender).Tag.ToString);  //TO DO: Abrir comanda pela tag.
-
-  if (TFrame(Sender).Hint = 'CMD ') then
-    LMessage := (TFrame(Sender).Hint + TFrame(Sender).Tag.ToString);
-
-  ShowMessage(LMessage);
-
-  pnlComandas.Visible := True;
+  comanda := TComanda.Create;
+  try
+    comanda.id := TFrameComanda(Sender).Tag;
+    Venda1.Click;
+  finally
+    FreeAndNil(comanda);
+  end;
 end;
 
 procedure TfPrincipal.Venda1Click(Sender: TObject);
