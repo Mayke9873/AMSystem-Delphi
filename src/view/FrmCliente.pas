@@ -100,7 +100,7 @@ var
 
 implementation
 
-uses dmCliente, Conexao.MySQL, FrmPrincipal;
+uses dmCliente, Conexao.MySQL, FrmPrincipal, System.StrUtils;
 {$R *.dfm}
 
 procedure TfCliente.DBECPFKeyPress(Sender: TObject; var Key: Char);
@@ -289,11 +289,7 @@ begin
   Cliente.Bairro := DBEBairro.Text;
   Cliente.DtNasc := DBENasc.Text;
 
-  if DBCheckBox1.Checked then
-    Cliente.Ativo := DBCheckBox1.ValueChecked
-
-  else
-    Cliente.Ativo := DBCheckBox1.ValueUnchecked;
+  Cliente.Ativo := IfThen(DBCheckBox1.Checked, DBCheckBox1.ValueChecked, DBCheckBox1.ValueUnchecked);
 
   NovoOuEditar(TipoCadastro);
   Consulta;
