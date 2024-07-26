@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
   Vcl.DBGrids, ZAbstractRODataset, ZDataset, ZSqlUpdate, ZAbstractDataset,
   System.StrUtils, Vcl.ExtCtrls, uCliente, Vcl.Buttons, uVenda, uProduto,
-  uFuncionario, uVenda_Itens;
+  uFuncionario, uVenda.Itens;
 
 type
   TfVenda = class(TForm)
