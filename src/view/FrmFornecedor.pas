@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, System.ImageList, Vcl.ImgList,
   Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, uFornecedor, Skia, Skia.Vcl;
+  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, uFornecedor, Skia, Vcl.Skia;
 
 
 type

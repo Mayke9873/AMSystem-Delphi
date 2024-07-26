@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ZSqlUpdate, System.ImageList, Vcl.ImgList,
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls,
-  Vcl.ToolWin, System.Actions, Vcl.ActnList, Vcl.ExtCtrls, Skia, Skia.Vcl, uGrupoProduto;
+  Vcl.ToolWin, System.Actions, Vcl.ActnList, Vcl.ExtCtrls, Skia, Vcl.Skia, uGrupoProduto;
 
 type
   TfGrupoProd = class(TForm)

@@ -10,7 +10,7 @@ uses
   ZAbstractRODataset, ZDataset, Vcl.ComCtrls, Vcl.Tabs, Vcl.DockTabSet,
   Vcl.StdCtrls, System.ImageList, Vcl.ImgList, ZAbstractDataset, Vcl.Mask,
   Vcl.DBCtrls, Vcl.ExtCtrls, ZSqlUpdate, Vcl.Buttons, uCliente, uValida,
-  System.Threading, Skia, Skia.Vcl;
+  System.Threading, Skia, VCL.Skia;
 
 type
   TfCliente = class(TForm)

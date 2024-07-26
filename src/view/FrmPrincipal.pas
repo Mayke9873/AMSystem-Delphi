@@ -3,13 +3,12 @@
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   System.Win.TaskbarCore, Vcl.Taskbar, Vcl.ComCtrls, Vcl.ToolWin,
   System.ImageList, Vcl.ImgList, Vcl.Menus, Threading, IPPeerClient,
   IPPeerServer, System.Tether.Manager, Vcl.OleCtrls, SHDocVw, Vcl.ExtCtrls,
-  Vcl.Imaging.jpeg, uValida, Skia, Skia.Vcl, ZDataset, uComanda,
-  System.Generics.Collections, Vcl.StdCtrls, uForms;
+  Vcl.Imaging.jpeg, uValida, Skia, Vcl.Skia, ZDataset, uComanda,
+  System.Generics.Collections, Vcl.StdCtrls, uForms, System.Classes;
 
 type
   TfPrincipal = class(TForm)

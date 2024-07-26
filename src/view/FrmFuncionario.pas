@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, ZSqlUpdate, System.ImageList, Vcl.ImgList,
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, uFuncionario, Skia, Skia.Vcl;
+  Vcl.ComCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, uFuncionario, Skia, Vcl.Skia;
 
 Const
   telaPadrao = 0;
