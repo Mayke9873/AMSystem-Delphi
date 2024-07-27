@@ -1,7 +1,7 @@
 object fPrincipal: TfPrincipal
   Left = 0
   Top = 0
-  Width = 1112
+  Width = 1024
   Height = 778
   AutoScroll = True
   Caption = 'AmSystem'
@@ -23,13 +23,13 @@ object fPrincipal: TfPrincipal
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    1100
+    1012
     720)
   TextHeight = 13
   object Image1: TImage
     Left = 0
     Top = 41
-    Width = 1100
+    Width = 1012
     Height = 679
     Align = alClient
     DragKind = dkDock
@@ -7080,7 +7080,7 @@ object fPrincipal: TfPrincipal
   object pnlBotoes: TPanel
     Left = 0
     Top = 0
-    Width = 1100
+    Width = 1012
     Height = 41
     Align = alTop
     BevelOuter = bvNone
@@ -7247,16 +7247,16 @@ object fPrincipal: TfPrincipal
   object pnlComandas: TPanel
     Left = 2
     Top = 42
-    Width = 1166
-    Height = 463
+    Width = 1082
+    Height = 444
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     Caption = 'pnlComandas'
     ShowCaption = False
     TabOrder = 1
     Visible = False
-    ExplicitWidth = 1162
-    ExplicitHeight = 462
+    ExplicitWidth = 1166
+    ExplicitHeight = 443
   end
   object MainMenu1: TMainMenu
     Left = 216

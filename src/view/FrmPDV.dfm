@@ -47,20 +47,19 @@ object fPDV: TfPDV
       ExplicitTop = 601
       ExplicitWidth = 1002
       object pnlFuncoes: TPanel
-        Left = 816
+        Left = 836
         Top = 9
-        Width = 185
+        Width = 165
         Height = 66
         Align = alRight
         BevelOuter = bvNone
         Caption = 'pnlFuncoes'
         ShowCaption = False
         TabOrder = 5
-        ExplicitLeft = 812
         object Shape5: TShape
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Align = alClient
           Brush.Color = clSkyBlue
@@ -74,28 +73,30 @@ object fPDV: TfPDV
         object btnFuncoes: TSpeedButton
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Action = acMaisAtalhos
           Align = alClient
           Flat = True
           ExplicitTop = -3
+          ExplicitWidth = 185
         end
       end
       object pnlSair: TPanel
-        Left = 745
+        Left = 665
         Top = 9
-        Width = 185
+        Width = 165
         Height = 66
         Align = alLeft
         BevelOuter = bvNone
         Caption = 'Panel4'
         ShowCaption = False
         TabOrder = 4
+        ExplicitLeft = 668
         object Shape4: TShape
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Align = alClient
           Brush.Color = clSkyBlue
@@ -109,7 +110,7 @@ object fPDV: TfPDV
         object btnSair: TSpeedButton
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Action = acSair
           Align = alClient
@@ -123,23 +124,25 @@ object fPDV: TfPDV
           ParentFont = False
           ExplicitLeft = 6
           ExplicitTop = -3
+          ExplicitWidth = 185
           ExplicitHeight = 84
         end
       end
       object pnlPesqProduto: TPanel
-        Left = 375
+        Left = 335
         Top = 9
-        Width = 185
+        Width = 165
         Height = 66
         Align = alLeft
         BevelOuter = bvNone
         Caption = 'Panel4'
         ShowCaption = False
         TabOrder = 2
+        ExplicitLeft = 338
         object Shape3: TShape
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Align = alClient
           Brush.Color = clSkyBlue
@@ -153,7 +156,7 @@ object fPDV: TfPDV
         object btnBuscaProduto: TSpeedButton
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Align = alClient
           Caption = 'Pesquisar produto'#13'(F4)'
@@ -167,22 +170,24 @@ object fPDV: TfPDV
           OnClick = btnBuscaProdutoClick
           ExplicitLeft = 6
           ExplicitTop = -3
+          ExplicitWidth = 185
         end
       end
       object pnlFinalizar: TPanel
-        Left = 190
+        Left = 170
         Top = 9
-        Width = 185
+        Width = 165
         Height = 66
         Align = alLeft
         BevelOuter = bvNone
         Caption = 'Panel4'
         ShowCaption = False
         TabOrder = 1
+        ExplicitLeft = 173
         object Shape2: TShape
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Align = alClient
           Brush.Color = clSkyBlue
@@ -196,7 +201,7 @@ object fPDV: TfPDV
         object btnFinalizar: TSpeedButton
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Action = acFinalizar
           Align = alClient
@@ -210,13 +215,14 @@ object fPDV: TfPDV
           ParentFont = False
           ExplicitLeft = -6
           ExplicitTop = -3
+          ExplicitWidth = 185
           ExplicitHeight = 84
         end
       end
       object pnlSalvar: TPanel
         Left = 5
         Top = 9
-        Width = 185
+        Width = 165
         Height = 66
         Align = alLeft
         BevelOuter = bvNone
@@ -226,7 +232,7 @@ object fPDV: TfPDV
         object Shape1: TShape
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Align = alClient
           Brush.Color = clSkyBlue
@@ -240,7 +246,7 @@ object fPDV: TfPDV
         object btnSalvar: TSpeedButton
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Action = acSalvar
           Align = alClient
@@ -253,23 +259,25 @@ object fPDV: TfPDV
           Font.Style = []
           ParentFont = False
           ExplicitTop = -3
+          ExplicitWidth = 185
           ExplicitHeight = 84
         end
       end
       object pnlExcluirProduto: TPanel
-        Left = 560
+        Left = 500
         Top = 9
-        Width = 185
+        Width = 165
         Height = 66
         Align = alLeft
         BevelOuter = bvNone
         Caption = 'Panel4'
         ShowCaption = False
         TabOrder = 3
+        ExplicitLeft = 509
         object Shape11: TShape
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Align = alClient
           Brush.Color = clSkyBlue
@@ -283,7 +291,7 @@ object fPDV: TfPDV
         object btnExcluirProduto: TSpeedButton
           Left = 0
           Top = 0
-          Width = 185
+          Width = 165
           Height = 66
           Action = acExcluirProd
           Align = alClient
@@ -297,6 +305,7 @@ object fPDV: TfPDV
           ParentFont = False
           ExplicitLeft = -6
           ExplicitTop = -3
+          ExplicitWidth = 185
         end
       end
     end
