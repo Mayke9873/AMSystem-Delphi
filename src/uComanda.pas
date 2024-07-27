@@ -278,10 +278,12 @@ var
 begin
   FListaComandas.Clear;
 
-  SQL := 'select comanda.id, comanda, nome, em_Uso, em_Caixa, sum(coalesce(vc.total, 0)) total ' + #10#13 +
+  SQL := 'select comanda.id, comanda, nome, em_Uso, em_Caixa,  ' +
+         '   case when em_Uso = ''S'' then sum(coalesce(vc.total, 0)) ' + #10#13 +
+         '         else 0 end total' + #10#13 +
          ' from comanda ' + #10#13 +
-         'left join venda_comanda VC on Vc.idComanda = comanda.comanda and VC.status = ''A''' + #10#13 +
-         ' where em_uso like '+ QuotedStr(em_Uso) + #10#13 + ' and (VC.ex = 0 or VC.ex = 1)'+
+         'left join venda_comanda VC on Vc.idComanda = comanda.comanda and VC.ex = 0' + #10#13 +
+         ' where em_uso like '+ QuotedStr(em_Uso) + #10#13 +
          ' group by comanda.id  '+ #10#13 + ' order by comanda';
 
   FQuery.Open;
