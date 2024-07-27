@@ -37,9 +37,15 @@ uses
   dmGrupo in 'src\model\dmGrupo.pas' {dmGrupos: TDataModule},
   FrmRelVendas in 'src\view\FrmRelVendas.pas' {fRelVendas},
   uRelVendas in 'src\Reports\uRelVendas.pas' {fRelVendas_I},
-  FrmConsultaCompra in 'src\view\FrmConsultaCompra.pas' {fConsultaCompra};
   FrmConsultaCompra in 'src\view\FrmConsultaCompra.pas' {fConsultaCompra},
-  uForms in 'src\uForms.pas';
+  uFrame.Comanda in 'src\Frames\uFrame.Comanda.pas' {FrameComanda: TFrame},
+  uRelEstoque in 'src\Reports\uRelEstoque.pas' {fRelEstoque_I},
+  FrmPDV in 'src\view\FrmPDV.pas' {fPDV},
+  uComanda in 'src\uComanda.pas',
+  uComanda.Itens in 'src\uComanda.Itens.pas',
+  uVenda.Itens in 'src\uVenda.Itens.pas',
+  uForms in 'src\uForms.pas',
+  FrmPesqProduto in 'src\view\FrmPesqProduto.pas' {fPesProd};
 
 {$R *.res}
 
@@ -47,7 +53,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDM, DM);
-  Application.CreateForm(TfPrincipal, fPrincipal);
   Application.CreateForm(TdmVendas, dmVendas);
   Application.CreateForm(TdmFuncionarios, dmFuncionarios);
   Application.CreateForm(TdmProdutos, dmProdutos);
@@ -55,5 +60,6 @@ begin
   Application.CreateForm(TdmClientes, dmClientes);
   Application.CreateForm(TdmCompras, dmCompras);
   Application.CreateForm(TdmGrupos, dmGrupos);
+  Application.CreateForm(TfPrincipal, fPrincipal);
   Application.Run;
 end.
