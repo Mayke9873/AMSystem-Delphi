@@ -17,6 +17,7 @@ object fPDV: TfPDV
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 15
   object pnlPrincipal: TPanel
     Left = 0
@@ -395,7 +396,8 @@ object fPDV: TfPDV
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
-            Text = 'EDTCOMANDA'
+            TextHint = 'N'#186' comanda'
+            OnKeyDown = edtComandaKeyDown
           end
         end
       end

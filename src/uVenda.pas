@@ -3,20 +3,22 @@ unit uVenda;
 interface
 
 uses
-  ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows, Interfaces, uCliente, uVenda_Itens,
-  System.Generics.Collections;
+  System.Generics.Collections, ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows, Interfaces,
+  uCliente, uVenda.Itens, uComanda, uComanda.Itens;
 
 type
   TVenda = class
   private
     FID: Integer;
+    FidVendedor: Integer;
     FDesconto: Currency;
     FTotal: Currency;
     FDescontoProduto: Currency;
     FPrecoProduto: Currency;
     FItens: TObjectList<TVenda_Itens>;
-    FidVendedor: Integer;
+
     procedure SetID(const Value: Integer);
+    procedure SetidVendedor(const Value: Integer);
     procedure SetDesconto(const Value: Currency);
     procedure SetTotal(const Value: Currency);
     procedure SetDescontoProduto(const Value: Currency);
@@ -24,22 +26,27 @@ type
     procedure SetItens(const Value: TObjectList<TVenda_Itens>);
     procedure Estoque;
     procedure AbreVenda;
-    procedure SetidVendedor(const Value: Integer);
     procedure ItensPDV;
 
   public
-    property Total : Currency read FTotal write SetTotal;
-    property Desconto : Currency read FDesconto write SetDesconto;
-    property PrecoProduto : Currency read FPrecoProduto write SetPrecoProduto;
-    property DescontoProduto : Currency read FDescontoProduto write SetDescontoProduto;
+    fComanda: TComanda;
+
     property ID : Integer read FID write SetID;
-    property Itens: TObjectList<TVenda_Itens> read FItens write SetItens;
     property idVendedor: Integer read FidVendedor write SetidVendedor;
+    property Desconto : Currency read FDesconto write SetDesconto;
+    property Total : Currency read FTotal write SetTotal;
+    property DescontoProduto : Currency read FDescontoProduto write SetDescontoProduto;
+    property PrecoProduto : Currency read FPrecoProduto write SetPrecoProduto;
+    property Itens: TObjectList<TVenda_Itens> read FItens write SetItens;
+
     procedure Soma;
     procedure Subtrair;
     procedure LimpaVenda;
     procedure ExcluirProduto(index: Integer = 0);
     procedure InsereVenda(pCodigoVenda : String);
+    procedure InserirItemComanda(aItem: TVenda_Itens);
+
+    function Salvar: Boolean;
     function Cancelar: Boolean;
     function Finaliza: Boolean;
 
@@ -57,8 +64,11 @@ implementation
 procedure TVenda.ExcluirProduto(index: Integer = 0);
 begin
   if not (DM.qParametroUsa_PDV.AsString = 'S') then
-    ExecSQL('Update Venda_item set ex = 1 where id = '+ fVenda.DBGrid1.Fields[0].AsString +' and ' +
+    ExecSQL('Update Venda_item set ex = 2 where id = '+ fVenda.DBGrid1.Fields[0].AsString +' and ' +
             ' IdVenda = '+ IntToStr(ID) +';');
+
+  if DM.qParametroUsa_comanda.AsString = 'S' then
+    fComanda.Itens[index].Ex := 2;
 
   PrecoProduto := FItens[index].total;
   Desconto     := FItens[index].desconto;
@@ -73,7 +83,7 @@ begin
   Result := False;
   if (ID <> 0) or (DM.qParametroUsa_PDV.AsString = 'S') then
   begin
-    if Application.MessageBox('Confirma venda?', 'Atenção', MB_YESNO + MB_ICONQUESTION) = IDYES then
+    if Application.MessageBox('Confirma venda?', 'Pergunta', MB_YESNO + MB_ICONQUESTION) = IDYES then
     begin
 
       ItensPDV();
@@ -90,7 +100,11 @@ begin
       ExecSQL('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + IntToStr(ID) + ';');
 
       Estoque();
-      FItens.Clear;
+
+      if DM.qParametroUsa_comanda.AsString = 'S' then
+        fComanda.Finaliza();
+
+      LimpaVenda();
       Result := True;
     end;
   end;
@@ -108,12 +122,12 @@ begin
     begin
       dmVendas.qProdVenda.Open;
       dmVendas.qProdVenda.Insert;
-      dmVendas.qProdVendaidprod.AsInteger := Item.id;
+      dmVendas.qProdVendaidprod.AsInteger   := Item.idProduto;
       dmVendas.qProdVendadescricao.AsString := Item.descricao;
-      dmVendas.qProdVendavalor.AsFloat := Item.valor_unit;
-      dmVendas.qProdVendadesconto.AsFloat := Item.desconto;
+      dmVendas.qProdVendavalor.AsFloat      := Item.valor_unit;
+      dmVendas.qProdVendadesconto.AsFloat   := Item.desconto;
       dmVendas.qProdVendaquantidade.AsFloat := Item.quantidade;
-      dmVendas.qProdVendatotal.AsFloat := Item.total;
+      dmVendas.qProdVendatotal.AsFloat      := Item.total;
 
       dmVendas.qProdVenda.ApplyUpdates;
       dmVendas.qProdVenda.Close;
@@ -123,11 +137,13 @@ end;
 
 constructor TVenda.Create;
 begin
-  Itens := TObjectList<TVenda_Itens>.Create;
+  Itens     := TObjectList<TVenda_Itens>.Create;
+  fComanda  := TComanda.Create;
 end;
 
 destructor TVenda.Destroy;
 begin
+  FreeAndNil(fComanda);
   FreeAndNil(Itens);
   inherited;
 end;
@@ -141,7 +157,7 @@ begin
   try
     for Item in FItens do
     begin
-      Prod.idProduto      := Item.id;
+      Prod.idProduto      := Item.idProduto;
       Prod.qtd            := Item.quantidade;
       Prod.idMovimentacao := FID;
 
@@ -208,6 +224,38 @@ begin
   Desconto := Desconto - DescontoProduto;
 end;
 
+function TVenda.Salvar: Boolean;
+var
+  Item: TVenda_Itens;
+begin
+  if NOT (Application.MessageBox('Salvar comanda?', 'Confirmação', MB_YESNO + 32) = IDYES) then
+    Exit(False);
+
+  if DM.qParametroUsa_comanda.AsString = 'S' then
+  begin
+    fComanda.SalvaItens;
+    Self.Itens.Clear;
+    Exit(True);
+  end;
+end;
+
+procedure TVenda.InserirItemComanda(aItem: TVenda_Itens);
+var
+  LItensComanda: TItensComanda;
+begin
+  LItensComanda := TItensComanda.Create;
+
+  LItensComanda.comanda     := Self.fComanda.comanda;
+  LItensComanda.idProduto   := aItem.idProduto;
+  LItensComanda.quantidade  := aItem.quantidade;
+  LItensComanda.valorUnitario := aItem.valor_unit;
+  LItensComanda.valorTotal    := aItem.total;
+  LItensComanda.Status        := 'A';
+  LItensComanda.ex            := 0;
+
+  Self.fComanda.Itens.Add(LItenscomanda);
+end;
+
 procedure TVenda.SetDesconto(const Value: Currency);
 begin
   FDesconto := Value;
@@ -229,6 +277,8 @@ begin
 end;
 
 procedure TVenda.SetItens(const Value: TObjectList<TVenda_Itens>);
+var
+  Comanda: TComanda;
 begin
   FItens := Value;
 end;

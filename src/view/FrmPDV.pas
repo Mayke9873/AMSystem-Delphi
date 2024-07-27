@@ -3,9 +3,10 @@ unit FrmPDV;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, System.Actions, Vcl.ActnList, Vcl.ComCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, CheckDBGrid,
-  Vcl.StdCtrls, Data.Bind.Components, Data.Bind.DBScope, Datasnap.Provider, Datasnap.DBClient, uFuncionario, uProduto, uVenda, uVenda_Itens, Vcl.WinXCtrls;
+  Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.ExtCtrls, Vcl.Buttons, System.Actions, Vcl.ActnList, Vcl.ComCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, CheckDBGrid,
+  Vcl.StdCtrls, Vcl.WinXCtrls, Data.Bind.Components, Data.Bind.DBScope, Datasnap.Provider, Datasnap.DBClient,
+  uFuncionario, uProduto, uVenda, uVenda.Itens, uComanda;
 
 type
   TfPDV = class(TForm)
@@ -94,15 +95,17 @@ type
     procedure acExcluirProdExecute(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);
     procedure pnlCancelaVendaClick(Sender: TObject);
+    procedure edtComandaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
+
   private
-    verifyStatus: Boolean;
     Venda: TVenda;
     Produto: TProduto;
     Funcionario: TFuncionario;
     Prod_Venda : TVenda_Itens;
     procedure ConsultaPorID(Sender: TEdit);
     procedure StatusCaixa;
-    procedure InserirProduto;
+    procedure InserirProduto();
     procedure RefazCaption;
     procedure LimpaCampos;
     { Private declarations }
@@ -116,7 +119,8 @@ var
 implementation
 
 uses
-  dmVenda, uDM, FrmPrincipal, FrmPesqProduto;
+  dmVenda, uDM, FrmPrincipal, FrmPesqProduto, uComanda.Itens,
+  Winapi.Windows;
 
 {$R *.dfm}
 
@@ -124,23 +128,40 @@ procedure TfPDV.FormCreate(Sender: TObject);
 begin
   acMaisAtalhos.Execute;
 
-  Venda         := TVenda.Create;
-  Produto       := TProduto.Create;
-  Funcionario   := TFuncionario.Create;
-
-  verifyStatus := True;
   dmVendas.CdsItens.Open;
 
   pnlComanda.Visible := (DM.qParametroUsa_comanda.AsString = 'S');
   pnlSalvar.Visible  := pnlComanda.Visible;
+  acSalvar.Enabled   := pnlComanda.Visible;
+
+  if not (pnlComanda.Visible) then
+    Self.OnShow := nil;
+
+  Venda         := TVenda.Create;
+  Produto       := TProduto.Create;
+  Funcionario   := TFuncionario.Create;
 
   LimpaCampos();
 end;
 
+procedure TfPDV.FormShow(Sender: TObject);
+var
+  Key: Word;
+begin
+  Key := VK_RETURN;
+
+  if DM.qParametroUsa_comanda.AsString = 'S' then
+  begin
+    if Assigned(fPrincipal.comanda) then
+    begin
+      edtComanda.Text := fPrincipal.Comanda.id.ToString;
+      edtComandaKeyDown(Self, Key, []);
+    end;
+  end;
+end;
+
 procedure TfPDV.FormActivate(Sender: TObject);
 begin
-  StatusCaixa();
-
   if (edtIdProduto.Text = '0000') or (Trim(edtIdProduto.Text) = '') then
   begin
     edtIdProduto.Text := '0000';
@@ -148,6 +169,8 @@ begin
 
     edtIdProduto.SetFocus;
   end;
+
+  StatusCaixa();
 end;
 
 procedure TfPDV.acSairExecute(Sender: TObject);
@@ -161,6 +184,9 @@ begin
     if not (Application.MessageBox('Deseja sair sem salvar?', 'Confirmação', 32 + MB_YESNO) = IDYES) then
       Abort;
 
+  if DM.qParametroUsa_comanda.AsString = 'S' then
+    Venda.fComanda.StatusComanda('S', 'N');
+
   dmVendas.CdsItens.EmptyDataSet;
 
   FreeAndNil(Venda);
@@ -170,13 +196,16 @@ begin
   Forms.FecharForm(Self, Action);
 end;
 
-procedure TfPDV.LimpaCampos;
+procedure TfPDV.LimpaCampos();
 begin
   edtIdProduto.Text     := '';
   edtQtde.Text          := '1,000';
   lblPreco.Caption      := 'R$ 0,00';
   lblSubTotal.Caption   := 'R$ 0,00';
   lbTotalCompra.Caption := 'R$ 0,00';
+
+  if edtComanda.CanFocus then  
+    edtComanda.Clear;
 end;
 
 procedure TfPDV.pnlCancelaVendaClick(Sender: TObject);
@@ -186,9 +215,16 @@ end;
 
 procedure TfPDV.acSalvarExecute(Sender: TObject);
 begin
-  ShowMessage('Salvar');
+  if not (dmVendas.CdsItens.IsEmpty) then
+    if Venda.Salvar() then
+    begin
+      Venda.fComanda.LimpaComanda();
+      dmVendas.CdsItens.EmptyDataSet;
+      StatusCaixa();
+      LimpaCampos();
 
-  Venda.Finaliza;
+      Application.MessageBox('Salvo com sucesso!', 'Aviso', 64);
+    end;
 end;
 
 procedure TfPDV.btnBuscaProdutoClick(Sender: TObject);
@@ -198,13 +234,19 @@ end;
 
 procedure TfPDV.acCancelarExecute(Sender: TObject);
 begin
-  if Venda.Cancelar then
+  if DM.qParametroUsa_comanda.AsString = 'S' then
   begin
-    dmVendas.CdsItens.EmptyDataSet;
-    LimpaCampos();
-    StatusCaixa();
-  end;
+    if not Venda.fComanda.Cancelar then
+      Abort;
 
+    edtComanda.Text := '';
+  end
+  else if not Venda.Cancelar then
+    Abort;
+
+  dmVendas.CdsItens.EmptyDataSet;
+  StatusCaixa();
+  LimpaCampos();
 end;
 
 procedure TfPDV.acExcluirProdExecute(Sender: TObject);
@@ -224,9 +266,10 @@ begin
     if Venda.Finaliza() then
     begin
       dmVendas.CdsItens.EmptyDataSet;
-      LimpaCampos();
-      Application.MessageBox('Venda realizada com sucesso!', 'Informação', 64);
       StatusCaixa();
+      LimpaCampos();
+
+      Application.MessageBox('Venda realizada com sucesso!', 'Aviso', 64);
     end;
 end;
 
@@ -238,6 +281,60 @@ end;
 procedure TfPDV.acPesquisaProdutoExecute(Sender: TObject);
 begin
   Forms.CriaForm(fPesProd, TfPesProd);
+end;
+
+procedure TfPDV.edtIdProdutoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if not (Key = 13) then
+    Exit;
+
+  if (DM.qParametroUsa_comanda.AsString = 'S') and (Trim(edtComanda.Text) = '') then
+  begin
+    Application.MessageBox('Comanda não informada. Por favor, verifique!', 'Aviso', 48);
+    Exit;
+  end;
+
+  ConsultaPorID(TEdit(Sender));
+end;
+
+procedure TfPDV.edtComandaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  ItemComanda: TItensComanda;
+begin
+  if Key = 13 then
+  begin
+    if Venda.fComanda.AbreComanda(StrToIntDef(edtComanda.Text, 0)) = nil then
+    begin
+      Application.MessageBox('Comanda inválida. Por favor, verifique!', 'Atenção', 48);
+      edtComanda.Clear;
+      edtComanda.SetFocus;
+      Exit;
+    end;
+
+    for ItemComanda in Venda.fComanda.Itens do
+    begin
+      Prod_Venda := TVenda_Itens.Create;
+      with Prod_Venda do
+      begin
+        id          := ItemComanda.id;
+        idProduto   := ItemComanda.idProduto;
+        descricao   := ItemComanda.Descricao;
+        valor_unit  := ItemComanda.valorUnitario;
+        quantidade  := ItemComanda.quantidade;
+        total       := ItemComanda.valorTotal;
+
+        Venda.Itens.Add(Prod_Venda);
+      end;
+    end;
+
+    Venda.Total := Venda.fComanda.valTotal;
+
+    RefazCaption();
+    StatusCaixa();
+
+    if Self.Active then
+      edtIdProduto.SetFocus;
+  end;
 end;
 
 procedure TfPDV.ConsultaPorID(Sender: TEdit);
@@ -279,7 +376,7 @@ begin
   Prod_Venda := TVenda_Itens.Create;
   with Prod_Venda do
   begin
-    id          := Produto.ID;
+    idProduto   := Produto.ID;
     idVenda     := Venda.ID;
     descricao   := Produto.Descricao;
     valor_unit  := Produto.PrecoVenda;
@@ -287,6 +384,8 @@ begin
     total       := dmVendas.CdsItensprodTotal.AsCurrency;
 
     Venda.Itens.Add(Prod_Venda);
+    if DM.qParametroUsa_comanda.AsString = 'S' then
+      Venda.InserirItemComanda(Prod_Venda);
   end;
 
   Venda.PrecoProduto    := dmVendas.CdsItensprodTotal.AsCurrency;
@@ -299,12 +398,6 @@ begin
   lblPreco.Caption      := FormatFloat('###,##0.00', dmVendas.CdsItensprodUnit.AsCurrency);
   lblSubTotal.Caption   := FormatFloat('###,##0.00', dmVendas.CdsItensprodTotal.AsCurrency);
   lbTotalCompra.Caption := FormatFloat('###,##0.00', Venda.Total);
-end;
-
-procedure TfPDV.edtIdProdutoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-  if Key = 13 then
-    ConsultaPorID(TEdit(Sender));
 end;
 
 procedure TfPDV.edtQtdeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -326,7 +419,7 @@ begin
     Venda.DescontoProduto := 0;
     Venda.Soma();
 
-    edtQtde.Text := FormatFloat('0.000', StrToFloatDef(edtQtde.Text, 1));
+    edtQtde.Text := FormatFloat('0.000', 1);
     edtIdProduto.SetFocus;
 
     RefazCaption();
@@ -335,13 +428,15 @@ end;
 
 procedure TfPDV.StatusCaixa();
 begin
-  verifyStatus := False;
-
   if dmVendas.CdsItens.RecordCount > 0 then
   begin
     pnlTop.Caption    := 'Caixa Ocupado';
     pnlTop.Color      := $000c53ff;
     edtComanda.Color  := $000c53ff;
+
+    if DM.qParametroUsa_comanda.AsString = 'S' then
+      edtComanda.Enabled := False;
+
     Exit;
   end;
 
@@ -350,6 +445,14 @@ begin
     pnlTop.Caption    := 'Caixa Aberto';
     pnlTop.Color      := $00FFDF5A;
     edtComanda.Color  := $00FFDF5A;
+
+    if DM.qParametroUsa_comanda.AsString = 'S' then
+    begin
+      edtComanda.Enabled := True;
+      if edtComanda.CanFocus then
+        edtComanda.SetFocus;
+    end;
+
     Exit;
   end;
 
