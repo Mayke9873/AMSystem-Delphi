@@ -124,11 +124,6 @@ begin
     Abort;
 end;
 
-procedure TfPrincipal.FormActivate(Sender: TObject);
-begin
-  pnlComandas.Visible := True;
-end;
-
 procedure TfPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   FecharSistema();
