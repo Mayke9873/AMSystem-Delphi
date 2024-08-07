@@ -19,6 +19,7 @@ type
     qParametroUsa_PDV: TZUnicodeStringField;
     procedure qClientedtnascSetText(Sender: TField; const Text: string);
     procedure qFuncionariodtnascSetText(Sender: TField; const Text: string);
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,6 +45,24 @@ begin
   DM.qExecSQL.SQL.Add(SQL);
   DM.qExecSQL.ExecSQL;
   DM.qExecSQL.ApplyUpdates;
+end;
+
+procedure TDM.DataModuleCreate(Sender: TObject);
+var
+  I: Integer;
+begin
+  DM.zCon.LibraryLocation := ExtractFilePath(Application.ExeName) + 'libmariadb.dll';
+  try
+    DM.zCon.Connect;
+
+    for I := 0 to ComponentCount - 1 do
+      if Components[i].ClassName = 'TZTable' then
+        (Components[i] as TZTable).Open;
+
+  except
+    Application.MessageBox('Nao foi possivel conectar ao banco de dados', 'Atenção', 16);
+    Halt;
+  end;
 end;
 
 procedure TDM.qClientedtnascSetText(Sender: TField; const Text: string);
