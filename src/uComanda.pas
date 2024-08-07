@@ -19,6 +19,7 @@ type
     FItens: TObjectList<TItensComanda>;
     FSQL: String;
     FItensComanda: TItensComanda;
+    FidVenda: Integer;
     procedure Setcomanda(const Value: integer);
     procedure Setem_Caixa(const Value: String);
     procedure Setem_Uso(const Value: String);
@@ -32,13 +33,23 @@ type
     procedure InserirItens;
     procedure SetItensComanda(const Value: TItensComanda);
     procedure FinalizaItens;
+    procedure SetidVenda(const Value: Integer);
+
     property SQL: String read FSQL write SetSQL;
 
   public
-    //property ItensComanda: TItensComanda read FItensComanda write SetItensComanda;
-
     constructor Create;
     destructor Destroy; override;
+
+    property id: Integer read Fid write Setid;
+    property idVenda: Integer read FidVenda write SetidVenda;
+    property comanda: integer read Fcomanda write Setcomanda;
+    property nome: String read Fnome write Setnome;
+    property em_Uso: String read Fem_Uso write Setem_Uso;
+    property em_Caixa: String read Fem_Caixa write Setem_Caixa;
+    property valTotal: Currency read FvalTotal write SetvalTotal;
+    property ListaComandas: TObjectList<TComanda> read GetListaComandas write SetListaComandas;
+    property Itens: TObjectList<TItensComanda> read FItens write SetItens;
 
     function VerificaComanda(aComanda: Integer = 0): Boolean;
     function AbreComanda(aComanda: Integer = 0; nome: String = ''): TComanda;
@@ -50,15 +61,6 @@ type
     procedure Finaliza();
     procedure LimpaComanda();
 
-  published
-    property id: Integer read Fid write Setid;
-    property comanda: integer read Fcomanda write Setcomanda;
-    property nome: String read Fnome write Setnome;
-    property em_Uso: String read Fem_Uso write Setem_Uso;
-    property em_Caixa: String read Fem_Caixa write Setem_Caixa;
-    property valTotal: Currency read FvalTotal write SetvalTotal;
-    property ListaComandas: TObjectList<TComanda> read GetListaComandas write SetListaComandas;
-    property Itens: TObjectList<TItensComanda> read FItens write SetItens;
   end;
 
 implementation
@@ -259,7 +261,8 @@ end;
 
 procedure TComanda.FinalizaItens();
 begin
-  SQL := 'update venda_comanda set ex = 1, status = ''F'' where idComanda = :comanda;';
+  SQL := 'update venda_comanda set ex = 1, status = ''F'', idVenda = '+ idVenda.ToString +
+         ' where status = ''A'' and idComanda = :comanda;';
   FQuery.ParamByName('comanda').AsInteger := Fcomanda;
 
   FQuery.ExecSQL;
@@ -326,6 +329,11 @@ end;
 procedure TComanda.Setid(const Value: Integer);
 begin
   Fid := Value;
+end;
+
+procedure TComanda.SetidVenda(const Value: Integer);
+begin
+  FidVenda := Value;
 end;
 
 procedure TComanda.SetItens(const Value: TObjectList<TItensComanda>);
