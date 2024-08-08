@@ -102,7 +102,10 @@ begin
       Estoque();
 
       if DM.qParametroUsa_comanda.AsString = 'S' then
+      begin
+        fComanda.idVenda := FID;
         fComanda.Finaliza();
+      end;
 
       LimpaVenda();
       Result := True;
