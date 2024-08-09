@@ -249,44 +249,48 @@ begin
     AComandas := LComandas.ListaComandas;      //Cria frames de todas as comandas em aberto.
     for I := 0 to AComandas.Count - 1 do
     begin
-
-      if (FindComponent('CMD' + AComandas[I].id.ToString) = nil) then
-      begin
-        LFrame                  := TFrameComanda.Create(Self);
-        LFrame.Name             := 'CMD' + AComandas[I].id.ToString;
-        LFrame.Parent           := pnlComandas;
-        LFrame.pnlFrame.OnClick := ClickComandas;
-        LFrame.lNome.OnClick    := ClickComandas;
-        LFrame.lValor.OnClick   := ClickComandas;
-        LFrame.lNumeroComanda.OnClick := ClickComandas;
-        LFrame.lNumeroComanda.Caption := AComandas[I].comanda.ToString;
-        LFrame.pnlFrame.Tag           := AComandas[I].comanda;
-        LFrame.lValor.Tag             := AComandas[I].comanda;
-        LFrame.lNumeroComanda.Tag     := AComandas[I].comanda;
-        LFrame.lNome.Tag              := AComandas[I].comanda;
-      end
+      if AComandas[I].valTotal = 0 then
+        FindComponent('CMD' + AComandas[I].id.ToString).Free
       else
-        LFrame := TFrameComanda(FindComponent('CMD' + AComandas[I].id.ToString));
-
-      LFrame.lNome.Caption := AComandas[I].nome;
-      LFrame.lNome.Visible := not (Trim(AComandas[I].nome) = '');
-
-      LFrame.lValor.Caption := FormatCurr('#0.00', AComandas[I].valTotal);
-      LFrame.pnlFrame.Hint := 'CMD ' + (AComandas[I].nome);
-
-      LFrame.Left := left;
-      LFrame.Top := top;
-
-      if AComandas[I].em_Caixa = 'S' then
-        LFrame.spColor.Brush.Color := $565fe2
-      else
-        LFrame.spColor.Brush.Color := clSkyBlue;
-
-      left := left + LFrame.Width + 2;
-      if left + LFrame.Width >= pnlComandas.Width then
       begin
-        left := 1;
-        top := top + LFrame.Height + 2;
+        if (FindComponent('CMD' + AComandas[I].id.ToString) = nil) then
+        begin
+          LFrame                  := TFrameComanda.Create(Self);
+          LFrame.Name             := 'CMD' + AComandas[I].id.ToString;
+          LFrame.Parent           := pnlComandas;
+          LFrame.pnlFrame.OnClick := ClickComandas;
+          LFrame.lNome.OnClick    := ClickComandas;
+          LFrame.lValor.OnClick   := ClickComandas;
+          LFrame.lNumeroComanda.OnClick := ClickComandas;
+          LFrame.lNumeroComanda.Caption := AComandas[I].comanda.ToString;
+          LFrame.pnlFrame.Tag           := AComandas[I].comanda;
+          LFrame.lValor.Tag             := AComandas[I].comanda;
+          LFrame.lNumeroComanda.Tag     := AComandas[I].comanda;
+          LFrame.lNome.Tag              := AComandas[I].comanda;
+        end
+        else
+          LFrame := TFrameComanda(FindComponent('CMD' + AComandas[I].id.ToString));
+
+        LFrame.lNome.Caption := AComandas[I].nome;
+        LFrame.lNome.Visible := not (Trim(AComandas[I].nome) = '');
+
+        LFrame.lValor.Caption := FormatCurr('#0.00', AComandas[I].valTotal);
+        LFrame.pnlFrame.Hint := 'CMD ' + (AComandas[I].nome);
+
+        LFrame.Left := left;
+        LFrame.Top := top;
+
+        if AComandas[I].em_Caixa = 'S' then
+          LFrame.spColor.Brush.Color := $565fe2
+        else
+          LFrame.spColor.Brush.Color := clSkyBlue;
+
+        left := left + LFrame.Width + 2;
+        if left + LFrame.Width >= pnlComandas.Width then
+        begin
+          left := 1;
+          top := top + LFrame.Height + 2;
+        end;
       end;
     end;
 
