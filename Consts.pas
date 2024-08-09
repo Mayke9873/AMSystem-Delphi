@@ -25,6 +25,15 @@ Const
   Edicao      = 4;
   Salvo       = 5;
   Efetivado   = 6;
+// ----------------------//
+
+// Tipos movimentacoes caixa //
+  CReceber = 'R';
+  CPagar   = 'P';
+  CVenda   = Venda;
+  CAbertura   = 'A';
+  CFechamento = 'F';
+// --------------------------//
 
 implementation
 
