@@ -65,7 +65,7 @@ var
 implementation
 
 uses
-  uDM, Consts, dmProduto, dmGrupo, FrmPrincipal;
+  uDM, Consts, dmProduto, dmGrupo, FrmPrincipal, System.StrUtils;
 
 {$R *.dfm}
 
@@ -119,12 +119,8 @@ begin
   Cancelar := False;
   AlterarCampos(telaPadrao);
 
-  Grupo.Descricao      := dbeDescricao.Text;
-
-  if dbchkAtivo.Checked then
-    Grupo.Ativo := dbchkAtivo.ValueChecked
-  else
-    Grupo.Ativo := dbchkAtivo.ValueUnchecked;
+  Grupo.Descricao := dbeDescricao.Text;
+  Grupo.Ativo     := IfThen(dbchkAtivo.Checked, dbchkAtivo.ValueChecked, dbchkAtivo.ValueUnchecked);
 
   Grupo.Cadastrar;
 end;

@@ -46,10 +46,9 @@ begin
 
   if dmGrupos.qGrupo.RecordCount = 1 then
   begin
-    Result := True;
     ID := dmGrupos.qGrupoId.AsInteger;
     Descricao := dmGrupos.qGrupoDescricao.AsString;
-    Exit;
+    Exit(True);
   end;
 
   ID := 0;

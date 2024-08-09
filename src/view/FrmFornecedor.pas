@@ -87,7 +87,7 @@ var
 implementation
 
 uses
-  dmFornecedor, Consts, FrmPrincipal;
+  dmFornecedor, Consts, FrmPrincipal, System.Math, System.StrUtils;
 
 {$R *.dfm}
 
@@ -142,18 +142,13 @@ begin
     Fornecedor.Endereco     := DBEEndereco.Text;
     Fornecedor.NumEndereco  := DBENumEnd.Text;
     Fornecedor.Bairro       := DBEBairro.Text;
-
-    if dbchkAtivo.Checked then
-      Fornecedor.Ativo := dbchkAtivo.ValueChecked
-    else
-      Fornecedor.Ativo := dbchkAtivo.ValueUnchecked;
+    Fornecedor.Ativo        := IfThen(dbchkAtivo.Checked, dbchkAtivo.ValueChecked, dbchkAtivo.ValueUnchecked);
 
     Fornecedor.Cadastrar(Fornecedor);
   finally
     FreeAndNil(Fornecedor);
   end;
 
-  Cancelar := 'N';
   AlterarCampos(telaPadrao);
 end;
 
@@ -180,6 +175,8 @@ begin
 
       if Cancelar = 'S' then
         dmFornecedores.qFornecedor.Cancel;
+
+      Cancelar := 'N';
     end;
 
     telaInsert : begin

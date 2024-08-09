@@ -1,7 +1,4 @@
 inherited dmProdutos: TdmProdutos
-  inherited zCon: TZConnection
-    LibraryLocation = ''
-  end
   object qProduto: TZQuery
     SortedFields = 'Id'
     Connection = zCon
@@ -111,11 +108,11 @@ inherited dmProdutos: TdmProdutos
         '  (id, descricao, unidade, estoque, pCompra, pLucro, pVenda, IdG' +
         'rupo,'
       '   grupo, dtRegistro, ativo)'
-      'SELECT'
+      'Values'
       
-        '  (select coalesce(max(id)+1, 1) from PRODUTO), :descricao, :uni' +
-        'dade, :estoque, :pCompra, :pLucro, :pVenda, :IdGrupo,'
-      '   :grupo, :dtRegistro, :ativo')
+        '  (null, :descricao, :unidade, :estoque, :pCompra, :pLucro, :pVe' +
+        'nda, :IdGrupo,'
+      '   :grupo, :dtRegistro, :ativo)')
     ModifySQL.Strings = (
       'UPDATE PRODUTO SET'
       '  id = :id,'
