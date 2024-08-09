@@ -40,6 +40,7 @@ type
     SkSvg3: TSkSvg;
     tmComanda: TTimer;
     pnlComandas: TPanel;
+    Contas1: TMenuItem;
     procedure Clientes1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -58,7 +59,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure ConsultadeCompras1Click(Sender: TObject);
     procedure tmComandaTimer(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
+    procedure Contas1Click(Sender: TObject);
   private
     { Private declarations }
     function VersaoExe: string;
@@ -78,7 +79,7 @@ implementation
 uses
   FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto,
   FrmFuncionario, FrmVenda, FrmFornecedor, FrmAjusteEstoque, FrmCompra,
-  FrmConsultaCompra, uFrame.Comanda, FrmPDV, uDM;
+  FrmConsultaCompra, uFrame.Comanda, FrmPDV, uDM, FrmConta;
 
 {$R *.dfm}
 
@@ -105,6 +106,11 @@ end;
 procedure TfPrincipal.ConsultadeVendas1Click(Sender: TObject);
 begin
   Forms.CriaForm(fConsultaVendas, TfConsultaVendas);
+end;
+
+procedure TfPrincipal.Contas1Click(Sender: TObject);
+begin
+  Forms.CriaForm(fConta, TfConta);
 end;
 
 procedure TfPrincipal.FecharSistema;

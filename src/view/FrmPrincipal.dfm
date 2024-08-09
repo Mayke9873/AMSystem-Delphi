@@ -19,7 +19,6 @@ object fPrincipal: TfPrincipal
   Menu = MainMenu1
   Position = poScreenCenter
   Visible = True
-  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
@@ -7095,7 +7094,7 @@ object fPrincipal: TfPrincipal
     ParentDoubleBuffered = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 1096
+    ExplicitWidth = 1008
     object pnlCliente: TPanel
       AlignWithMargins = True
       Left = 10
@@ -7247,16 +7246,16 @@ object fPrincipal: TfPrincipal
   object pnlComandas: TPanel
     Left = 2
     Top = 42
-    Width = 1082
-    Height = 444
+    Width = 1098
+    Height = 368
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     Caption = 'pnlComandas'
     ShowCaption = False
     TabOrder = 1
     Visible = False
-    ExplicitWidth = 1166
-    ExplicitHeight = 443
+    ExplicitWidth = 1094
+    ExplicitHeight = 367
   end
   object MainMenu1: TMainMenu
     Left = 216
@@ -7289,6 +7288,10 @@ object fPrincipal: TfPrincipal
       end
       object N2: TMenuItem
         Caption = '-'
+      end
+      object Contas1: TMenuItem
+        Caption = 'Contas'
+        OnClick = Contas1Click
       end
     end
     object Movimento1: TMenuItem

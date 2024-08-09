@@ -45,7 +45,10 @@ uses
   uComanda.Itens in 'src\uComanda.Itens.pas',
   uVenda.Itens in 'src\uVenda.Itens.pas',
   uForms in 'src\uForms.pas',
-  FrmPesqProduto in 'src\view\FrmPesqProduto.pas' {fPesProd};
+  FrmPesqProduto in 'src\view\FrmPesqProduto.pas' {fPesProd},
+  uFinanceiro.Conta in 'src\uFinanceiro.Conta.pas',
+  dmFinanceiro in 'src\model\dmFinanceiro.pas' {dmFinanceiros: TDataModule},
+  FrmConta in 'src\view\FrmConta.pas' {fConta};
 
 {$R *.res}
 
