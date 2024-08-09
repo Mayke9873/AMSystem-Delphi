@@ -27,6 +27,7 @@ type
     procedure Estoque;
     procedure AbreVenda;
     procedure ItensPDV;
+    procedure Financeiro;
 
   public
     fComanda: TComanda;
@@ -57,7 +58,7 @@ type
 implementation
 
   uses
-    uDM, FrmVenda, uProduto, uEstoque, Consts, dmCliente, dmVenda;
+    uDM, FrmVenda, uProduto, uEstoque, Consts, dmCliente, dmVenda, uFinanceiro.Movimento;
 
 { TVenda }
 
@@ -100,6 +101,7 @@ begin
       ExecSQL('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + IntToStr(ID) + ';');
 
       Estoque();
+      Financeiro();
 
       if DM.qParametroUsa_comanda.AsString = 'S' then
       begin
@@ -149,6 +151,19 @@ begin
   FreeAndNil(fComanda);
   FreeAndNil(Itens);
   inherited;
+end;
+
+procedure TVenda.Financeiro();
+begin
+  var Caixa := TCaixa.Create;
+  Caixa.idConta := 1;
+  Caixa.idMov   := Self.FID;
+  Caixa.tipoMov := CVenda;
+  Caixa.valor   := Self.FTotal;
+  Caixa.ex      := 0;
+  Caixa.InsereCaixa(Caixa);
+
+  FreeAndNil(Caixa);
 end;
 
 procedure TVenda.Estoque;
