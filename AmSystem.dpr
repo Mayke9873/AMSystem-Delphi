@@ -46,6 +46,7 @@ uses
   uVenda.Itens in 'src\uVenda.Itens.pas',
   uForms in 'src\uForms.pas',
   FrmPesqProduto in 'src\view\FrmPesqProduto.pas' {fPesProd},
+  uFinanceiro.Movimento in 'src\uFinanceiro.Movimento.pas',
   uFinanceiro.Conta in 'src\uFinanceiro.Conta.pas',
   dmFinanceiro in 'src\model\dmFinanceiro.pas' {dmFinanceiros: TDataModule},
   FrmConta in 'src\view\FrmConta.pas' {fConta};

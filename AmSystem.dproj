@@ -244,6 +244,7 @@
             <Form>fPesProd</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\uFinanceiro.Movimento.pas"/>
         <DCCReference Include="src\uFinanceiro.Conta.pas"/>
         <DCCReference Include="src\model\dmFinanceiro.pas">
             <Form>dmFinanceiros</Form>
