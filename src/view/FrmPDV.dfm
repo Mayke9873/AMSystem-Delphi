@@ -56,6 +56,7 @@ object fPDV: TfPDV
         Caption = 'pnlFuncoes'
         ShowCaption = False
         TabOrder = 5
+        ExplicitLeft = 832
         object Shape5: TShape
           Left = 0
           Top = 0
@@ -92,7 +93,6 @@ object fPDV: TfPDV
         Caption = 'Panel4'
         ShowCaption = False
         TabOrder = 4
-        ExplicitLeft = 668
         object Shape4: TShape
           Left = 0
           Top = 0
@@ -138,7 +138,6 @@ object fPDV: TfPDV
         Caption = 'Panel4'
         ShowCaption = False
         TabOrder = 2
-        ExplicitLeft = 338
         object Shape3: TShape
           Left = 0
           Top = 0
@@ -167,7 +166,7 @@ object fPDV: TfPDV
           Font.Name = 'Segoe UI'
           Font.Style = []
           ParentFont = False
-          OnClick = btnBuscaProdutoClick
+          OnClick = acPesquisaProdutoExecute
           ExplicitLeft = 6
           ExplicitTop = -3
           ExplicitWidth = 185
@@ -183,7 +182,6 @@ object fPDV: TfPDV
         Caption = 'Panel4'
         ShowCaption = False
         TabOrder = 1
-        ExplicitLeft = 173
         object Shape2: TShape
           Left = 0
           Top = 0
@@ -273,7 +271,6 @@ object fPDV: TfPDV
         Caption = 'Panel4'
         ShowCaption = False
         TabOrder = 3
-        ExplicitLeft = 509
         object Shape11: TShape
           Left = 0
           Top = 0
@@ -1019,7 +1016,7 @@ object fPDV: TfPDV
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          OnClick = pnlCancelaVendaClick
+          OnClick = acCancelarExecute
           object Shape14: TShape
             Left = 0
             Top = 40

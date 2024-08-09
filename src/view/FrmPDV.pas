@@ -91,10 +91,8 @@ type
     procedure acFinalizarExecute(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure edtQtdeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure btnBuscaProdutoClick(Sender: TObject);
     procedure acExcluirProdExecute(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);
-    procedure pnlCancelaVendaClick(Sender: TObject);
     procedure edtComandaKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
 
@@ -208,11 +206,6 @@ begin
     edtComanda.Clear;
 end;
 
-procedure TfPDV.pnlCancelaVendaClick(Sender: TObject);
-begin
-  acCancelar.Execute;
-end;
-
 procedure TfPDV.acSalvarExecute(Sender: TObject);
 begin
   if not (dmVendas.CdsItens.IsEmpty) then
@@ -225,11 +218,6 @@ begin
 
       Application.MessageBox('Salvo com sucesso!', 'Aviso', 64);
     end;
-end;
-
-procedure TfPDV.btnBuscaProdutoClick(Sender: TObject);
-begin
-  acPesquisaProduto.Execute;
 end;
 
 procedure TfPDV.acCancelarExecute(Sender: TObject);
