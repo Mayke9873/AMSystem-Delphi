@@ -32,52 +32,52 @@ inherited dmClientes: TdmClientes
       item
         Name = 'ativo'
       end>
-    object qClienteId: TIntegerField
+    object qClienteId: TZInt64Field
       Alignment = taCenter
       FieldName = 'Id'
       Required = True
     end
-    object qClienteNome: TWideStringField
+    object qClienteNome: TZUnicodeStringField
       FieldName = 'Nome'
       Required = True
       Size = 250
     end
-    object qClienteRG: TWideStringField
+    object qClienteRG: TZUnicodeStringField
       Alignment = taCenter
       FieldName = 'RG'
       Size = 10
     end
-    object qClienteCpfCnpj: TWideStringField
+    object qClienteCpfCnpj: TZUnicodeStringField
       FieldName = 'CpfCnpj'
       Size = 11
     end
-    object qClientedtnasc: TDateField
+    object qClientedtnasc: TZDateField
       FieldName = 'dtnasc'
       OnSetText = qClientedtnascSetText
       EditMask = '!99/99/9999;1;_'
     end
-    object qClienteEndereco: TWideStringField
+    object qClienteEndereco: TZUnicodeStringField
       FieldName = 'Endereco'
       Size = 255
     end
-    object qClientenumendereco: TWideStringField
+    object qClientenumendereco: TZUnicodeStringField
       FieldName = 'numendereco'
       Size = 5
     end
-    object qClienteBairro: TWideStringField
+    object qClienteBairro: TZUnicodeStringField
       FieldName = 'Bairro'
       Size = 250
     end
-    object qClientedtregistro: TDateField
+    object qClientedtregistro: TZDateField
       Alignment = taCenter
       FieldName = 'dtregistro'
     end
-    object qClienteTipo: TWideStringField
+    object qClienteTipo: TZUnicodeStringField
       Alignment = taCenter
       FieldName = 'Tipo'
       Size = 1
     end
-    object qClienteAtivo: TWideStringField
+    object qClienteAtivo: TZUnicodeStringField
       Alignment = taCenter
       FieldName = 'Ativo'
       Size = 1

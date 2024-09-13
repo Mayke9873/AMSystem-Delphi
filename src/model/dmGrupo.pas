@@ -10,9 +10,9 @@ type
     dGrupo: TDataSource;
     qGrupo: TZQuery;
     uGrupo: TZUpdateSQL;
-    qGrupoid: TIntegerField;
-    qGrupodescricao: TWideStringField;
-    qGrupoativo: TWideStringField;
+    qGrupoid: TZInt64Field;
+    qGrupodescricao: TZUnicodeStringField;
+    qGrupoativo: TZUnicodeStringField;
     procedure qGrupoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }

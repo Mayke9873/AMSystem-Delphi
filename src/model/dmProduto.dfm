@@ -40,56 +40,56 @@ inherited dmProdutos: TdmProdutos
       item
         Name = 'ativo'
       end>
-    object qProdutoid: TIntegerField
+    object qProdutoid: TZInt64Field
       FieldName = 'id'
       Required = True
     end
-    object qProdutodescricao: TWideStringField
+    object qProdutodescricao: TZUnicodeStringField
       FieldName = 'descricao'
       Required = True
       Size = 255
     end
-    object qProdutoestoque: TFloatField
+    object qProdutoestoque: TZDoubleField
       FieldName = 'estoque'
+      ReadOnly = True
     end
-    object qProdutounidade: TWideStringField
+    object qProdutounidade: TZUnicodeStringField
       FieldName = 'unidade'
       Size = 5
     end
-    object qProdutoIdGrupo: TIntegerField
+    object qProdutoIdGrupo: TZInt64Field
       FieldName = 'IdGrupo'
     end
-    object qProdutogrupo: TWideStringField
+    object qProdutogrupo: TZUnicodeStringField
       FieldName = 'grupo'
       Size = 70
     end
-    object qProdutodtRegistro: TDateField
+    object qProdutodtRegistro: TZDateField
       FieldName = 'dtRegistro'
       Required = True
     end
-    object qProdutoativo: TWideStringField
+    object qProdutoativo: TZUnicodeStringField
       FieldName = 'ativo'
-      Required = True
       Size = 1
     end
     object qProdutopCompra: TZBCDField
       FieldName = 'pCompra'
       DisplayFormat = '###,###,##0.00'
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qProdutopLucro: TZBCDField
       FieldName = 'pLucro'
       DisplayFormat = '###,###,##0.00'
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qProdutopVenda: TZBCDField
       FieldName = 'pVenda'
       Required = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
   end
   object dProduto: TDataSource
@@ -187,11 +187,11 @@ inherited dmProdutos: TdmProdutos
       item
         Name = 'idProd'
       end>
-    object qMovEstoqueid: TIntegerField
+    object qMovEstoqueid: TZInt64Field
       FieldName = 'id'
       Required = True
     end
-    object qMovEstoqueidproduto: TIntegerField
+    object qMovEstoqueidproduto: TZInt64Field
       FieldName = 'idproduto'
       Required = True
     end
@@ -199,24 +199,24 @@ inherited dmProdutos: TdmProdutos
       FieldName = 'quantidade'
       Required = True
     end
-    object qMovEstoquedataMov: TDateField
+    object qMovEstoquedataMov: TZDateField
       FieldName = 'dataMov'
       Required = True
     end
-    object qMovEstoqueidUsuario: TZShortIntField
+    object qMovEstoqueidUsuario: TZInt64Field
       FieldName = 'idUsuario'
     end
-    object qMovEstoqueidFornecedor: TZShortIntField
+    object qMovEstoqueidFornecedor: TZInt64Field
       FieldName = 'idFornecedor'
     end
-    object qMovEstoquetipoMov: TWideStringField
+    object qMovEstoquetipoMov: TZUnicodeStringField
       FieldName = 'tipoMov'
       Required = True
       Size = 1
     end
-    object qMovEstoqueobs: TWideStringField
+    object qMovEstoqueobs: TZUnicodeStringField
       FieldName = 'obs'
-      Size = 250
+      Size = 255
     end
     object qMovEstoqueidMovimentacao: TZIntegerField
       FieldName = 'idMovimentacao'
@@ -299,7 +299,7 @@ inherited dmProdutos: TdmProdutos
       FieldName = 'id'
       ReadOnly = True
     end
-    object qGrupodescricao: TWideStringField
+    object qGrupodescricao: TZUnicodeStringField
       FieldName = 'descricao'
       ReadOnly = True
       Size = 255
@@ -340,7 +340,7 @@ inherited dmProdutos: TdmProdutos
       item
         Name = 'dtF'
       end>
-    object qConsProdutosid: TZIntegerField
+    object qConsProdutosid: TZInt64Field
       FieldName = 'id'
       ReadOnly = True
     end
@@ -362,22 +362,22 @@ inherited dmProdutos: TdmProdutos
     object qConsProdutospCompra: TZBCDField
       FieldName = 'pCompra'
       ReadOnly = True
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qConsProdutospLucro: TZBCDField
       FieldName = 'pLucro'
       ReadOnly = True
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qConsProdutospVenda: TZBCDField
       FieldName = 'pVenda'
       ReadOnly = True
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
-    object qConsProdutosIdGrupo: TZIntegerField
+    object qConsProdutosIdGrupo: TZInt64Field
       FieldName = 'IdGrupo'
       ReadOnly = True
     end

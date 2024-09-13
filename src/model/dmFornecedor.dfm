@@ -101,46 +101,45 @@ inherited dmFornecedores: TdmFornecedores
       item
         Name = 'ativo'
       end>
-    object qFornecedorid: TIntegerField
+    object qFornecedorid: TZInt64Field
       Alignment = taCenter
       FieldName = 'id'
       Required = True
     end
-    object qFornecedornome: TWideStringField
+    object qFornecedornome: TZUnicodeStringField
       FieldName = 'nome'
       Required = True
       Size = 255
     end
-    object qFornecedorie: TWideStringField
+    object qFornecedorie: TZUnicodeStringField
       FieldName = 'ie'
       Size = 14
     end
-    object qFornecedorCNPJ: TWideStringField
+    object qFornecedorCNPJ: TZUnicodeStringField
       FieldName = 'CNPJ'
       EditMask = '99.999.999/9999-99;0;_'
       Size = 14
     end
-    object qFornecedorendereco: TWideStringField
+    object qFornecedorendereco: TZUnicodeStringField
       FieldName = 'endereco'
       Size = 250
     end
-    object qFornecedornumEndereco: TWideStringField
+    object qFornecedornumEndereco: TZUnicodeStringField
       FieldName = 'numEndereco'
       Size = 6
     end
-    object qFornecedorbairro: TWideStringField
+    object qFornecedorbairro: TZUnicodeStringField
       FieldName = 'bairro'
       Size = 250
     end
-    object qFornecedordtRegistro: TDateField
+    object qFornecedordtRegistro: TZDateField
       Alignment = taCenter
       FieldName = 'dtRegistro'
       Required = True
     end
-    object qFornecedorativo: TWideStringField
+    object qFornecedorativo: TZUnicodeStringField
       Alignment = taCenter
       FieldName = 'ativo'
-      Required = True
       Size = 1
     end
   end

@@ -9,18 +9,9 @@ uses
 type
   TdmVendas = class(TDM)
     qVenda: TZQuery;
-    qVendaid: TIntegerField;
     uVenda: TZUpdateSQL;
     qConsVendas: TZReadOnlyQuery;
-    qConsVendasID: TIntegerField;
-    qConsVendasCLIENTE: TWideStringField;
-    qConsVendasVALOR: TZBCDField;
-    qConsVendasDESCONTO: TZBCDField;
-    qConsVendasVALOR_TOTAL: TZBCDField;
-    qConsVendasDATA_VENDA: TZDateField;
-    qConsVendasNOME: TWideStringField;
     qVenda_comanda: TZQuery;
-    IntegerField1: TIntegerField;
     uVenda_comanda: TZUpdateSQL;
     CdsItens: TClientDataSet;
     CdsItenscodProduto: TIntegerField;
@@ -32,13 +23,24 @@ type
     dProdVenda: TDataSource;
     uProdVenda: TZUpdateSQL;
     qProdVenda: TZQuery;
-    qProdVendaid: TIntegerField;
-    qProdVendaidprod: TIntegerField;
-    qProdVendaquantidade: TZBCDField;
-    qProdVendadescricao: TWideStringField;
-    qProdVendadesconto: TZBCDField;
-    qProdVendatotal: TZBCDField;
+    qVendaid: TZInt64Field;
+    qConsVendasID: TZInt64Field;
+    qConsVendasCLIENTE: TZUnicodeStringField;
+    qConsVendasVALOR: TZBCDField;
+    qConsVendasDESCONTO: TZBCDField;
+    qConsVendasVALOR_TOTAL: TZBCDField;
+    qConsVendasDATA_VENDA: TZDateField;
+    qConsVendasNOME: TZUnicodeStringField;
+    qVenda_comandaid: TZInt64Field;
+    qProdVendaid: TZInt64Field;
+    qProdVendaidVenda: TZInt64Field;
+    qProdVendaidprod: TZInt64Field;
+    qProdVendadescricao: TZUnicodeStringField;
     qProdVendavalor: TZBCDField;
+    qProdVendadesconto: TZBCDField;
+    qProdVendaquantidade: TZBCDField;
+    qProdVendatotal: TZBCDField;
+    qProdVendaex: TZIntegerField;
   private
     { Private declarations }
   public

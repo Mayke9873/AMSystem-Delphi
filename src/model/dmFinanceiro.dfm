@@ -34,14 +34,13 @@ inherited dmFinanceiros: TdmFinanceiros
       item
         Name = 'ativo'
       end>
-    object qContaidConta: TZIntegerField
+    object qContaidConta: TZInt64Field
       DisplayLabel = 'Cod.'
       FieldName = 'idConta'
       ReadOnly = True
       Required = True
     end
     object qContadescricao: TZUnicodeStringField
-      DisplayLabel = 'Descri'#231#227'o'
       FieldName = 'descricao'
       Required = True
       Size = 70
@@ -49,14 +48,14 @@ inherited dmFinanceiros: TdmFinanceiros
     object qContabancaria: TZShortIntField
       FieldName = 'bancaria'
     end
-    object qContaex: TZIntegerField
+    object qContaex: TZInt64Field
       FieldName = 'ex'
-      Required = True
     end
-    object qContabanc: TWideStringField
+    object qContaBanc: TZUnicodeStringField
       Alignment = taCenter
       DisplayLabel = 'Bancaria'
-      FieldName = 'banc'
+      FieldName = 'Banc'
+      ReadOnly = True
       Size = 1
     end
   end

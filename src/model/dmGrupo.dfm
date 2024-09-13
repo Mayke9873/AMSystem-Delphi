@@ -37,18 +37,17 @@ inherited dmGrupos: TdmGrupos
       item
         Name = 'ativo'
       end>
-    object qGrupoid: TIntegerField
+    object qGrupoid: TZInt64Field
       FieldName = 'id'
       Required = True
     end
-    object qGrupodescricao: TWideStringField
+    object qGrupodescricao: TZUnicodeStringField
       FieldName = 'descricao'
       Required = True
       Size = 255
     end
-    object qGrupoativo: TWideStringField
+    object qGrupoativo: TZUnicodeStringField
       FieldName = 'ativo'
-      Required = True
       Size = 1
     end
   end

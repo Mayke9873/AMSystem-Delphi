@@ -11,15 +11,15 @@ type
     dFornecedor: TDataSource;
     uFornecedor: TZUpdateSQL;
     qFornecedor: TZQuery;
-    qFornecedorid: TIntegerField;
-    qFornecedornome: TWideStringField;
-    qFornecedorie: TWideStringField;
-    qFornecedorCNPJ: TWideStringField;
-    qFornecedorendereco: TWideStringField;
-    qFornecedornumEndereco: TWideStringField;
-    qFornecedorbairro: TWideStringField;
-    qFornecedordtRegistro: TDateField;
-    qFornecedorativo: TWideStringField;
+    qFornecedorid: TZInt64Field;
+    qFornecedornome: TZUnicodeStringField;
+    qFornecedorie: TZUnicodeStringField;
+    qFornecedorCNPJ: TZUnicodeStringField;
+    qFornecedorendereco: TZUnicodeStringField;
+    qFornecedornumEndereco: TZUnicodeStringField;
+    qFornecedorbairro: TZUnicodeStringField;
+    qFornecedordtRegistro: TZDateField;
+    qFornecedorativo: TZUnicodeStringField;
     procedure qFornecedorNewRecord(DataSet: TDataSet);
   private
     { Private declarations }

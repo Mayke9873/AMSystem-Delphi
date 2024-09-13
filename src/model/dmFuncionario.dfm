@@ -1,10 +1,10 @@
 inherited dmFuncionarios: TdmFuncionarios
-  object dFuncionario: TDataSource [4]
+  object dFuncionario: TDataSource
     DataSet = qFuncionario
     Left = 88
     Top = 173
   end
-  object uFuncionario: TZUpdateSQL [5]
+  object uFuncionario: TZUpdateSQL
     DeleteSQL.Strings = (
       'DELETE FROM Funcionario'
       'WHERE'
@@ -72,7 +72,7 @@ inherited dmFuncionarios: TdmFuncionarios
         Name = 'OLD_id'
       end>
   end
-  object qFuncionario: TZQuery [6]
+  object qFuncionario: TZQuery
     SortedFields = 'Id'
     Connection = zCon
     OnNewRecord = qFuncionarioNewRecord
@@ -107,56 +107,55 @@ inherited dmFuncionarios: TdmFuncionarios
       item
         Name = 'ativo'
       end>
-    object qFuncionarioId: TIntegerField
+    object qFuncionarioId: TZInt64Field
       Alignment = taCenter
       FieldName = 'Id'
       Required = True
     end
-    object qFuncionarioNome: TWideStringField
+    object qFuncionarioNome: TZUnicodeStringField
       FieldName = 'Nome'
       Required = True
       Size = 255
     end
-    object qFuncionarioRG: TWideStringField
+    object qFuncionarioRG: TZUnicodeStringField
       Alignment = taCenter
       FieldName = 'RG'
       Required = True
       Size = 10
     end
-    object qFuncionarioCpf: TWideStringField
+    object qFuncionarioCpf: TZUnicodeStringField
       Alignment = taCenter
       FieldName = 'Cpf'
       Required = True
       Size = 11
     end
-    object qFuncionariodtnasc: TDateField
+    object qFuncionariodtnasc: TZDateField
       Alignment = taCenter
       FieldName = 'dtnasc'
       Required = True
       OnSetText = qFuncionariodtnascSetText
       EditMask = '!99/99/9999;1;_'
     end
-    object qFuncionarioEndereco: TWideStringField
+    object qFuncionarioEndereco: TZUnicodeStringField
       FieldName = 'Endereco'
       Size = 250
     end
-    object qFuncionarionumendereco: TWideStringField
+    object qFuncionarionumendereco: TZUnicodeStringField
       FieldName = 'numendereco'
       Size = 5
     end
-    object qFuncionarioBairro: TWideStringField
+    object qFuncionarioBairro: TZUnicodeStringField
       FieldName = 'Bairro'
       Size = 250
     end
-    object qFuncionariodtregistro: TDateField
+    object qFuncionariodtregistro: TZDateField
       Alignment = taCenter
       FieldName = 'dtregistro'
       Required = True
     end
-    object qFuncionarioAtivo: TWideStringField
+    object qFuncionarioAtivo: TZUnicodeStringField
       Alignment = taCenter
       FieldName = 'Ativo'
-      Required = True
       Size = 1
     end
   end

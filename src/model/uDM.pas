@@ -14,9 +14,9 @@ type
     dPesq: TDataSource;
     qExecSQL: TZQuery;
     qParametro: TZTable;
-    qParametroidCliente: TZIntegerField;
     qParametroUsa_comanda: TZUnicodeStringField;
     qParametroUsa_PDV: TZUnicodeStringField;
+    qParametroidCliente: TZInt64Field;
     procedure qClientedtnascSetText(Sender: TField; const Text: string);
     procedure qFuncionariodtnascSetText(Sender: TField; const Text: string);
     procedure DataModuleCreate(Sender: TObject);

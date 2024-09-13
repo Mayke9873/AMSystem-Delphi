@@ -10,11 +10,11 @@ type
   TdmFinanceiros = class(TDM)
     qConta: TZQuery;
     dConta: TDataSource;
-    qContaidConta: TZIntegerField;
+    qContaidConta: TZInt64Field;
     qContadescricao: TZUnicodeStringField;
     qContabancaria: TZShortIntField;
-    qContaex: TZIntegerField;
-    qContabanc: TWideStringField;
+    qContaex: TZInt64Field;
+    qContaBanc: TZUnicodeStringField;
   private
     { Private declarations }
   public

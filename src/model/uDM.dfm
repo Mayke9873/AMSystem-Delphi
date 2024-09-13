@@ -1,4 +1,5 @@
 object DM: TDM
+  OnCreate = DataModuleCreate
   Height = 366
   Width = 493
   object zCon: TZConnection
@@ -14,8 +15,6 @@ object DM: TDM
     Password = '123456'
     Protocol = 'mysql'
     LibraryLocation = 
-      'D:\Desenvolvimento\Projetos\Delphi\AMSystem-Delphi\bin\libmariad' +
-      'b.dll'
     Left = 24
     Top = 16
   end
@@ -39,11 +38,10 @@ object DM: TDM
   object qParametro: TZTable
     Connection = zCon
     SequenceField = 'idCliente'
-    Active = True
     TableName = 'parametro'
     Left = 64
     Top = 16
-    object qParametroidCliente: TZIntegerField
+    object qParametroidCliente: TZInt64Field
       FieldName = 'idCliente'
       Required = True
     end

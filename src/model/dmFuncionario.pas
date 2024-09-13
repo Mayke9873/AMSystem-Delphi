@@ -11,16 +11,16 @@ type
     dFuncionario: TDataSource;
     uFuncionario: TZUpdateSQL;
     qFuncionario: TZQuery;
-    qFuncionarioId: TIntegerField;
-    qFuncionarioNome: TWideStringField;
-    qFuncionarioRG: TWideStringField;
-    qFuncionarioCpf: TWideStringField;
-    qFuncionariodtnasc: TDateField;
-    qFuncionarioEndereco: TWideStringField;
-    qFuncionarionumendereco: TWideStringField;
-    qFuncionarioBairro: TWideStringField;
-    qFuncionariodtregistro: TDateField;
-    qFuncionarioAtivo: TWideStringField;
+    qFuncionarioId: TZInt64Field;
+    qFuncionarioNome: TZUnicodeStringField;
+    qFuncionarioRG: TZUnicodeStringField;
+    qFuncionarioCpf: TZUnicodeStringField;
+    qFuncionariodtnasc: TZDateField;
+    qFuncionarioEndereco: TZUnicodeStringField;
+    qFuncionarionumendereco: TZUnicodeStringField;
+    qFuncionarioBairro: TZUnicodeStringField;
+    qFuncionariodtregistro: TZDateField;
+    qFuncionarioAtivo: TZUnicodeStringField;
     procedure qFuncionarioNewRecord(DataSet: TDataSet);
   private
     { Private declarations }

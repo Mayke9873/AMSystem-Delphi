@@ -7,7 +7,7 @@ inherited dmCompras: TdmCompras
     Params = <>
     Left = 24
     Top = 68
-    object qCompraid: TIntegerField
+    object qCompraid: TZInt64Field
       FieldName = 'id'
       Required = True
     end
@@ -94,7 +94,7 @@ inherited dmCompras: TdmCompras
       item
         Name = 'dtF'
       end>
-    object qConsComprasID: TZIntegerField
+    object qConsComprasID: TZInt64Field
       FieldName = 'ID'
       ReadOnly = True
     end
@@ -102,22 +102,22 @@ inherited dmCompras: TdmCompras
       FieldName = 'VALOR'
       ReadOnly = True
       DisplayFormat = '###,###,#00.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qConsComprasDESCONTO: TZBCDField
       FieldName = 'DESCONTO'
       ReadOnly = True
       DisplayFormat = '###,###,#00.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qConsComprasVALOR_TOTAL: TZBCDField
       FieldName = 'VALOR_TOTAL'
       ReadOnly = True
       DisplayFormat = '###,###,#00.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qConsComprasDATA_COMPRA: TZDateField
       FieldName = 'DATA_COMPRA'

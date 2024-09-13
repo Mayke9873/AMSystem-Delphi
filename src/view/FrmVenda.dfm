@@ -581,8 +581,6 @@ object fVenda: TfVenda
     Caption = 'pnlBotoes'
     ShowCaption = False
     TabOrder = 17
-    ExplicitTop = 568
-    ExplicitWidth = 959
     DesignSize = (
       963
       55)
@@ -680,21 +678,21 @@ object fVenda: TfVenda
       item
         Name = 'idVenda'
       end>
-    object qProdVendaid: TIntegerField
+    object qProdVendaid: TZInt64Field
       FieldName = 'id'
       Required = True
     end
-    object qProdVendaidprod: TIntegerField
+    object qProdVendaidprod: TZInt64Field
       FieldName = 'idprod'
       Required = True
     end
     object qProdVendaquantidade: TZBCDField
       FieldName = 'quantidade'
       Required = True
-      Precision = 5
+      Precision = 11
       Size = 3
     end
-    object qProdVendadescricao: TWideStringField
+    object qProdVendadescricao: TZUnicodeStringField
       FieldName = 'descricao'
       Required = True
       Size = 255
@@ -703,22 +701,30 @@ object fVenda: TfVenda
       FieldName = 'desconto'
       Required = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qProdVendatotal: TZBCDField
       FieldName = 'total'
       Required = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qProdVendavalor: TZBCDField
       FieldName = 'valor'
       Required = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
+    end
+    object qProdVendaidVenda: TZInt64Field
+      FieldName = 'idVenda'
+      Required = True
+    end
+    object qProdVendaex: TZIntegerField
+      FieldName = 'ex'
+      Required = True
     end
   end
   object uProdVenda: TZUpdateSQL

@@ -7,7 +7,7 @@ inherited dmVendas: TdmVendas
     Params = <>
     Left = 24
     Top = 68
-    object qVendaid: TIntegerField
+    object qVendaid: TZInt64Field
       FieldName = 'id'
       Required = True
     end
@@ -82,11 +82,11 @@ inherited dmVendas: TdmVendas
       item
         Name = 'dtF'
       end>
-    object qConsVendasID: TIntegerField
+    object qConsVendasID: TZInt64Field
       FieldName = 'ID'
       ReadOnly = True
     end
-    object qConsVendasCLIENTE: TWideStringField
+    object qConsVendasCLIENTE: TZUnicodeStringField
       FieldName = 'CLIENTE'
       ReadOnly = True
       Size = 250
@@ -95,28 +95,28 @@ inherited dmVendas: TdmVendas
       FieldName = 'VALOR'
       ReadOnly = True
       DisplayFormat = '###,###,#00.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qConsVendasDESCONTO: TZBCDField
       FieldName = 'DESCONTO'
       ReadOnly = True
       DisplayFormat = '###,###,#00.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qConsVendasVALOR_TOTAL: TZBCDField
       FieldName = 'VALOR_TOTAL'
       ReadOnly = True
       DisplayFormat = '###,###,#00.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qConsVendasDATA_VENDA: TZDateField
       FieldName = 'DATA_VENDA'
       ReadOnly = True
     end
-    object qConsVendasNOME: TWideStringField
+    object qConsVendasNOME: TZUnicodeStringField
       FieldName = 'NOME'
       ReadOnly = True
       Size = 255
@@ -132,7 +132,7 @@ inherited dmVendas: TdmVendas
     Params = <>
     Left = 24
     Top = 196
-    object IntegerField1: TIntegerField
+    object qVenda_comandaid: TZInt64Field
       FieldName = 'id'
       Required = True
     end
@@ -369,21 +369,21 @@ inherited dmVendas: TdmVendas
       item
         Name = 'idVenda'
       end>
-    object qProdVendaid: TIntegerField
+    object qProdVendaid: TZInt64Field
       FieldName = 'id'
       Required = True
     end
-    object qProdVendaidprod: TIntegerField
+    object qProdVendaidprod: TZInt64Field
       FieldName = 'idprod'
       Required = True
     end
     object qProdVendaquantidade: TZBCDField
       FieldName = 'quantidade'
       Required = True
-      Precision = 5
+      Precision = 11
       Size = 3
     end
-    object qProdVendadescricao: TWideStringField
+    object qProdVendadescricao: TZUnicodeStringField
       FieldName = 'descricao'
       Required = True
       Size = 255
@@ -392,22 +392,30 @@ inherited dmVendas: TdmVendas
       FieldName = 'desconto'
       Required = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qProdVendatotal: TZBCDField
       FieldName = 'total'
       Required = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qProdVendavalor: TZBCDField
       FieldName = 'valor'
       Required = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 5
-      Size = 2
+      Precision = 11
+      Size = 3
+    end
+    object qProdVendaidVenda: TZInt64Field
+      FieldName = 'idVenda'
+      Required = True
+    end
+    object qProdVendaex: TZIntegerField
+      FieldName = 'ex'
+      Required = True
     end
   end
 end

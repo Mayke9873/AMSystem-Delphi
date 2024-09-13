@@ -4,15 +4,15 @@ interface
 
 uses
   System.SysUtils, System.Classes, uDM, ZSqlUpdate, Data.DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, ZAbstractConnection, ZConnection;
+  ZAbstractDataset, ZDataset, ZAbstractConnection, ZConnection, ZAbstractTable;
 
 type
   TdmCompras = class(TDM)
     qCompra: TZQuery;
     uCompra: TZUpdateSQL;
-    qCompraid: TIntegerField;
     qConsCompras: TZReadOnlyQuery;
-    qConsComprasID: TZIntegerField;
+    qCompraid: TZInt64Field;
+    qConsComprasID: TZInt64Field;
     qConsComprasVALOR: TZBCDField;
     qConsComprasDESCONTO: TZBCDField;
     qConsComprasVALOR_TOTAL: TZBCDField;

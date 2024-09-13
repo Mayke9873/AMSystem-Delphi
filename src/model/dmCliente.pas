@@ -9,19 +9,19 @@ uses
 type
   TdmClientes = class(TDM)
     qCliente: TZQuery;
-    qClienteId: TIntegerField;
-    qClienteNome: TWideStringField;
-    qClienteRG: TWideStringField;
-    qClienteCpfCnpj: TWideStringField;
-    qClientedtnasc: TDateField;
-    qClienteEndereco: TWideStringField;
-    qClientenumendereco: TWideStringField;
-    qClienteBairro: TWideStringField;
-    qClientedtregistro: TDateField;
-    qClienteTipo: TWideStringField;
-    qClienteAtivo: TWideStringField;
     dCliente: TDataSource;
     uCliente: TZUpdateSQL;
+    qClienteId: TZInt64Field;
+    qClienteNome: TZUnicodeStringField;
+    qClienteRG: TZUnicodeStringField;
+    qClienteCpfCnpj: TZUnicodeStringField;
+    qClientedtnasc: TZDateField;
+    qClienteEndereco: TZUnicodeStringField;
+    qClientenumendereco: TZUnicodeStringField;
+    qClienteBairro: TZUnicodeStringField;
+    qClientedtregistro: TZDateField;
+    qClienteTipo: TZUnicodeStringField;
+    qClienteAtivo: TZUnicodeStringField;
     procedure qClienteNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
