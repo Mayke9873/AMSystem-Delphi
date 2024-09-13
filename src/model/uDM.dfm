@@ -14,7 +14,6 @@ object DM: TDM
     User = 'root'
     Password = '123456'
     Protocol = 'mysql'
-    LibraryLocation = 
     Left = 24
     Top = 16
   end
