@@ -61,7 +61,7 @@ inherited dmVendas: TdmVendas
         '  a.ID, a.CLIENTE, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DATA_VE' +
         'NDA, b.NOME'
       'FROM VENDA a'
-      'LEFT JOIN  FUNCIONARIO b on  a.VENDEDOR = b.ID'
+      'LEFT JOIN  Usuario b on  a.VENDEDOR = b.ID'
       '  WHERE ex = 0 and'
       '    (:dt = 0 or (a.DATA_VENDA between :dt and :dtF))'
       '    order by id desc;')

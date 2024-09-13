@@ -6,11 +6,11 @@ inherited dmFuncionarios: TdmFuncionarios
   end
   object uFuncionario: TZUpdateSQL
     DeleteSQL.Strings = (
-      'DELETE FROM Funcionario'
+      'DELETE FROM USUARIO'
       'WHERE'
-      '  Funcionario.id = :OLD_id')
+      '  Usuario.id = :OLD_id')
     InsertSQL.Strings = (
-      'INSERT INTO Funcionario'
+      'INSERT INTO USUARIO'
       
         '  (id, nome, rg, CPF, DtNasc, endereco, numEndereco, bairro, DtR' +
         'egistro, '
@@ -21,7 +21,7 @@ inherited dmFuncionarios: TdmFuncionarios
         'rro, '
       '   :DtRegistro, :ativo)')
     ModifySQL.Strings = (
-      'UPDATE Funcionario SET'
+      'UPDATE USUARIO SET'
       '  id = :id,'
       '  nome = :nome,'
       '  rg = :rg,'
@@ -81,7 +81,7 @@ inherited dmFuncionarios: TdmFuncionarios
       
         'SELECT Id, Nome, RG, Cpf, dtnasc, Endereco, numendereco, Bairro,' +
         ' dtregistro, Ativo'
-      #9'FROM FUNCIONARIO'
+      #9'FROM USUARIO'
       'where ((:id = 0 or id = :id) and nome like :nome)'
       #9#9'and (:ativo = '#39'T'#39' or ativo = :ativo);')
     Params = <

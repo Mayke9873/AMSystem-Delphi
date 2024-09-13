@@ -73,7 +73,7 @@ inherited dmCompras: TdmCompras
         '  a.ID, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DATA_COMPRA, a. FO' +
         'RNECEDOR NOME'
       'FROM COMPRA a'
-      'LEFT JOIN  FUNCIONARIO b on  a.USUARIO = b.ID'
+      'LEFT JOIN USUARIO b on  a.USUARIO = b.ID'
       '  WHERE ex = 0 and'
       '    (:dt = 0 or (a.DATA_COMPRA between :dt and :dtF))'
       '    order by id desc;')
