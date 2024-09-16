@@ -41,9 +41,7 @@ object fConta: TfConta
     ActivePage = pgDados
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 0
-    ExplicitWidth = 979
-    ExplicitHeight = 584
+    TabOrder = 5
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgConta: TDBGrid
@@ -102,7 +100,7 @@ object fConta: TfConta
           end
           item
             Expanded = False
-            FieldName = 'banc'
+            FieldName = 'Banc'
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -163,7 +161,7 @@ object fConta: TfConta
         DataField = 'ex'
         DataSource = dmFinanceiros.dConta
         ReadOnly = True
-        TabOrder = 0
+        TabOrder = 1
         ValueChecked = '5'
         ValueUnchecked = '2'
       end
@@ -178,7 +176,7 @@ object fConta: TfConta
         Margins.Bottom = 0
         BevelOuter = bvNone
         Color = clWindow
-        TabOrder = 1
+        TabOrder = 3
         object Shape1: TShape
           AlignWithMargins = True
           Left = 0
@@ -226,7 +224,7 @@ object fConta: TfConta
         Margins.Bottom = 0
         BevelOuter = bvNone
         Color = clWindow
-        TabOrder = 2
+        TabOrder = 0
         object Shape8: TShape
           Left = 0
           Top = 0
@@ -272,7 +270,7 @@ object fConta: TfConta
         DataField = 'bancaria'
         DataSource = dmFinanceiros.dConta
         ReadOnly = True
-        TabOrder = 3
+        TabOrder = 2
         ValueChecked = '1'
         ValueUnchecked = '0'
       end
@@ -288,7 +286,6 @@ object fConta: TfConta
     CharCase = ecUpperCase
     TabOrder = 1
     OnChange = edPesquisaChange
-    ExplicitWidth = 208
   end
   object rdbTodos: TRadioButton
     Left = 324
@@ -305,7 +302,6 @@ object fConta: TfConta
     ParentFont = False
     TabOrder = 2
     OnClick = rdbTodosClick
-    ExplicitLeft = 320
   end
   object rdbAtivo: TRadioButton
     Tag = 5
@@ -325,7 +321,6 @@ object fConta: TfConta
     TabOrder = 3
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 400
   end
   object rdbInativo: TRadioButton
     Tag = 2
@@ -343,7 +338,6 @@ object fConta: TfConta
     ParentFont = False
     TabOrder = 4
     OnClick = rdbTodosClick
-    ExplicitLeft = 472
   end
   object pnlBotoes: TPanel
     Left = 0
@@ -355,8 +349,7 @@ object fConta: TfConta
     Caption = 'pnlBotoes'
     Padding.Left = 4
     ShowCaption = False
-    TabOrder = 5
-    ExplicitWidth = 979
+    TabOrder = 0
     object tbNovo: TSkSvg
       AlignWithMargins = True
       Left = 4

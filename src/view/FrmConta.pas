@@ -116,8 +116,6 @@ end;
 
 procedure TfConta.tbSalvarClick(Sender: TObject);
 begin
-  AlterarCampos(telaPadrao);
-
   Contas.id        := StrToIntDef(DBEditID.Text, 0);
   Contas.descricao := dbeDescricao.Text;
   Contas.ex        := IfThen(dbchkAtivo.Checked, StrToInt(dbchkAtivo.ValueChecked),
@@ -125,7 +123,12 @@ begin
   Contas.isBanco   := dbchkBancaria.Checked;
 
   if not (Contas.Salvar(Contas)) then
+  begin
     Application.MessageBox('Erro ao salvar. Tente novamente!', 'Atenção', 48);
+    Abort;
+  end;
+
+  AlterarCampos(telaPadrao);
 end;
 
 procedure TfConta.AlterarCampos(pTipo : Integer);
