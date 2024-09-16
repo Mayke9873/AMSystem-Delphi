@@ -40,8 +40,7 @@ object fGrupoProd: TfGrupoProd
     ActivePage = pgTabela
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 0
-    ExplicitWidth = 991
+    TabOrder = 5
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgGrupo: TDBGrid
@@ -256,8 +255,7 @@ object fGrupoProd: TfGrupoProd
     Caption = 'pnlBotoes'
     Padding.Left = 4
     ShowCaption = False
-    TabOrder = 5
-    ExplicitWidth = 987
+    TabOrder = 0
     object tbNovo: TSkSvg
       AlignWithMargins = True
       Left = 4

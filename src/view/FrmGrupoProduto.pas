@@ -255,6 +255,7 @@ end;
 
 procedure TfGrupoProd.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  FreeAndNil(Grupo);
   Forms.FecharForm(Self, Action);
 end;
 
