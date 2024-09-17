@@ -13,7 +13,7 @@ type
     Label9: TLabel;
     qVendas: TZReadOnlyQuery;
     dVendas: TDataSource;
-    qVendasID: TIntegerField;
+    qVendasID: TZInt64Field;
     qVendasCLIENTE: TWideStringField;
     qVendasVALOR: TZBCDField;
     qVendasDESCONTO: TZBCDField;
@@ -81,10 +81,9 @@ begin
   qVendas.Close;
   qVendas.SQL.Clear;
   qVendas.SQL.Add('SELECT a.ID, a.CLIENTE, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DATA_VENDA, b.NOME ' +
-    'FROM VENDA a LEFT JOIN  FUNCIONARIO b on  a.VENDEDOR = b.ID WHERE ex = 0 and cliente like ' +
+    'FROM VENDA a LEFT JOIN  USUARIO b on  a.VENDEDOR = b.ID WHERE ex = 5 and cliente like ' +
     QuotedStr('%' + edPesquisa.Text + '%') + ' order by id desc;');
   qVendas.Open;
-
 end;
 
 procedure TfConsultaVendas.FormActivate(Sender: TObject);

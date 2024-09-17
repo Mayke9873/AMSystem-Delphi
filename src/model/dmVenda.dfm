@@ -62,7 +62,7 @@ inherited dmVendas: TdmVendas
         'NDA, b.NOME'
       'FROM VENDA a'
       'LEFT JOIN  Usuario b on  a.VENDEDOR = b.ID'
-      '  WHERE ex = 0 and'
+      '  WHERE ex = 5 and'
       '    (:dt = 0 or (a.DATA_VENDA between :dt and :dtF))'
       '    order by id desc;')
     Params = <

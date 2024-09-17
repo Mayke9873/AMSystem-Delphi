@@ -42,9 +42,8 @@ object fConsultaVendas: TfConsultaVendas
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
-    TabOrder = 0
+    TabOrder = 1
     OnChange = edPesquisaChange
-    ExplicitWidth = 280
   end
   object Panel1: TPanel
     Left = 0
@@ -55,9 +54,7 @@ object fConsultaVendas: TfConsultaVendas
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     Caption = 'Panel1'
-    TabOrder = 1
-    ExplicitWidth = 979
-    ExplicitHeight = 567
+    TabOrder = 2
     object dbgVendas: TDBGrid
       AlignWithMargins = True
       Left = 4
@@ -218,8 +215,7 @@ object fConsultaVendas: TfConsultaVendas
     Caption = 'pnlBotoes'
     Padding.Left = 4
     ShowCaption = False
-    TabOrder = 2
-    ExplicitWidth = 979
+    TabOrder = 0
     object tbNovo: TSkSvg
       AlignWithMargins = True
       Left = 4
@@ -404,14 +400,14 @@ object fConsultaVendas: TfConsultaVendas
         'SELECT a.ID, a.CLIENTE, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DA' +
         'TA_VENDA, b.NOME'
       
-        '  FROM VENDA a LEFT JOIN  FUNCIONARIO b on  a.VENDEDOR = b.ID WH' +
-        'ERE ex = 0'
+        '  FROM VENDA a LEFT JOIN  USUARIO b on  a.VENDEDOR = b.ID WHERE ' +
+        'ex = 5'
       '    order by id desc;')
     Params = <>
     IndexFieldNames = 'ID Desc'
     Left = 848
     Top = 96
-    object qVendasID: TIntegerField
+    object qVendasID: TZInt64Field
       FieldName = 'ID'
       ReadOnly = True
     end
@@ -424,22 +420,22 @@ object fConsultaVendas: TfConsultaVendas
       FieldName = 'VALOR'
       ReadOnly = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qVendasDESCONTO: TZBCDField
       FieldName = 'DESCONTO'
       ReadOnly = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qVendasVALOR_TOTAL: TZBCDField
       FieldName = 'VALOR_TOTAL'
       ReadOnly = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qVendasDATA_VENDA: TDateField
       FieldName = 'DATA_VENDA'

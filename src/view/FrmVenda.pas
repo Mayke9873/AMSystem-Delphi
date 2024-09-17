@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.Grids,
   Vcl.DBGrids, ZAbstractRODataset, ZDataset, ZSqlUpdate, ZAbstractDataset,
   System.StrUtils, Vcl.ExtCtrls, uCliente, Vcl.Buttons, uVenda, uProduto,
-  uFuncionario, uVenda.Itens;
+  uFuncionario, uVenda.Itens, Consts;
 
 type
   TfVenda = class(TForm)
@@ -249,17 +249,19 @@ begin
   try
     qProdVenda.Open;
     qProdVenda.Insert;
+    qProdVendaidVenda.AsInteger  := Venda.id;
     qProdVendaidprod.AsInteger   := StrToInt(edIdProd.Text);
     qProdVendadescricao.AsString := edPesqProd.Text;
     qProdVendavalor.AsFloat      := StrToFloat(edValorUnitario.Text);
     qProdVendadesconto.AsFloat   := StrToFloat(edDesconto.Text);
     qProdVendaquantidade.AsFloat := StrToFloat(edQtdProduto.Text);
     qProdVendatotal.AsFloat      := (Venda.PrecoProduto);
+    qProdVendaex.AsInteger       := Consts.Aberto;
 
     Prod_Venda := TVenda_Itens.Create;
     with Prod_Venda do
     begin
-      id          := StrToInt(edIdProd.Text);
+      idProduto   := StrToInt(edIdProd.Text);
       idVenda     := Venda.ID;
       valor_unit  := StrToFloat(edValorUnitario.Text);
       desconto    := StrToFloat(edDesconto.Text);

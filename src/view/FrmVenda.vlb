@@ -1,9 +1,6 @@
 ﻿[edVendedor]
 Coordinates=575,232,84,58
 
-[qProdVendaidprod]
-Coordinates=570,386,122,36
-
 [Label2]
 Coordinates=138,300,53,58
 
@@ -18,9 +15,6 @@ Coordinates=700,10,53,58
 
 [dbgCliente]
 Coordinates=111,368,76,36
-
-[qProdVendaid]
-Coordinates=570,496,96,36
 
 [edQtdProduto]
 Coordinates=596,10,94,58
@@ -39,9 +33,6 @@ Coordinates=762,232,53,58
 
 [edIdVendedor]
 Coordinates=10,232,95,58
-
-[qProdVendadescricao]
-Coordinates=730,166,141,36
 
 [dbgVendedor]
 Coordinates=10,368,91,36
@@ -86,6 +77,6 @@ Coordinates=434,10,53,58
 Coordinates=209,232,88,58
 
 []
-Coordinates=730,276,138,36
+Coordinates=570,496,96,36
 Visible=True
 

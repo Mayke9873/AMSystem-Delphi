@@ -58,7 +58,8 @@ type
 implementation
 
   uses
-    uDM, FrmVenda, uProduto, uEstoque, Consts, dmCliente, dmVenda, uFinanceiro.Movimento;
+    uDM, FrmVenda, uProduto, uEstoque, Consts, dmCliente, dmVenda, uFinanceiro.Movimento,
+  System.StrUtils;
 
 { TVenda }
 
@@ -89,14 +90,15 @@ begin
 
       ItensPDV();
 
-      ExecSQL('UPDATE VENDA SET ID_CLIENTE = ' + IntToStr(dmClientes.qClienteId.AsInteger) +
+      ExecSQL('UPDATE VENDA SET ID_CLIENTE = ' +
+                IfThen(dmClientes.qClienteId.AsInteger = 0, 'null', dmClientes.qClienteId.AsInteger.ToString) +
         ', CLIENTE = ' + QuotedStr(dmClientes.qClienteNome.AsString) +
         ', VALOR = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
         ', DESCONTO = ' + StringReplace(FloatToStr(Desconto), ',', '.', []) +
         ', VALOR_TOTAL = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
         ', PAGO = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
         ', VENDEDOR = ' + QuotedStr(idVendedor.ToString) + ', DATA_VENDA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) +
-        ', EX = 0 WHERE ID = ' + IntToStr(ID) + ';');
+        ', EX = 5 WHERE ID = ' + IntToStr(ID) + ';');
 
       ExecSQL('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + IntToStr(ID) + ';');
 
@@ -223,8 +225,12 @@ begin
   if Application.MessageBox('Deseja cancelar venda?', 'Atenção', MB_YESNO + MB_ICONQUESTION) = IDYES then
   begin
     LimpaVenda;
-    ExecSQL('Delete from venda where ID = ' + IntToStr(ID));
+    ExecSQL('delete from movestoque where tipoMov = ''V'' and IdMovimentacao = '+ Id.ToString);
     ExecSQL('Delete from venda_item where idVenda = '+  IntToStr(ID));
+    ExecSQL('Delete from venda where ID = ' + IntToStr(ID));
+    ExecSQL('ALTER table venda AUTO_INCREMENT = 0');
+    ExecSQL('ALTER table venda_item AUTO_INCREMENT = 0');
+    ExecSQL('ALTER table MovEstoque AUTO_INCREMENT = 0');
     Result := True;
   end;
 end;
