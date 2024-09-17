@@ -262,8 +262,7 @@ end;
 procedure TComanda.FinalizaItens();
 begin
   SQL := 'update venda_comanda set ex = 1, status = ''F'', idVenda = '+ idVenda.ToString +
-         ' where status = ''A'' and idComanda = :comanda;';
-  FQuery.ParamByName('comanda').AsInteger := Fcomanda;
+         ' where status = ''A'' and idComanda = '+ Fcomanda.ToString;
 
   FQuery.ExecSQL;
 end;
