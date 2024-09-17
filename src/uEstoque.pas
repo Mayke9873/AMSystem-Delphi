@@ -43,7 +43,7 @@ implementation
 
 { TEstoque }
 
-uses dmProduto;
+uses dmProduto, System.StrUtils;
 
 procedure TEstoque.MovEstoque(const tipo : String; multiplo : Integer; ajuste: Boolean = False);
 begin
@@ -61,12 +61,11 @@ begin
   dmProdutos.qMovEstoquedataMov.AsDateTime  := Now;
   dmProdutos.qMovEstoqueidUsuario.AsInteger := 1;
   dmProdutos.qMovEstoquetipoMov.AsString    := tipo;
-  dmProdutos.qMovEstoqueidFornecedor.AsInteger   := FidFornecedor;
+  dmProdutos.qMovEstoqueidFornecedor.AsString    := IfThen(FidFornecedor = 0, '', FidFornecedor.ToString);
   dmProdutos.qMovEstoqueidMovimentacao.AsInteger := FidMovimentacao;
   dmProdutos.qMovEstoque.Post;
-  dmProdutos.qProduto.Refresh;
 
-  if ajuste then  
+  if ajuste then
     Application.MessageBox('Ajuste realizado com sucesso!','' , 32);
 end;
 
