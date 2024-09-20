@@ -247,6 +247,8 @@ begin
   Venda.Soma();
 
   try
+    ExecSQL('ALTER table venda_item AUTO_INCREMENT = 0');
+
     qProdVenda.Open;
     qProdVenda.Insert;
     qProdVendaidVenda.AsInteger  := Venda.id;

@@ -128,6 +128,8 @@ begin
 
     for Item in FItens do
     begin
+      ExecSQL('ALTER table venda_item AUTO_INCREMENT = 0');
+
       dmVendas.qProdVenda.Open;
       dmVendas.qProdVenda.Insert;
       dmVendas.qProdVendaidVenda.AsString   := IfThen(FID = 0, '', FID.ToString);
@@ -181,6 +183,8 @@ begin
   try
     for Item in FItens do
     begin
+      ExecSQL('ALTER table MovEstoque AUTO_INCREMENT = 0');
+
       Prod.idProduto      := Item.idProduto;
       Prod.qtd            := Item.quantidade;
       Prod.idMovimentacao := FID;
@@ -203,7 +207,8 @@ begin
       Desconto := 0;
     end;
 
-    ExecSQL('insert into venda (ID, EX) select (select coalesce(max(id)+1, 1) from venda), 1;');
+    ExecSQL('ALTER table venda AUTO_INCREMENT = 0');
+    ExecSQL('insert into venda (ID, EX) values (null, 0);');
 
     AbreVenda();
   end;
@@ -232,9 +237,7 @@ begin
     ExecSQL('delete from movestoque where tipoMov = ''V'' and IdMovimentacao = '+ Id.ToString);
     ExecSQL('Delete from venda_item where idVenda = '+  IntToStr(ID));
     ExecSQL('Delete from venda where ID = ' + IntToStr(ID));
-    ExecSQL('ALTER table venda AUTO_INCREMENT = 0');
-    ExecSQL('ALTER table venda_item AUTO_INCREMENT = 0');
-    ExecSQL('ALTER table MovEstoque AUTO_INCREMENT = 0');
+
     Result := True;
   end;
 end;
