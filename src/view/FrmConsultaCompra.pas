@@ -13,7 +13,7 @@ type
     Label9: TLabel;
     qCompras: TZReadOnlyQuery;
     dCompras: TDataSource;
-    qComprasID: TIntegerField;
+    qComprasID: TZInt64Field;
     qComprasCLIENTE: TWideStringField;
     qComprasVALOR: TZBCDField;
     qComprasDESCONTO: TZBCDField;
@@ -81,7 +81,7 @@ begin
   qCompras.Close;
   qCompras.SQL.Clear;
   qCompras.SQL.Add('SELECT a.ID, a.Fornecedor cliente, a.VALOR, a.DESCONTO, a.VALOR_TOTAL, a.DATA_COMPRA DATA_VENDA, b.NOME ' +
-    'FROM COMPRA a LEFT JOIN  FUNCIONARIO b on  a.USUARIO = b.ID WHERE ex = 0 and a.Fornecedor like ' +
+    'FROM COMPRA a LEFT JOIN  USUARIO b on  a.USUARIO = b.ID WHERE ex = 0 and a.Fornecedor like ' +
     QuotedStr('%' + edPesquisa.Text + '%') + ' order by id desc;');
   qCompras.Open;
 end;

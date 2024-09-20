@@ -42,9 +42,8 @@ object fConsultaCompras: TfConsultaCompras
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
-    TabOrder = 0
+    TabOrder = 1
     OnChange = edPesquisaChange
-    ExplicitWidth = 248
   end
   object Panel1: TPanel
     Left = 0
@@ -55,9 +54,7 @@ object fConsultaCompras: TfConsultaCompras
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     Caption = 'Panel1'
-    TabOrder = 1
-    ExplicitWidth = 971
-    ExplicitHeight = 565
+    TabOrder = 2
     object dbgVendas: TDBGrid
       AlignWithMargins = True
       Left = 4
@@ -201,8 +198,7 @@ object fConsultaCompras: TfConsultaCompras
     Caption = 'pnlBotoes'
     Padding.Left = 4
     ShowCaption = False
-    TabOrder = 2
-    ExplicitWidth = 971
+    TabOrder = 0
     object tbNovo: TSkSvg
       AlignWithMargins = True
       Left = 4
@@ -387,14 +383,14 @@ object fConsultaCompras: TfConsultaCompras
         'SELECT a.ID, a.Fornecedor cliente, a.VALOR, a.DESCONTO, a.VALOR_' +
         'TOTAL, a.DATA_COMPRA DATA_VENDA, b.NOME'
       
-        '  FROM COMPRA a LEFT JOIN  FUNCIONARIO b on  a.USUARIO = b.ID WH' +
-        'ERE ex = 0'
+        '  FROM COMPRA a LEFT JOIN  USUARIO b on  a.USUARIO = b.ID WHERE ' +
+        'ex = 0'
       '    order by id desc;')
     Params = <>
     IndexFieldNames = 'ID Desc'
     Left = 848
     Top = 96
-    object qComprasID: TIntegerField
+    object qComprasID: TZInt64Field
       FieldName = 'ID'
       ReadOnly = True
     end
@@ -407,22 +403,22 @@ object fConsultaCompras: TfConsultaCompras
       FieldName = 'VALOR'
       ReadOnly = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qComprasDESCONTO: TZBCDField
       FieldName = 'DESCONTO'
       ReadOnly = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qComprasVALOR_TOTAL: TZBCDField
       FieldName = 'VALOR_TOTAL'
       ReadOnly = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qComprasDATA_VENDA: TDateField
       FieldName = 'DATA_VENDA'
