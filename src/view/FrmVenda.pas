@@ -133,7 +133,7 @@ end;
 
 procedure TfVenda.FormKeyPress(Sender: TObject; var Key: Char);
 begin
-  if Key = #13 then
+  if (Key = #13) and NOT ((ActiveControl = dbgVendedor)) then
   begin
     Key := #0;
     Perform(WM_NEXTDLGCTL, 0, 0);
@@ -206,31 +206,20 @@ procedure TfVenda.dbgVendedorKeyDown(Sender: TObject; var Key: Word;
 begin
   if not (Key = 13) then
     Exit;
-    
+
   PreencheCampos(TDBGrid(Sender));
-  Perform(WM_NEXTDLGCTL, 0, 0);
 end;
 
 procedure TfVenda.edPesqProdChange(Sender: TObject);
 begin
-  if (Trim(edPesqProd.Text) <> '') and (Trim(edIdProd.Text) = '') then
-  begin
-    Produto.Ativo := 'S';
-    Produto.Pesquisar(edPesqProd.Text);
+  dbgPesqProduto.Visible := false;
+  if NOT ((Trim(edPesqProd.Text) <> '') and (Trim(edIdProd.Text) = '')) then
+    Exit;
 
-    if dmProdutos.qProduto.RecordCount > 0  then
-    begin
-      dbgPesqProduto.Visible := True;
-    end
-    else
-    begin
-      dbgPesqProduto.Visible := false;
-    end;
-  end
-  else
-  begin
-    dbgPesqProduto.Visible := false;
-  end;
+  Produto.Ativo := 'S';
+  Produto.Pesquisar(edPesqProd.Text);
+
+  dbgPesqProduto.Visible := (dmProdutos.qProduto.RecordCount > 0);
 end;
 
 procedure TfVenda.edValorTotalEnter(Sender: TObject);
@@ -289,33 +278,26 @@ end;
 
 procedure TfVenda.edVendedorChange(Sender: TObject);
 begin
-  if (Trim(edVendedor.Text) <> '') and (Trim(edIdVendedor.Text) = '') then
-  begin
-    Consulta(TEdit(Sender));
-    
-    if dmFuncionarios.qFuncionario.RecordCount > 0 then
-      dbgVendedor.Visible := True
-    else
-      dbgVendedor.Visible := False;
-  end
-  else
-    dbgVendedor.Visible := False;
+  dbgVendedor.Visible := False;
+  if NOT ((Trim(edVendedor.Text) <> '') and (Trim(edIdVendedor.Text) = '')) then
+    Exit;
 
+  Consulta(TEdit(Sender));
+
+  dbgVendedor.Visible := (dmFuncionarios.qFuncionario.RecordCount > 0);
 end;
 
 procedure TfVenda.edVendedorKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-    if (Key = VK_DOWN) then
-      FocarGrid(TEdit(Sender));
+  if (Key = VK_DOWN) then
+    FocarGrid(TEdit(Sender));
 end;
 
 procedure TfVenda.edQtdProdutoEnter(Sender: TObject);
 begin
   if Length(Trim(edQtdProduto.Text)) <> 0 then
-  begin
     edQtdProduto.Text := '1'
-  end;
 end;
 
 procedure TfVenda.edQtdProdutoExit(Sender: TObject);
@@ -329,17 +311,13 @@ end;
 
 procedure TfVenda.edClienteChange(Sender: TObject);
 begin
-  if (Trim(edCliente.Text) <> '') and (Trim(edIdCliente.Text) = '') then
-  begin
-    Consulta(TEdit(Sender));
-    
-    if dmClientes.qCliente.RecordCount > 0 then
-      dbgCliente.Visible := True
-    else
-      dbgCliente.Visible := False;
-  end
-  else
-    dbgCliente.Visible := False;
+  dbgCliente.Visible := False;
+  if NOT ((Trim(edCliente.Text) <> '') and (Trim(edIdCliente.Text) = '')) then
+    Exit;
+
+  Consulta(TEdit(Sender));
+
+  dbgCliente.Visible := (dmClientes.qCliente.RecordCount > 0);
 end;
 
 procedure TfVenda.edDescontoExit(Sender: TObject);
@@ -499,30 +477,31 @@ end;
 
 procedure TfVenda.PreencheCampos(grid: TDBGrid);
 begin
+  SelectNext(ActiveControl, True, True);
+
   case grid.Tag of
-    0 : begin 
+    0 : begin
       edIdVendedor.Text := dbgVendedor.Fields[0].Value;
-      edVendedor.Text := dbgVendedor.Fields[1].Value;
-      dbgVendedor.Visible := False;
+      edVendedor.Text   := dbgVendedor.Fields[1].Value;
     end;
-    
+
     1 : begin
       edIdCliente.Text := dbgCliente.Fields[0].Value;
-      edCliente.Text := dbgCliente.Fields[1].Value;
-      dbgCliente.Visible := False;
+      edCliente.Text   := dbgCliente.Fields[1].Value;
     end;
-    
+
     2 : begin
-      edIdProd.Text := dbgPesqProduto.Fields[0].Value;
+      edIdProd.Text        := dbgPesqProduto.Fields[0].Value;
       edValorUnitario.Text := dbgPesqProduto.Fields[3].Text;
-      edPesqProd.Text := dbgPesqProduto.Fields[1].Text;
-      dbgPesqProduto.Visible := False;
+      edPesqProd.Text      := dbgPesqProduto.Fields[1].Text;
 
       edQtdProduto.Text := '1';
-      edDesconto.Text := '0,00';
-      edQtdProduto.SetFocus; 
+      edDesconto.Text   := '0,00';
+      edQtdProduto.SetFocus;
     end;
   end;
+
+  grid.Visible := False;
 end;
 
 procedure TfVenda.LimpaProduto;
