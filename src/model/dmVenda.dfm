@@ -272,8 +272,8 @@ inherited dmVendas: TdmVendas
       '   ex)'
       'VALUES'
       
-        '  ((select max(id) from Venda), :idprod, :descricao, :valor, :de' +
-        'sconto, :quantidade, '
+        '  (:idVenda, :idprod, :descricao, :valor, :desconto, :quantidade' +
+        ', '
       '   :total, 9)')
     ModifySQL.Strings = (
       'UPDATE Venda_item SET'
@@ -411,7 +411,6 @@ inherited dmVendas: TdmVendas
     end
     object qProdVendaidVenda: TZInt64Field
       FieldName = 'idVenda'
-      Required = True
     end
     object qProdVendaex: TZIntegerField
       FieldName = 'ex'

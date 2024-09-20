@@ -16,6 +16,7 @@ type
     FDescontoProduto: Currency;
     FPrecoProduto: Currency;
     FItens: TObjectList<TVenda_Itens>;
+    FCliente: TCliente;
 
     procedure SetID(const Value: Integer);
     procedure SetidVendedor(const Value: Integer);
@@ -39,6 +40,7 @@ type
     property DescontoProduto : Currency read FDescontoProduto write SetDescontoProduto;
     property PrecoProduto : Currency read FPrecoProduto write SetPrecoProduto;
     property Itens: TObjectList<TVenda_Itens> read FItens write SetItens;
+    property Cliente: TCliente read FCliente write FCliente;
 
     procedure Soma;
     procedure Subtrair;
@@ -90,14 +92,13 @@ begin
 
       ItensPDV();
 
-      ExecSQL('UPDATE VENDA SET ID_CLIENTE = ' +
-                IfThen(dmClientes.qClienteId.AsInteger = 0, 'null', dmClientes.qClienteId.AsInteger.ToString) +
-        ', CLIENTE = ' + QuotedStr(dmClientes.qClienteNome.AsString) +
+      ExecSQL('UPDATE VENDA SET ID_CLIENTE = ' + IfThen(FCliente.Cod = 0, 'null', FCliente.Cod.ToString) +
+        ', CLIENTE = ' + FCliente.Nome.QuotedString +
         ', VALOR = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
         ', DESCONTO = ' + StringReplace(FloatToStr(Desconto), ',', '.', []) +
         ', VALOR_TOTAL = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
         ', PAGO = ' + StringReplace(FloatToStr(Total), ',', '.', []) +
-        ', VENDEDOR = ' + QuotedStr(idVendedor.ToString) + ', DATA_VENDA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) +
+        ', VENDEDOR = ' + IfThen(idVendedor = 0, 'null', idVendedor.ToString) + ', DATA_VENDA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) +
         ', EX = 5 WHERE ID = ' + IntToStr(ID) + ';');
 
       ExecSQL('UPDATE venda_item set ex = 0 where ex = 9 and idVenda = ' + IntToStr(ID) + ';');
@@ -129,13 +130,16 @@ begin
     begin
       dmVendas.qProdVenda.Open;
       dmVendas.qProdVenda.Insert;
+      dmVendas.qProdVendaidVenda.AsString   := IfThen(FID = 0, '', FID.ToString);
       dmVendas.qProdVendaidprod.AsInteger   := Item.idProduto;
       dmVendas.qProdVendadescricao.AsString := Item.descricao;
       dmVendas.qProdVendavalor.AsFloat      := Item.valor_unit;
       dmVendas.qProdVendadesconto.AsFloat   := Item.desconto;
       dmVendas.qProdVendaquantidade.AsFloat := Item.quantidade;
       dmVendas.qProdVendatotal.AsFloat      := Item.total;
+      dmVendas.qProdVendaex.AsInteger       := 5;
 
+      dmVendas.qProdVenda.Post;
       dmVendas.qProdVenda.ApplyUpdates;
       dmVendas.qProdVenda.Close;
     end;

@@ -379,6 +379,7 @@ begin
     Abort;
   end;
 
+  Venda.Cliente := Cliente;
   Venda.ID := StrToIntDef(edCodVenda.Text, 0);
   if Venda.Finaliza() then
   begin

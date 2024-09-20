@@ -6,7 +6,7 @@ uses
   Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.ExtCtrls, Vcl.Buttons, System.Actions, Vcl.ActnList, Vcl.ComCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids, CheckDBGrid,
   Vcl.StdCtrls, Vcl.WinXCtrls, Data.Bind.Components, Data.Bind.DBScope, Datasnap.Provider, Datasnap.DBClient,
-  uFuncionario, uProduto, uVenda, uVenda.Itens, uComanda;
+  uFuncionario, uProduto, uVenda, uVenda.Itens, uComanda, uCliente;
 
 type
   TfPDV = class(TForm)
@@ -101,6 +101,7 @@ type
     Produto: TProduto;
     Funcionario: TFuncionario;
     Prod_Venda : TVenda_Itens;
+    Cliente: TCliente;
     procedure ConsultaPorID(Sender: TEdit);
     procedure StatusCaixa;
     procedure InserirProduto();
@@ -138,6 +139,7 @@ begin
   Venda         := TVenda.Create;
   Produto       := TProduto.Create;
   Funcionario   := TFuncionario.Create;
+  Cliente      := TCliente.Create;
 
   LimpaCampos();
 end;
@@ -190,6 +192,7 @@ begin
   FreeAndNil(Venda);
   FreeAndNil(Produto);
   FreeAndNil(Funcionario);
+  FreeAndNil(Cliente);
 
   Forms.FecharForm(Self, Action);
 end;
@@ -250,15 +253,18 @@ end;
 
 procedure TfPDV.acFinalizarExecute(Sender: TObject);
 begin
-  if not (dmVendas.CdsItens.IsEmpty) then
-    if Venda.Finaliza() then
-    begin
-      dmVendas.CdsItens.EmptyDataSet;
-      StatusCaixa();
-      LimpaCampos();
+  if (dmVendas.CdsItens.IsEmpty) then
+    Exit;
 
-      Application.MessageBox('Venda realizada com sucesso!', 'Aviso', 64);
-    end;
+  Venda.Cliente := Cliente;
+  if Venda.Finaliza() then
+  begin
+    dmVendas.CdsItens.EmptyDataSet;
+    StatusCaixa();
+    LimpaCampos();
+
+    Application.MessageBox('Venda realizada com sucesso!', 'Aviso', 64);
+  end;
 end;
 
 procedure TfPDV.acMaisAtalhosExecute(Sender: TObject);
