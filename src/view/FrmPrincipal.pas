@@ -79,7 +79,7 @@ implementation
 uses
   FrmCliente, uVenda, FrmConsultaVenda, FrmProduto, FrmGrupoProduto,
   FrmFuncionario, FrmVenda, FrmFornecedor, FrmAjusteEstoque, FrmCompra,
-  FrmConsultaCompra, uFrame.Comanda, FrmPDV, uDM, FrmConta;
+  FrmConsultaCompra, uFrame.Comanda, FrmPDV, uDM, FrmConta, System.StrUtils;
 
 {$R *.dfm}
 
@@ -253,7 +253,9 @@ begin
         FindComponent('CMD' + AComandas[I].id.ToString).Free
       else
       begin
-        if (FindComponent('CMD' + AComandas[I].id.ToString) = nil) then
+        LFrame := TFrameComanda(FindComponent('CMD' + AComandas[I].id.ToString));
+
+        if LFrame = nil then
         begin
           LFrame                  := TFrameComanda.Create(Self);
           LFrame.Name             := 'CMD' + AComandas[I].id.ToString;
@@ -267,9 +269,7 @@ begin
           LFrame.lValor.Tag             := AComandas[I].comanda;
           LFrame.lNumeroComanda.Tag     := AComandas[I].comanda;
           LFrame.lNome.Tag              := AComandas[I].comanda;
-        end
-        else
-          LFrame := TFrameComanda(FindComponent('CMD' + AComandas[I].id.ToString));
+        end;
 
         LFrame.lNome.Caption := AComandas[I].nome;
         LFrame.lNome.Visible := not (Trim(AComandas[I].nome) = '');
@@ -280,10 +280,8 @@ begin
         LFrame.Left := left;
         LFrame.Top := top;
 
-        if AComandas[I].em_Caixa = 'S' then
-          LFrame.spColor.Brush.Color := $565fe2
-        else
-          LFrame.spColor.Brush.Color := clSkyBlue;
+        LFrame.spColor.Brush.Color :=
+              StringToColor(IfThen(AComandas[I].em_Caixa = 'S', '$565fe2', '$F0CAA6'));
 
         left := left + LFrame.Width + 2;
         if left + LFrame.Width >= pnlComandas.Width then

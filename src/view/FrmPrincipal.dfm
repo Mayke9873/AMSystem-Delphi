@@ -22,14 +22,14 @@ object fPrincipal: TfPrincipal
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    1012
-    720)
+    1008
+    739)
   TextHeight = 13
   object Image1: TImage
     Left = 0
     Top = 41
-    Width = 1012
-    Height = 679
+    Width = 1008
+    Height = 698
     Align = alClient
     DragKind = dkDock
     Picture.Data = {
@@ -7079,7 +7079,7 @@ object fPrincipal: TfPrincipal
   object pnlBotoes: TPanel
     Left = 0
     Top = 0
-    Width = 1012
+    Width = 1008
     Height = 41
     Align = alTop
     BevelOuter = bvNone
@@ -7094,7 +7094,6 @@ object fPrincipal: TfPrincipal
     ParentDoubleBuffered = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 1008
     object pnlCliente: TPanel
       AlignWithMargins = True
       Left = 10
