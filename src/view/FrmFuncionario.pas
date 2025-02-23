@@ -144,7 +144,6 @@ var
   Funcionario : TFuncionario;
 begin
   Cancelar := 'N';
-  AlterarCampos(telaPadrao);
 
   Funcionario := TFuncionario.Create;
   try
@@ -156,12 +155,19 @@ begin
     Funcionario.NumEndereco := DBENumEnd.Text;
     Funcionario.Bairro := DBEBairro.Text;
 
-    if DBENasc.Text <> '  /  /    ' then
+    if (DBENasc.Text = '  /  /    ') or (Trim(DBENasc.Text) = EmptyStr) then
+    begin
+      Application.MessageBox('Data de nascimento não informado.'#13'Por favor, verifique!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+      Abort;
+    end;
+
+    if (DBENasc.Text <> '  /  /    ') and Not (Trim(DBENasc.Text) = EmptyStr) then
     begin
       try
         Funcionario.DtNasc := StrToDate(DBENasc.Text);
       except
         Application.MessageBox('Data inválida. Por favor, verifique!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+        Abort;
       end;
     end;
 
@@ -175,6 +181,8 @@ begin
   finally
     Funcionario.Free;
   end;
+
+  AlterarCampos(telaPadrao);
 end;
 
 procedure TfFuncionario.edPesquisaChange(Sender: TObject);
