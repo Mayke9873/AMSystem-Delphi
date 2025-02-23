@@ -52,28 +52,28 @@ object fVenda: TfVenda
     Caption = 'Produto'
   end
   object Label5: TLabel
-    Left = 547
+    Left = 590
     Top = 192
     Width = 29
     Height = 18
     Caption = 'Qtd.'
   end
   object Label6: TLabel
-    Left = 640
+    Left = 683
     Top = 192
     Width = 55
     Height = 18
     Caption = 'R$ Unit.'
   end
   object Label7: TLabel
-    Left = 734
+    Left = 777
     Top = 192
     Width = 41
     Height = 18
     Caption = 'Desc.'
   end
   object Label8: TLabel
-    Left = 826
+    Left = 869
     Top = 192
     Width = 56
     Height = 18
@@ -140,7 +140,7 @@ object fVenda: TfVenda
     Tag = 2
     Left = 95
     Top = 212
-    Width = 446
+    Width = 489
     Height = 26
     CharCase = ecUpperCase
     TabOrder = 9
@@ -149,7 +149,7 @@ object fVenda: TfVenda
   end
   object edQtdProduto: TEdit
     Tag = 99
-    Left = 547
+    Left = 590
     Top = 212
     Width = 86
     Height = 26
@@ -159,7 +159,7 @@ object fVenda: TfVenda
   end
   object edValorUnitario: TEdit
     Tag = 99
-    Left = 640
+    Left = 683
     Top = 212
     Width = 86
     Height = 26
@@ -167,7 +167,7 @@ object fVenda: TfVenda
   end
   object edDesconto: TEdit
     Tag = 99
-    Left = 734
+    Left = 777
     Top = 212
     Width = 86
     Height = 26
@@ -176,7 +176,7 @@ object fVenda: TfVenda
   end
   object edValorTotal: TEdit
     Tag = 99
-    Left = 826
+    Left = 869
     Top = 212
     Width = 86
     Height = 26
@@ -186,7 +186,7 @@ object fVenda: TfVenda
   object DBGrid1: TDBGrid
     Left = 8
     Top = 244
-    Width = 904
+    Width = 947
     Height = 319
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -214,6 +214,7 @@ object fVenda: TfVenda
         Title.Font.Height = -15
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
+        Width = 100
         Visible = True
       end
       item
@@ -225,7 +226,7 @@ object fVenda: TfVenda
         Title.Font.Height = -15
         Title.Font.Name = 'Arial'
         Title.Font.Style = [fsBold]
-        Width = 430
+        Width = 385
         Visible = True
       end
       item
@@ -690,6 +691,7 @@ object fVenda: TfVenda
     object qProdVendaquantidade: TZBCDField
       FieldName = 'quantidade'
       Required = True
+      DisplayFormat = '###,###,##0.000'
       Precision = 11
       Size = 3
     end
