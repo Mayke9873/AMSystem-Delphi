@@ -198,6 +198,7 @@ object fVenda: TfVenda
     TitleFont.Height = -16
     TitleFont.Name = 'Arial'
     TitleFont.Style = []
+    OnDrawColumnCell = DBGrid1DrawColumnCell
     Columns = <
       item
         Expanded = False

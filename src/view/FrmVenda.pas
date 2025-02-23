@@ -83,6 +83,8 @@ type
       Shift: TShiftState);
     procedure edVendedorKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
     Produto : TProduto;
@@ -413,6 +415,19 @@ begin
       Cliente.Pesquisar(StrToIntDef(edIdCliente.Text, 0));
       edCliente.Text := Cliente.Nome;  
     end;
+  end;
+end;
+
+procedure TfVenda.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if Rect.Top = TStringGrid(DBGrid1).CellRect(0, TStringGrid(DBGrid1).Row).Top then
+  begin
+    DBGrid1.Canvas.FillRect(Rect);
+    DBGrid1.Canvas.Brush.Color := TColor($FFFF00);
+    DBGrid1.Canvas.Font.Color := clBlack;
+    DBGrid1.Canvas.Font.Style := [fsBold];
+    DBGrid1.DefaultDrawDataCell(Rect, Column.Field, State)
   end;
 end;
 
