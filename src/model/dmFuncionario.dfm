@@ -33,7 +33,7 @@ inherited dmFuncionarios: TdmFuncionarios
       '  DtRegistro = :DtRegistro,'
       '  ativo = :ativo'
       'WHERE'
-      '  Funcionario.id = :OLD_id')
+      '  USUARIO.id = :OLD_id')
     UseSequenceFieldForRefreshSQL = False
     Left = 56
     Top = 173
