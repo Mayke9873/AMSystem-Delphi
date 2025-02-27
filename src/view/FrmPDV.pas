@@ -139,7 +139,7 @@ begin
   Venda         := TVenda.Create;
   Produto       := TProduto.Create;
   Funcionario   := TFuncionario.Create;
-  Cliente      := TCliente.Create;
+  Cliente       := TCliente.Create;
 
   LimpaCampos();
 end;
@@ -244,7 +244,7 @@ procedure TfPDV.acExcluirProdExecute(Sender: TObject);
 begin
   if not (dmVendas.CdsItens.IsEmpty) then
   begin
-    Venda.ExcluirProduto(dmVendas.CdsItens.RecNo -1);
+    Venda.ExcluirProduto(dmVendas.CdsItensID.AsInteger -1);
     dmVendas.CdsItens.Delete;
 
     RefazCaption;
@@ -357,29 +357,35 @@ end;
 
 procedure TfPDV.InserirProduto();
 begin
-  edtIdProduto.Text := FormatFloat('0000', Produto.ID);
-  dmVendas.CdsItens.Append;
-  dmVendas.CdsItensID.AsInteger           := dmVendas.CdsItens.RecordCount + 1;
-  dmVendas.CdsItenscodProduto.AsInteger   := Produto.ID;
-  dmVendas.CdsItensprodDescricao.AsString := Produto.Descricao;
-  dmVendas.CdsItensprodQtd.AsFloat        := StrToFloatDef(edtQtde.Text, 1);
-  dmVendas.CdsItensprodUnit.AsCurrency    := Produto.PrecoVenda;
-  dmVendas.CdsItensprodTotal.AsCurrency   := Produto.PrecoVenda * dmVendas.CdsItensprodQtd.AsFloat;
-  dmVendas.CdsItens.Post;
+  try
+    edtIdProduto.Text := FormatFloat('0000', Produto.ID);
+    dmVendas.CdsItens.Append;
+    dmVendas.CdsItensID.AsInteger           := Venda.Itens.Count + 1;
+    dmVendas.CdsItenscodProduto.AsInteger   := Produto.ID;
+    dmVendas.CdsItensprodDescricao.AsString := Produto.Descricao;
+    dmVendas.CdsItensprodQtd.AsFloat        := StrToFloatDef(edtQtde.Text, 1);
+    dmVendas.CdsItensprodUnit.AsCurrency    := Produto.PrecoVenda;
+    dmVendas.CdsItensprodTotal.AsCurrency   := Produto.PrecoVenda * dmVendas.CdsItensprodQtd.AsFloat;
 
-  Prod_Venda := TVenda_Itens.Create;
-  with Prod_Venda do
-  begin
-    idProduto   := Produto.ID;
-    idVenda     := Venda.ID;
-    descricao   := Produto.Descricao;
-    valor_unit  := Produto.PrecoVenda;
-    quantidade  := StrToFloatDef(edtQtde.Text, 1);
-    total       := dmVendas.CdsItensprodTotal.AsCurrency;
+    Prod_Venda := TVenda_Itens.Create;
+    with Prod_Venda do
+    begin
+      idProduto   := Produto.ID;
+      idVenda     := Venda.ID;
+      descricao   := Produto.Descricao;
+      valor_unit  := Produto.PrecoVenda;
+      quantidade  := StrToFloatDef(edtQtde.Text, 1);
+      total       := dmVendas.CdsItensprodTotal.AsCurrency;
 
-    Venda.Itens.Add(Prod_Venda);
-    if DM.qParametroUsa_comanda.AsString = 'S' then
-      Venda.InserirItemComanda(Prod_Venda);
+      Venda.Itens.Add(Prod_Venda);
+      if DM.qParametroUsa_comanda.AsString = 'S' then
+        Venda.InserirItemComanda(Prod_Venda);
+    end;
+
+    dmVendas.CdsItens.Post;
+  except
+    Application.MessageBox('Falha ao inserir produto. Tente novamente', 'Atenção', 48);
+    dmVendas.CdsItens.Cancel;
   end;
 
   Venda.PrecoProduto    := dmVendas.CdsItensprodTotal.AsCurrency;
@@ -396,7 +402,7 @@ end;
 
 procedure TfPDV.edtQtdeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if Key = 13 then  //TODO: Arrumar edição
+  if Key = 13 then
   begin
     Venda.PrecoProduto := dmVendas.CdsItensprodTotal.AsCurrency;
     Venda.Subtrair;

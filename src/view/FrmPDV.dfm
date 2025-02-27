@@ -29,8 +29,6 @@ object fPDV: TfPDV
     Caption = 'pnlPrincipal'
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 1002
-    ExplicitHeight = 681
     object pnlBotoes: TPanel
       Left = 0
       Top = 602
@@ -44,8 +42,6 @@ object fPDV: TfPDV
       Padding.Bottom = 4
       ShowCaption = False
       TabOrder = 2
-      ExplicitTop = 601
-      ExplicitWidth = 1002
       object pnlFuncoes: TPanel
         Left = 836
         Top = 9
@@ -56,7 +52,6 @@ object fPDV: TfPDV
         Caption = 'pnlFuncoes'
         ShowCaption = False
         TabOrder = 5
-        ExplicitLeft = 832
         object Shape5: TShape
           Left = 0
           Top = 0
@@ -325,7 +320,6 @@ object fPDV: TfPDV
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1002
       object pnlComanda: TPanel
         Left = 812
         Top = 0
@@ -340,7 +334,6 @@ object fPDV: TfPDV
         Padding.Bottom = 4
         ShowCaption = False
         TabOrder = 0
-        ExplicitLeft = 808
         object lblComanda: TLabel
           Left = 4
           Top = 4
@@ -417,8 +410,6 @@ object fPDV: TfPDV
       Caption = 'pnlProdutos'
       ShowCaption = False
       TabOrder = 1
-      ExplicitWidth = 1002
-      ExplicitHeight = 536
       DesignSize = (
         1006
         537)
@@ -435,8 +426,6 @@ object fPDV: TfPDV
         Padding.Bottom = 4
         ShowCaption = False
         TabOrder = 1
-        ExplicitWidth = 720
-        ExplicitHeight = 534
         object CheckDBGrid1: TCheckDBGrid
           Left = 5
           Top = 5
@@ -526,8 +515,6 @@ object fPDV: TfPDV
         Padding.Bottom = 12
         ShowCaption = False
         TabOrder = 2
-        ExplicitLeft = 721
-        ExplicitHeight = 534
         object pnlTotal: TPanel
           AlignWithMargins = True
           Left = 9
@@ -543,7 +530,6 @@ object fPDV: TfPDV
           Caption = 'Panel2'
           ShowCaption = False
           TabOrder = 4
-          ExplicitTop = 447
           object Label1: TLabel
             Left = 0
             Top = 0
@@ -622,7 +608,6 @@ object fPDV: TfPDV
           Caption = 'Panel2'
           ShowCaption = False
           TabOrder = 3
-          ExplicitTop = 363
           object Label2: TLabel
             Left = 0
             Top = 0
@@ -702,7 +687,6 @@ object fPDV: TfPDV
           Caption = 'Panel2'
           ShowCaption = False
           TabOrder = 2
-          ExplicitTop = 279
           object Label4: TLabel
             Left = 0
             Top = 0
@@ -784,7 +768,6 @@ object fPDV: TfPDV
           Caption = 'Panel2'
           ShowCaption = False
           TabOrder = 1
-          ExplicitTop = 195
           object Label5: TLabel
             Left = 0
             Top = 0
@@ -864,7 +847,6 @@ object fPDV: TfPDV
           Caption = 'Panel2'
           ShowCaption = False
           TabOrder = 0
-          ExplicitTop = 111
           object Label7: TLabel
             Left = 0
             Top = 0
@@ -944,8 +926,6 @@ object fPDV: TfPDV
         Placement = svpRight
         TabOrder = 0
         UseAnimation = False
-        ExplicitLeft = 801
-        ExplicitHeight = 534
         object Panel1: TPanel
           Left = 0
           Top = 82

@@ -66,7 +66,7 @@ type
 implementation
 
 uses
-  dmVenda, Vcl.Forms, Winapi.Windows;
+  dmVenda, Vcl.Forms, Winapi.Windows, Consts;
 
 { TComanda }
 
@@ -206,24 +206,27 @@ var
 begin
   for Item in FItens do
   begin
-    if (Item.id = 0) then
-      SQL := 'Insert into venda_comanda (idComanda, idProduto, quantidade, unitario, total, status , ex) VALUES ' + #13 +
+    case Item.Ex of
+      Aberto: begin
+        SQL := 'Insert into venda_comanda (idComanda, idProduto, quantidade, unitario, total, status , ex) VALUES ' + #13 +
              '('+ Item.Comanda.ToString +', '+
              Item.idProduto.ToString +', '+
              ReplaceStr(FloatToStr(Item.quantidade), ',', '.') +', '+
              ReplaceStr(FloatToStr(Item.valorUnitario), ',', '.') +', '+
              ReplaceStr(FloatToStr(Item.valorTotal), ',', '.') +', '+
-             QuotedStr(Item.Status) +', ''0'' )'
-    else
-    case Item.Ex of
-      2: begin
+             QuotedStr(Item.Status) +', ''0'' )';
+      end;
+
+      Excluido:
         if NOT (Item.id = 0) then
         begin
           SQL := 'Update venda_comanda set ex = 2 where id = '+ Item.id.ToString;
         end;
-      end;
 
-      4: begin
+      Cancelado:
+        Continue;
+
+      Edicao: begin
         SQL := 'Update venda_comanda set ';
         SQL := SQL + 'quantidade = :qtd, unitario = :unit, desconto = :desc, ';
         SQL := SQL + 'total = (:qtd * :unit) where id = '+ Item.id.ToString;
