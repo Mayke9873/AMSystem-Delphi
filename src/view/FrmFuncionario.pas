@@ -63,6 +63,7 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure rdbTodosClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure DBECPFExit(Sender: TObject);
   private
     Cancelar : String;
     Ativo : String;
@@ -80,7 +81,7 @@ var
 implementation
 
 uses
-  dmFuncionario, FrmPrincipal;
+  dmFuncionario, FrmPrincipal, uValida;
 
 {$R *.dfm}
 
@@ -144,6 +145,14 @@ var
   Funcionario : TFuncionario;
 begin
   Cancelar := 'N';
+
+  if not (Trim(DBECPF.Text) = EmptyStr) then
+    if not TValidacoes.ValidaDocumento(DBECPF.Text) then
+    begin
+      Application.MessageBox('CPF invalido. Por favor, verifique!', 'Atenção', 48);
+      DBECPF.SetFocus;
+      Abort;
+    end;
 
   Funcionario := TFuncionario.Create;
   try
@@ -268,6 +277,19 @@ begin
   end;
 
   Opacidade();
+end;
+
+procedure TfFuncionario.DBECPFExit(Sender: TObject);
+begin
+  if Trim((Sender as TDBEdit).Text) = EmptyStr then
+    Exit;
+
+  if not TValidacoes.ValidaDocumento((Sender as TDBEdit).Text) then
+  begin
+    Application.MessageBox('CPF invalido. Por favor, verifique!', 'Atenção', 48);
+    DBECPF.SetFocus;
+    Abort;
+  end;
 end;
 
 procedure TfFuncionario.dbgFuncionarioDrawColumnCell(Sender: TObject;

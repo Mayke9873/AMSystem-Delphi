@@ -457,6 +457,7 @@ object fFuncionario: TfFuncionario
         DataSource = dmFuncionarios.dFuncionario
         ReadOnly = True
         TabOrder = 3
+        OnExit = DBECPFExit
       end
       object DBENasc: TDBEdit
         Left = 612
