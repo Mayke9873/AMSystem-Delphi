@@ -4,7 +4,7 @@ interface
 
 uses
   System.Generics.Collections, ZDataset, SysUtils, Data.DB, Vcl.Forms, Winapi.Windows, Interfaces,
-  uCliente, uVenda.Itens, uComanda, uComanda.Itens;
+  uCliente, uVenda.Itens, uComanda, uComanda.Itens, Consts, System.Math;
 
 type
   TVenda = class
@@ -60,7 +60,7 @@ type
 implementation
 
   uses
-    uDM, FrmVenda, uProduto, uEstoque, Consts, dmCliente, dmVenda, uFinanceiro.Movimento,
+    uDM, FrmVenda, uProduto, uEstoque, dmCliente, dmVenda, uFinanceiro.Movimento,
   System.StrUtils;
 
 { TVenda }
@@ -72,12 +72,12 @@ begin
             ' IdVenda = '+ IntToStr(ID) +';');
 
   if DM.qParametroUsa_comanda.AsString = 'S' then
-    fComanda.Itens[index].Ex := 2;
+    fComanda.Itens[index].Ex := IfThen(fComanda.Itens[index].id = 0, Cancelado, Excluido);
 
   PrecoProduto := FItens[index].total;
   Desconto     := FItens[index].desconto;
 
-  FItens.Delete(index);
+  FItens[index] := nil;
 
   Subtrair();
 end;
@@ -128,6 +128,9 @@ begin
 
     for Item in FItens do
     begin
+      if not Assigned(Item) then
+        Continue;
+
       ExecSQL('ALTER table venda_item AUTO_INCREMENT = 0');
 
       dmVendas.qProdVenda.Open;
@@ -183,6 +186,9 @@ begin
   try
     for Item in FItens do
     begin
+      if not Assigned(Item) then
+        Continue;
+
       ExecSQL('ALTER table MovEstoque AUTO_INCREMENT = 0');
 
       Prod.idProduto      := Item.idProduto;
@@ -282,7 +288,7 @@ begin
   LItensComanda.valorUnitario := aItem.valor_unit;
   LItensComanda.valorTotal    := aItem.total;
   LItensComanda.Status        := 'A';
-  LItensComanda.ex            := 0;
+  LItensComanda.ex            := Aberto;
 
   Self.fComanda.Itens.Add(LItenscomanda);
 end;
