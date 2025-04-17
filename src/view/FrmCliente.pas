@@ -82,6 +82,7 @@ type
     procedure tbSalvarClick(Sender: TObject);
     procedure tbCancelarClick(Sender: TObject);
     procedure tbSairClick(Sender: TObject);
+    procedure DBECPFExit(Sender: TObject);
   private
     { Private declarations }
     Cliente : TCliente;
@@ -102,6 +103,19 @@ implementation
 
 uses dmCliente, Conexao.MySQL, FrmPrincipal, System.StrUtils;
 {$R *.dfm}
+
+procedure TfCliente.DBECPFExit(Sender: TObject);
+begin
+  if Trim((Sender as TDBEdit).Text) = EmptyStr then
+    Exit;
+
+  if not Valida.ValidaDocumento((Sender as TDBEdit).Text) then
+  begin
+    Application.MessageBox('CPF inválido. Por favor, verifique!', 'Atenção', 48);
+    DBECPF.SetFocus;
+    Abort;
+  end;
+end;
 
 procedure TfCliente.DBECPFKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -260,6 +274,13 @@ end;
 
 procedure TfCliente.tbSalvarClick(Sender: TObject);
 begin
+  if not Valida.ValidaDocumento(DBECPF.Text) then
+  begin
+    Application.MessageBox('CPF inválido. Por favor, verifique!', 'Atenção', 48);
+    DBECPF.SetFocus;
+    Abort;
+  end;
+
   SelectNext(ActiveControl, True, True);
 
   DBEditID.ReadOnly := true;

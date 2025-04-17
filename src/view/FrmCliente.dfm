@@ -45,8 +45,6 @@ object fCliente: TfCliente
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
-    ExplicitWidth = 987
-    ExplicitHeight = 590
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object DBGrid1: TDBGrid
@@ -508,6 +506,7 @@ object fCliente: TfCliente
           DataSource = dmClientes.dCliente
           ReadOnly = True
           TabOrder = 0
+          OnExit = DBECPFExit
           OnKeyPress = DBECPFKeyPress
         end
       end
@@ -750,7 +749,6 @@ object fCliente: TfCliente
     CharCase = ecUpperCase
     TabOrder = 1
     OnChange = edPesquisaChange
-    ExplicitWidth = 272
   end
   object rdbTodos: TRadioButton
     Left = 392
@@ -769,7 +767,6 @@ object fCliente: TfCliente
     TabOrder = 2
     TabStop = True
     OnClick = rdbTodosClick
-    ExplicitLeft = 384
   end
   object rdbAtivo: TRadioButton
     Left = 472
@@ -786,7 +783,6 @@ object fCliente: TfCliente
     ParentFont = False
     TabOrder = 3
     OnClick = rdbAtivoClick
-    ExplicitLeft = 464
   end
   object rdbInativo: TRadioButton
     Left = 544
@@ -803,7 +799,6 @@ object fCliente: TfCliente
     ParentFont = False
     TabOrder = 4
     OnClick = rdbInativoClick
-    ExplicitLeft = 536
   end
   object pnlBotoes: TPanel
     Left = 0
@@ -816,7 +811,6 @@ object fCliente: TfCliente
     Padding.Left = 4
     ShowCaption = False
     TabOrder = 5
-    ExplicitWidth = 987
     object tbNovo: TSkSvg
       AlignWithMargins = True
       Left = 4
