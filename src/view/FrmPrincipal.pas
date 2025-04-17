@@ -62,6 +62,8 @@ type
     procedure Contas1Click(Sender: TObject);
   private
     { Private declarations }
+    bComandas: Boolean;
+
     function VersaoExe: string;
     procedure Comandas(Sender: TObject);
     procedure ClickComandas(Sender: TObject);
@@ -140,6 +142,7 @@ begin
   Caption := 'AmSystem :::: V.' + VersaoExe;
   Forms := TForms.Create;
 
+  bComandas := False;
   if (DM.qParametroUsa_comanda.AsString = 'S') then
   begin
     pnlComandas.Visible := True;
@@ -246,9 +249,27 @@ begin
       FindComponent('CMD' + AComandas[I].id.ToString).Free;
 
     LComandas.em_Uso := 'S';
-    AComandas := LComandas.ListaComandas;      //Cria frames de todas as comandas em aberto.
+    AComandas := LComandas.ListaComandas;
+
+    if (AComandas.Count = 0) and bComandas then
+    begin
+      for I := 0 to ComponentCount -1 do
+      begin
+        if Pos('CMD', Components[I].Name) > 0 then
+        begin
+          FreeAndNil(Components[I]);
+          bComandas := False;
+        end;
+      end;
+
+      Exit;
+    end;
+
+    //Cria frames de todas as comandas em aberto.
     for I := 0 to AComandas.Count - 1 do
     begin
+      bComandas := True;
+
       if AComandas[I].valTotal = 0 then
         FindComponent('CMD' + AComandas[I].id.ToString).Free
       else
@@ -258,6 +279,7 @@ begin
         if LFrame = nil then
         begin
           LFrame                  := TFrameComanda.Create(Self);
+          LFrame.Parent           := pnlComandas;
           LFrame.Name             := 'CMD' + AComandas[I].id.ToString;
           LFrame.Parent           := pnlComandas;
           LFrame.pnlFrame.OnClick := ClickComandas;
