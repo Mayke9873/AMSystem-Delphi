@@ -69,6 +69,7 @@ type
     procedure tbCancelarClick(Sender: TObject);
     procedure rdbTodosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure DBECPFExit(Sender: TObject);
   private
     Cancelar : String;
     Ativo : String;
@@ -87,7 +88,7 @@ var
 implementation
 
 uses
-  dmFornecedor, Consts, FrmPrincipal, System.Math, System.StrUtils;
+  dmFornecedor, Consts, FrmPrincipal, System.Math, System.StrUtils, uValida;
 
 {$R *.dfm}
 
@@ -133,6 +134,13 @@ end;
 
 procedure TfFornecedor.tbSalvarClick(Sender: TObject);
 begin
+  if not TValidacoes.ValidaDocumento((Sender as TDBEdit).Text) then
+  begin
+    Application.MessageBox('CNPJ inválido. Por favor, verifique!', 'Atenção', 48);
+    DBECPF.SetFocus;
+    Abort;
+  end;
+
   Fornecedor := TFornecedor.Create;
   try
     Fornecedor.Cod          := StrToIntDef(DBEditID.Text, 0);
@@ -224,6 +232,19 @@ begin
   end;
 
   Opacidade();
+end;
+
+procedure TfFornecedor.DBECPFExit(Sender: TObject);
+begin
+  if Trim((Sender as TDBEdit).Text) = EmptyStr then
+    Exit;
+
+  if not TValidacoes.ValidaDocumento((Sender as TDBEdit).Text) then
+  begin
+    Application.MessageBox('CNPJ inválido. Por favor, verifique!', 'Atenção', 48);
+    DBECPF.SetFocus;
+    Abort;
+  end;
 end;
 
 procedure TfFornecedor.Opacidade;

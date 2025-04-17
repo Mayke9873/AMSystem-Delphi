@@ -42,8 +42,6 @@ object fFornecedor: TfFornecedor
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
-    ExplicitWidth = 975
-    ExplicitHeight = 587
     object pgTabela: TTabSheet
       Caption = 'Tabela'
       object dbgFornecedor: TDBGrid
@@ -429,6 +427,7 @@ object fFornecedor: TfFornecedor
           DataSource = dmFornecedores.dFornecedor
           ReadOnly = True
           TabOrder = 0
+          OnExit = DBECPFExit
         end
       end
       object Panel5: TPanel
@@ -690,7 +689,6 @@ object fFornecedor: TfFornecedor
     Padding.Left = 4
     ShowCaption = False
     TabOrder = 5
-    ExplicitLeft = -16
     object tbNovo: TSkSvg
       AlignWithMargins = True
       Left = 4
