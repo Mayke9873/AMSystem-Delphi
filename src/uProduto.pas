@@ -164,6 +164,7 @@ begin
     FID := dmProdutos.qProdutoId.AsInteger;
     FDescricao := dmProdutos.qProdutoDescricao.AsString;
     FPrecoVenda := dmProdutos.qProdutopVenda.AsCurrency;
+    FPrecoCompra := dmProdutos.qProdutopCompra.AsCurrency;
     Exit;
   end;
 
