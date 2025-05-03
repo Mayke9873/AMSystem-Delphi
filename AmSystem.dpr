@@ -49,7 +49,8 @@ uses
   uFinanceiro.Movimento in 'src\uFinanceiro.Movimento.pas',
   uFinanceiro.Conta in 'src\uFinanceiro.Conta.pas',
   dmFinanceiro in 'src\model\dmFinanceiro.pas' {dmFinanceiros: TDataModule},
-  FrmConta in 'src\view\FrmConta.pas' {fConta};
+  FrmConta in 'src\view\FrmConta.pas' {fConta},
+  uValidacoes in 'src\utils\uValidacoes.pas';
 
 {$R *.res}
 

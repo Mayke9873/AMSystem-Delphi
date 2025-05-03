@@ -255,6 +255,7 @@
             <Form>fConta</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\utils\uValidacoes.pas"/>
         <None Include="ModelSupport_AmSystem\default.txaPackage"/>
         <None Include="ModelSupport_AmSystem\default.txvpck"/>
         <None Include="ModelSupport_AmSystem\uClientes\default.txvpck"/>
