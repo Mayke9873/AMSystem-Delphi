@@ -50,6 +50,7 @@ uses
   uFinanceiro.Conta in 'src\uFinanceiro.Conta.pas',
   dmFinanceiro in 'src\model\dmFinanceiro.pas' {dmFinanceiros: TDataModule},
   FrmConta in 'src\view\FrmConta.pas' {fConta},
+  uCompra.Itens in 'src\uCompra.Itens.pas',
   uValidacoes in 'src\utils\uValidacoes.pas';
 
 {$R *.res}

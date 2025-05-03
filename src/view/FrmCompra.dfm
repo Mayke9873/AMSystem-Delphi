@@ -2,8 +2,8 @@ object fCompra: TfCompra
   Left = 0
   Top = 0
   Caption = 'fCompra'
-  ClientHeight = 625
-  ClientWidth = 967
+  ClientHeight = 624
+  ClientWidth = 963
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,37 +18,39 @@ object fCompra: TfCompra
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   TextHeight = 15
+  object lblTitle: TLabel
+    AlignWithMargins = True
+    Left = 3
+    Top = 3
+    Width = 957
+    Height = 25
+    Align = alTop
+    Alignment = taCenter
+    Caption = 'Nova compra'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 116
+  end
   object Panel1: TPanel
     Left = 0
-    Top = 0
-    Width = 967
-    Height = 625
+    Top = 31
+    Width = 963
+    Height = 593
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 963
-    ExplicitHeight = 624
     DesignSize = (
-      967
-      625)
-    object Label1: TLabel
-      Left = 8
-      Top = 8
-      Width = 77
-      Height = 18
-      Caption = 'N'#186' Compra'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Arial'
-      Font.Style = []
-      ParentFont = False
-    end
+      963
+      593)
     object Label3: TLabel
       Left = 8
-      Top = 56
+      Top = 21
       Width = 81
       Height = 18
       Caption = 'Fornecedor'
@@ -61,7 +63,7 @@ object fCompra: TfCompra
     end
     object Label4: TLabel
       Left = 8
-      Top = 192
+      Top = 72
       Width = 55
       Height = 18
       Caption = 'Produto'
@@ -73,23 +75,23 @@ object fCompra: TfCompra
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 507
-      Top = 192
-      Width = 29
+      Left = 584
+      Top = 72
+      Width = 38
       Height = 18
       Anchors = [akTop, akRight]
-      Caption = 'Qtd.'
+      Caption = 'Qtde.'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 547
+      ExplicitLeft = 596
     end
     object Label6: TLabel
-      Left = 600
-      Top = 192
+      Left = 677
+      Top = 72
       Width = 55
       Height = 18
       Anchors = [akTop, akRight]
@@ -100,11 +102,11 @@ object fCompra: TfCompra
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 640
+      ExplicitLeft = 689
     end
     object Label7: TLabel
-      Left = 694
-      Top = 192
+      Left = 771
+      Top = 72
       Width = 41
       Height = 18
       Anchors = [akTop, akRight]
@@ -115,11 +117,11 @@ object fCompra: TfCompra
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 734
+      ExplicitLeft = 783
     end
     object Label8: TLabel
-      Left = 786
-      Top = 192
+      Left = 862
+      Top = 72
       Width = 56
       Height = 18
       Anchors = [akTop, akRight]
@@ -130,30 +132,20 @@ object fCompra: TfCompra
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 826
-    end
-    object edCodCompra: TEdit
-      Tag = 99
-      Left = 8
-      Top = 28
-      Width = 86
-      Height = 23
-      TabStop = False
-      ReadOnly = True
-      TabOrder = 0
+      ExplicitLeft = 874
     end
     object edIdFornecedor: TEdit
       Left = 8
-      Top = 76
+      Top = 42
       Width = 86
       Height = 23
-      TabOrder = 1
+      TabOrder = 2
       OnExit = edIdFornecedorExit
     end
     object edIdProd: TEdit
       Tag = 2
       Left = 8
-      Top = 212
+      Top = 92
       Width = 86
       Height = 23
       TabOrder = 4
@@ -161,75 +153,71 @@ object fCompra: TfCompra
     end
     object edFornecedor: TEdit
       Left = 95
-      Top = 76
-      Width = 446
+      Top = 42
+      Width = 476
       Height = 23
+      Anchors = [akLeft, akTop, akRight]
       CharCase = ecUpperCase
-      TabOrder = 2
+      TabOrder = 3
       OnChange = edFornecedorChange
       OnKeyDown = edPesqProdKeyDown
     end
     object edPesqProd: TEdit
       Tag = 1
       Left = 95
-      Top = 212
-      Width = 406
+      Top = 92
+      Width = 476
       Height = 23
       Anchors = [akLeft, akTop, akRight]
       CharCase = ecUpperCase
       TabOrder = 5
       OnChange = edPesqProdChange
       OnKeyDown = edPesqProdKeyDown
-      ExplicitWidth = 402
     end
     object edQtdProduto: TEdit
       Tag = 99
-      Left = 507
-      Top = 212
+      Left = 584
+      Top = 92
+      Width = 86
+      Height = 23
+      Anchors = [akTop, akRight]
+      TabOrder = 6
+      OnExit = edQtdProdutoExit
+    end
+    object edValorUnitario: TEdit
+      Tag = 99
+      Left = 677
+      Top = 92
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 7
-      OnExit = edQtdProdutoExit
-      ExplicitLeft = 503
     end
-    object edValorUnitario: TEdit
+    object edDesconto: TEdit
       Tag = 99
-      Left = 600
-      Top = 212
+      Left = 771
+      Top = 92
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 8
-      ExplicitLeft = 596
+      OnExit = edDescontoExit
     end
-    object edDesconto: TEdit
+    object edValorTotal: TEdit
       Tag = 99
-      Left = 694
-      Top = 212
+      Left = 862
+      Top = 92
       Width = 86
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 9
-      OnExit = edDescontoExit
-      ExplicitLeft = 690
-    end
-    object edValorTotal: TEdit
-      Tag = 99
-      Left = 786
-      Top = 212
-      Width = 86
-      Height = 23
-      Anchors = [akTop, akRight]
-      TabOrder = 10
       OnEnter = edValorTotalEnter
-      ExplicitLeft = 782
     end
     object DBGrid1: TDBGrid
       Left = 8
-      Top = 244
-      Width = 864
-      Height = 320
+      Top = 121
+      Width = 940
+      Height = 411
       TabStop = False
       Anchors = [akLeft, akTop, akRight, akBottom]
       DataSource = dProdCompra
@@ -240,6 +228,7 @@ object fCompra: TfCompra
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGrid1DrawColumnCell
       Columns = <
         item
           Expanded = False
@@ -257,7 +246,6 @@ object fCompra: TfCompra
           Title.Font.Height = -15
           Title.Font.Name = 'Arial'
           Title.Font.Style = [fsBold]
-          Width = 94
           Visible = True
         end
         item
@@ -338,7 +326,7 @@ object fCompra: TfCompra
       DataSource = dmProdutos.dProduto
       Options = [dgTitles, dgIndicator, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ReadOnly = True
-      TabOrder = 6
+      TabOrder = 12
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
@@ -406,7 +394,7 @@ object fCompra: TfCompra
       DataSource = dmFornecedores.dFornecedor
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ReadOnly = True
-      TabOrder = 3
+      TabOrder = 10
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
@@ -440,14 +428,15 @@ object fCompra: TfCompra
         end>
     end
     object pnlDesconto: TPanel
-      Left = 695
+      Left = 732
       Top = 10
       Width = 107
       Height = 55
+      Anchors = [akTop, akRight]
       BevelOuter = bvNone
       Caption = 'pnlDesconto'
       ShowCaption = False
-      TabOrder = 12
+      TabOrder = 0
       object Label9: TLabel
         Left = 0
         Top = 0
@@ -511,14 +500,15 @@ object fCompra: TfCompra
       end
     end
     object pnlTotal: TPanel
-      Left = 805
+      Left = 841
       Top = 10
       Width = 107
       Height = 55
+      Anchors = [akTop, akRight]
       BevelOuter = bvNone
       Caption = 'pnlTotal'
       ShowCaption = False
-      TabOrder = 13
+      TabOrder = 1
       object Label10: TLabel
         Left = 0
         Top = 0
@@ -585,18 +575,16 @@ object fCompra: TfCompra
     end
     object pnlBotoes: TPanel
       Left = 0
-      Top = 570
-      Width = 967
+      Top = 538
+      Width = 963
       Height = 55
       Align = alBottom
       BevelOuter = bvNone
       Caption = 'pnlBotoes'
       ShowCaption = False
-      TabOrder = 14
-      ExplicitTop = 569
-      ExplicitWidth = 963
+      TabOrder = 13
       DesignSize = (
-        967
+        963
         55)
       object btnSair: TButton
         Left = 401
@@ -612,7 +600,7 @@ object fCompra: TfCompra
         Font.Name = 'Arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 3
       end
       object btnExcluirProduto: TButton
         Left = 270
@@ -628,7 +616,7 @@ object fCompra: TfCompra
         Font.Name = 'Arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
       end
       object btnCancelar: TButton
         Left = 139
@@ -644,7 +632,7 @@ object fCompra: TfCompra
         Font.Name = 'Arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 1
       end
       object btnSalvar: TButton
         Left = 8
@@ -662,7 +650,7 @@ object fCompra: TfCompra
         Font.Style = []
         ParentBiDiMode = False
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 0
       end
     end
   end
@@ -693,46 +681,54 @@ object fCompra: TfCompra
         Name = 'idCompra'
         SQLType = stUnicodeString
       end>
-    object qProdCompraid: TIntegerField
+    object qProdCompraid: TZInt64Field
       FieldName = 'id'
       Required = True
     end
-    object qProdCompraidprod: TIntegerField
+    object qProdCompraidCompra: TZInt64Field
+      FieldName = 'idCompra'
+      Required = True
+    end
+    object qProdCompraidprod: TZInt64Field
       FieldName = 'idprod'
       Required = True
     end
-    object qProdCompradescricao: TWideStringField
+    object qProdCompradescricao: TZUnicodeStringField
       FieldName = 'descricao'
       Required = True
       Size = 255
+    end
+    object qProdCompravalor: TZBCDField
+      FieldName = 'valor'
+      Required = True
+      DisplayFormat = '###,###,##0.00'
+      Precision = 11
+      Size = 3
     end
     object qProdCompradesconto: TZBCDField
       FieldName = 'desconto'
       Required = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
     object qProdCompraquantidade: TZBCDField
       FieldName = 'quantidade'
       Required = True
-      DisplayFormat = '###,###,##0.00'
-      Precision = 5
+      DisplayFormat = '###,###,##0.000'
+      Precision = 11
       Size = 3
     end
     object qProdCompratotal: TZBCDField
       FieldName = 'total'
       Required = True
       DisplayFormat = '###,###,##0.00'
-      Precision = 6
-      Size = 2
+      Precision = 11
+      Size = 3
     end
-    object qProdCompravalor: TZBCDField
-      FieldName = 'valor'
+    object qProdCompraex: TZIntegerField
+      FieldName = 'ex'
       Required = True
-      DisplayFormat = '###,###,##0.00'
-      Precision = 6
-      Size = 2
     end
   end
   object uProdCompra: TZUpdateSQL

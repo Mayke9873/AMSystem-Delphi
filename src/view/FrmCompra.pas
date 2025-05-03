@@ -6,19 +6,18 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Data.DB, ZSqlUpdate, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, System.Actions, Vcl.ActnList,
-  uValida, uFornecedor, uFuncionario, uProduto, System.StrUtils, uCompra;
+  uValida, uFornecedor, uFuncionario, uProduto, System.StrUtils, uCompra,
+  uCompra.Itens;
 
 type
   TfCompra = class(TForm)
     Panel1: TPanel;
-    Label1: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
-    edCodCompra: TEdit;
     edIdFornecedor: TEdit;
     edIdProd: TEdit;
     edFornecedor: TEdit;
@@ -45,15 +44,17 @@ type
     btnExcluirProduto: TButton;
     btnCancelar: TButton;
     btnSalvar: TButton;
-    dProdCompra: TDataSource;
     qProdCompra: TZQuery;
-    qProdCompraid: TIntegerField;
-    qProdCompraidprod: TIntegerField;
-    qProdCompradescricao: TWideStringField;
+    dProdCompra: TDataSource;
+    qProdCompraid: TZInt64Field;
+    qProdCompraidprod: TZInt64Field;
+    qProdCompradescricao: TZUnicodeStringField;
+    qProdCompravalor: TZBCDField;
     qProdCompradesconto: TZBCDField;
     qProdCompraquantidade: TZBCDField;
     qProdCompratotal: TZBCDField;
-    qProdCompravalor: TZBCDField;
+    qProdCompraidCompra: TZInt64Field;
+    qProdCompraex: TZIntegerField;
     uProdCompra: TZUpdateSQL;
     ActionList1: TActionList;
     acSair: TAction;
@@ -61,6 +62,7 @@ type
     acCancelar: TAction;
     acExcluirProduto: TAction;
     tmPesquisa: TTimer;
+    lblTitle: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure acSairExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -77,16 +79,20 @@ type
     procedure edValorTotalEnter(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);
     procedure acExcluirProdutoExecute(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     Fornecedor: TFornecedor;
     Produto: TProduto;
     Compra: TCompra;
+    ProdutoCompra: TProdutoCompra;
 
     procedure PesquisaPorID(Sender: TEdit);
     procedure Consulta(Sender: TEdit);
     procedure LimpaCampos(pTipo : String);
   public
     { Public declarations }
+    CodCompra: Integer;
   end;
 
 var
@@ -96,17 +102,17 @@ implementation
 
 {$R *.dfm}
 
-uses dmFornecedor, dmProduto, dmCompra, uDM, FrmPrincipal;
+uses dmFornecedor, dmProduto, dmCompra, uDM, FrmPrincipal, System.Math;
 
 procedure TfCompra.FormCreate(Sender: TObject);
 begin
+  CodCompra := 0;
   PosicionaGrid(dbgFornecedor, edIdFornecedor);
   PosicionaGrid(dbgPesqProduto, edIdProd);
 
-  Fornecedor := TFornecedor.Create;
-  Produto := TProduto.Create;
-  Compra := TCompra.Create;
-
+  Fornecedor    := TFornecedor.Create;
+  Produto       := TProduto.Create;
+  Compra        := TCompra.Create;
 end;
 
 procedure TfCompra.FormKeyPress(Sender: TObject; var Key: Char);
@@ -143,18 +149,15 @@ end;
 procedure TfCompra.tmPesquisaTimer(Sender: TObject);
 begin
   tmPesquisa.Enabled := False;
+  dbgFornecedor.Visible := False;
 
   if (Trim(edIdFornecedor.Text) <> '') and (Trim(edIdFornecedor.Text) = '') then
   begin
     Consulta(TEdit(Sender));
 
-    if (dmFornecedores.qFornecedor.RecordCount > 0) and ((edIdFornecedor.Text = '') or (edIdFornecedor.Text = '0')) then
-      dbgFornecedor.Visible := True
-    else
-      dbgFornecedor.Visible := False;
+    dbgFornecedor.Visible := (dmFornecedores.qFornecedor.RecordCount > 0)
+                             and ((edIdFornecedor.Text = '') or (edIdFornecedor.Text = '0'))
   end
-  else
-    dbgFornecedor.Visible := False;
 end;
 
 procedure TfCompra.Consulta(Sender : TEdit);
@@ -171,7 +174,6 @@ begin
     end;
   end;
 end;
-
 
 procedure TfCompra.dbgFornecedorKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -194,6 +196,19 @@ begin
         edDesconto.Text := '0,00';
       end;
     end;
+  end;
+end;
+
+procedure TfCompra.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if Rect.Top = TStringGrid(DBGrid1).CellRect(0, TStringGrid(DBGrid1).Row).Top then
+  begin
+    DBGrid1.Canvas.FillRect(Rect);
+    DBGrid1.Canvas.Brush.Color := TColor($FFFF00);
+    DBGrid1.Canvas.Font.Color := clBlack;
+    DBGrid1.Canvas.Font.Style := [fsBold];
+    DBGrid1.DefaultDrawDataCell(Rect, Column.Field, State)
   end;
 end;
 
@@ -233,14 +248,13 @@ end;
 
 procedure TfCompra.edPesqProdChange(Sender: TObject);
 begin
+  dbgPesqProduto.Visible := false;
   if (Trim(edPesqProd.Text) <> '') and (Trim(edIdProd.Text) = '') then
   begin
     Consulta(TEdit(Sender));
 
     dbgPesqProduto.Visible := dmProdutos.qProduto.RecordCount > 0;
   end
-  else
-    dbgPesqProduto.Visible := false;
 end;
 
 procedure TfCompra.edPesqProdKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -259,7 +273,6 @@ begin
       end;
     end;
   end;
-
 end;
 
 procedure TfCompra.edQtdProdutoExit(Sender: TObject);
@@ -276,7 +289,8 @@ begin
   If not Produto.Pesquisar(StrToIntDef(edIdProd.Text, 0)) then
     Exit;
 
-  Compra.InsereCompra(edCodCompra.Text);
+  Compra.InsereCompra(CodCompra.ToString);     //TODO: Nao fazer o insert ao inserir produto.
+  CodCompra := Compra.ID;
 
   Compra.PrecoProduto    := StrToCurr(edValorUnitario.Text) * strtoFLoat(edQtdProduto.Text);
   Compra.DescontoProduto := StrToCurr(edDesconto.Text);
@@ -284,19 +298,36 @@ begin
   Compra.Soma();
 
   try
+    qProdCompra.Params[0].AsInteger := Compra.ID;
     qProdCompra.Open;
-    qProdCompra.Insert;
-    qProdCompraidprod.AsInteger := StrToInt(edIdProd.Text);
+    qProdCompra.Append;
+    qProdCompraidprod.AsInteger   := StrToInt(edIdProd.Text);
+    qProdCompraidCompra.AsInteger := Compra.ID;
     qProdCompradescricao.AsString := edPesqProd.Text;
-    qProdCompravalor.AsFloat := StrToFloat(edValorUnitario.Text);
-    qProdCompradesconto.AsFloat := StrToFloat(edDesconto.Text);
+    qProdCompravalor.AsFloat      := StrToFloat(edValorUnitario.Text);
+    qProdCompradesconto.AsFloat   := StrToFloat(edDesconto.Text);
     qProdCompraquantidade.AsFloat := StrToFloat(edQtdProduto.Text);
-    qProdCompratotal.AsFloat := (Compra.PrecoProduto);
+    qProdCompratotal.AsFloat      := (Compra.PrecoProduto);
+    qProdCompraex.AsInteger       := 0;
+
+    ProdutoCompra := TProdutoCompra.Create;
+    with ProdutoCompra do
+    begin
+      idProduto     := qProdCompraidprod.AsInteger;
+      descricao     := qProdCompradescricao.AsString;
+      valor         := qProdCompravalor.AsFloat;
+      desconto      := qProdCompradesconto.AsFloat;
+      quantidade    := qProdCompraquantidade.AsFloat;
+      total         := qProdCompratotal.AsFloat;
+      EX            := 0;
+
+      Compra.ItensCompra.Add(ProdutoCompra);
+    end;
 
     qProdCompra.ApplyUpdates;
     qProdCompra.Close;
   finally
-    qProdCompra.ParamByName('idCompra').AsInteger := StrToIntDef(edCodCompra.Text, 0);
+    qProdCompra.ParamByName('idCompra').AsInteger := Compra.ID;
     qProdCompra.Open;
   end;
 
@@ -321,7 +352,7 @@ begin
     End;
 
     1 : Begin
-      edCodCompra.Clear;
+      CodCompra := 0;
       edIdProd.Clear;
       edPesqProd.Clear;
       edQtdProduto.Clear;
@@ -339,7 +370,9 @@ end;
 
 procedure TfCompra.acCancelarExecute(Sender: TObject);
 begin
-  Compra.ID := dmCompras.qCompraid.AsInteger;
+  if dmCompras.qCompra.Active then
+    Compra.ID := dmCompras.qCompraid.AsInteger;
+
   Compra.Cancelar;
   LimpaCampos('Compra');
 end;
@@ -350,7 +383,11 @@ begin
   begin
     Compra.PrecoProduto    := StrToCurr(DBGrid1.Fields[6].AsString);
     Compra.DescontoProduto := StrToCurr(DBGrid1.Fields[5].AsString);
-    Compra.ExcluirProduto();
+    Compra.ExcluirProduto(qProdCompraid.AsInteger);
+
+    qProdCompra.Close;
+    qProdCompra.Open;
+
     edTotalVenda.Text := FormatFloat('###,##0.00', Compra.Total);
     edDescontoVenda.Text := FormatFloat('###,##0.00', Compra.Desconto);
   end;
@@ -358,12 +395,12 @@ end;
 
 procedure TfCompra.acSairExecute(Sender: TObject);
 begin
-  if (Trim(edCodCompra.Text) = '') and (Application.MessageBox('Deseja sair da compra?', 'Confirmação', MB_YESNO + 32) = 6) then
+  if (Compra.ID = 0) and (Application.MessageBox('Deseja sair da compra?', 'Confirmação', MB_YESNO + 32) = 6) then
   begin
     Close;
   end
   else
-  if (not (Trim(edCodCompra.Text) = '' ) and Compra.Cancelar()) then
+  if (not (Compra.ID = 0) and Compra.Cancelar()) then
     Close;
 end;
 
@@ -375,13 +412,20 @@ begin
     Abort;
   end;
 
-  Compra.ID := StrToIntDef(edCodCompra.Text, 0);
+  Compra.idForncedor := Fornecedor.Cod;
+  Compra.forncedor   := Fornecedor.Nome;
+  Compra.ID          := IfThen(CodCompra <> 0, CodCompra, Compra.ID);
+
   if Compra.Finaliza() then
     LimpaCampos('Compra');
 end;
 
 procedure TfCompra.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  FreeAndNil(Fornecedor);
+  FreeAndNil(Produto);
+  FreeAndNil(Compra);
+
   Forms.FecharForm(Self, Action);
 end;
 
