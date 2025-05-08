@@ -26,7 +26,7 @@ type
     edValorUnitario: TEdit;
     edDesconto: TEdit;
     edValorTotal: TEdit;
-    DBGrid1: TDBGrid;
+    grdItensCompra: TDBGrid;
     dbgPesqProduto: TDBGrid;
     dbgFornecedor: TDBGrid;
     pnlDesconto: TPanel;
@@ -79,7 +79,7 @@ type
     procedure edValorTotalEnter(Sender: TObject);
     procedure acCancelarExecute(Sender: TObject);
     procedure acExcluirProdutoExecute(Sender: TObject);
-    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+    procedure grdItensCompraDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
   private
     Fornecedor: TFornecedor;
@@ -199,16 +199,16 @@ begin
   end;
 end;
 
-procedure TfCompra.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+procedure TfCompra.grdItensCompraDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  if Rect.Top = TStringGrid(DBGrid1).CellRect(0, TStringGrid(DBGrid1).Row).Top then
+  if Rect.Top = TStringGrid(grdItensCompra).CellRect(0, TStringGrid(grdItensCompra).Row).Top then
   begin
-    DBGrid1.Canvas.FillRect(Rect);
-    DBGrid1.Canvas.Brush.Color := TColor($FFFF00);
-    DBGrid1.Canvas.Font.Color := clBlack;
-    DBGrid1.Canvas.Font.Style := [fsBold];
-    DBGrid1.DefaultDrawDataCell(Rect, Column.Field, State)
+    grdItensCompra.Canvas.FillRect(Rect);
+    grdItensCompra.Canvas.Brush.Color := TColor($FFFF00);
+    grdItensCompra.Canvas.Font.Color := clBlack;
+    grdItensCompra.Canvas.Font.Style := [fsBold];
+    grdItensCompra.DefaultDrawDataCell(Rect, Column.Field, State)
   end;
 end;
 

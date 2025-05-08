@@ -213,7 +213,7 @@ object fCompra: TfCompra
       TabOrder = 9
       OnEnter = edValorTotalEnter
     end
-    object DBGrid1: TDBGrid
+    object grdItensCompra: TDBGrid
       Left = 8
       Top = 121
       Width = 940
@@ -228,7 +228,7 @@ object fCompra: TfCompra
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
-      OnDrawColumnCell = DBGrid1DrawColumnCell
+      OnDrawColumnCell = grdItensCompraDrawColumnCell
       Columns = <
         item
           Expanded = False
