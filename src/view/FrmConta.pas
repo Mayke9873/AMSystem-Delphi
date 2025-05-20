@@ -105,6 +105,9 @@ end;
 
 procedure TfConta.tbEditarClick(Sender: TObject);
 begin
+  if Contas.DM.qConta.RecordCount = 0 then
+    Exit;
+
   AlterarCampos(telaEdit);
 end;
 
