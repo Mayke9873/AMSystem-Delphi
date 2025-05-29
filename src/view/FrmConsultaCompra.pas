@@ -124,7 +124,7 @@ end;
 
 procedure TfConsultaCompras.tbNovoClick(Sender: TObject);
 begin
-  fCompra := TfCompra.Create(fConsultaCompras);
+  Forms.CriaForm(fCompra, TfCompra);
 end;
 
 procedure TfConsultaCompras.tbSairClick(Sender: TObject);
