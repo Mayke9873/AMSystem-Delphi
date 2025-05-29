@@ -25,6 +25,8 @@ type
     procedure Setvalor(const Value: Currency);
     procedure Setquantidade(const Value: Double);
 
+    procedure CalculaTotal;
+
   public
     property id: Integer read Fid write Setid;
     property idCompra: Integer read FidCompra write SetidCompra;
@@ -41,9 +43,16 @@ implementation
 
 { TProdutoCompra }
 
+procedure TProdutoCompra.CalculaTotal;
+begin
+  Self.total := (Fvalor * Fquantidade) - Fdesconto;
+end;
+
 procedure TProdutoCompra.Setdesconto(const Value: Currency);
 begin
   Fdesconto := Value;
+
+  CalculaTotal();
 end;
 
 procedure TProdutoCompra.Setdescricao(const Value: String);
@@ -74,6 +83,8 @@ end;
 procedure TProdutoCompra.Setquantidade(const Value: Double);
 begin
   Fquantidade := Value;
+
+  CalculaTotal();
 end;
 
 procedure TProdutoCompra.Settotal(const Value: Currency);
@@ -84,6 +95,8 @@ end;
 procedure TProdutoCompra.Setvalor(const Value: Currency);
 begin
   Fvalor := Value;
+
+  CalculaTotal();
 end;
 
 end.
