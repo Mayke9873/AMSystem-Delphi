@@ -4,103 +4,94 @@ interface
 
 uses
   System.SysUtils, Vcl.Forms, Winapi.Windows, ZDataset,
-  System.Generics.Collections, uCompra.Itens;
+  System.Generics.Collections, uCompra.Itens, Data.DB, Datasnap.DBClient;
 
 type TCompra = class
   private
     FID: Integer;
     FDesconto: Currency;
     FTotal: Currency;
-    FDescontoProduto: Currency;
-    FPrecoProduto: Currency;
     Fforncedor: String;
     FidForncedor: Integer;
+    FEX: Integer;
     FItensCompra: TObjectList<TProdutoCompra>;
+
     procedure SetID(const Value: Integer);
     procedure SetDesconto(const Value: Currency);
     procedure SetTotal(const Value: Currency);
-    procedure SetDescontoProduto(const Value: Currency);
-    procedure SetPrecoProduto(const Value: Currency);
     procedure Estoque;
     procedure Financeiro;
     procedure Setforncedor(const Value: String);
     procedure SetidForncedor(const Value: Integer);
+    procedure SetEX(const Value: Integer);
     procedure SetItensCompra(const Value: TObjectList<TProdutoCompra>);
+
     procedure LimpaCompra;
 
   public
     property Total : Currency read FTotal write SetTotal;
     property Desconto : Currency read FDesconto write SetDesconto;
-    property PrecoProduto : Currency read FPrecoProduto write SetPrecoProduto;
-    property DescontoProduto : Currency read FDescontoProduto write SetDescontoProduto;
     property ID : Integer read FID write SetID;
     property idForncedor: Integer read FidForncedor write SetidForncedor;
     property forncedor: String read Fforncedor write Setforncedor;
+    property EX: Integer read FEX write SetEX;
     property ItensCompra: TObjectList<TProdutoCompra> read FItensCompra write SetItensCompra;
 
     constructor Create;
     destructor  Destroy; override;
 
-    procedure Soma;
-    procedure Subtrair;
-    procedure ExcluirProduto(pID: Integer = 0);
-    procedure InsereCompra(pCodigoCompra : String);
+    procedure Soma; overload;
+    procedure Soma(aItem: TProdutoCompra); overload;
+    procedure Subtrair(aItem: TProdutoCompra);
+    procedure ExcluirProduto(cdsItem: TClientDataSet = nil; pID: Integer = 0);
+    procedure InserirItem(aItem: TProdutoCompra);
     function Cancelar: Boolean;
-    function Finaliza: Boolean;
+    function Salvar: Boolean;
+
   End;
 
 implementation
 
-  uses
-    uDM, FrmVenda, uProduto, uEstoque, Consts, FrmCompra, dmFornecedor, dmCompra, uFinanceiro.Movimento;
+uses
+  Math,
+  uDM, uProduto, uEstoque, Consts, FrmCompra,
+  dmFornecedor, uFinanceiro.Movimento, dmCompra;
 
 { TCompra }
 
 constructor TCompra.Create;
 begin
+  FID           := 0;
+  FidForncedor  := 0;
+  FDesconto     := 0;
+  FTotal        := 0;
+
   ItensCompra := TObjectList<TProdutoCompra>.Create;
 end;
 
 destructor TCompra.Destroy;
 begin
   FreeAndNil(ItensCompra);
+
   inherited;
 end;
 
-procedure TCompra.ExcluirProduto(pID: Integer = 0);
+procedure TCompra.ExcluirProduto(cdsItem: TClientDataSet = nil; pID: Integer = 0);
 begin
-  ExecSQL('Update Compra_item set ex = 1 where id = '+ pID.ToString +' and ' +
-      ' IdCompra = '+ IntToStr(ID) +';');
+  if (FItensCompra.Count = 0) or (pID = 0) then
+    Abort;
 
-  //TODO: Fazer exclusao de produto da Object List.
-  Subtrair();
-end;
+  try
+    cdsItem.Edit;
+    cdsItem.FieldByName('ex').AsInteger := Cancelado;
+    cdsItem.Post;
 
-function TCompra.Finaliza : Boolean;
-begin
-  Result := False;
-  if ID <> 0 then
-  begin
-    if Application.MessageBox('Confirma compra?', 'Atenção', MB_YESNO + MB_ICONQUESTION) = IDYES then
-    begin
-      ExecSQL('UPDATE COMPRA SET ID_FORNECEDOR = ' + FidForncedor.ToString +
-        ', FORNECEDOR = ' + Fforncedor.QuotedString +
-        ', VALOR = ' + StringReplace(FloatToStr(FTotal), ',', '.', []) +
-        ', DESCONTO = ' + StringReplace(FloatToStr(FDesconto), ',', '.', []) +
-        ', VALOR_TOTAL = ' + StringReplace(FloatToStr(FTotal), ',', '.', []) +
-        ', PAGO = ' + StringReplace(FloatToStr(FTotal), ',', '.', []) +
-        ', DATA_COMPRA = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', Now)) +
-        ', EX = 0 WHERE ID = ' + IntToStr(ID) + ';');
-
-      ExecSQL('UPDATE compra_item set ex = 0 where ex = 9 and idCompra = ' + IntToStr(ID) + ';');
-
-      Estoque();
-      Financeiro();
-      Self.ID := 0;
-      ItensCompra.Clear;
-      Result := True;
-    end;
+    FItensCompra[pID-1].EX := Cancelado;
+  except
+    raise Exception.Create('Erro ao excluir produto');
   end;
+
+  Subtrair(FItensCompra[pID-1]);
 end;
 
 procedure TCompra.Estoque;
@@ -112,66 +103,67 @@ begin
   try
     for ProdutoCompra in ItensCompra do
     begin
+      if ProdutoCompra.ex = Cancelado then
+        Continue;
+
       Prod.idProduto := ProdutoCompra.idProduto;
       Prod.qtd       := ProdutoCompra.quantidade;
       Prod.idMovimentacao := FID;
 
-      Prod.MovEstoque(Compra, Entrada);
+      Prod.MovEstoque(Compra, IfThen(ProdutoCompra.EX = 2, Saida, Entrada));
     end;
   finally
     FreeAndNil(Prod);
   end;
-
 end;
 
 procedure TCompra.Financeiro();
 begin
   var Caixa := TCaixa.Create;
-  Caixa.idConta := 1;
-  Caixa.idMov   := Self.FID;
-  Caixa.tipoMov := Compra;
-  Caixa.valor   := Self.FTotal;
-  Caixa.ex      := 0;
-  Caixa.InsereCaixa(Caixa);
 
-  FreeAndNil(Caixa);
+  try
+    Caixa.idConta := 1;
+    Caixa.idMov   := Self.FID;
+    Caixa.tipoMov := Compra;
+    Caixa.valor   := Self.FTotal;
+    Caixa.ex      := 0;
+    Caixa.InsereCaixa(Caixa);
+  finally
+    FreeAndNil(Caixa);
+  end;
 end;
 
-procedure TCompra.InsereCompra(pCodigoCompra : String);
+function TCompra.Salvar: Boolean;
+var
+  DmCompra: TdmCompras;
 begin
-  if (Length(pCodigoCompra.Trim) = 0) or (pCodigoCompra.Trim = '0') then
-  begin
-    Total := 0;
-    Desconto := 0;
+  DmCompra := TdmCompras.Create(nil);
+  try
+    DmCompra.SalvarCompra(Self);
 
-    var LQuery := TZQuery.Create(nil);
-    try
-      LQuery.Connection := DM.zCon;
-
-      ExecSQL('ALTER table compra AUTO_INCREMENT = 0');
-      ExecSQL('insert into compra (ID, EX) values (null, 1);');
-
-      LQuery.SQL.Add('select LAST_INSERT_ID() id;');
-      LQuery.Open;
-
-      ID := LQuery.Fields[0].AsInteger;
-    finally
-      FreeAndNil(LQuery);
-    end;
+    Estoque();
+    Financeiro();
+    Self.ID := 0;
+    ItensCompra.Clear;
+  finally
+    FreeAndNil(DmCompra);
   end;
+end;
+
+procedure TCompra.InserirItem(aItem: TProdutoCompra);
+begin
+  Self.ItensCompra.Add(aItem);
+  Self.Soma(aItem);
 end;
 
 function TCompra.Cancelar : Boolean;
 begin
   Result := False;
-  if Application.MessageBox('Deseja cancelar compra?', 'AmSystem', MB_YESNO + MB_ICONQUESTION) = IDYES then
-  begin
-    ExecSQL('Delete from Compra_item where idCompra = '+  IntToStr(ID));
-    ExecSQL('Delete from Compra where ID = ' + IntToStr(ID));
-    LimpaCompra();
-    Result := True;
-  end;
 
+  if not (Application.MessageBox('Deseja concelar compra?', 'Confirmação', 32 + MB_YESNO) = IDYES) then
+    Abort;
+
+  Result := True;
 end;
 
 procedure TCompra.LimpaCompra;
@@ -182,16 +174,34 @@ begin
 end;
 
 procedure TCompra.Soma;
+var
+  LItem: TProdutoCompra;
 begin
-  PrecoProduto := PrecoProduto - DescontoProduto;
-  Total := Total + PrecoProduto;
-  Desconto := Desconto + (DescontoProduto);
+  FTotal := 0;
+  FDesconto := 0;
+
+  for LItem in FItensCompra do
+  begin
+    if Assigned(LItem) then
+      Continue;
+
+    if LItem.EX = Cancelado then
+      Continue;
+
+    Soma(LItem);
+  end;
 end;
 
-procedure TCompra.Subtrair;
+procedure TCompra.Soma(aItem: TProdutoCompra);
 begin
-  Total := Total - PrecoProduto;
-  Desconto := Desconto - DescontoProduto;
+  Total := Total + aItem.total;
+  Desconto := Desconto + (aItem.desconto);
+end;
+
+procedure TCompra.Subtrair(aItem: TProdutoCompra);
+begin
+  Total := Total - aItem.total;
+  Desconto := Desconto - aItem.desconto;
 end;
 
 procedure TCompra.SetDesconto(const Value: Currency);
@@ -199,19 +209,14 @@ begin
   FDesconto := Value;
 end;
 
-procedure TCompra.SetDescontoProduto(const Value: Currency);
+procedure TCompra.SetEX(const Value: Integer);
 begin
-  FDescontoProduto := Value;
+  FEX := Value;
 end;
 
 procedure TCompra.SetID(const Value: Integer);
 begin
   FID := Value;
-end;
-
-procedure TCompra.SetPrecoProduto(const Value: Currency);
-begin
-  FPrecoProduto := Value;
 end;
 
 procedure TCompra.SetTotal(const Value: Currency);
@@ -235,3 +240,4 @@ begin
 end;
 
 end.
+

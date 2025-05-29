@@ -192,6 +192,7 @@ object fCompra: TfCompra
       Height = 23
       Anchors = [akTop, akRight]
       TabOrder = 7
+      OnExit = edQtdProdutoExit
     end
     object edDesconto: TEdit
       Tag = 99
@@ -238,7 +239,7 @@ object fCompra: TfCompra
         end
         item
           Expanded = False
-          FieldName = 'idprod'
+          FieldName = 'idProd'
           ReadOnly = True
           Title.Caption = 'C'#243'digo'
           Title.Font.Charset = ANSI_CHARSET
@@ -655,180 +656,9 @@ object fCompra: TfCompra
     end
   end
   object dProdCompra: TDataSource
-    DataSet = qProdCompra
-    Left = 856
-    Top = 544
-  end
-  object qProdCompra: TZQuery
-    Connection = DM.zCon
-    UpdateObject = uProdCompra
-    SQL.Strings = (
-      
-        'Select id, idCompra, idprod, descricao, valor, desconto, quantid' +
-        'ade, total, ex'
-      '  From Compra_item where idCompra = :idCompra and ex = 9;')
-    Params = <
-      item
-        DataType = ftWideString
-        Name = 'idCompra'
-        SQLType = stUnicodeString
-      end>
-    Left = 798
-    Top = 512
-    ParamData = <
-      item
-        DataType = ftWideString
-        Name = 'idCompra'
-        SQLType = stUnicodeString
-      end>
-    object qProdCompraid: TZInt64Field
-      FieldName = 'id'
-      Required = True
-    end
-    object qProdCompraidCompra: TZInt64Field
-      FieldName = 'idCompra'
-      Required = True
-    end
-    object qProdCompraidprod: TZInt64Field
-      FieldName = 'idprod'
-      Required = True
-    end
-    object qProdCompradescricao: TZUnicodeStringField
-      FieldName = 'descricao'
-      Required = True
-      Size = 255
-    end
-    object qProdCompravalor: TZBCDField
-      FieldName = 'valor'
-      Required = True
-      DisplayFormat = '###,###,##0.00'
-      Precision = 11
-      Size = 3
-    end
-    object qProdCompradesconto: TZBCDField
-      FieldName = 'desconto'
-      Required = True
-      DisplayFormat = '###,###,##0.00'
-      Precision = 11
-      Size = 3
-    end
-    object qProdCompraquantidade: TZBCDField
-      FieldName = 'quantidade'
-      Required = True
-      DisplayFormat = '###,###,##0.000'
-      Precision = 11
-      Size = 3
-    end
-    object qProdCompratotal: TZBCDField
-      FieldName = 'total'
-      Required = True
-      DisplayFormat = '###,###,##0.00'
-      Precision = 11
-      Size = 3
-    end
-    object qProdCompraex: TZIntegerField
-      FieldName = 'ex'
-      Required = True
-    end
-  end
-  object uProdCompra: TZUpdateSQL
-    DeleteSQL.Strings = (
-      'DELETE FROM Compra_item'
-      'WHERE'
-      '  Compra_item.id = :OLD_id AND'
-      '  Compra_item.idVenda = :OLD_idCompra AND'
-      '  Compra_item.idprod = :OLD_idprod AND'
-      '  Compra_item.valor = :OLD_valor AND'
-      '  Compra_item.desconto = :OLD_desconto AND'
-      '  Compra_item.quantidade = :OLD_quantidade AND'
-      '  Compra_item.total = :OLD_total AND'
-      '  Compra_item.ex = :OLD_ex')
-    InsertSQL.Strings = (
-      'INSERT INTO Compra_item'
-      
-        '  (idCompra, idprod, descricao, valor, desconto, quantidade, tot' +
-        'al, '
-      '   ex)'
-      'VALUES'
-      
-        '  ((select max(id) from Compra), :idprod, :descricao, :valor, :d' +
-        'esconto, :quantidade, '
-      '   :total, 9)')
-    ModifySQL.Strings = (
-      'UPDATE Compra_item SET'
-      '  id = :id,'
-      '  idCompra = :idCompra,'
-      '  idprod = :idprod,'
-      '  descricao = :descricao,'
-      '  valor = :valor,'
-      '  desconto = :desconto,'
-      '  quantidade = :quantidade,'
-      '  total = :total,'
-      '  ex = :ex'
-      'WHERE'
-      '  Compra_item.id = :OLD_id AND'
-      '  Compra_item.idVenda = :OLD_idCompra AND'
-      '  Compra_item.idprod = :OLD_idprod AND'
-      '  Compra_item.valor = :OLD_valor AND'
-      '  Compra_item.desconto = :OLD_desconto AND'
-      '  Compra_item.quantidade = :OLD_quantidade AND'
-      '  Compra_item.total = :OLD_total AND'
-      '  Compra_item.ex = :OLD_ex')
-    UseSequenceFieldForRefreshSQL = False
-    Left = 827
-    Top = 528
-    ParamData = <
-      item
-        Name = 'id'
-      end
-      item
-        Name = 'idCompra'
-      end
-      item
-        Name = 'idprod'
-      end
-      item
-        Name = 'descricao'
-      end
-      item
-        Name = 'valor'
-      end
-      item
-        Name = 'desconto'
-      end
-      item
-        Name = 'quantidade'
-      end
-      item
-        Name = 'total'
-      end
-      item
-        Name = 'ex'
-      end
-      item
-        Name = 'OLD_id'
-      end
-      item
-        Name = 'OLD_idCompra'
-      end
-      item
-        Name = 'OLD_idprod'
-      end
-      item
-        Name = 'OLD_valor'
-      end
-      item
-        Name = 'OLD_desconto'
-      end
-      item
-        Name = 'OLD_quantidade'
-      end
-      item
-        Name = 'OLD_total'
-      end
-      item
-        Name = 'OLD_ex'
-      end>
+    DataSet = cdsItem
+    Left = 592
+    Top = 264
   end
   object ActionList1: TActionList
     Left = 544
@@ -860,5 +690,77 @@ object fCompra: TfCompra
     OnTimer = tmPesquisaTimer
     Left = 496
     Top = 24
+  end
+  object cdsItem: TClientDataSet
+    Aggregates = <>
+    Filter = 'ex <> 3'
+    Filtered = True
+    FieldDefs = <
+      item
+        Name = 'id'
+        DataType = ftInteger
+      end
+      item
+        Name = 'idProd'
+        DataType = ftInteger
+      end
+      item
+        Name = 'descricao'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'valor'
+        DataType = ftFloat
+      end
+      item
+        Name = 'desconto'
+        DataType = ftFloat
+      end
+      item
+        Name = 'quantidade'
+        DataType = ftFloat
+      end
+      item
+        Name = 'total'
+        DataType = ftFloat
+      end
+      item
+        Name = 'ex'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 544
+    Top = 264
+    object cdsItemid: TIntegerField
+      FieldName = 'id'
+    end
+    object cdsItemidProd: TIntegerField
+      FieldName = 'idProd'
+    end
+    object cdsItemdescricao: TStringField
+      FieldName = 'descricao'
+    end
+    object cdsItemvalor: TFloatField
+      FieldName = 'valor'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object cdsItemdesconto: TFloatField
+      FieldName = 'desconto'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object cdsItemquantidade: TFloatField
+      FieldName = 'quantidade'
+      DisplayFormat = '###,###,##0.000'
+    end
+    object cdsItemtotal: TFloatField
+      FieldName = 'total'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object cdsItemex: TIntegerField
+      FieldName = 'ex'
+    end
   end
 end
