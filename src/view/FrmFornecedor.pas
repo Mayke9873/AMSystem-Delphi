@@ -134,12 +134,13 @@ end;
 
 procedure TfFornecedor.tbSalvarClick(Sender: TObject);
 begin
-  if not TValidacoes.ValidaDocumento((Sender as TDBEdit).Text) then
-  begin
-    Application.MessageBox('CNPJ inválido. Por favor, verifique!', 'Atenção', 48);
-    DBECPF.SetFocus;
-    Abort;
-  end;
+  if not (Trim(DBECPF.Text) = EmptyStr)  then
+    if not TValidacoes.ValidaDocumento(DBECPF.Text) then
+    begin
+      Application.MessageBox('CNPJ inválido. Por favor, verifique!', 'Atenção', 48);
+      DBECPF.SetFocus;
+      Abort;
+    end;
 
   Fornecedor := TFornecedor.Create;
   try

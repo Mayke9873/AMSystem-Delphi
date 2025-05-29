@@ -274,12 +274,13 @@ end;
 
 procedure TfCliente.tbSalvarClick(Sender: TObject);
 begin
-  if not Valida.ValidaDocumento(DBECPF.Text) then
-  begin
-    Application.MessageBox('CPF inválido. Por favor, verifique!', 'Atenção', 48);
-    DBECPF.SetFocus;
-    Abort;
-  end;
+  if not (Trim(DBECPF.Text) = EmptyStr)  then
+    if not Valida.ValidaDocumento(DBECPF.Text) then
+    begin
+      Application.MessageBox('CPF inválido. Por favor, verifique!', 'Atenção', 48);
+      DBECPF.SetFocus;
+      Abort;
+    end;
 
   SelectNext(ActiveControl, True, True);
 
